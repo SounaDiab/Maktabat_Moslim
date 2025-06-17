@@ -171,10 +171,14 @@ import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_lilmohema
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_lilzaka2_wjoudat_alhofez.dart';
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_lziyadat_alrizk.dart';
 import '../screens/albakiyat alsali7at/ba3d_alsalawat_almandouba.dart';
+import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/dou3a2_al2i7tijab_amir_almo2minin.dart';
 import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_3ida_men_al2ad3iya_allati_yod3a_biha_saba7an_wmasa2an.dart';
 import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ad3iya_ma2soura_lilrizk.dart';
 import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ad3iya_yod3a_bha_3ind_alnom_w3ind_l2intibah_menh.dart';
+import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ad3iyat_al3ilal_walmarad.dart';
+import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ba3d_ala7raz_wal3owaz.dart';
 import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_da3awat_ma2soura_kabl_salat_wfi_adbariha.dart';
+import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_da3awat_mojzat_ljami3_7wa2ej_aldonia_wal2a5ira.dart';
 import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_zikr_3idat_da3awat_yod3a_bha_2iza_5araj_l2insan_men_manzlhi.dart';
 import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_zikr_ba3d_ma_warad_lilham_wal8am_wal5awf_wa8airaha.dart';
 import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_zikr_dou3a2ain_lildin.dart';
@@ -2364,11 +2368,11 @@ class AlBaqiyatAlSalehat {
       },
       {
         'title': 'في ادعية العلل والامراض',
-        'route': Dou3a2Lita3asorAlwilada.screenRoute
+        'route': FiAd3iyatAl3ilalWalmarad.screenRoute
       },
-      {'title': 'في بعض الاحراز والعوذ', 'route': Dou3a2Li7alAlmarbout.screenRoute},
-      {'title': 'في دعوات موجزات لجميع حوائج الدنيا والاخرة', 'route': AwzatAl7oma.screenRoute},
-      {'title': 'دعاء الاحتجاب', 'route': Dou3a2Lilza7ir.screenRoute},
+      {'title': 'في بعض الاحراز والعوذ', 'route': FiBa3dAla7razWal3owaz.screenRoute},
+      {'title': 'في دعوات موجزات لجميع حوائج الدنيا والاخرة', 'route': FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute},
+      {'title': 'دعاء الاحتجاب', 'route': Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute},
     ],
   };
 
