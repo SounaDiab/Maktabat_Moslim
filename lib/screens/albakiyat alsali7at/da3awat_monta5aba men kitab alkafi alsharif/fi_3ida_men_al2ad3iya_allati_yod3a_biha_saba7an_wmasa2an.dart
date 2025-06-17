@@ -7,7 +7,7 @@ import '../../../widgets/add_custom_bottom_navigation_bar.dart';
 import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
-import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
+import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
 import 'dou3a2_al2i7tijab_amir_almo2minin.dart';
 import 'fi_ad3iya_yod3a_bha_3ind_alnom_w3ind_l2intibah_menh.dart';
 
@@ -58,7 +58,7 @@ class _Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2anState
       return false;
     } else {
       Navigator.of(context).pushReplacementNamed(
-          Al2ad3iyaWal3awzatLil2alamWal2askam.screenRoute);
+          Da3awatMonta5abaMenKitabAlkafiAlsharif.screenRoute);
       return false;
     }
   }

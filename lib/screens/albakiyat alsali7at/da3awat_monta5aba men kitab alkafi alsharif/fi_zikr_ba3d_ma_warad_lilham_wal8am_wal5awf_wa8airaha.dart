@@ -7,7 +7,7 @@ import '../../../widgets/add_custom_bottom_navigation_bar.dart';
 import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
-import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
+import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
 import 'fi_ad3iyat_al3ilal_walmarad.dart';
 import 'fi_zikr_dou3a2ain_lildin.dart';
 
@@ -53,7 +53,7 @@ class _FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airahaState extends State<FiZikrBa
       return false;
     } else {
       Navigator.of(context).pushReplacementNamed(
-          Al2ad3iyaWal3awzatLil2alamWal2askam.screenRoute);
+          Da3awatMonta5abaMenKitabAlkafiAlsharif.screenRoute);
       return false;
     }
   }
