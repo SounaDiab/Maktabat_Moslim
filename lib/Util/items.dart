@@ -146,6 +146,21 @@ import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/do
 import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_liwaja3_alfam.dart';
 import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_liwaja3_alra2s_walisoda3_walisomm.dart';
 import '../screens/albakiyat alsali7at/al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belisti5araa.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belistikala.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belsafaar.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bilisti3aza.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bishokr_allah.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_al7aj.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_al7awa2ij.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_alrizk.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_altawba.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_likashf_alzolm.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/dou3a2_alsajad_fi_zikr_altawba.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_asar_ba3d_sowar_walayat.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_ba3d_ala7raz_walad3iya_almoujaza.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_ba3d_ma_yata3alak_belmawt.dart';
+import '../screens/albakiyat alsali7at/ala7raz_walad3iya_almoujaza.dart';
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al2a3rabi.dart';
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al2isti5ara_zat_alrka3.dart';
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al3afo.dart';
@@ -2199,7 +2214,7 @@ class AlBaqiyatAlSalehat {
       },
       {
         'title': 'الاحراز والادعية الموجزة',
-        'route': NozorMenA3malAllailWalnahar.screenRoute
+        'route': Ala7razWalad3iyaAlmoujaza.screenRoute
       },
     ],
     "nozorMenA3malAllailWalnaharItem": [
@@ -2304,7 +2319,10 @@ class AlBaqiyatAlSalehat {
     ],
     "al2ad3iyaWal3awzatLil2alamWal2askamItem": [
       {'title': 'دعاء العافية', 'route': Dou3a2Al3afiya.screenRoute},
-      {'title': 'عوذة ودعاء للامراض', 'route': AwzatWadou3a2Lilamrad.screenRoute},
+      {
+        'title': 'عوذة ودعاء للامراض',
+        'route': AwzatWadou3a2Lilamrad.screenRoute
+      },
       {
         'title': 'دعاء لوجع الرأس وللصداع وللصمم',
         'route': Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute
@@ -2344,20 +2362,30 @@ class AlBaqiyatAlSalehat {
         'title': 'عوذة للامن من السارق',
         'route': AwzaLil2amnMenAlsarik.screenRoute
       },
-      {
-        'title': 'عوذة للعقرب ',
-        'route': AwzaLil3akrab.screenRoute
-      },
+      {'title': 'عوذة للعقرب ', 'route': AwzaLil3akrab.screenRoute},
     ],
-        "da3awatMonta5abaMenKitabAlkafiAlsharifItem": [
-      {'title': 'في عدة الادعية التي يدعى بها صباحا ومساء', 'route': Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute},
-      {'title': 'في ادعية يدعى بها عند النوم وعند الانتباه منه', 'route': FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh.screenRoute},
+    "da3awatMonta5abaMenKitabAlkafiAlsharifItem": [
+      {
+        'title': 'في عدة الادعية التي يدعى بها صباحا ومساء',
+        'route': Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute
+      },
+      {
+        'title': 'في ادعية يدعى بها عند النوم وعند الانتباه منه',
+        'route': FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh.screenRoute
+      },
       {
         'title': 'في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله',
-        'route': FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute
+        'route':
+            FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute
       },
-      {'title': 'في دعوات ماثورة قبل الصلاة وفي ادبارها', 'route': FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute},
-      {'title': 'في ادعية ماثورة للرزق', 'route': FiAd3iyaMa2souraLilrizk.screenRoute},
+      {
+        'title': 'في دعوات ماثورة قبل الصلاة وفي ادبارها',
+        'route': FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute
+      },
+      {
+        'title': 'في ادعية ماثورة للرزق',
+        'route': FiAd3iyaMa2souraLilrizk.screenRoute
+      },
       {
         'title': 'في ذكر دعائين للدين',
         'route': FiZikrDou3a2ainLildin.screenRoute
@@ -2370,9 +2398,75 @@ class AlBaqiyatAlSalehat {
         'title': 'في ادعية العلل والامراض',
         'route': FiAd3iyatAl3ilalWalmarad.screenRoute
       },
-      {'title': 'في بعض الاحراز والعوذ', 'route': FiBa3dAla7razWal3owaz.screenRoute},
-      {'title': 'في دعوات موجزات لجميع حوائج الدنيا والاخرة', 'route': FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute},
-      {'title': 'دعاء الاحتجاب', 'route': Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute},
+      {
+        'title': 'في بعض الاحراز والعوذ',
+        'route': FiBa3dAla7razWal3owaz.screenRoute
+      },
+      {
+        'title': 'في دعوات موجزات لجميع حوائج الدنيا والاخرة',
+        'route': FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute
+      },
+      {
+        'title': 'دعاء الاحتجاب',
+        'route': Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute
+      },
+    ],
+    "ala7razWalad3iyaAlmoujazaItem": [
+      {
+        'title':
+            'دعاء السجاد (عليه السلام) وكان من دعائه (عليه السلام) في ذكر التوبة وطلبها',
+        'route': Dou3a2AlsajadFiZikrAltawba.screenRoute
+      },
+      {
+        'title':
+            'في بعض الاحراز والادعية الموجزة المقتطفة من كتاب (مهج الدعوات) و(المجتنى)',
+        'route': FiBa3dAla7razWalad3iyaAlmoujaza.screenRoute
+      },
+      {
+        'title': 'المناجاة بالاستخارة',
+        'route': AlmonajatBelisti5araa.screenRoute
+      },
+      {
+        'title': 'المناجة بالاستقالة',
+        'route': AlmonajatBelistikala.screenRoute
+      },
+      {'title': 'المناجات للسفر', 'route': AlmonajatBelsafaar.screenRoute},
+      {
+        'title': 'المناجاة بطلب الرزق',
+        'route': AlmonajatBitalabAlrizk.screenRoute
+      },
+      {
+        'title': 'المناجاة بالاستعاذة',
+        'route': AlmonajatBilisti3aza.screenRoute
+      },
+      {
+        'title': 'المناجاة بطلب التوبة',
+        'route': AlmonajatBitalabAltawba.screenRoute
+      },
+      {
+        'title': 'المناجاة بطلب الحج',
+        'route': AlmonajatBitalabAl7aj.screenRoute
+      },
+      {
+        'title': 'المناجاة لكشف الظلم',
+        'route': AlmonajatLikashfAlzolm.screenRoute
+      },
+      {
+        'title': 'المناجاة بشكر الله',
+        'route': AlmonajatBishokrAllah.screenRoute
+      },
+      {
+        'title': 'المناجاة بطلب الحوائج',
+        'route': AlmonajatBitalabAl7awa2ij.screenRoute
+      },
+      {
+        'title': 'في اثار بعض السور والايات وذكر امور مختلفة',
+        'route': FiAsarBa3dSowarWalayat.screenRoute
+      },
+      {
+        'title': 'في بعض ما يتعلق بالموت من الاداب والادعية',
+        'route': FiBa3dMaYata3alakBelmawt.screenRoute
+      },
     ],
   };
 
@@ -2401,5 +2495,9 @@ class AlBaqiyatAlSalehat {
       da3awatMonta5abaMenKitabAlkafiAlsharifList =
       AlBaqiyatAlSalehat.dataAlBaqiyatAlSalehat[
               "da3awatMonta5abaMenKitabAlkafiAlsharifItem"] ??
+          [];
+  static final List<Map<String, String>> ala7razWalad3iyaAlmoujazaItemList =
+      AlBaqiyatAlSalehat
+              .dataAlBaqiyatAlSalehat["ala7razWalad3iyaAlmoujazaItem"] ??
           [];
 }
