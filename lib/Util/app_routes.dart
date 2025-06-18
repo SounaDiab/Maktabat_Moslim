@@ -125,6 +125,21 @@ import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/do
 import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_liwaja3_alfam.dart';
 import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_liwaja3_alra2s_walisoda3_walisomm.dart';
 import '../screens/albakiyat alsali7at/al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belisti5araa.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belistikala.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belsafaar.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bilisti3aza.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bishokr_allah.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_al7aj.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_al7awa2ij.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_alrizk.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_altawba.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_likashf_alzolm.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/dou3a2_alsajad_fi_zikr_altawba.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_asar_ba3d_sowar_walayat.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_ba3d_ala7raz_walad3iya_almoujaza.dart';
+import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_ba3d_ma_yata3alak_belmawt.dart';
+import '../screens/albakiyat alsali7at/ala7raz_walad3iya_almoujaza.dart';
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al2a3rabi.dart';
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al2isti5ara_zat_alrka3.dart';
 import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al3afo.dart';
@@ -1186,11 +1201,14 @@ class AppRoutes {
         Al2ad3iyaWal3awzatLil2alamWal2askam(),
     Dou3a2Al3afiya.screenRoute: (context) => Dou3a2Al3afiya(),
     AwzatWadou3a2Lilamrad.screenRoute: (context) => AwzatWadou3a2Lilamrad(),
-    Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute: (context) => Dou3a2Liwaja3Alra2sWalisoda3Walisomm(),
+    Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute: (context) =>
+        Dou3a2Liwaja3Alra2sWalisoda3Walisomm(),
     Dou3a2Liwaja3Alfam.screenRoute: (context) => Dou3a2Liwaja3Alfam(),
     AwzaLiwaja3Alasnan.screenRoute: (context) => AwzaLiwaja3Alasnan(),
-    Dou3a2Liwaja3AlbatenWalcolon.screenRoute: (context) => Dou3a2Liwaja3AlbatenWalcolon(),
-    Dou3a2Lilso2lolWlilawram.screenRoute: (context) => Dou3a2Lilso2lolWlilawram(),
+    Dou3a2Liwaja3AlbatenWalcolon.screenRoute: (context) =>
+        Dou3a2Liwaja3AlbatenWalcolon(),
+    Dou3a2Lilso2lolWlilawram.screenRoute: (context) =>
+        Dou3a2Lilso2lolWlilawram(),
     Dou3a2Lita3asorAlwilada.screenRoute: (context) => Dou3a2Lita3asorAlwilada(),
     Dou3a2Li7alAlmarbout.screenRoute: (context) => Dou3a2Li7alAlmarbout(),
     AwzatAl7oma.screenRoute: (context) => AwzatAl7oma(),
@@ -1202,21 +1220,62 @@ class AppRoutes {
     AwzaLiwaja3Al3ain.screenRoute: (context) => AwzaLiwaja3Al3ain(),
     Al3awzaLibtalAlsi7r.screenRoute: (context) => Al3awzaLibtalAlsi7r(),
     Al7erzMenAl3ain.screenRoute: (context) => Al7erzMenAl3ain(),
-    AwzaLidaf3WasawisAlshaitan.screenRoute: (context) => AwzaLidaf3WasawisAlshaitan(),
+    AwzaLidaf3WasawisAlshaitan.screenRoute: (context) =>
+        AwzaLidaf3WasawisAlshaitan(),
     AwzaLil2amnMenAlsarik.screenRoute: (context) => AwzaLil2amnMenAlsarik(),
     AwzaLil3akrab.screenRoute: (context) => AwzaLil3akrab(),
     // !
-    Da3awatMonta5abaMenKitabAlkafiAlsharif.screenRoute: (context) => Da3awatMonta5abaMenKitabAlkafiAlsharif(),
-    Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute: (context) => Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an(),
-    FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh.screenRoute: (context) => FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh(),
-    FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute: (context) => FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi(),
-    FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute: (context) => FiDa3awatMa2souraKablSalatWfiAdbariha(),
+    Da3awatMonta5abaMenKitabAlkafiAlsharif.screenRoute: (context) =>
+        Da3awatMonta5abaMenKitabAlkafiAlsharif(),
+    Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute: (context) =>
+        Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an(),
+    FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh.screenRoute: (context) =>
+        FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh(),
+    FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute:
+        (context) => FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi(),
+    FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute: (context) =>
+        FiDa3awatMa2souraKablSalatWfiAdbariha(),
     FiAd3iyaMa2souraLilrizk.screenRoute: (context) => FiAd3iyaMa2souraLilrizk(),
     FiZikrDou3a2ainLildin.screenRoute: (context) => FiZikrDou3a2ainLildin(),
-    FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha.screenRoute: (context) => FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha(),
-    FiAd3iyatAl3ilalWalmarad.screenRoute: (context) => FiAd3iyatAl3ilalWalmarad(),
+    FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha.screenRoute: (context) =>
+        FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha(),
+    FiAd3iyatAl3ilalWalmarad.screenRoute: (context) =>
+        FiAd3iyatAl3ilalWalmarad(),
     FiBa3dAla7razWal3owaz.screenRoute: (context) => FiBa3dAla7razWal3owaz(),
-    FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute: (context) => FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira(),
-    Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute: (context) => Dou3a2Al2i7tijabAmirAlmo2minin(),
+    FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute: (context) =>
+        FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira(),
+    Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute: (context) =>
+        Dou3a2Al2i7tijabAmirAlmo2minin(),
+    // !
+    Ala7razWalad3iyaAlmoujaza.screenRoute: (context) =>
+        Ala7razWalad3iyaAlmoujaza(),
+    Dou3a2AlsajadFiZikrAltawba.screenRoute: (context) =>
+        Dou3a2AlsajadFiZikrAltawba(),
+    FiBa3dAla7razWalad3iyaAlmoujaza.screenRoute: (context) =>
+        FiBa3dAla7razWalad3iyaAlmoujaza(),
+    AlmonajatBelisti5araa.screenRoute: (context) =>
+        AlmonajatBelisti5araa(),
+    AlmonajatBelistikala.screenRoute: (context) =>
+        AlmonajatBelistikala(),
+    AlmonajatBelsafaar.screenRoute: (context) =>
+        AlmonajatBelsafaar(),
+    AlmonajatBitalabAlrizk.screenRoute: (context) =>
+        AlmonajatBitalabAlrizk(),
+    AlmonajatBilisti3aza.screenRoute: (context) =>
+        AlmonajatBilisti3aza(),
+    AlmonajatBitalabAltawba.screenRoute: (context) =>
+        AlmonajatBitalabAltawba(),
+    AlmonajatBitalabAl7aj.screenRoute: (context) =>
+        AlmonajatBitalabAl7aj(),
+    AlmonajatLikashfAlzolm.screenRoute: (context) =>
+        AlmonajatLikashfAlzolm(),
+    AlmonajatBishokrAllah.screenRoute: (context) =>
+        AlmonajatBishokrAllah(),
+    AlmonajatBitalabAl7awa2ij.screenRoute: (context) =>
+        AlmonajatBitalabAl7awa2ij(),
+    FiAsarBa3dSowarWalayat.screenRoute: (context) =>
+        FiAsarBa3dSowarWalayat(),
+    FiBa3dMaYata3alakBelmawt.screenRoute: (context) =>
+        FiBa3dMaYata3alakBelmawt(),
   };
 }
