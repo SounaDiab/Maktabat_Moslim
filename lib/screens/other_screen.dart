@@ -55,7 +55,6 @@ class OtherScreen extends StatelessWidget {
                       Container(
                         width: sizeWidth / 4,
                         margin: EdgeInsets.symmetric(horizontal: 5),
-                        padding: EdgeInsets.symmetric(vertical: 10),
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.pushNamed(
