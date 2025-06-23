@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1013011532590",
+    "project_id": "maktabat-almoslim",
+    "storage_bucket": "maktabat-almoslim.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013011532590:android:c4d7bd8d7fbb56466948bf",
+        "android_client_info": {
+          "package_name": "com.hassandiab.maktabat_almoslim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5KyzJHaBACRW4rqiOGh3A9nTfzOFC3OY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
