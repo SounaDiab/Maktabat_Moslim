@@ -22,6 +22,10 @@ import 'screens/kor2an/providers/theme_provider.dart';
 import 'screens/kor2an/providers/toast.dart';
 // import 'firebase_options.dart';
 // options: DefaultFirebaseOptions.currentPlatform,
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+final FlutterLocalNotificationsPlugin notificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 void main() {
   runZonedGuarded(() async {
@@ -67,6 +71,14 @@ void main() {
   }, (error, stackTrace) {
     print('Caught error: $error');
   });
+}
+
+Future<void> initializeNotifications() async {
+  const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  const settings = InitializationSettings(android: android);
+
+  await notificationsPlugin.initialize(settings);
 }
 
 class MyApp extends StatelessWidget {
