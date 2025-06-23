@@ -1,55 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:adhan/adhan.dart';
-// import 'package:geocoding/geocoding.dart';
-// import 'package:geolocator/geolocator.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PrayerTimeWidget extends StatefulWidget {
   @override
-  State<PrayerTimeWidget> createState() => _PrayerTimeWidgetState();
+  _PrayerTimeWidgetState createState() => _PrayerTimeWidgetState();
 }
 
 class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
-  // String _dateText = "جاري تحديد التاريخ...";
+  Map<String, String>? times;
+  List<PrayerTime>? timingList;
+  String error = '';
+  bool loading = false;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadLocalizedDate();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    loadFromCache().then((_) => fetchPrayerTimes());
+  }
 
-  // Future<void> _loadLocalizedDate() async {
-  //   try {
-  //     // الحصول على موقع المستخدم
-  //     Position position = await Geolocator.getCurrentPosition(
-  //       desiredAccuracy: LocationAccuracy.best,
-  //     );
-  //     List<Placemark> placemarks = await placemarkFromCoordinates(
-  //       position.latitude,
-  //       position.longitude,
-  //     );
-
-  //     final String country = placemarks.first.country ?? "";
-
-  //     final DateTime now = DateTime.now();
-  //     final String formatted =
-  //         country.contains("Lebanon") || country.contains("لبنان")
-  //             ? formatLebaneseDate(now)
-  //             : formatArabicDate(now);
-
-  //     setState(() {
-  //       _dateText = formatted;
-  //     });
-  //   } catch (e) {
-  //     setState(() {
-  //       _dateText = "تعذر تحديد الموقع.";
-  //     });
-  //   }
-  // }
-
-  final Coordinates coordinates = Coordinates(33.8938, 35.5018);
-  // بيروت
   String formatTime(DateTime time) {
     return DateFormat('hh:mm a').format(time);
   }
@@ -95,38 +68,124 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
     return "${hijri.hDay} ${hijri.longMonthName} ${hijri.hYear} هـ";
   }
 
+  Future<void> fetchPrayerTimes() async {
+    setState(() {
+      loading = true;
+      error = '';
+    });
+
+    try {
+      final url = Uri.parse(
+        'https://api.aladhan.com/v1/timingsByCity?city=Beirut&country=Lebanon&method=0&school=1',
+      );
+
+      final response = await http.get(url);
+
+      if (response.statusCode != 200) {
+        throw Exception('فشل في تحميل البيانات: ${response.statusCode}');
+      }
+
+      final data = json.decode(response.body);
+      final timings = data['data']['timings'] as Map<String, dynamic>;
+      String adjustTime(String time, int minutes) {
+        final parts = time.split(':');
+        final hour = int.parse(parts[0]);
+        final minute = int.parse(parts[1]);
+        final original = DateTime(0, 1, 1, hour, minute);
+        final adjusted = original.add(Duration(minutes: minutes));
+        return '${adjusted.hour.toString().padLeft(2, '0')}:${adjusted.minute.toString().padLeft(2, '0')}';
+      }
+
+      timings['Imsak'] = adjustTime(timings['Imsak'], -2);
+      timings['Asr'] = adjustTime(timings['Asr'], -76);
+      timings['Maghrib'] = adjustTime(timings['Maghrib'], 3);
+      timings['Isha'] = adjustTime(timings['Isha'], 6);
+      timings['Midnight'] = adjustTime(timings['Midnight'], -46);
+
+      final labels = {
+        'Imsak': 'الإمساك',
+        'Fajr': 'صلاة الصبح',
+        'Sunrise': 'الشروق',
+        'Dhuhr': 'الظهر',
+        'Asr': 'العصر',
+        'Maghrib': 'المغرب',
+        'Isha': 'العشاء',
+        'Midnight': 'منتصف الليل',
+      };
+
+      final Map<String, String> namedTimings = {
+        for (final e in timings.entries)
+          if (labels.containsKey(e.key)) labels[e.key]!: e.value,
+      };
+
+// ترتيب يدوي للمواقيت
+      final orderedKeys = [
+        'الإمساك',
+        'صلاة الصبح',
+        'الشروق',
+        'الظهر',
+        'العصر',
+        'المغرب',
+        'العشاء',
+        'منتصف الليل',
+      ];
+
+      final List<PrayerTime> list = orderedKeys
+          .where((key) => namedTimings.containsKey(key))
+          .map((key) => PrayerTime(key, namedTimings[key]!))
+          .toList();
+
+      await saveToCache(list);
+
+      setState(() {
+        timingList = list;
+      });
+    } catch (e) {
+      setState(() {
+        error = e.toString();
+      });
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
+  Future<void> saveToCache(List<PrayerTime> list) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encoded = jsonEncode(list.map((e) => e.toJson()).toList());
+    await prefs.setString('cached_prayer_times', encoded);
+  }
+
+  Future<void> loadFromCache() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('cached_prayer_times');
+    if (data != null) {
+      final List parsed = jsonDecode(data);
+      final list = parsed.map((e) => PrayerTime.fromJson(e)).toList();
+      setState(() => timingList = List<PrayerTime>.from(list));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final params = CalculationMethod.tehran.getParameters();
-    params.madhab = Madhab.shafi;
     final today = DateTime.now();
-    final prayerTimes = PrayerTimes.today(coordinates, params);
+    if (timingList == null && error.isEmpty) {
+      return Center(child: CircularProgressIndicator());
+    }
 
-    final delayeSobeh = prayerTimes.fajr.add(Duration(minutes: 10));
-    final delayeIsha = prayerTimes.isha.add(Duration(minutes: 6));
-    final delaySunrise = prayerTimes.sunrise.add(Duration(minutes: 1));
-    final fajerSadik = prayerTimes.fajr.subtract(Duration(minutes: 8));
-    final differenceFajrAndMaghrib =
-        fajerSadik.difference(prayerTimes.maghrib) ~/ 2;
-    final montasafLail = prayerTimes.maghrib.add(differenceFajrAndMaghrib);
-
-    final times = {
-      "الإمساك": formatTime(prayerTimes.fajr),
-      "صلاة الصبح": formatTime(delayeSobeh),
-      "الشروق": formatTime(delaySunrise),
-      "الظهر": formatTime(prayerTimes.dhuhr),
-      "العصر": formatTime(prayerTimes.asr),
-      "المغرب": formatTime(prayerTimes.maghrib),
-      "العشاء": formatTime(delayeIsha),
-      "منتصف الليل": formatTime(montasafLail),
-    };
+    if (error.isNotEmpty) {
+      return Center(
+        child: Text('خطأ: $error', textAlign: TextAlign.center),
+      );
+    }
 
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: isTablet ? 20 : 10),
+          padding: EdgeInsets.symmetric(horizontal: isTablet ? 10 : 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -134,15 +193,22 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
                 formatLebaneseDate(today),
                 style: TextStyle(
                   fontSize: isTablet ? 24 : 12,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w900,
                   fontFamily: 'Tajawal',
                 ),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.refresh,
+                  size: isTablet ? 40 : 20,
+                ),
+                onPressed: fetchPrayerTimes,
               ),
               Text(
                 getHijriDate(today),
                 style: TextStyle(
                   fontSize: isTablet ? 24 : 12,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w900,
                   fontFamily: 'Tajawal',
                 ),
               ),
@@ -150,111 +216,52 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
           ),
         ),
         Expanded(
-          child: ListView.builder(
-            itemCount: times.length,
-            itemBuilder: (context, index) {
-              String name = times.keys.elementAt(index);
-              String time = times[name]!;
-              return Card(
-                color: Colors.white,
-                child: ListTile(
-                  title: Text(
-                    name,
-                    style: TextStyle(
-                      fontSize: isTablet ? 30 : 16,
-                      fontFamily: 'Tajawal',
+          child: loading
+              ? Center(child: CircularProgressIndicator())
+              : timingList == null
+                  ? Center(child: Text('لا توجد بيانات حالياً'))
+                  : ListView.builder(
+                      padding: EdgeInsets.all(16),
+                      itemCount: timingList!.length,
+                      itemBuilder: (context, index) {
+                        final item = timingList![index];
+                        return Card(
+                          color: Colors.white,
+                          margin: EdgeInsets.all(isTablet ? 5 : 2),
+                          child: ListTile(
+                            title: Text(
+                              item.name,
+                              style: TextStyle(
+                                fontSize: isTablet ? 30 : 16,
+                                fontFamily: 'Tajawal',
+                              ),
+                            ),
+                            trailing: Text(
+                              item.time,
+                              style: TextStyle(
+                                fontSize: isTablet ? 30 : 16,
+                                fontFamily: 'Tajawal',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  ),
-                  trailing: Text(
-                    time,
-                    style: TextStyle(
-                      fontSize: isTablet ? 30 : 16,
-                      fontFamily: 'Tajawal',
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
         ),
       ],
     );
   }
 }
 
-// ! // Prayer Time Widget for Shia Muslims from Api Aladhan
-// import 'package:flutter/material.dart';
-// import 'package:geolocator/geolocator.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
+class PrayerTime {
+  final String name;
+  final String time;
 
-// class PrayerTimeWidget extends StatefulWidget {
-//   @override
-//   _PrayerTimeWidgetState createState() => _PrayerTimeWidgetState();
-// }
+  PrayerTime(this.name, this.time);
 
-// class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
-//   Map<String, dynamic> prayerTimes = {};
-//   String status = "جاري تحميل المواقيت...";
+  Map<String, dynamic> toJson() => {'name': name, 'time': time};
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     fetchPrayerTimes();
-//   }
-
-//   Future<void> fetchPrayerTimes() async {
-//     try {
-//       // الحصول على الموقع الحالي
-//       Position position = await Geolocator.getCurrentPosition(
-//         desiredAccuracy: LocationAccuracy.low,
-//       );
-
-//       double lat = position.latitude;
-//       double lon = position.longitude;
-
-//       final now = DateTime.now();
-//       final url =
-//           'https://api.aladhan.com/v1/timings/${now.millisecondsSinceEpoch ~/ 1000}?latitude=$lat&longitude=$lon&method=0';
-
-//       final response = await http.get(Uri.parse(url));
-
-//       if (response.statusCode == 200) {
-//         final data = json.decode(response.body);
-//         setState(() {
-//           prayerTimes = data['data']['timings'];
-//           status = "تم جلب المواقيت بنجاح.";
-//         });
-//       } else {
-//         setState(() {
-//           status = "فشل في جلب البيانات.";
-//         });
-//       }
-//     } catch (e) {
-//       setState(() {
-//         status = "حدث خطأ: $e";
-//       });
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text("مواقيت الصلاة - المذهب الشيعي")),
-//       body: Center(
-//         child: prayerTimes.isEmpty
-//             ? Text(status)
-//             : ListView(
-//                 padding: EdgeInsets.all(20),
-//                 children: prayerTimes.entries.map((entry) {
-//                   return Padding(
-//                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-//                     child: Text("${entry.key}: ${entry.value}",
-//                         style: TextStyle(fontSize: 20)),
-//                   );
-//                 }).toList(),
-//               ),
-//       ),
-//     );
-//   }
-// }
+  static PrayerTime fromJson(Map<String, dynamic> json) =>
+      PrayerTime(json['name'], json['time']);
+}
