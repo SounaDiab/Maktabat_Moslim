@@ -199,6 +199,7 @@ import '../screens/kor2an/screens/index_screen.dart';
 import '../screens/kor2an/screens/juz_index_screen.dart';
 import '../screens/other pages/counter_screen.dart';
 import '../screens/other pages/imsakiya_screen.dart';
+import '../screens/other pages/salat_allayl.dart';
 import '../screens/other pages/takwim_screen.dart';
 import '../screens/quran_home_screen.dart';
 import '../screens/about/about_us.dart';
@@ -538,6 +539,7 @@ class AppRoutes {
     MafatihAljinanHomeScreen.screenRoute: (context) =>
         MafatihAljinanHomeScreen(),
     OtherScreen.screenRoute: (context) => OtherScreen(),
+    SalatAllayl.screenRoute: (context) => SalatAllayl(),
     CounterScreen.screenRoute: (context) => CounterScreen(),
     ImsakiyaScreen.screenRoute: (context) => ImsakiyaScreen(),
     TakwimScreen.screenRoute: (context) => TakwimScreen(),
@@ -1253,28 +1255,18 @@ class AppRoutes {
         Dou3a2AlsajadFiZikrAltawba(),
     FiBa3dAla7razWalad3iyaAlmoujaza.screenRoute: (context) =>
         FiBa3dAla7razWalad3iyaAlmoujaza(),
-    AlmonajatBelisti5araa.screenRoute: (context) =>
-        AlmonajatBelisti5araa(),
-    AlmonajatBelistikala.screenRoute: (context) =>
-        AlmonajatBelistikala(),
-    AlmonajatBelsafaar.screenRoute: (context) =>
-        AlmonajatBelsafaar(),
-    AlmonajatBitalabAlrizk.screenRoute: (context) =>
-        AlmonajatBitalabAlrizk(),
-    AlmonajatBilisti3aza.screenRoute: (context) =>
-        AlmonajatBilisti3aza(),
-    AlmonajatBitalabAltawba.screenRoute: (context) =>
-        AlmonajatBitalabAltawba(),
-    AlmonajatBitalabAl7aj.screenRoute: (context) =>
-        AlmonajatBitalabAl7aj(),
-    AlmonajatLikashfAlzolm.screenRoute: (context) =>
-        AlmonajatLikashfAlzolm(),
-    AlmonajatBishokrAllah.screenRoute: (context) =>
-        AlmonajatBishokrAllah(),
+    AlmonajatBelisti5araa.screenRoute: (context) => AlmonajatBelisti5araa(),
+    AlmonajatBelistikala.screenRoute: (context) => AlmonajatBelistikala(),
+    AlmonajatBelsafaar.screenRoute: (context) => AlmonajatBelsafaar(),
+    AlmonajatBitalabAlrizk.screenRoute: (context) => AlmonajatBitalabAlrizk(),
+    AlmonajatBilisti3aza.screenRoute: (context) => AlmonajatBilisti3aza(),
+    AlmonajatBitalabAltawba.screenRoute: (context) => AlmonajatBitalabAltawba(),
+    AlmonajatBitalabAl7aj.screenRoute: (context) => AlmonajatBitalabAl7aj(),
+    AlmonajatLikashfAlzolm.screenRoute: (context) => AlmonajatLikashfAlzolm(),
+    AlmonajatBishokrAllah.screenRoute: (context) => AlmonajatBishokrAllah(),
     AlmonajatBitalabAl7awa2ij.screenRoute: (context) =>
         AlmonajatBitalabAl7awa2ij(),
-    FiAsarBa3dSowarWalayat.screenRoute: (context) =>
-        FiAsarBa3dSowarWalayat(),
+    FiAsarBa3dSowarWalayat.screenRoute: (context) => FiAsarBa3dSowarWalayat(),
     FiBa3dMaYata3alakBelmawt.screenRoute: (context) =>
         FiBa3dMaYata3alakBelmawt(),
   };
