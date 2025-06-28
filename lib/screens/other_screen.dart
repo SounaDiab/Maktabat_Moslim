@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/prayer_time_widget.dart';
 import 'other pages/counter_screen.dart';
 import 'other pages/imsakiya_screen.dart';
+import 'other pages/salat_allayl.dart';
 import 'other pages/takwim_screen.dart';
 
 class OtherScreen extends StatelessWidget {
@@ -46,6 +47,29 @@ class OtherScreen extends StatelessWidget {
                   height: isTablet ? sizeHeight / 2 : sizeHeight / 1.5,
                   child: Container(
                     child: PrayerTimeWidget(),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  // margin: EdgeInsets.symmetric(horizontal: 5),
+                  // padding: EdgeInsets.symmetric(vertical: 10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, SalatAllayl.screenRoute);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      elevation: 5,
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                    ),
+                    child: Text('حديث الكساء',
+                        style: TextStyle(
+                          fontSize: isTablet ? 32 : 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800,
+                          fontFamily: 'Tajawal',
+                          letterSpacing: isTablet ? 5 : 3,
+                        )),
                   ),
                 ),
                 Container(
