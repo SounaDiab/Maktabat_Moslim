@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:maktabat_almoslim/Util/app_routes.dart';
@@ -23,15 +24,40 @@ import 'screens/kor2an/providers/toast.dart';
 // import 'firebase_options.dart';
 // options: DefaultFirebaseOptions.currentPlatform,
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 final FlutterLocalNotificationsPlugin notificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+    void backgroundAlarmCallback() async {
+  const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+    'alarm_channel',
+    'صلاة',
+    channelDescription: 'تنبيه من الخلفية',
+    importance: Importance.max,
+    priority: Priority.high,
+    playSound: true,
+    sound: RawResourceAndroidNotificationSound('azan'),
+  );
+
+  const NotificationDetails notificationDetails =
+      NotificationDetails(android: androidDetails);
+
+  await notificationsPlugin.show(
+    1111,
+    '🕌 وقت الصلاة',
+    'حان وقت الصلاة!',
+    notificationDetails,
+  );
+}
+
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    await AndroidAlarmManager.initialize();
     await Firebase.initializeApp();
     print('✅ Firebase initialized');
+    tz.initializeTimeZones();
 
     final savedThemeMode = await AdaptiveTheme.getThemeMode();
     final prefs = await SharedPreferences.getInstance();
