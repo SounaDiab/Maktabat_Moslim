@@ -502,6 +502,9 @@ import '../screens/herz lmoujahidin/herz_lietikaa_silah_alaadow_page.dart';
 import '../screens/herz lmoujahidin/herz_mostakhraj_men_kitab_allah_page.dart';
 import '../screens/herz lmoujahidin/herz_rasoul_allah_page.dart';
 import '../screens/herz lmoujahidin/rokaat_aljayb_lilimam_alrida_aalaih_alsalam_page.dart';
+import '../screens/other pages/salat layl/dou3aa_7azin.dart';
+import '../screens/other pages/salat layl/sawabaha_wa_fawa2idaha.dart';
+import '../screens/other pages/salat layl/waktaha_wakaifyatiha.dart';
 
 class Items {
   static final Map<String, List<Map<String, String>>> dataItems = {
@@ -2500,4 +2503,25 @@ class AlBaqiyatAlSalehat {
       AlBaqiyatAlSalehat
               .dataAlBaqiyatAlSalehat["ala7razWalad3iyaAlmoujazaItem"] ??
           [];
+}
+
+class OtherScreenn {
+  static final Map<String, List<Map<String, String>>> dataOtherScreen = {
+    "salatAllaylItem": [
+      {
+        'title': 'عنها وثوابها وفوائدها',
+        'route': SawabahaWaFawa2idaha.screenRoute
+      },
+      {
+        'title': 'وقتها وكيفيتها',
+        'route': WaktahaWakaifyatiha.screenRoute
+      },
+      {'title': 'دعاء الحزين', 'route': Dou3aa7azin.screenRoute},
+    ],
+  };
+
+  static final List<Map<String, String>> allItems =
+      dataOtherScreen.values.expand((list) => list).toList();
+  static final List<Map<String, String>> salatAllaylItemList =
+      OtherScreenn.dataOtherScreen["salatAllaylItem"] ?? [];
 }
