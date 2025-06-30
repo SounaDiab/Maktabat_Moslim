@@ -84,6 +84,7 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
 
     await notificationsPlugin.initialize(initializationSettings);
   }
+
   Future<void> loadNotificationPreferences() async {
     final prefs = await SharedPreferences.getInstance();
     final keys = [
@@ -100,6 +101,7 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
       for (var k in keys) k: prefs.getBool(k) ?? true,
     };
   }
+
   Future<void> saveNotificationPreferences() async {
     final prefs = await SharedPreferences.getInstance();
     enabledNotificationsPerPrayer.forEach((key, value) {
