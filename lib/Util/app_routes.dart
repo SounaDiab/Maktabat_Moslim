@@ -200,6 +200,7 @@ import '../screens/kor2an/screens/juz_index_screen.dart';
 import '../screens/other pages/counter_screen.dart';
 import '../screens/other pages/imsakiya_screen.dart';
 import '../screens/other pages/salat layl/dou3aa_7azin.dart';
+import '../screens/other pages/salat layl/name_list_page.dart';
 import '../screens/other pages/salat layl/sawabaha_wa_fawa2idaha.dart';
 import '../screens/other pages/salat layl/waktaha_wakaifyatiha.dart';
 import '../screens/other pages/salat_allayl.dart';
@@ -547,6 +548,7 @@ class AppRoutes {
     SawabahaWaFawa2idaha.screenRoute: (context) => SawabahaWaFawa2idaha(),
     WaktahaWakaifyatiha.screenRoute: (context) => WaktahaWakaifyatiha(),
     Dou3aa7azin.screenRoute: (context) => Dou3aa7azin(),
+    NameListPage.screenRoute: (context) => NameListPage(),
     // !
     CounterScreen.screenRoute: (context) => CounterScreen(),
     ImsakiyaScreen.screenRoute: (context) => ImsakiyaScreen(),
