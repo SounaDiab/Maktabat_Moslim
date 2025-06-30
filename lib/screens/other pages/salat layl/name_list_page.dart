@@ -107,31 +107,40 @@ class _NameListPageState extends State<NameListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'قائمة الأربعين مؤمن',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+        toolbarHeight: isTablet ? 100 : 50,
+        centerTitle: true,
+        title: Text(
+          'قائمة الأربعين مؤمن',
+          style: TextStyle(
+            fontSize: isTablet
+                ? 40
+                : size > 1.0
+                    ? 20
+                    : 23,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: Navigator.of(context).pop,
+          icon: Icon(
+            Icons.arrow_back,
+            size: isTablet ? 50 : 25,
           ),
         ),
         actions: [
           IconButton(
             onPressed: _addName,
-            icon: const Icon(
+            icon: Icon(
               Icons.group_add_rounded,
               color: Colors.green,
+              size: isTablet ? 50 : 25,
             ),
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.delete_forever,
               color: Colors.red,
+              size: isTablet ? 50 : 25,
             ),
             tooltip: 'مسح الكل',
             onPressed: () {
@@ -165,14 +174,35 @@ class _NameListPageState extends State<NameListPage> {
           ? const Center(child: Text('لا توجد أسماء مضافة'))
           : ListView.builder(
               itemCount: names.length,
-              itemBuilder: (_, i) => ListTile(
-                title: Text('${i + 1}- ${names[i]}'),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
+              itemBuilder: (_, i) => Card(
+                color: Colors.white,
+                margin: EdgeInsets.all(isTablet ? 5 : 2),
+                child: ListTile(
+                  leading: Text(
+                    '${i + 1}',
+                    style: TextStyle(
+                      fontFamily: 'Tajawal',
+                      fontWeight: FontWeight.w800,
+                      fontSize: isTablet ? 50 : 25,
+                    ),
                   ),
-                  onPressed: () => _removeName(i),
+                  title: Center(
+                    child: Text(
+                      '${names[i]}',
+                      style: TextStyle(
+                        fontFamily: 'Tajawal',
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.red,
+                      size: isTablet ? 40 : 20,
+                    ),
+                    onPressed: () => _removeName(i),
+                  ),
                 ),
               ),
             ),
