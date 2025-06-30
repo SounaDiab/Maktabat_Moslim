@@ -4,6 +4,7 @@ import 'other pages/counter_screen.dart';
 import 'other pages/imsakiya_screen.dart';
 import 'other pages/salat_allayl.dart';
 import 'other pages/takwim_screen.dart';
+import 'welcome_screen.dart';
 
 class OtherScreen extends StatelessWidget {
   static String screenRoute = 'other_screen';
@@ -25,7 +26,8 @@ class OtherScreen extends StatelessWidget {
           toolbarHeight: isTablet ? 60 : 30,
           leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context)
+                  .pushReplacementNamed(WelcomeScreen.screenRoute);
             },
             icon: Icon(
               Icons.arrow_back,
@@ -62,7 +64,7 @@ class OtherScreen extends StatelessWidget {
                       elevation: 5,
                       padding: EdgeInsets.symmetric(vertical: 10),
                     ),
-                    child: Text('حديث الكساء',
+                    child: Text('صلاة الليل',
                         style: TextStyle(
                           fontSize: isTablet ? 32 : 20,
                           color: Colors.black,
