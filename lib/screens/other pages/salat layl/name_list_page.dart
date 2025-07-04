@@ -38,22 +38,52 @@ class _NameListPageState extends State<NameListPage> {
     showDialog(
       context: context,
       builder: (ctx) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        final isTablet = screenWidth >= 600;
         return AlertDialog(
-          title: const Text('أدخل الاسم'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: 'الاسم'),
-              ),
-              TextField(
-                controller: positionController,
-                decoration:
-                    const InputDecoration(labelText: 'الموقع (اختياري)'),
-                keyboardType: TextInputType.number,
-              ),
-            ],
+          elevation: 100,
+          title: Text(
+            'أدخل الاسم',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 20,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          content: SizedBox(
+            width: isTablet ? 500 : double.maxFinite,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  child: TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      labelText: 'الاسم',
+                      labelStyle: TextStyle(
+                        fontSize: isTablet ? 40 : 20,
+                        fontFamily: 'Tajawal',
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+                TextField(
+                  controller: positionController,
+                  decoration: InputDecoration(
+                    labelText: 'الموقع (اختياري)',
+                    labelStyle: TextStyle(
+                      fontSize: isTablet ? 40 : 20,
+                      fontFamily: 'Tajawal',
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -77,7 +107,75 @@ class _NameListPageState extends State<NameListPage> {
                   _saveData(); // الحفظ بعد إغلاق النافذة
                 }
               },
-              child: const Text('إضافة'),
+              child: Text(
+                'إضافة',
+                style: TextStyle(
+                  fontSize: isTablet ? 40 : 20,
+                  fontFamily: 'Tajawal',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _editName(int index) {
+    final controller = TextEditingController(text: names[index]);
+
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        final isTablet = screenWidth >= 600;
+        return AlertDialog(
+          title: Text(
+            'تعديل الاسم',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 20,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          content: SizedBox(
+            width: isTablet ? 500 : double.maxFinite,
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                labelText: 'الاسم الجديد',
+                labelStyle: TextStyle(
+                  fontSize: isTablet ? 40 : 20,
+                  fontFamily: 'Tajawal',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                final newName = controller.text.trim();
+                if (newName.isNotEmpty) {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    names[index] = newName;
+                  });
+                  _saveData();
+                }
+              },
+              child: Text(
+                'حفظ',
+                style: TextStyle(
+                  fontSize: isTablet ? 40 : 20,
+                  fontFamily: 'Tajawal',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ],
         );
@@ -179,12 +277,12 @@ class _NameListPageState extends State<NameListPage> {
                 margin: EdgeInsets.all(isTablet ? 5 : 2),
                 child: ListTile(
                   leading: Text(
-                    '${i + 1}',
+                    '${i + 1}.',
                     style: TextStyle(
-                      fontFamily: 'Tajawal',
-                      fontWeight: FontWeight.w800,
-                      fontSize: isTablet ? 50 : 25,
-                    ),
+                        fontFamily: 'Tajawal',
+                        fontWeight: FontWeight.w800,
+                        fontSize: isTablet ? 50 : 20,
+                        color: Colors.green),
                   ),
                   title: Center(
                     child: Text(
@@ -192,16 +290,32 @@ class _NameListPageState extends State<NameListPage> {
                       style: TextStyle(
                         fontFamily: 'Tajawal',
                         fontWeight: FontWeight.w800,
+                        fontSize: isTablet ? 40 : 20,
                       ),
                     ),
                   ),
-                  trailing: IconButton(
-                    icon: Icon(
-                      Icons.close,
-                      color: Colors.red,
-                      size: isTablet ? 40 : 20,
+                  trailing: Container(
+                    width: isTablet ? 120 : 60,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.edit_note,
+                            color: Colors.blue,
+                            size: isTablet ? 40 : 20,
+                          ),
+                          onPressed: () => _editName(i),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.close,
+                            color: Colors.red,
+                            size: isTablet ? 40 : 20,
+                          ),
+                          onPressed: () => _removeName(i),
+                        ),
+                      ],
                     ),
-                    onPressed: () => _removeName(i),
                   ),
                 ),
               ),
