@@ -284,19 +284,19 @@ class _NameListPageState extends State<NameListPage> {
                         fontSize: isTablet ? 50 : 20,
                         color: Colors.green),
                   ),
-                  title: Center(
-                    child: Text(
-                      '${names[i]}',
-                      style: TextStyle(
-                        fontFamily: 'Tajawal',
-                        fontWeight: FontWeight.w800,
-                        fontSize: isTablet ? 40 : 20,
-                      ),
+                  title: Text(
+                    '${names[i]}',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontFamily: 'Tajawal',
+                      fontWeight: FontWeight.w800,
+                      fontSize: isTablet ? 40 : 15,
                     ),
                   ),
                   trailing: Container(
-                    width: isTablet ? 120 : 60,
+                    width: isTablet ? 120 : 96,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
                           icon: Icon(
