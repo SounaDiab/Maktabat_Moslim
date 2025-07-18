@@ -57,7 +57,7 @@ class _AddCustomBottomNavigationBarState
     if (isPlaying) {
       await player.pause();
     } else {
-      await player.setSource(AssetSource('audio/${widget.soud}'));
+      await player.setSource(UrlSource('${widget.soud}'));
       await player.resume();
       print('audio downloaded');
     }
