@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _ZyaratAmirMo2mininState extends State<ZyaratAmirMo2minin> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -143,7 +142,7 @@ class _ZyaratAmirMo2mininState extends State<ZyaratAmirMo2minin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malAllaylaAlsalisaWal3ishrin.screenRoute,
           pushBack: Dou3a2AllaylaAlwahidaWal3ishrin.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة امير المؤمنين عليه السلام.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

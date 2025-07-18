@@ -26,7 +26,6 @@ double _fontSizeTablet = 30;
 class _A3malAllaylaLatasi3a3asharState
     extends State<A3malAllaylaLatasi3a3ashar> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -183,7 +182,7 @@ class _A3malAllaylaLatasi3a3asharState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malAllaylaAlwahidaWal3eshrin.screenRoute,
           pushBack: Hadis2alkisa2.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الليلة التاسعة عشر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

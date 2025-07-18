@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _SalatLaylState extends State<SalatLayl> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -141,7 +140,7 @@ class _SalatLaylState extends State<SalatLayl> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Ba3dSalatAlwater.screenRoute,
           pushBack: Dou3a2YaBatinan.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الليل.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

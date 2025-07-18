@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -144,7 +143,7 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2YaBatinan.screenRoute,
           pushBack: A3malAllaylaAlsalisaWal3ishrin.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة آل ياسين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

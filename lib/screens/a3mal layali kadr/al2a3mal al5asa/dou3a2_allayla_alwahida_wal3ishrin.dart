@@ -26,7 +26,6 @@ double _fontSizeTablet = 30;
 class _Dou3a2AllaylaAlwahidaWal3ishrinState
     extends State<Dou3a2AllaylaAlwahidaWal3ishrin> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -147,7 +146,7 @@ class _Dou3a2AllaylaAlwahidaWal3ishrinState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZyaratAmirMo2minin.screenRoute,
           pushBack: Dou3a2AlimamAlsadek.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الليلة الواحدة والعشرين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

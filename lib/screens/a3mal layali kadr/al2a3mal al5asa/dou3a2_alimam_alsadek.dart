@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3a2AlimamAlsadekState extends State<Dou3a2AlimamAlsadek> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -144,7 +143,7 @@ class _Dou3a2AlimamAlsadekState extends State<Dou3a2AlimamAlsadek> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2AllaylaAlwahidaWal3ishrin.screenRoute,
           pushBack: A3malAllaylaAlwahidaWal3eshrin.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الامام الصادق عليه السلام في العشر الأواخر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

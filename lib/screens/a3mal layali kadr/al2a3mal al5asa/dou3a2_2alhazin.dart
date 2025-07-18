@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3a22alhazinState extends State<Dou3a22alhazin> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -164,7 +163,7 @@ class _Dou3a22alhazinState extends State<Dou3a22alhazin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Hadis2alkisa2.screenRoute,
           pushBack: Dou3a2Ba3dSalatAlwater.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الحزين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

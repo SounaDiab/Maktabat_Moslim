@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _SouratAl3ankaboutState extends State<SouratAl3ankabout> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -145,7 +144,7 @@ class _SouratAl3ankaboutState extends State<SouratAl3ankabout> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SouratAlroum.screenRoute,
           pushBack: SouratAldo5an.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/سورة العنكبوت.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

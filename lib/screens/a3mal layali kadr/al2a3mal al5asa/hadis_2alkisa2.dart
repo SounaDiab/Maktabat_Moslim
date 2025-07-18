@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Hadis2alkisa2State extends State<Hadis2alkisa2> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -166,7 +165,7 @@ class _Hadis2alkisa2State extends State<Hadis2alkisa2> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malAllaylaLatasi3a3ashar.screenRoute,
           pushBack: Dou3a22alhazin.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حديث الكساء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

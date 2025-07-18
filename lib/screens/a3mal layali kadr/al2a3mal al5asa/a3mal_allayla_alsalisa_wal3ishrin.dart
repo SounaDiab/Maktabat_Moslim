@@ -26,7 +26,6 @@ double _fontSizeTablet = 30;
 class _A3malAllaylaAlsalisaWal3ishrinState
     extends State<A3malAllaylaAlsalisaWal3ishrin> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -147,7 +146,7 @@ class _A3malAllaylaAlsalisaWal3ishrinState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZyaratSa7ibAlzaman.screenRoute,
           pushBack: ZyaratAmirMo2minin.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الليلة الثالثة والعشرين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
