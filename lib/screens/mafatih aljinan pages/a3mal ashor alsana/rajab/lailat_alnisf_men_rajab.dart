@@ -211,7 +211,7 @@ class _LailatAlnisfMenRajabState extends State<LailatAlnisfMenRajab> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: YawmAlnisfMenRajab.screenRoute,
         pushBack: AllaylaAlsalisa3ashara.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ليلة النصف من رجب.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

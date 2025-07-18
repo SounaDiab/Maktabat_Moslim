@@ -208,7 +208,7 @@ class _AlyawmAlrabi3Wal3ishrounZilhojaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlyawmAl5amisWal3ishrounZilhoja.screenRoute,
         pushBack: KhotbatAmirAlmo2mininTawmAl8adir.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الرابع والعشرون من ذي الحجة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

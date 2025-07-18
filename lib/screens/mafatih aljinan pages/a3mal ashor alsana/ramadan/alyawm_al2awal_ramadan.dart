@@ -235,7 +235,7 @@ class _AlyawmAl2awalRamadanState extends State<AlyawmAl2awalRamadan> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlyawmAlsadisRamadan.screenRoute,
         pushBack: AllaylaAl2oulaRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الاول من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

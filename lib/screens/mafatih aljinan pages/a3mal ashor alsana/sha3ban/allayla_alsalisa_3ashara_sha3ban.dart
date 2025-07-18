@@ -161,7 +161,7 @@ class _AllaylaAlsalisa3asharaSha3banState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: LaylatAlnisfMenSha3ben.screenRoute,
         pushBack: AlyawmAlsalisSha3ben.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الالثالثة عشرةاولى من شعبان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

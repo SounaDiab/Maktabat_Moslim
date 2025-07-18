@@ -244,7 +244,7 @@ class _MaYosta7ab2itanohFiLayaliShaherRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAl2iftita7.screenRoute,
         pushBack: MaYa3omAllayaliWal2ayam.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ما يستحب ايتانه في ليالي شهر رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

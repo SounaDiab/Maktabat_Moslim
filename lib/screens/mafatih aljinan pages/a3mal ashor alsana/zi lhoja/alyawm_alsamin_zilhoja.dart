@@ -158,7 +158,7 @@ class _AlyawmAlsaminZilhojaState extends State<AlyawmAlsaminZilhoja> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AllaylaAltasi3aZilhoja.screenRoute,
         pushBack: AlyawmAlsabi3Zilhoja.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الثامن من ذي الحجة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

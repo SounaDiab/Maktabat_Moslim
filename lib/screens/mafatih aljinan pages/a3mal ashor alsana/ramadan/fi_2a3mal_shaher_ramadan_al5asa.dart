@@ -344,7 +344,7 @@ class _Fi2a3malShaherRamadanAl5asaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SalawatAllayaliWada3awatAl2ayamaAlmashhoura.screenRoute,
         pushBack: Fi2a3mal2ayamShaherRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال شهر رمضان الخاصة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

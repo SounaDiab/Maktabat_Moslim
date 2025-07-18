@@ -159,7 +159,7 @@ class _AllaylaAl3ashiraZilhojaState extends State<AllaylaAl3ashiraZilhoja> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlyawmAl3ashirZilhoja.screenRoute,
         pushBack: AlyawmAltasi3Zilhoja.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة العاشرة من ذي الحجة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

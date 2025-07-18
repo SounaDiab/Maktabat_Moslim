@@ -161,7 +161,7 @@ class _AlyawmAlwa7idWal3ishrounRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAllaylaAlsaniaWal3ishrounRamadan.screenRoute,
         pushBack: AllaylaAlwa7idaWal3ishrounRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الواحد والعشرون من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

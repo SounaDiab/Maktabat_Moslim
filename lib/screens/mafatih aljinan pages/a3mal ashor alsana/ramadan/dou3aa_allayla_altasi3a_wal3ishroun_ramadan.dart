@@ -162,7 +162,7 @@ class _Dou3aaAllaylaAltasi3aWal3ishrounRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Dou3aaAllaylaAlsalasinRamadan.screenRoute,
         pushBack: Dou3aaAllaylaAlsaminaWal3ishrounRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الليلة التاسعة والعشرون من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

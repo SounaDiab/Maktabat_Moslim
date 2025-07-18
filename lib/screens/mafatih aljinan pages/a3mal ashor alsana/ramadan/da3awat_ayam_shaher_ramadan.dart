@@ -438,7 +438,7 @@ class _Da3awatAyamShaherRamadanState extends State<Da3awatAyamShaherRamadan> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: FiFadelShaherRamadanWa2a3maloh.screenRoute,
         pushBack: AlyawmAlsalasinRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعوات ايام شهر رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

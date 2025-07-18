@@ -158,7 +158,7 @@ class _YawmAlnisfMenSha3benState extends State<YawmAlnisfMenSha3ben> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: A3malMaBakyaMenAlshaher.screenRoute,
         pushBack: LaylatAlnisfMenSha3ben.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/يوم النصف من شعبان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

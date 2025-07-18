@@ -158,7 +158,7 @@ class _FiA3malShaherMoharamState extends State<FiA3malShaherMoharam> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AllaylaAl2oula.screenRoute,
         pushBack: AlyawmAl5amesWal3eshroun.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال شهر محرم.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

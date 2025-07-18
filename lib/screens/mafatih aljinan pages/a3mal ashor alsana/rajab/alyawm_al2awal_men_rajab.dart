@@ -217,7 +217,7 @@ class _AlyawmAl2awalMenRajabState extends State<AlyawmAl2awalMenRajab> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AllaylaAlsalisa3ashara.screenRoute,
           pushBack: Al2a3malAl5asaBrajab.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الاول من رجب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

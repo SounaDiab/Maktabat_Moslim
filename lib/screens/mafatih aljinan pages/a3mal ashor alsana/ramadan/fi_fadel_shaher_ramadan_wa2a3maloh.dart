@@ -164,7 +164,7 @@ class _FiFadelShaherRamadanWa2a3malohState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: MaYa3omAllayaliWal2ayam.screenRoute,
         pushBack: Da3awatAyamShaherRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل شهر رمضان واعماله.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

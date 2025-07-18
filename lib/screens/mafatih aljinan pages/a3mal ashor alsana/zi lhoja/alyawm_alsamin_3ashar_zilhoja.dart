@@ -264,7 +264,7 @@ class _AlyawmAlsamin3asharZilhojaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: KhotbatAmirAlmo2mininTawmAl8adir.screenRoute,
         pushBack: AllaylaAlsamina3asharaZilhoja.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الثامن عشر من ذي الحجة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

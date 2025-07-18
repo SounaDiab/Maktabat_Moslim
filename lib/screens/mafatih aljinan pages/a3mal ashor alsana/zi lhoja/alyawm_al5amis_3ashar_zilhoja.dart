@@ -161,7 +161,7 @@ class _AlyawmAl5amis3asharZilhojaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SouratAlroum.screenRoute,
         pushBack: AlyawmAl3ashirZilhoja.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الخامس عشر من ذي الحجة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

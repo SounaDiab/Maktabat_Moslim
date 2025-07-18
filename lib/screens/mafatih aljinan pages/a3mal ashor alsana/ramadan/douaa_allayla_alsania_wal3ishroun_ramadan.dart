@@ -162,7 +162,7 @@ class _DouaaAllaylaAlsaniaWal3ishrounRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AllaylaAlsalisaWal3ishrounRamadan.screenRoute,
         pushBack: AlyawmAlwa7idWal3ishrounRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الليلة الثانية والععشرون من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

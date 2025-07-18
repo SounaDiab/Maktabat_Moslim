@@ -158,7 +158,7 @@ class _AlyawmAlsadisRamadanState extends State<AlyawmAlsadisRamadan> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AllaylaAlsalisa3asharRamadan.screenRoute,
         pushBack: AlyawmAl2awalRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم السادس من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

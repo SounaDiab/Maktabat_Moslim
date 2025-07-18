@@ -160,7 +160,7 @@ class _MaYa3omAllayaliWal2ayamState extends State<MaYa3omAllayaliWal2ayam> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: MaYosta7ab2itanohFiLayaliShaherRamadan.screenRoute,
         pushBack: FiFadelShaherRamadanWa2a3maloh.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ما يعم الليالي والايام.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

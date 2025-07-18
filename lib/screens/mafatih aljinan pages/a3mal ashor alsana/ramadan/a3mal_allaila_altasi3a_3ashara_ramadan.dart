@@ -188,7 +188,7 @@ class _A3malAllailaAltasi3a3asharaRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AllaylaAlwa7idaWal3ishrounRamadan.screenRoute,
         pushBack: AllaylaAlsabi3a3asharaRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الليلة التاسعة عشرة من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

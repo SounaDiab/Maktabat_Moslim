@@ -206,7 +206,7 @@ class _AllaylaAl5amisa3asharRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: YawmAlnisfMenRamadan.screenRoute,
         pushBack: AllaylaAlrabi3a3asharRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الخامسة عشر من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

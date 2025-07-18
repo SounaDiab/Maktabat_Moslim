@@ -258,7 +258,7 @@ class _AllaylaAlsalisaWal3ishrounRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Dou3aaAllaylaAlrabi3aWal3ishrounRamadan.screenRoute,
         pushBack: DouaaAllaylaAlsaniaWal3ishrounRamadan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الثالثة والعشرون من رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

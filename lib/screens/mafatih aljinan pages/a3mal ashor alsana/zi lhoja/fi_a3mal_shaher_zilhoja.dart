@@ -207,7 +207,7 @@ class _FiA3malShaherZilhojaState extends State<FiA3malShaherZilhoja> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlyawmAl2awalZilhoja.screenRoute,
         pushBack: ZiyaratAmirAlmo2mininYawmAl8adir.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال شهر ذي الحجة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

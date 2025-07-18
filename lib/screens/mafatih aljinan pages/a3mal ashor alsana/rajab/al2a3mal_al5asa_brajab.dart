@@ -255,7 +255,7 @@ class _Al2a3malAl5asaBrajabState extends State<Al2a3malAl5asaBrajab> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlyawmAl2awalMenRajab.screenRoute,
         pushBack: AlyawmAl2a5irMenAlshaher.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الاعمال الخاصة برجب.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

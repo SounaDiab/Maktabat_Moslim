@@ -214,7 +214,7 @@ class _DouaaAl2iftita7State extends State<DouaaAl2iftita7> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Fi2a3mal2asharShaherRamadan.screenRoute,
         pushBack: MaYosta7ab2itanohFiLayaliShaherRamadan.screenRoute,
-        soud: 'دعاء الافتتاح.mp3',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الإفتتاح.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -251,7 +251,7 @@ class _A3malYawm3idAlfitrState extends State<A3malYawm3idAlfitr> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AllaylaAl2oulaShawal.screenRoute,
           pushBack: AllaylaAl2oulaShawal.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال يوم عيد الفطر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -164,7 +164,7 @@ class _KhotbatAmirAlmo2mininTawmAl8adirState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlyawmAlrabi3Wal3ishrounZilhoja.screenRoute,
         pushBack: AlyawmAlsamin3asharZilhoja.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/خطبة امير المؤمنين يوم الغدير.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

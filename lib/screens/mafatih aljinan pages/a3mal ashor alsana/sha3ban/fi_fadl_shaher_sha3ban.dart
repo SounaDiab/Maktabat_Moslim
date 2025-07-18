@@ -242,7 +242,7 @@ class _FiFadlShaherSha3banState extends State<FiFadlShaherSha3ban> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AllaylaAl2oulaSha3ban.screenRoute,
         pushBack: A3malMaBakyaMenAlshaher.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل شهر شعبان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -180,7 +180,7 @@ class _Fi2a3mal2asharShaherRamadanState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAbi7amzaAlsamali.screenRoute,
         pushBack: DouaaAl2iftita7.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال اسحار شهر رمضان.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {
