@@ -179,7 +179,7 @@ class _Fi2a3mal2as7arRamadanState extends State<Fi2a3mal2as7arRamadan> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Abi7amzaAlsamali.screenRoute,
           pushBack: Dou3a2Alsa7ar.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال اسحار رمضان.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

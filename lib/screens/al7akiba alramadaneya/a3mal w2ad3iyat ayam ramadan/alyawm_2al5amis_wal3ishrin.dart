@@ -158,7 +158,7 @@ class _Alyawm2al5amisWal3ishrinState extends State<Alyawm2al5amisWal3ishrin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alyawm2alsadisWal3ishrin.screenRoute,
           pushBack: Alyawm2alrabi3Wal3ishrin.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الخامس والعشرين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

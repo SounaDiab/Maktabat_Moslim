@@ -164,7 +164,7 @@ class _Allayla2altasi3aWal3ishrinState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Allayla2alsalasin.screenRoute,
           pushBack: Allayla2alsaminaWal3ishrin.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة التاسعة والعشرين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

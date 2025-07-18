@@ -193,7 +193,7 @@ class _Allayla2alsabi3a3asharState extends State<Allayla2alsabi3a3ashar> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Allayla2altasi3a3ashar.screenRoute,
           pushBack: Allayla2al5amisa3ashar.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة السابعة عشر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

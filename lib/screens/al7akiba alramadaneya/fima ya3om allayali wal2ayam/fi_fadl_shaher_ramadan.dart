@@ -161,7 +161,7 @@ class _FiFadlShaherRamadanState extends State<FiFadlShaherRamadan> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: MaYa3omAllayaliWalayam.screenRoute,
           pushBack: MaYa3omAllayaliWalayam.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل شهر رمضان.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

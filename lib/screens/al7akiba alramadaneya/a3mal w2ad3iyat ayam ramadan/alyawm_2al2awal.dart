@@ -88,7 +88,7 @@ class _Alyawm2al2awalState extends State<Alyawm2al2awal> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('اليوم الاول', Alyawm2al2awal.screenRoute);
@@ -226,7 +226,8 @@ class _Alyawm2al2awalState extends State<Alyawm2al2awal> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alyawm2alsaniWal3ishrin.screenRoute,
           pushBack: Alyawm2alsalasin.screenRoute,
-          soud: '',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الاول.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

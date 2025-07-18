@@ -159,7 +159,7 @@ class _Alyawm2alsamin3asharState extends State<Alyawm2alsamin3ashar> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alyawm2altasi33ashar.screenRoute,
           pushBack: Alyawm2alsabi33ashar.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الثامن عشر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
