@@ -476,7 +476,7 @@ class _Ta3kibat3amaState extends State<Ta3kibat3ama> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ta3kibAlsabah.screenRoute,
           pushBack: Ta3kibAl3isha2.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/تعقيبات عامة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

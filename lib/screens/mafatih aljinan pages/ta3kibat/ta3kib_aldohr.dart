@@ -169,7 +169,7 @@ class _Ta3kibAldohrState extends State<Ta3kibAldohr> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ta3kibAl3asr.screenRoute,
           pushBack: Ta3kibAlsabah.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/تعقيب الظهر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

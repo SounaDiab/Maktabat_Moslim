@@ -167,7 +167,7 @@ class _ZiaratAl5amisState extends State<ZiaratAl5amis> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiaratAljom3a.screenRoute,
           pushBack: ZiaratAl2arbi3a2.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الخميس.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

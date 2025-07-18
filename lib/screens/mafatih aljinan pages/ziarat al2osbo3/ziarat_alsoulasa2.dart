@@ -169,7 +169,7 @@ class _ZiaratAlsoulasa2State extends State<ZiaratAlsoulasa2> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiaratAl2arbi3a2.screenRoute,
           pushBack: ZiaratAl2isnain.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الثلثاء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

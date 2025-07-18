@@ -177,7 +177,7 @@ class _ZiaratAljom3aState extends State<ZiaratAljom3a> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiaratAlsabt.screenRoute,
           pushBack: ZiaratAl5amis.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الجمعة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

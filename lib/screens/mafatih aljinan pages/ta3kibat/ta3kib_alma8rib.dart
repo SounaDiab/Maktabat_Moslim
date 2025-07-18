@@ -171,7 +171,7 @@ class _Ta3kibAlma8ribState extends State<Ta3kibAlma8rib> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ta3kibAl3isha2.screenRoute,
           pushBack: Ta3kibAl3asr.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/تعقيب المغرب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
