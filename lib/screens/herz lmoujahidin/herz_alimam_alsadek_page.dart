@@ -39,7 +39,7 @@ class _HerzAlimamAlsadekPageState extends State<HerzAlimamAlsadekPage> {
     await prefs.setBool('isFavorite_herzalimamalsadek_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -85,7 +85,7 @@ class _HerzAlimamAlsadekPageState extends State<HerzAlimamAlsadekPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام جعفر الصادق (ع)',
@@ -164,7 +164,7 @@ class _HerzAlimamAlsadekPageState extends State<HerzAlimamAlsadekPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlkazemPage.screenRoute,
           pushBack: HerzAlimamAlbakerPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام جعفر الصادق.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

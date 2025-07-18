@@ -42,7 +42,7 @@ class _DouaaLilkhalasMenAlkatlPageState
     await prefs.setBool('isFavorite_douaalilkhalasmenalkatl_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -88,7 +88,7 @@ class _DouaaLilkhalasMenAlkatlPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('دعاء للخلاص من القتل',
@@ -157,7 +157,7 @@ class _DouaaLilkhalasMenAlkatlPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzLietikaaSilahAlaadowPage.screenRoute,
           pushBack: AawzaYataawazBihaAalaAlaadaaPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للخلاص من القتل.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

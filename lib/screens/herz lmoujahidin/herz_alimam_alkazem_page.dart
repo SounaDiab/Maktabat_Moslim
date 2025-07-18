@@ -85,7 +85,7 @@ class _HerzAlimamAlkazemPageState extends State<HerzAlimamAlkazemPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام الكاظم (ع)',
@@ -148,7 +148,7 @@ class _HerzAlimamAlkazemPageState extends State<HerzAlimamAlkazemPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlridaPage.screenRoute,
           pushBack: HerzAlimamAlsadekPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الكاظم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

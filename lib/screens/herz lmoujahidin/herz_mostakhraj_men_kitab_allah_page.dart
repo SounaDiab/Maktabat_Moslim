@@ -42,7 +42,7 @@ class _HerzMostakhrajMenKitabAllahPageState
     await prefs.setBool('isFavorite_herzmostakhrajmenkitaballah_screen', value);
   }
 
-      Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -89,7 +89,7 @@ class _HerzMostakhrajMenKitabAllahPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز مستخرج من كتاب الله',
@@ -205,7 +205,7 @@ class _HerzMostakhrajMenKitabAllahPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlhayakelSabeaPage.screenRoute,
           pushBack: DouaaLidafeaKaidAladowWsharohPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز مستخرج من كتاب الله.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

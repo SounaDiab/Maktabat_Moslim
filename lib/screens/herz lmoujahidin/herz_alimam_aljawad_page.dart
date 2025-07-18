@@ -85,7 +85,7 @@ class _HerzAlimamAljawadPageState extends State<HerzAlimamAljawadPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام الجواد (ع)',
@@ -192,7 +192,7 @@ class _HerzAlimamAljawadPageState extends State<HerzAlimamAljawadPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AawzatAlnabiYawmWadiAlkoraPage.screenRoute,
           pushBack: AyatAlhefzMenSaifAlaadowPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الجواد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

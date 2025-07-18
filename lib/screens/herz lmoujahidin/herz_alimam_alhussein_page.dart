@@ -40,7 +40,7 @@ class _HerzAlimamAlhusseinPageState extends State<HerzAlimamAlhusseinPage> {
     await prefs.setBool('isFavorite_herzalimamalhussein_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -87,7 +87,7 @@ class _HerzAlimamAlhusseinPageState extends State<HerzAlimamAlhusseinPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام الحسين بن علي (ع)',
@@ -141,7 +141,7 @@ class _HerzAlimamAlhusseinPageState extends State<HerzAlimamAlhusseinPage> {
                   child: ListOfNineVerses(
                     title: '',
                     subtitle:
-                        'يا مَن شأنه الكفاية وسُرادقُهُ الرعاية يا من هو الغاية والنهاية يا صارف السوء والسوّاية والضرُّ اصرف عني أذيَّة العالمين من الجن والإنس أجمعين بالأشباح النّورامية وبالأسماء السُريانية وبالأقلام اليونانية وبالكلمات العبرانية وبما نزل في الألواح من يقين الإيضاح اجعلني اللهم في حزبك وفي حرزك وفي عياذِك وفي سترك وفي حفظك وفي كنفك من شرِّ كلِّ شيطانٍ ماردٍ وعدوٍ راصدٍ ولئيمٍ معاندٍ وضدٍّ كيودٍ ومن كلِّ حاسدٍ ببسم الله استشفيت وبسم الله استكفيت وعلى الله توكلت وبه استعنت وإليه استدعيت على كلِّ ظالمٍ ظلم وغاشمٍ غشم  طارقٍ طرق وزاجرٍ زجر فالله خير حافظاً وهو أرحم الراحمين.',
+                        'يا مَن شأنه الكفاية وسُرادقُهُ الرعاية يا من هو الغاية والنهاية يا صارف السوء والسوّاية والضرُّ اصرف عني أذيَّة العالمين من الجن والإنس أجمعين بالأشباح النّورامية وبالأسماء السُريانية وبالأقلام اليونانية وبالكلمات العبرانية وبما نزل في الألواح من يقين الإيضاح اجعلني اللهم في حزبك وفي حرزك وفي عياذِك وفي سترك وفي حفظك وفي كنفك من شرِّ كلِّ شيطانٍ ماردٍ وعدوٍ راصدٍ ولئيمٍ معاندٍ وضدٍّ كيودٍ ومن كلِّ حاسدٍ ببسم الله استشفيت وبسم الله استكفيت وعلى الله توكلت وبه استعنت وإليه استدعيت على كلِّ ظالمٍ ظلم وغاشمٍ غشم  طارقٍ طرق وزاجرٍ زجر فالله خير حافظاً وهو أرحم الراحمين.',
                     weight: FontWeight.w600,
                     size: isTablet ? _fontSizeTablet : _fontSize,
                   ),
@@ -153,7 +153,7 @@ class _HerzAlimamAlhusseinPageState extends State<HerzAlimamAlhusseinPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamZainAlaabidinPage.screenRoute,
           pushBack: HerzAlimamAlhassanAlmojtabaPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسين بن علي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

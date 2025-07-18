@@ -85,7 +85,7 @@ class _HerzAltajPageState extends State<HerzAltajPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز التاج', HerzAltajPage.screenRoute);
@@ -156,7 +156,7 @@ class _HerzAltajPageState extends State<HerzAltajPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaNadiAalyanMozhiraAlaajaibPage.screenRoute,
           pushBack: DouaaLilihtijabPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز التاج.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

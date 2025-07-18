@@ -113,7 +113,8 @@ class _AlfalakPageState extends State<AlfalakPage> {
           basmala: 'بسم الله الرحمن الرحيم',
           koraan:
               'قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ (1) مِن شَرِّ مَا خَلَقَ (2) وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ (3) وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ (4) وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ (5)',
-          music: 'audio/$name.mp3',
+          music:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/$name.mp3',
           next: AlnasPage.screenRoute,
           back: AlikhlasPage.screenRoute,
         ),

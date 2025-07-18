@@ -198,7 +198,7 @@ class _AlhayakelSabeaPageState extends State<AlhayakelSabeaPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: RokaatAljaybLilimamAlridaAalaihAlsalamPage.screenRoute,
           pushBack: HerzMostakhrajMenKitabAllahPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الهياكل السبع.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

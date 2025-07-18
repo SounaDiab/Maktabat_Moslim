@@ -172,7 +172,8 @@ class _RokaatAljaybLilimamAlridaAalaihAlsalamPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AawzaYataawazBihaAalaAlaadaaPage.screenRoute,
           pushBack: AlhayakelSabeaPage.screenRoute,
-          soud: '',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/رقعة الجيب للإمام الرضا.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

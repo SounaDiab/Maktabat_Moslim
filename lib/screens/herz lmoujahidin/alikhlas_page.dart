@@ -113,7 +113,8 @@ class _AlikhlasPageState extends State<AlikhlasPage> {
           basmala: 'بسم الله الرحمن الرحيم',
           koraan:
               'قُلۡ هُوَ ٱللَّهُ أَحَدٌ (1) ٱللَّهُ ٱلصَّمَدُ (2) لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ (3) وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ (4)',
-          music: 'audio/$name.mp3',
+          music:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/$name.mp3',
           next: AlfalakPage.screenRoute,
           back: AlkafirounPage.screenRoute,
         ),

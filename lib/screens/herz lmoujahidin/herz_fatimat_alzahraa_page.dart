@@ -86,7 +86,7 @@ class _HerzFatimatAlzahraaPageState extends State<HerzFatimatAlzahraaPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز فاطمة الزهراء (ع)',
@@ -150,7 +150,7 @@ class _HerzFatimatAlzahraaPageState extends State<HerzFatimatAlzahraaPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlhassanAlmojtabaPage.screenRoute,
           pushBack: HerzAlimamAliPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز فاطمة الزهراء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

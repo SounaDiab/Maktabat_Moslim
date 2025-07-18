@@ -39,7 +39,7 @@ class _HerzAlimamAliPageState extends State<HerzAlimamAliPage> {
     await prefs.setBool('isFavorite_herzalimamali_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -86,7 +86,7 @@ class _HerzAlimamAliPageState extends State<HerzAlimamAliPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام علي بن أبي طالب (ع)',
@@ -153,7 +153,7 @@ class _HerzAlimamAliPageState extends State<HerzAlimamAliPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzFatimatAlzahraaPage.screenRoute,
           pushBack: HerzRasoulAllahPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام علي بن أبي طالب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

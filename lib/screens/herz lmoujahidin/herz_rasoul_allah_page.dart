@@ -85,7 +85,7 @@ class _HerzRasoulAllahPageState extends State<HerzRasoulAllahPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
@@ -148,7 +148,7 @@ class _HerzRasoulAllahPageState extends State<HerzRasoulAllahPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAliPage.screenRoute,
           pushBack: HerzAlimamAlmahdiPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز رسول الله.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

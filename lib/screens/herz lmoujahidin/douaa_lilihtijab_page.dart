@@ -39,7 +39,7 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
     await prefs.setBool('isFavorite_douaalilihtijab_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -85,7 +85,7 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
@@ -149,7 +149,7 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
                       ListOfNineVerses(
                         title: '',
                         subtitle:
-                            'شاه‍ت الوجوه شاهت الوجوه شاهت الوجوه وعميت الأبصار وكلَّت الألسن اللهم اجعلْ خيرهم بين عينيهم وشرَّهم وتحت قدميهم وخاتم سليمان بين أكتافهم. سُيْحان القادر القاهر الكافي، فسيكفيكهم الله وهو السميع العليم، صبغة الله ومن أحسن من الله صبغةً، كهيعص اكفنا، حمعسق احمنا وارحمنا، هو الله القادر القاهر الكافي، وجعلنا من بين أيديهم سداً فأغشيناهم فهم لا يبصرون، أولئك الذين طبع الله على قلوبهم وسمعهم وأبصارهم وأولئك هم الغافلون، وصلَّى الله على محمد وآله أجمعين الطَّيِّبين الطّاهرين، إنه من سليمان وإنه بسم الله الرحمن الرحيم ألا تعلوا عليَّ وأتوني مسلمين، اللهم إني أسألك أن تقضي حاجتي وتغفر ذنوبي فإنه لا يغفر الذنوب إلا أنت برحمتك يا أرحم الراحمين، وعنت الوجوه للحيّ القيّوم يا ذا الجلال والإكرام.',
+                            'شاه‍ت الوجوه شاهت الوجوه شاهت الوجوه وعميت الأبصار وكلَّت الألسن اللهم اجعلْ خيرهم بين عينيهم وشرَّهم وتحت قدميهم وخاتم سليمان بين أكتافهم. سُيْحان القادر القاهر الكافي، فسيكفيكهم الله وهو السميع العليم، صبغة الله ومن أحسن من الله صبغةً، كهيعص اكفنا، حمعسق احمنا وارحمنا، هو الله القادر القاهر الكافي، وجعلنا من بين أيديهم سداً فأغشيناهم فهم لا يبصرون، أولئك الذين طبع الله على قلوبهم وسمعهم وأبصارهم وأولئك هم الغافلون، وصلَّى الله على محمد وآله أجمعين الطَّيِّبين الطّاهرين، إنه من سليمان وإنه بسم الله الرحمن الرحيم ألا تعلوا عليَّ وأتوني مسلمين، اللهم إني أسألك أن تقضي حاجتي وتغفر ذنوبي فإنه لا يغفر الذنوب إلا أنت برحمتك يا أرحم الراحمين، وعنت الوجوه للحيّ القيّوم يا ذا الجلال والإكرام.',
                         weight: FontWeight.w600,
                         size: isTablet ? _fontSizeTablet : _fontSize,
                       ),
@@ -163,7 +163,7 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAltajPage.screenRoute,
           pushBack: DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للإحتجاب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

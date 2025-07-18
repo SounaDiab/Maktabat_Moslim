@@ -39,7 +39,7 @@ class _HerzAlimamAlmahdiPageState extends State<HerzAlimamAlmahdiPage> {
     await prefs.setBool('isFavorite_herzalimamalmahdi_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -85,7 +85,7 @@ class _HerzAlimamAlmahdiPageState extends State<HerzAlimamAlmahdiPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام المهدي (ع)',
@@ -147,7 +147,7 @@ class _HerzAlimamAlmahdiPageState extends State<HerzAlimamAlmahdiPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzRasoulAllahPage.screenRoute,
           pushBack: HerzAlimamAlaaskariPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام المهدي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

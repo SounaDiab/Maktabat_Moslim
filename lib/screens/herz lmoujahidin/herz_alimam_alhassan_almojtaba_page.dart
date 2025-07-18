@@ -42,7 +42,7 @@ class _HerzAlimamAlhassanAlmojtabaPageState
     await prefs.setBool('isFavorite_herzalimamalhassanalmojtaba_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -89,7 +89,7 @@ class _HerzAlimamAlhassanAlmojtabaPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام الحسن بن علي (ع)',
@@ -143,7 +143,7 @@ class _HerzAlimamAlhassanAlmojtabaPageState
                   child: ListOfNineVerses(
                     title: '',
                     subtitle:
-                        'اللهم يا من جعل بين البحرين حاجزاً وبرزخاً وحجراً محجوراً يا ذا القوة والسلطان يا عليَّ المكان كيف أخاف وأنت أمني وكيف أضام وعليك متَّكلي استرني من أعدائك بسترك وافرغ عليَّ من صبرك وأظهرني على أعدائي بأمرك وأيدني بنصرك إليك اللّجَأُ ونحوك الملتجأُ فاجعل لي من أمري فرجاً ومخرجاً يا كافي أهل الحرم من أصحاب الفيل والمرسل عليهم طيراً أبابيل ترميهم بحجارةٍ من سجّيل ارم من عاداني بالتنكيل اللهم إني أسألك الشِّفاء من كلِّ داء والنصر على الأعداء والتوفيق لما تحبُّ وترضى يا إله من في السماوات والأرض وما بينهما وما تحت الثرى بك أستكفي وبك أستشفي وعليك أتوكَّل فسيكفيكهم الله وهو السميع العليم.',
+                        'اللهم يا من جعل بين البحرين حاجزاً وبرزخاً وحجراً محجوراً يا ذا القوة والسلطان يا عليَّ المكان كيف أخاف وأنت أمني وكيف أضام وعليك متَّكلي استرني من أعدائك بسترك وافرغ عليَّ من صبرك وأظهرني على أعدائي بأمرك وأيدني بنصرك إليك اللّجَأُ ونحوك الملتجأُ فاجعل لي من أمري فرجاً ومخرجاً يا كافي أهل الحرم من أصحاب الفيل والمرسل عليهم طيراً أبابيل ترميهم بحجارةٍ من سجّيل ارم من عاداني بالتنكيل اللهم إني أسألك الشِّفاء من كلِّ داء والنصر على الأعداء والتوفيق لما تحبُّ وترضى يا إله من في السماوات والأرض وما بينهما وما تحت الثرى بك أستكفي وبك أستشفي وعليك أتوكَّل فسيكفيكهم الله وهو السميع العليم.',
                     weight: FontWeight.w600,
                     size: isTablet ? _fontSizeTablet : _fontSize,
                   ),
@@ -155,7 +155,7 @@ class _HerzAlimamAlhassanAlmojtabaPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlhusseinPage.screenRoute,
           pushBack: HerzFatimatAlzahraaPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسن بن علي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -113,7 +113,8 @@ class _AlkafirounPageState extends State<AlkafirounPage> {
           basmala: 'بسم الله الرحمن الرحيم',
           koraan:
               'قُلۡ يَٰٓأَيُّهَا ٱلۡكَٰفِرُونَ (1) لَآ أَعۡبُدُ مَا تَعۡبُدُونَ (2) وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ (3) وَلَآ أَنَا۠ عَابِدٌ مَّا عَبَدتُّمۡ (4) وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ (5) لَكُمۡ دِينُكُمۡ وَلِيَ دِينِ (6)',
-          music: 'audio/$name.mp3',
+          music:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/$name.mp3',
           next: AlikhlasPage.screenRoute,
           back: AyatLkorsiPage.screenRoute,
         ),

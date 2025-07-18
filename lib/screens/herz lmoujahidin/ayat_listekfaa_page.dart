@@ -228,7 +228,7 @@ class _AyatListekfaaPageState extends State<AyatListekfaaPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaIkhdaaRikabAljababiraPage.screenRoute,
           pushBack: AlnasPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الاستكفاء التسع.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

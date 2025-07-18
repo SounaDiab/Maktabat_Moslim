@@ -42,7 +42,7 @@ class _AawzatAlnabiYawmWadiAlkoraPageState
     await prefs.setBool('isFavorite_aawzatalnabiyawmwadialkora_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -89,7 +89,7 @@ class _AawzatAlnabiYawmWadiAlkoraPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('عوذة النبي (ص) يوم وادي القرى',
@@ -154,7 +154,8 @@ class _AawzatAlnabiYawmWadiAlkoraPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AyatAlikhtifaaMenAlaadowPage.screenRoute,
           pushBack: HerzAlimamAljawadPage.screenRoute,
-          soud: '',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة النبي يوم وادي القرى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

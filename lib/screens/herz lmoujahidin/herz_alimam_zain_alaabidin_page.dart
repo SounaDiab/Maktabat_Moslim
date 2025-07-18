@@ -42,7 +42,7 @@ class _HerzAlimamZainAlaabidinPageState
     await prefs.setBool('isFavorite_herzalimamazainalaabidin_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -88,7 +88,7 @@ class _HerzAlimamZainAlaabidinPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام زين العابدين (ع)',
@@ -151,7 +151,7 @@ class _HerzAlimamZainAlaabidinPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlbakerPage.screenRoute,
           pushBack: HerzAlimamAlhusseinPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام زين العابدين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -39,7 +39,7 @@ class _HerzAlimamAlridaPageState extends State<HerzAlimamAlridaPage> {
     await prefs.setBool('isFavorite_herzalimamalrida_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -85,7 +85,7 @@ class _HerzAlimamAlridaPageState extends State<HerzAlimamAlridaPage> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز الإمام الرضا (ع)',
@@ -150,7 +150,7 @@ class _HerzAlimamAlridaPageState extends State<HerzAlimamAlridaPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamMohamadAljawadPage.screenRoute,
           pushBack: HerzAlimamAlkazemPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الرضا.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

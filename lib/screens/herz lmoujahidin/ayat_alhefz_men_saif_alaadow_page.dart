@@ -163,7 +163,7 @@ class _AyatAlhefzMenSaifAlaadowPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAljawadPage.screenRoute,
           pushBack: HerzLietikaaSilahAlaadowPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الحفظ من سيف العدو.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

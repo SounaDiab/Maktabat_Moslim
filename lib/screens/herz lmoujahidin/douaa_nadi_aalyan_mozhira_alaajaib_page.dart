@@ -43,7 +43,7 @@ class _DouaaNadiAalyanMozhiraAlaajaibPageState
         'isFavorite_douaanadiaalyanmozhiraalaajaib_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -89,7 +89,7 @@ class _DouaaNadiAalyanMozhiraAlaajaibPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('دعاء ناد علياً مظهر العجائب',
@@ -198,7 +198,7 @@ class _DouaaNadiAalyanMozhiraAlaajaibPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AyatLkorsiPage.screenRoute,
           pushBack: HerzAltajPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء ناد علياً مظهر العجائب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

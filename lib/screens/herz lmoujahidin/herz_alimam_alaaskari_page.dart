@@ -153,7 +153,7 @@ class _HerzAlimamAlaaskariPageState extends State<HerzAlimamAlaaskariPage> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlmahdiPage.screenRoute,
           pushBack: HerzAlimamAlhadiPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسن العسكري.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

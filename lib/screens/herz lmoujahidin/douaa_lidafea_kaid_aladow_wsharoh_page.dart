@@ -163,7 +163,7 @@ class _DouaaLidafeaKaidAladowWsharohPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzMostakhrajMenKitabAllahPage.screenRoute,
           pushBack: DouaaIkhdaaRikabAljababiraPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لدفع كيد العدو وشره.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

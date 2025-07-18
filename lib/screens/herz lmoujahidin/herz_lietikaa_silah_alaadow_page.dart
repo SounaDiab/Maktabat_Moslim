@@ -88,7 +88,7 @@ class _HerzLietikaaSilahAlaadowPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('حرز لاتقاء سلاح العدوّ',
@@ -162,7 +162,7 @@ class _HerzLietikaaSilahAlaadowPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AyatAlhefzMenSaifAlaadowPage.screenRoute,
           pushBack: DouaaLilkhalasMenAlkatlPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز لاتقاء سلاح العدوّ.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -113,7 +113,8 @@ class _AlnasPageState extends State<AlnasPage> {
           basmala: 'بسم الله الرحمن الرحيم',
           koraan:
               'قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ (1) مَلِكِ ٱلنَّاسِ (2) إِلَٰهِ ٱلنَّاسِ (3) مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ (4) ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ (5) مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ (6)',
-          music: 'audio/$name.mp3',
+          music:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/$name.mp3',
           next: AyatListekfaaPage.screenRoute,
           back: AlfalakPage.screenRoute,
         ),

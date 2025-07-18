@@ -42,7 +42,7 @@ class _AyatAlikhtifaaMenAlaadowPageState
     await prefs.setBool('isFavorite_ayatalikhtifa2menalaadow_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -88,7 +88,7 @@ class _AyatAlikhtifaaMenAlaadowPageState
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('آيات الإختفاء من العدو',
@@ -166,7 +166,7 @@ class _AyatAlikhtifaaMenAlaadowPageState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
           pushBack: AawzatAlnabiYawmWadiAlkoraPage.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الإختفاء من العدو.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
