@@ -202,7 +202,7 @@ class _FimaYata3alakBel8odatState extends State<FimaYata3alakBel8odat> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alta3kibatAl3amaa.screenRoute,
           pushBack: FimaYod3aBihiFikolSa3aMenSa3atAlyawm.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/فيما يتعلق بالغداة ما بين الفجر وطلوع الشمس.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

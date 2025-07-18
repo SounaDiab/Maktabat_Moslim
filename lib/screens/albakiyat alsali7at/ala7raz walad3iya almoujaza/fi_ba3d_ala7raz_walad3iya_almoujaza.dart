@@ -304,7 +304,7 @@ class _FiBa3dAla7razWalad3iyaAlmoujazaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBelisti5araa.screenRoute,
           pushBack: Dou3a2AlsajadFiZikrAltawba.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة في بعض الاحراز والادعية الموجزة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

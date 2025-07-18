@@ -163,7 +163,7 @@ class _AlmonajatLikashfAlzolmState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBishokrAllah.screenRoute,
           pushBack: AlmonajatBitalabAl7aj.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة لكشف الظلم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

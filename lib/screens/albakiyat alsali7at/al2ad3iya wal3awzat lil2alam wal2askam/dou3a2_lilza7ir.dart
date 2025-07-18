@@ -163,7 +163,7 @@ class _Dou3a2Lilza7irState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Aldou3a2LikarakirAlbatn.screenRoute,
           pushBack: AwzatAl7oma.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للزحير.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

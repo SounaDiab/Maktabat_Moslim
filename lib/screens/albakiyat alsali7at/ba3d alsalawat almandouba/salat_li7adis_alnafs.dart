@@ -162,7 +162,7 @@ class _SalatLi7adisAlnafsState extends State<SalatLi7adisAlnafs> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAl2isti5araZatAlrka3.screenRoute,
           pushBack: SalatAlja2i3.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة لحديث النفس.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

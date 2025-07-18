@@ -362,7 +362,7 @@ class _FiAzkarWda3awatTokra2Saba7anWamasa2anState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FimaYod3aBihiFikolSa3aMenSa3atAlyawm.screenRoute,
           pushBack: FiL2intibahMenAlnawmWsalatAllayl.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اذكار ودعوات تقرأ صباحا ومساء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

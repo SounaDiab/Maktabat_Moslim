@@ -163,7 +163,7 @@ class _AlmonajatBelisti5araaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBelistikala.screenRoute,
           pushBack: FiBa3dAla7razWalad3iyaAlmoujaza.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالاستخارة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

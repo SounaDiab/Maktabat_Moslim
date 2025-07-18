@@ -159,7 +159,7 @@ class _SalatAl5awfMenAlzalimState extends State<SalatAl5awfMenAlzalim> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatLilzaka2WjoudatAlhofez.screenRoute,
           pushBack: SalatAl7ojaFiJamkaran.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الخوف من الظالم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

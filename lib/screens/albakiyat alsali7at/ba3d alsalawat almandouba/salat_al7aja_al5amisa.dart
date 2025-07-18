@@ -161,7 +161,7 @@ class _SalatAl7ajaAl5amisaState extends State<SalatAl7ajaAl5amisa> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAlisti8asa.screenRoute,
           pushBack: SalatAl7ajaAlrabi3a.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الحاجة الخامسة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

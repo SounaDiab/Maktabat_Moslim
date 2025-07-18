@@ -162,7 +162,7 @@ class _Dou3a2Lita3asorAlwiladaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Li7alAlmarbout.screenRoute,
           pushBack: Dou3a2Lilso2lolWlilawram.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لتعسر الولادة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

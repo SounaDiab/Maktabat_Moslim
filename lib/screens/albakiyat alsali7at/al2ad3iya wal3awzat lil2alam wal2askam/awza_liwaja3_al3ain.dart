@@ -183,7 +183,7 @@ class _AwzaLiwaja3Al3ainState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Al3awzaLibtalAlsi7r.screenRoute,
           pushBack: AwzaLiwaja3Alrokba.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لوجع العين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

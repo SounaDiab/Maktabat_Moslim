@@ -382,7 +382,7 @@ class _Alta3kibatAl3amaaState extends State<Alta3kibatAl3amaa> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alta3kibatAl5asaBfaridatAlsob7.screenRoute,
           pushBack: FimaYata3alakBel8odat.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/التعقيبات العامة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

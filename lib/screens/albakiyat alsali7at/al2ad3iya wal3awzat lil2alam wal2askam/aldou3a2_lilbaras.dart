@@ -164,7 +164,7 @@ class _Aldou3a2LilbarasState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLiwaja3Al3awra.screenRoute,
           pushBack: Aldou3a2LikarakirAlbatn.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء للبرص.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

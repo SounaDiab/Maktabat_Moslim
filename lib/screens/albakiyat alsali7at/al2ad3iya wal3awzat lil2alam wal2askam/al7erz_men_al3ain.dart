@@ -195,7 +195,7 @@ class _Al7erzMenAl3ainState extends State<Al7erzMenAl3ain> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLidaf3WasawisAlshaitan.screenRoute,
           pushBack: Al3awzaLibtalAlsi7r.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الحرز من العين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

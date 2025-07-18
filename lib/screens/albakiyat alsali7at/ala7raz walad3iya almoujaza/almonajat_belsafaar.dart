@@ -163,7 +163,7 @@ class _AlmonajatBelsafaarState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBitalabAlrizk.screenRoute,
           pushBack: AlmonajatBelistikala.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالسفر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

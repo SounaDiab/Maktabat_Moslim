@@ -528,7 +528,7 @@ class _FiAsarBa3dSowarWalayatState extends State<FiAsarBa3dSowarWalayat> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiBa3dMaYata3alakBelmawt.screenRoute,
           pushBack: AlmonajatBitalabAl7awa2ij.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اثر بعض السور والايات.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

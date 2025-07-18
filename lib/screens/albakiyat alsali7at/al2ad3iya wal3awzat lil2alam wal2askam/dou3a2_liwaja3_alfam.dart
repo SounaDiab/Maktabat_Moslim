@@ -162,7 +162,7 @@ class _Dou3a2Liwaja3AlfamState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLiwaja3Alasnan.screenRoute,
           pushBack: Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع الفم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

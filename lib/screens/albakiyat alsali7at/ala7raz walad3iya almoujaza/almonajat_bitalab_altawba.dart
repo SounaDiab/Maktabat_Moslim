@@ -163,7 +163,7 @@ class _AlmonajatBitalabAltawbaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBitalabAl7aj.screenRoute,
           pushBack: AlmonajatBilisti3aza.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بطلب التوبة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

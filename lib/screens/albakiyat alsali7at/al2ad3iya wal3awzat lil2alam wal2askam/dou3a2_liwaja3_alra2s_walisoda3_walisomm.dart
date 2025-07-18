@@ -181,7 +181,7 @@ class _Dou3a2Liwaja3Alra2sWalisoda3WalisommState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Liwaja3Alfam.screenRoute,
           pushBack: AwzatWadou3a2Lilamrad.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع الرأس والصداع وللصمم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

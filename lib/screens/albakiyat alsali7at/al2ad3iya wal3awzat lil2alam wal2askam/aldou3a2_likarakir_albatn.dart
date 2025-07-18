@@ -162,7 +162,7 @@ class _Aldou3a2LikarakirAlbatnState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Aldou3a2Lilbaras.screenRoute,
           pushBack: Dou3a2Lilza7ir.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء لكراكر البطن.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

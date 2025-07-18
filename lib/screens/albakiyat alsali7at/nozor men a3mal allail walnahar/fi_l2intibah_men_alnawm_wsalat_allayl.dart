@@ -193,7 +193,7 @@ class _FiL2intibahMenAlnawmWsalatAllaylState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiAzkarWda3awatTokra2Saba7anWamasa2an.screenRoute,
           pushBack: FimaYo3malMen7inAl8ouroub2ela7inAlnawm.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في الانتباه من النوم وصلاة الليل.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

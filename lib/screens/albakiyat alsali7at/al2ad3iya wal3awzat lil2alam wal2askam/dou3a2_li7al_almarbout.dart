@@ -163,7 +163,7 @@ class _Dou3a2Li7alAlmarboutState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzatAl7oma.screenRoute,
           pushBack: Dou3a2Lilso2lolWlilawram.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لحل المربوط.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

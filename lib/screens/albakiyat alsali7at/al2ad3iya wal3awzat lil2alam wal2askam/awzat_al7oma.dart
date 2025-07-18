@@ -169,7 +169,7 @@ class _AwzatAl7omaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Lilza7ir.screenRoute,
           pushBack: Dou3a2Li7alAlmarbout.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة الحمى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -165,7 +165,7 @@ class _AwzaLil3akrabState extends State<AwzaLil3akrab> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Al3afiya.screenRoute,
           pushBack: AwzaLil2amnMenAlsarik.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة للعقرب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

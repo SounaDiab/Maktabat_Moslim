@@ -225,7 +225,7 @@ class _FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenhState
               FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute,
           pushBack:
               Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ادعية يدعى بها عند النوم عند الانتباه منه.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

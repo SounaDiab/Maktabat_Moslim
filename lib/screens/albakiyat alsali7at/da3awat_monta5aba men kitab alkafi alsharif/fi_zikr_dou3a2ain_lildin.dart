@@ -168,7 +168,7 @@ class _FiZikrDou3a2ainLildinState extends State<FiZikrDou3a2ainLildin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha.screenRoute,
           pushBack: FiAd3iyaMa2souraLilrizk.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر دعائين للدين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -163,7 +163,7 @@ class _AlmonajatBishokrAllahState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBitalabAl7awa2ij.screenRoute,
           pushBack: AlmonajatLikashfAlzolm.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بشكر الله.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

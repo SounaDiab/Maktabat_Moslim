@@ -162,7 +162,7 @@ class _AwzaLil2amnMenAlsarikState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLil3akrab.screenRoute,
           pushBack: AwzaLidaf3WasawisAlshaitan.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة للامن من السارق.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

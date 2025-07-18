@@ -164,7 +164,7 @@ class _SalatAl7ajaAl2oulaState extends State<SalatAl7ajaAl2oula> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAl7ajaAlsaniya.screenRoute,
           pushBack: SalatLziyadatAlrizk.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الحاجة الاولى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

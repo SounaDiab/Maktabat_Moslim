@@ -155,7 +155,7 @@ class _SalatAl3asraState extends State<SalatAl3asra> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatLziyadatAlrizk.screenRoute,
           pushBack: SalatLilmohemat.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة العسرة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

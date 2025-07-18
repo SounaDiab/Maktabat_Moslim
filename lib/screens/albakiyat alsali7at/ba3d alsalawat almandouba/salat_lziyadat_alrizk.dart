@@ -176,7 +176,7 @@ class _SalatLziyadatAlrizkState extends State<SalatLziyadatAlrizk> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAl7ajaAl2oula.screenRoute,
           pushBack: SalatAl3asra.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة لزيادة الرزق.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -235,7 +235,7 @@ class _FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhiState
           pushNext:
               FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute,
           pushBack: FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

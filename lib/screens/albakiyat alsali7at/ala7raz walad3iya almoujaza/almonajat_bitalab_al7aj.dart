@@ -163,7 +163,7 @@ class _AlmonajatBitalabAl7ajState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatLikashfAlzolm.screenRoute,
           pushBack: AlmonajatBitalabAltawba.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بطلب الحج.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

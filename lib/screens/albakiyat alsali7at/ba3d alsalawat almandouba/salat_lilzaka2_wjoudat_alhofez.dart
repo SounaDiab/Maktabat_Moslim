@@ -159,7 +159,7 @@ class _SalatLilzaka2WjoudatAlhofezState extends State<SalatLilzaka2WjoudatAlhofe
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatLi8ofranAlzounoub.screenRoute,
           pushBack: SalatAl5awfMenAlzalim.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة للذكاء وجودة الحفظ.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

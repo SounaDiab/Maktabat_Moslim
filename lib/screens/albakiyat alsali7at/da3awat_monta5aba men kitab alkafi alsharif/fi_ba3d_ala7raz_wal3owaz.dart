@@ -206,7 +206,7 @@ class _FiBa3dAla7razWal3owazState extends State<FiBa3dAla7razWal3owaz> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute,
           pushBack: FiAd3iyatAl3ilalWalmarad.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في بعض الاحراز العوذ.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

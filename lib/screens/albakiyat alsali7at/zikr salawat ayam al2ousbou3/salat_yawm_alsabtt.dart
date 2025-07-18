@@ -170,7 +170,7 @@ class _SalatYawmAlsabttState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatYawmAl2a7add.screenRoute,
           pushBack: SalatYawmAljom3aa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة يوم السبت.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
