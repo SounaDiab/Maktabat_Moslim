@@ -163,7 +163,7 @@ class _Alsalat3alaLhassanWalhusseinState
       bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Alsalat3alaAliBinLhussein.screenRoute,
         pushBack: Alsalat3alaAlsayidaFatima.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على الحسن والحسين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

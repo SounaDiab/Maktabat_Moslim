@@ -173,7 +173,7 @@ class _Alsadbi3aAlmo5asasaAlsaniaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlsaminaAlmo5asasa.screenRoute,
           pushBack: Alsadbi3aAlmo5asasa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/السابعة المخصصة الثانية.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

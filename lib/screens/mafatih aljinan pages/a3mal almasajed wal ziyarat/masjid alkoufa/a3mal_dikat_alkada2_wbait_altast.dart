@@ -164,7 +164,7 @@ class _A3malDikatAlkada2WbaitAltastState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malBaitAltast.screenRoute,
           pushBack: A3malJami3Alkoufa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال دكة القضاء وبيت الطست.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

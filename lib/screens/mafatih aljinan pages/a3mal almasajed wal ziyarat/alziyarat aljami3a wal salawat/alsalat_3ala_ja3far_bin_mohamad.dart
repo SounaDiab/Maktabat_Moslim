@@ -162,7 +162,7 @@ class _Alsalat3alaJa3farBinMohamadState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaMoussaBinJa3far.screenRoute,
           pushBack: Alsalat3alaMohamadBinAli.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على جعفر بن محمد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

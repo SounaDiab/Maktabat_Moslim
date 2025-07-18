@@ -167,7 +167,7 @@ class _AakibZiyaratAl2a2imaState extends State<AakibZiyaratAl2a2ima> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaAlnabi.screenRoute,
           pushBack: MaYozarKol2imam.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ما يدعى به عقيب زيارة الأئمة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

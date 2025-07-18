@@ -198,7 +198,7 @@ class _FiZiyaratKobourLmo2mininState extends State<FiZiyaratKobourLmo2minin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiZiyaratL2abiya2L3izam.screenRoute,
           pushBack: FiZiyaratAlabna2Al3ozama2.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على في زيارة قبور المؤمنين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

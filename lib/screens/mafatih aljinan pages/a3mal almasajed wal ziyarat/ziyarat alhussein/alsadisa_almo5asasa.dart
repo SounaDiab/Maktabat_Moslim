@@ -177,7 +177,7 @@ class _AlsadisaAlmo5asasaState extends State<AlsadisaAlmo5asasa> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsadbi3aAlmo5asasa.screenRoute,
           pushBack: Al5amisaAlmo5asasa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/السادسة المخصصة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

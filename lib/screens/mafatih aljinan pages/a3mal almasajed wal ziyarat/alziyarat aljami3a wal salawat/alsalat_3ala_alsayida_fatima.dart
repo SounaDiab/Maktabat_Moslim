@@ -162,7 +162,7 @@ class _Alsalat3alaAlsayidaFatimaState extends State<Alsalat3alaAlsayidaFatima> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaLhassanWalhussein.screenRoute,
           pushBack: Alsalat3alaAmirAlmo2minin.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على السيدة فاطمة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

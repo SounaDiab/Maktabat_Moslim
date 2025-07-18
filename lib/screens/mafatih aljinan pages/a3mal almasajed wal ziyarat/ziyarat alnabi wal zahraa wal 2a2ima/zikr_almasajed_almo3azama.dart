@@ -161,7 +161,7 @@ class _ZikrAlmasajedAlmo3azamaState extends State<ZikrAlmasajedAlmo3azama> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alwada3.screenRoute,
           pushBack: ZiyaratKobourAlshohada2.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ذكر المساجد المعظمة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

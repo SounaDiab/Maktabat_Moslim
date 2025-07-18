@@ -179,7 +179,7 @@ class _A3malAl2ostwanaAlsabi3aState extends State<A3malAl2ostwanaAlsabi3a> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: A3malAl2ostwanaAl5amisa.screenRoute,
         pushBack: ZikrAlsalatWaldou3aaFiWasatAlmasjid.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الاسطوانة السابعة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -166,7 +166,7 @@ class _HadisAlkisa2State extends State<HadisAlkisa2> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiZiyaratAlabna2Al3ozama2.screenRoute,
           pushBack: ZiyaratAlsayidaZainab.screenRoute,
-          soud: 'حديث الكساء.mp3',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حديث الكساء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

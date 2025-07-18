@@ -184,7 +184,7 @@ class _AlmakamAlsaniState extends State<AlmakamAlsani> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: ZiyaratAl2imamAlmahdiAlmankoula.screenRoute,
         pushBack: ZiyaratAlimamAl3askari.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المقام الثاني.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

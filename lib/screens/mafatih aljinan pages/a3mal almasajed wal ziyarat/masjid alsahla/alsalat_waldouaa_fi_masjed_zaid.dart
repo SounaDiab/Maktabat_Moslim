@@ -166,7 +166,7 @@ class _AlsalatWaldouaaFiMasjedZaidState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malMasjedAlsahla.screenRoute,
           pushBack: FiFadlMasjedAlsahla.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة والدعاء في مسجد زيد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

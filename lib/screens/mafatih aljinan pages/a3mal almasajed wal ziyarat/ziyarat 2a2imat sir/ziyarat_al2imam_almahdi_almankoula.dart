@@ -168,7 +168,7 @@ class _ZiyaratAl2imamAlmahdiAlmankoulaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAl2imamAlmahdiAl2o5raAlsaniya.screenRoute,
           pushBack: AlmakamAlsani.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الامام المهدي المنقولة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

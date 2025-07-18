@@ -161,7 +161,7 @@ class _ZiyaratAlimamAlridaAl2oulaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: ZiyaratAlimamAlridaAlsaniya.screenRoute,
         pushBack: ZiyaratAlimamAlridaAlsaniya.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الامام الرضا الاولى.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

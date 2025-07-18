@@ -179,7 +179,7 @@ class _ZiyaratHamzaState extends State<ZiyaratHamza> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratKobourAlshohada2.screenRoute,
           pushBack: ZiyaratFatimaBent2asad.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة حمزة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

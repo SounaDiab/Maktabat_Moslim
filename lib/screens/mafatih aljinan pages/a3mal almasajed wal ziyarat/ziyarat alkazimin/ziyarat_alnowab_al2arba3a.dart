@@ -166,7 +166,7 @@ class _ZiyaratAlnowabAl2arba3aState extends State<ZiyaratAlnowabAl2arba3a> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: ZiyaratSalman.screenRoute,
         pushBack: AlmasjedAlsharif.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة النواب الاربعة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

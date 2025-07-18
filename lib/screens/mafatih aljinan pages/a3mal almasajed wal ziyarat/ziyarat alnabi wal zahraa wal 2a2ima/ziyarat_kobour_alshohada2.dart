@@ -161,7 +161,7 @@ class _ZiyaratKobourAlshohada2State extends State<ZiyaratKobourAlshohada2> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: ZikrAlmasajedAlmo3azama.screenRoute,
         pushBack: ZiyaratHamza.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة قبور الشهداء.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

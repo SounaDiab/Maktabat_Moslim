@@ -161,7 +161,7 @@ class _ZikrSa2irAlziyaratState extends State<ZikrSa2irAlziyarat> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratFatimaBent2asad.screenRoute,
           pushBack: Ziyarat2a2imatBelbaki3.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ذكر سائر الزيارة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

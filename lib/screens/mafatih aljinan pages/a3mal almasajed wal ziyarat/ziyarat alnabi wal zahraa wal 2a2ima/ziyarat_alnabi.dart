@@ -170,7 +170,7 @@ class _ZiyaratAlnabiState extends State<ZiyaratAlnabi> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Ziyarat2a2imatBelbaki3.screenRoute,
         pushBack: ZiyaratAlnabiWalzahraaWal2a2imaBelbaki3.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة النبي.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

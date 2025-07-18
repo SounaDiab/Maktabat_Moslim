@@ -223,7 +223,7 @@ class _MaYozarKol2imamState extends State<MaYozarKol2imam> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AakibZiyaratAl2a2ima.screenRoute,
           pushBack: FiZiyaratL2abiya2L3izam.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ما يزار كل امام.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

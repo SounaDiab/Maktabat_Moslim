@@ -216,7 +216,7 @@ class _FiZiyaratAlabna2Al3ozama2State extends State<FiZiyaratAlabna2Al3ozama2> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiZiyaratKobourLmo2minin.screenRoute,
           pushBack: HadisAlkisa2.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في زيارة الابناء العظماء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

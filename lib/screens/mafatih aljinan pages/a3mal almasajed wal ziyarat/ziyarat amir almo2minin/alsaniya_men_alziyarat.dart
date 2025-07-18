@@ -242,7 +242,7 @@ class _AlsaniyaMenAlziyaratState extends State<AlsaniyaMenAlziyarat> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlsalisaMenAlziyarat.screenRoute,
           pushBack: Wada3Al2amir.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثانية من الزيارات المخصصة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

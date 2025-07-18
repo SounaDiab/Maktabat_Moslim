@@ -187,7 +187,7 @@ class _Alwada3State extends State<Alwada3> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAlnabiWalzahraaWal2a2imaBelbaki3.screenRoute,
           pushBack: ZikrAlmasajedAlmo3azama.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الوداع.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -178,7 +178,7 @@ class _AlziyaratAl2o5raState extends State<AlziyaratAl2o5ra> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FadlTorbatAlhussein.screenRoute,
           pushBack: AlsaminaAlmo5asasa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة الاخرى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

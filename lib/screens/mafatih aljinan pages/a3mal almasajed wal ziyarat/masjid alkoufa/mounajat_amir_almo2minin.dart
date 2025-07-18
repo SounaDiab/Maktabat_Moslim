@@ -167,7 +167,7 @@ class _MounajatAmirAlmo2mininState extends State<MounajatAmirAlmo2minin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: ZiyaratMouslimBen3akil.screenRoute,
         pushBack: A3malMi7rabAmirAlmo2minin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/مناجات امير المؤمنين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

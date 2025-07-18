@@ -166,7 +166,7 @@ class _FiFadlAlkoufaWamasjidouhaState extends State<FiFadlAlkoufaWamasjidouha> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malJami3Alkoufa.screenRoute,
           pushBack: ZiyaratHaniBen3orwa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل الكوفة ومسجدها.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

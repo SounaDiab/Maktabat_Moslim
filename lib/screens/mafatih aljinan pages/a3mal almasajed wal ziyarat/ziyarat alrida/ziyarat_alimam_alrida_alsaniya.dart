@@ -297,21 +297,13 @@ class _ZiyaratAlimamAlridaAlsaniyaState
                   size: isTablet ? _fontSizeTablet : _fontSize,
                 ),
               ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle: '',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
             ],
           ),
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAlimamAlridaAl2oula.screenRoute,
           pushBack: ZiyaratAlimamAlridaAl2oula.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الامام الرضا الثانية.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

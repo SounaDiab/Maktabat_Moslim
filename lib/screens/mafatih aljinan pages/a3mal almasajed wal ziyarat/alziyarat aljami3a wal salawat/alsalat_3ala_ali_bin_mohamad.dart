@@ -161,7 +161,7 @@ class _Alsalat3alaAliBinMohamadState extends State<Alsalat3alaAliBinMohamad> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaLhassanAl3askari.screenRoute,
           pushBack: Alsalat3alaMohamadBinAliBinMoussa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على علي بن محمد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

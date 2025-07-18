@@ -230,7 +230,7 @@ class _ZiyaratAl3abasBen3aliState extends State<ZiyaratAl3abasBen3ali> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Al2oulaAlmo5asasa.screenRoute,
           pushBack: AlziyaratAlmotlakaAlsabi3a.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة العباس بن علي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

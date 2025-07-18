@@ -587,7 +587,7 @@ class _FiKaifiyatZiyaratihiState extends State<FiKaifiyatZiyaratihi> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Wada3Al2amir.screenRoute,
           pushBack: FiFadlZiyaratihi.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في كيفية زيارته.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -167,7 +167,7 @@ class _A3malMasjedAlsahlaState extends State<A3malMasjedAlsahla> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiFadlMasjedAlsahla.screenRoute,
           pushBack: AlsalatWaldouaaFiMasjedZaid.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال مسجد السهلة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

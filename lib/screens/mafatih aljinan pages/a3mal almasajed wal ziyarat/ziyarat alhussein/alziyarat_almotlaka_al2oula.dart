@@ -9,7 +9,7 @@ import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alhoussein_wa2adabiha.dart';
 import 'alziyarat_almotlaka_alsaniya.dart';
-import 'fi_fadl_ziyarat_alhussein.dart';
+import 'fima_3ala_alza2ir_mora3atoh.dart';
 
 class AlziyaratAlmotlakaAl2oula extends StatefulWidget {
   static String screenRoute = 'alziyarat_almotlaka_al2oula_screen';
@@ -165,8 +165,8 @@ class _AlziyaratAlmotlakaAl2oulaState extends State<AlziyaratAlmotlakaAl2oula> {
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlziyaratAlmotlakaAlsaniya.screenRoute,
-          pushBack: FiFadlZiyaratAlhussein.screenRoute,
-          soud: '',
+          pushBack: Fima3alaAlza2irMora3atoh.screenRoute,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة الطلقة الاولى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -202,7 +202,7 @@ class _Ziyarat2a2imatBelbaki3State extends State<Ziyarat2a2imatBelbaki3> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZikrSa2irAlziyarat.screenRoute,
           pushBack: ZiyaratAlnabi.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة أئمة البقيع.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

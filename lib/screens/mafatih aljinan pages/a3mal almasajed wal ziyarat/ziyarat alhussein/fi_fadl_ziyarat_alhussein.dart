@@ -8,7 +8,7 @@ import '../../../../widgets/list_of_nine_verses.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alhoussein_wa2adabiha.dart';
-import 'alziyarat_almotlaka_al2oula.dart';
+import 'fima_3ala_alza2ir_mora3atoh.dart';
 import 'ziyarat_3ashoraa.dart';
 
 class FiFadlZiyaratAlhussein extends StatefulWidget {
@@ -161,9 +161,9 @@ class _FiFadlZiyaratAlhusseinState extends State<FiFadlZiyaratAlhussein> {
           ),
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-          pushNext: AlziyaratAlmotlakaAl2oula.screenRoute,
+          pushNext: Fima3alaAlza2irMora3atoh.screenRoute,
           pushBack: Ziyarat3ashoraa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل زيارة الحسين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

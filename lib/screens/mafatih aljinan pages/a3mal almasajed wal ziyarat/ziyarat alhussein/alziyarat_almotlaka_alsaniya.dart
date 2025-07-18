@@ -164,7 +164,7 @@ class _AlziyaratAlmotlakaAlsaniyaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlziyaratAlmotlakaAlsalisa.screenRoute,
           pushBack: AlziyaratAlmotlakaAl2oula.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة المطلقة الثانية.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

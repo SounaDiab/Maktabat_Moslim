@@ -163,7 +163,7 @@ class _Alsalat3alaMohamadBinAliBinMoussaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaAliBinMohamad.screenRoute,
           pushBack: Alsalat3alaAliBinMoussa.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على محمد بن علي بن موسى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

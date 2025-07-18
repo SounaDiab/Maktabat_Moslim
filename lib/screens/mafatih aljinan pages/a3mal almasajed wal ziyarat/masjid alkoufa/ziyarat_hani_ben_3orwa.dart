@@ -161,7 +161,7 @@ class _ZiyaratHaniBen3orwaState extends State<ZiyaratHaniBen3orwa> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiFadlAlkoufaWamasjidouha.screenRoute,
           pushBack: ZiyaratMouslimBen3akil.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة هاني بن عروة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

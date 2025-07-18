@@ -175,21 +175,13 @@ class _A3malJami3AlkoufaState extends State<A3malJami3Alkoufa> {
                   size: isTablet ? _fontSizeTablet : _fontSize,
                 ),
               ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle: '',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
             ],
           ),
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: A3malDikatAlkada2WbaitAltast.screenRoute,
         pushBack: FiFadlAlkoufaWamasjidouha.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال جامع الكوفة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

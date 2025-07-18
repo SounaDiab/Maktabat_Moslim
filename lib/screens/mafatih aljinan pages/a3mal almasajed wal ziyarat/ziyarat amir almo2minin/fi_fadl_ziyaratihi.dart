@@ -199,7 +199,7 @@ class _FiFadlZiyaratihiState extends State<FiFadlZiyaratihi> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiKaifiyatZiyaratihi.screenRoute,
           pushBack: AlsalisaMenAlziyarat.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل زيارته.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

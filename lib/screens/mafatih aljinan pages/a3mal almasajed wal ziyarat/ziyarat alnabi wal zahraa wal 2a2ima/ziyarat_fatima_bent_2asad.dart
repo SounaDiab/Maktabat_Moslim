@@ -161,7 +161,7 @@ class _ZiyaratFatimaBent2asadState extends State<ZiyaratFatimaBent2asad> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratHamza.screenRoute,
           pushBack: ZikrSa2irAlziyarat.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة فاطمة بنت اسد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

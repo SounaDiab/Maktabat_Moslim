@@ -3,8 +3,11 @@ import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
 import '../../../../widgets/list_of_nine_verses.dart';
 import '../../../favorites_provider.dart';
+import 'alziyarat_almotlaka_al2oula.dart';
+import 'fi_fadl_ziyarat_alhussein.dart';
 
 class Fima3alaAlza2irMora3atoh extends StatefulWidget {
   static String screenRoute = 'fima_3ala_alza2ir_mora3atoh_screen';
@@ -382,31 +385,50 @@ class _Fima3alaAlza2irMora3atohState extends State<Fima3alaAlza2irMora3atoh> {
                 size: isTablet ? _fontSizeTablet : _fontSize,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 20,
-                bottom: 20,
-                left: 40,
-                right: 40,
-              ),
-              child: Slider(
-                value: isTablet ? _fontSizeTablet : _fontSize,
-                min: isTablet ? 30 : 18,
-                max: isTablet ? 50 : 30,
-                divisions: 40,
-                label: isTablet
-                    ? _fontSizeTablet.toStringAsFixed(1)
-                    : _fontSize.toStringAsFixed(1),
-                onChanged: (value) {
-                  setState(() {
-                    isTablet ? _fontSizeTablet = value : _fontSize = value;
-                  });
-                },
-              ),
-            ),
           ],
         ),
       ),
+      bottomNavigationBar: AddCustomBottomNavigationBar(
+          pushNext: AlziyaratAlmotlakaAl2oula.screenRoute,
+          pushBack: FiFadlZiyaratAlhussein.screenRoute,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ماعلى الزائر مراعاته.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ),
     );
   }
 }

@@ -244,7 +244,7 @@ class _Wada3Al2amirState extends State<Wada3Al2amir> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlsaniyaMenAlziyarat.screenRoute,
           pushBack: FiKaifiyatZiyaratihi.screenRoute,
-          soud: '',
+          soud: 'وداع الامير',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
