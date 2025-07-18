@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _AltasbihatState extends State<Altasbihat> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -140,7 +139,7 @@ class _AltasbihatState extends State<Altasbihat> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2MakarimAl2a5lak.screenRoute,
           pushBack: Dou3a2YaMafza3i.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/التسبيحات.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

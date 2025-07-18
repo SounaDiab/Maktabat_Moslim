@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3aAlbaha2State extends State<Dou3aAlbaha2> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -140,7 +139,7 @@ class _Dou3aAlbaha2State extends State<Dou3aAlbaha2> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2AbiHamzaAlsamali.screenRoute,
           pushBack: A3malAsharRamdan.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء البهاء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

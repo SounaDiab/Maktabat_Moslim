@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3a2AltawbaState extends State<Dou3a2Altawba> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -145,7 +144,7 @@ class _Dou3a2AltawbaState extends State<Dou3a2Altawba> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malAsharRamdan.screenRoute,
           pushBack: Dou3a2AljawshanAlkabir.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء التوبة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

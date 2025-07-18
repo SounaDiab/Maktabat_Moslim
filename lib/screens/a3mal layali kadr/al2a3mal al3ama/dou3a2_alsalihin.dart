@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3a2AlsalihinState extends State<Dou3a2Alsalihin> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -44,7 +43,7 @@ class _Dou3a2AlsalihinState extends State<Dou3a2Alsalihin> {
     await prefs.setBool('isFavorite_dou3a2_alsalihin_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -88,10 +87,11 @@ class _Dou3a2AlsalihinState extends State<Dou3a2Alsalihin> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء الصالحين', Dou3a2Alsalihin.screenRoute);
+                      .addFavorite(
+                          'دعاء الصالحين', Dou3a2Alsalihin.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -142,7 +142,8 @@ class _Dou3a2AlsalihinState extends State<Dou3a2Alsalihin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Al2imamAlsadek.screenRoute,
           pushBack: Dou3a2L2iftitah.screenRoute,
-          soud: music,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الصالحين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

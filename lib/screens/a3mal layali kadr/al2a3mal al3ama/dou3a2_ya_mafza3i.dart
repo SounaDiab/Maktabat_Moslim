@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3a2YaMafza3iState extends State<Dou3a2YaMafza3i> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -142,7 +141,7 @@ class _Dou3a2YaMafza3iState extends State<Dou3a2YaMafza3i> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Altasbihat.screenRoute,
           pushBack: Dou3a2Idris.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا مفزعي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

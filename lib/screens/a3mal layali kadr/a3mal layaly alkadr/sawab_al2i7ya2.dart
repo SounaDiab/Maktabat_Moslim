@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _SawabAl2i7ya2State extends State<SawabAl2i7ya2> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -132,7 +131,7 @@ class _SawabAl2i7ya2State extends State<SawabAl2i7ya2> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Al2iste3dad.screenRoute,
           pushBack: Mawane3Alkoboul.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ثواب إحياء ليلة القدر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

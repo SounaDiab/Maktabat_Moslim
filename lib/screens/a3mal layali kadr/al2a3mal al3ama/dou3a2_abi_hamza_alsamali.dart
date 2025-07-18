@@ -158,7 +158,8 @@ class _Dou3a2AbiHamzaAlsamaliState extends State<Dou3a2AbiHamzaAlsamali> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Ya3odati.screenRoute,
           pushBack: Dou3aAlbaha2.screenRoute,
-          soud: 'دعاء أبي حمزة الثمالي.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/abi_hamza_alsamali.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

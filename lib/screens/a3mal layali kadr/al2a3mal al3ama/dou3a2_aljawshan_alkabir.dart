@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3a2AljawshanAlkabirState extends State<Dou3a2AljawshanAlkabir> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -258,7 +257,7 @@ class _Dou3a2AljawshanAlkabirState extends State<Dou3a2AljawshanAlkabir> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Altawba.screenRoute,
           pushBack: Dou3a2Allahoma2iniAmsayt.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الجوشن الكبير.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

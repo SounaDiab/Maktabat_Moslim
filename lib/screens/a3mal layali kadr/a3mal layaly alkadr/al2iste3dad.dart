@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Al2iste3dadState extends State<Al2iste3dad> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -43,13 +42,6 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isFavorite_al2istedad_screen', value);
   }
-
-  // Future<bool> _onWillPop() async {
-  //   final searchProvider = Provider.of<SearchProvider>(context, listen: false);
-  //   searchProvider.clearSearch();
-  //   Navigator.of(context).pushReplacementNamed(A3malLayalyAlkadr.screenRoute);
-  //   return false;
-  // }
 
   Future<bool> _onWillPop() async {
     final args =
@@ -139,7 +131,8 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Mawane3Alkoboul.screenRoute,
           pushBack: SawabAl2i7ya2.screenRoute,
-          soud: music,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الاستعداد لليلة القدر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -143,7 +142,7 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAbiAlfadl.screenRoute,
           pushBack: Ziyarat3aliBinAlhussein.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الشهداء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

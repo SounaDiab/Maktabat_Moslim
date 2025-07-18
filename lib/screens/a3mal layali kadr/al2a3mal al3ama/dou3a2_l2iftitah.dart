@@ -43,7 +43,7 @@ class _Dou3a2L2iftitahState extends State<Dou3a2L2iftitah> {
     await prefs.setBool('isFavorite_dou3a2_l2iftitah_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -87,10 +87,11 @@ class _Dou3a2L2iftitahState extends State<Dou3a2L2iftitah> {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء الإفتتاح', Dou3a2L2iftitah.screenRoute);
+                      .addFavorite(
+                          'دعاء الإفتتاح', Dou3a2L2iftitah.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -141,7 +142,8 @@ class _Dou3a2L2iftitahState extends State<Dou3a2L2iftitah> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Alsalihin.screenRoute,
           pushBack: Dou3a2MakarimAl2a5lak.screenRoute,
-          soud: 'دعاء الافتتاح.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الافتتاح.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

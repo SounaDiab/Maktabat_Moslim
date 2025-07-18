@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _Dou3a2MakarimAl2a5lakState extends State<Dou3a2MakarimAl2a5lak> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -144,7 +143,7 @@ class _Dou3a2MakarimAl2a5lakState extends State<Dou3a2MakarimAl2a5lak> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2L2iftitah.screenRoute,
           pushBack: Altasbihat.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء مكارم الاخلاق.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

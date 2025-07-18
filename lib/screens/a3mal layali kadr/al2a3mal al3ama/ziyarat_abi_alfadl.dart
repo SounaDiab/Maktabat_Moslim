@@ -24,7 +24,6 @@ double _fontSizeTablet = 30;
 
 class _ZiyaratAbiAlfadlState extends State<ZiyaratAbiAlfadl> {
   bool isIcon = true;
-  String music = '';
   @override
   void initState() {
     super.initState();
@@ -143,7 +142,7 @@ class _ZiyaratAbiAlfadlState extends State<ZiyaratAbiAlfadl> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatMi2atRok3a.screenRoute,
           pushBack: ZiyaratAlshohada.screenRoute,
-          soud: music,
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة ابي الفضل العباس عليه السلام.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
