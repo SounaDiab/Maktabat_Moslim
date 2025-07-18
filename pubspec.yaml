@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.3.0+11
+version: 1.4.2+14
 
 environment:
   sdk: ^3.5.3
@@ -42,27 +42,25 @@ dependencies:
   rename: ^3.0.2
   url_launcher: ^6.3.1
   package_info_plus: ^8.1.1
-  audioplayers: ^6.1.0
+  audioplayers: ^6.5.0
   image_picker: ^1.1.2
   permission_handler: ^11.3.1
   shared_preferences: ^2.3.3
   adaptive_theme: ^3.6.0
   provider: ^6.1.2
   http: ^1.2.2
-  html: ^0.15.6
   carousel_slider: ^5.0.0
   flutter_svg: ^2.0.17
   flutter_native_splash: ^2.4.4
   adhan: ^2.0.0+1
   hijri: ^3.0.0
-  geolocator: ^9.0.2
-  geocoding: ^2.1.0
-  intl: ^0.19.0
   pray_times: ^0.0.1
   timezone: ^0.10.1
   flutter_local_notifications: ^19.3.0
   android_intent_plus: ^5.3.0
   android_alarm_manager_plus: ^4.0.7
+  cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -100,8 +98,8 @@ flutter:
   assets:
     - images/
     - assets/icons/
-    - assets/quran-images-1/
-    - assets/audio/
+    # - assets/quran-images-1/
+    # - assets/audio/
     # - assets/quran-images-2/
     # - assets/quran-images-3/
     # - assets/quran-images-4/
