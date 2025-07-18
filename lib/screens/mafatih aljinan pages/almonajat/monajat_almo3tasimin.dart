@@ -168,7 +168,7 @@ class _MonajatAlmo3tasiminState extends State<MonajatAlmo3tasimin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: MonajatAlzahidin.screenRoute,
         pushBack: MonajatAlzakirin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة المعتصمين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -165,7 +165,7 @@ class _Dou3a2AlsabtState extends State<Dou3a2Alsabt> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Dou3a2Al2a7ad.screenRoute,
         pushBack: Dou3a2Aljom3a.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء السبت.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

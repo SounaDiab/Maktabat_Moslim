@@ -185,7 +185,7 @@ class _DouaaKomailState extends State<DouaaKomail> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAl3asharat.screenRoute,
         pushBack: DouaaAltawasol.screenRoute,
-        soud: 'دعاء كميل.mp3',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء كميل.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

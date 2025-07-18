@@ -168,7 +168,7 @@ class _MonajatAlra8ibinState extends State<MonajatAlra8ibin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: MonajatAlshakirin.screenRoute,
         pushBack: MonajatAlrajin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/مناجاة الراغبين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

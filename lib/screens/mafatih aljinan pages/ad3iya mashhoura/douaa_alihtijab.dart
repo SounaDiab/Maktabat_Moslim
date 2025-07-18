@@ -169,7 +169,7 @@ class _DouaaAlihtijabState extends State<DouaaAlihtijab> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaZamanAlghaiba.screenRoute,
           pushBack: DouaaAlkamous.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الاحتجاب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -170,7 +170,7 @@ class _SalatAl2imamAlhusseinState extends State<SalatAl2imamAlhussein> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SalatAl2imamZainAl3abidin.screenRoute,
         pushBack: SalatAl2imamAlhassan.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام الحسين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

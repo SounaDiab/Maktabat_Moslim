@@ -179,7 +179,7 @@ class _SalatAl2imamAlhassanState extends State<SalatAl2imamAlhassan> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SalatAl2imamAlhussein.screenRoute,
         pushBack: SalatAlsaidaAlzahraa.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام الحسن.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

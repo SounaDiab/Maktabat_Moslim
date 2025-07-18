@@ -168,7 +168,7 @@ class _DouaaAl3asharatState extends State<DouaaAl3asharat> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAlsimat.screenRoute,
         pushBack: DouaaKomail.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء العشرات.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -207,7 +207,7 @@ class _DouaaAljawshanAlsa8irState extends State<DouaaAljawshanAlsa8ir> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAlhazin.screenRoute,
         pushBack: DouaaAljawshanAlkabir.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الجوشن الصغير.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

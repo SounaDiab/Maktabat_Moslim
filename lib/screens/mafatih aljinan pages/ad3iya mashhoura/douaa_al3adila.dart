@@ -166,7 +166,7 @@ class _DouaaAl3adilaState extends State<DouaaAl3adila> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAljawshanAlkabir.screenRoute,
         pushBack: DouaaAlmojir.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء العديلة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

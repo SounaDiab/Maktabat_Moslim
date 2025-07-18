@@ -268,7 +268,7 @@ class _A3malLailatAljom3aState extends State<A3malLailatAljom3a> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: A3malNaharAljom3a.screenRoute,
         pushBack: Salat2imamAlmahdi.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال ليلة الجمعة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -176,7 +176,7 @@ class _SalatAlsaidaAlzahraaState extends State<SalatAlsaidaAlzahraa> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SalatAl2imamAlhassan.screenRoute,
         pushBack: SalatAmirAmo2minin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة السيدة الزهراء.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

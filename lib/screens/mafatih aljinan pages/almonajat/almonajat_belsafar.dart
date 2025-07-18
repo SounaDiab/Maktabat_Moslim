@@ -168,7 +168,7 @@ class _AlmonajatBelsafarState extends State<AlmonajatBelsafar> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlmonajatBikashfAlzolm.screenRoute,
         pushBack: SalasKalimat3anAmirAlmo2minin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالسفر.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

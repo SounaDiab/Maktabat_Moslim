@@ -165,7 +165,7 @@ class _Dou3a2Al2a7adState extends State<Dou3a2Al2a7ad> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Al2isnain.screenRoute,
           pushBack: Dou3a2Alsabt.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الاحد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

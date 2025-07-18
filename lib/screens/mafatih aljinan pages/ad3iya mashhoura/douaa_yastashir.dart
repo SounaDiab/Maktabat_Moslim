@@ -178,7 +178,7 @@ class _DouaaYastashirState extends State<DouaaYastashir> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAlmojir.screenRoute,
         pushBack: DouaaAlmashlol.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يستشير.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

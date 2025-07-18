@@ -180,7 +180,7 @@ class _Douaa3alkamaState extends State<Douaa3alkama> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAlsabah.screenRoute,
         pushBack: DouaaAlaahd.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء علقمة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

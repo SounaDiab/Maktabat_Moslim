@@ -168,7 +168,7 @@ class _MonajatAlmotawasilinState extends State<MonajatAlmotawasilin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: MonajatAlmoftakirin.screenRoute,
         pushBack: MonajatAlmo7ebin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/مناجاة المتوسلين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

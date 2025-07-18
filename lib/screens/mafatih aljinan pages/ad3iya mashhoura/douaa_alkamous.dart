@@ -179,7 +179,7 @@ class _DouaaAlkamousState extends State<DouaaAlkamous> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAlihtijab.screenRoute,
         pushBack: DouaaAlhazin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء القاموس.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

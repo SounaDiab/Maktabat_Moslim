@@ -178,7 +178,7 @@ class _SalatAl2imamAlhadiState extends State<SalatAl2imamAlhadi> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SalatAl2imamAl3askari.screenRoute,
         pushBack: SalatAl2imamAljawad.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام الهادي.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

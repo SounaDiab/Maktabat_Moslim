@@ -166,7 +166,7 @@ class _Dou3a2Al5amisState extends State<Dou3a2Al5amis> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Dou3a2Aljom3a.screenRoute,
         pushBack: Dou3a2Al2arbi3a2.screenRoute,
-        soud: '',
+        soud: 'الخميس',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

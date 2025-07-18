@@ -184,7 +184,7 @@ class _DouaaAltawasolState extends State<DouaaAltawasol> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaKomail.screenRoute,
         pushBack: DouaaAlsabah.screenRoute,
-        soud: 'دعاء التوسل.mp3',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء التوسل.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

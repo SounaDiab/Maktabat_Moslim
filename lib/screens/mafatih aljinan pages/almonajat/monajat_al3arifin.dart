@@ -169,7 +169,7 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: MonajatAlzakirin.screenRoute,
         pushBack: MonajatAlmoftakirin.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة العارفين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

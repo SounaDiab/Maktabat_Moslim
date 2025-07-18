@@ -183,7 +183,7 @@ class _DouaaAlsabahState extends State<DouaaAlsabah> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAltawasol.screenRoute,
         pushBack: Douaa3alkama.screenRoute,
-        soud: 'دعاء الصباح.mp3',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الصباح.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

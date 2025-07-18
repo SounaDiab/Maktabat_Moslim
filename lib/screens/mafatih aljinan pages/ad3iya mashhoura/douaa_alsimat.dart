@@ -280,7 +280,7 @@ class _DouaaAlsimatState extends State<DouaaAlsimat> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaAlmashlol.screenRoute,
         pushBack: DouaaAl3asharat.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء السمات.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

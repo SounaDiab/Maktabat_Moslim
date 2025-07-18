@@ -176,7 +176,7 @@ class _DouaaAlmojirState extends State<DouaaAlmojir> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaAl3adila.screenRoute,
           pushBack: DouaaYastashir.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء المجير.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

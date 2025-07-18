@@ -166,7 +166,7 @@ class _DouaaNodbaState extends State<DouaaNodba> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: DouaaMakarimAlakhlak.screenRoute,
         pushBack: DouaaZamanAlghaiba.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الندبة.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

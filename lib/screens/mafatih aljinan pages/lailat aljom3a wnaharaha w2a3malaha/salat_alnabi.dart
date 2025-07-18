@@ -168,7 +168,7 @@ class _SalatAlnabiState extends State<SalatAlnabi> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SalatAmirAmo2minin.screenRoute,
         pushBack: A3malNaharAljom3a.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام النبي.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -178,7 +178,7 @@ class _SalatAl2imamAlkazemState extends State<SalatAl2imamAlkazem> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: SalatAl2imamAlrida.screenRoute,
         pushBack: SalatAl2imamAlsadek.screenRoute,
-        soud: '',
+        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام الكاظم.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {
