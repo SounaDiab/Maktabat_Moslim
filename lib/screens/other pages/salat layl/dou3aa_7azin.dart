@@ -154,7 +154,7 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SawabahaWaFawa2idaha.screenRoute,
           pushBack: WaktahaWakaifyatiha.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الحزين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

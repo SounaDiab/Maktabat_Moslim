@@ -199,7 +199,7 @@ class _SawabahaWaFawa2idahaState extends State<SawabahaWaFawa2idaha> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: WaktahaWakaifyatiha.screenRoute,
           pushBack: Dou3aa7azin.screenRoute,
-          soud: '',
+          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ثوابها وفوائدها.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
