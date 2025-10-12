@@ -118,7 +118,7 @@ class _Alyawm2alsabi3Wal3ishrinState extends State<Alyawm2alsabi3Wal3ishrin> {
           pushNext: Alyawm2alsaminWal3ishrin.screenRoute,
           pushBack: Alyawm2alsadisWal3ishrin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم السابع والعشرين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

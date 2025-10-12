@@ -113,7 +113,7 @@ class _Alyawm2alsaniState extends State<Alyawm2alsani> {
           pushNext: Alyawm2alsalis.screenRoute,
           pushBack: Alyawm2al2awal.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الثاني.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

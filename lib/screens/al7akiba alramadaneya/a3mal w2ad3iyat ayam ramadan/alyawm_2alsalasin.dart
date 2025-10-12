@@ -115,7 +115,7 @@ class _Alyawm2alsalasinState extends State<Alyawm2alsalasin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alyawm2al2awal.screenRoute,
           pushBack: Alyawm2altasi3Wal3ishrin.screenRoute,
-          soud: 'الثلاثين',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

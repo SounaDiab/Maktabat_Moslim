@@ -116,7 +116,7 @@ class _FiFadlShaherRamadanState extends State<FiFadlShaherRamadan> {
           pushNext: MaYa3omAllayaliWalayam.screenRoute,
           pushBack: MaYa3omAllayaliWalayam.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل شهر رمضان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

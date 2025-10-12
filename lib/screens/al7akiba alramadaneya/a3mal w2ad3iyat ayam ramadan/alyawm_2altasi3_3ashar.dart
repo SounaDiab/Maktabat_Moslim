@@ -117,7 +117,7 @@ class _Alyawm2altasi33asharState extends State<Alyawm2altasi33ashar> {
           pushNext: Alyawm2al3ishroun.screenRoute,
           pushBack: Alyawm2alsamin3ashar.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم التاسع عشر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -113,7 +113,7 @@ class _Dou3a2Alsa7arState extends State<Dou3a2Alsa7ar> {
           pushNext: Fi2a3mal2as7arRamadan.screenRoute,
           pushBack: Dou3a2Abi7amzaAlsamali.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء السحر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -117,7 +117,7 @@ class _Allayla2altasi3a3asharState extends State<Allayla2altasi3a3ashar> {
           pushNext: Allayla2al7adiyaWal3ishrin.screenRoute,
           pushBack: Allayla2alsabi3a3ashar.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة التاسعة عشر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

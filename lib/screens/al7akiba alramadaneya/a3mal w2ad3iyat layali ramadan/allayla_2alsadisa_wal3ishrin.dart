@@ -120,7 +120,7 @@ class _Allayla2alsadisaWal3ishrinState
           pushNext: Allayla2alsabi3aWal3ishrin.screenRoute,
           pushBack: Allayla2al5amisaWal3ishrin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة السادسة والعشرين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
