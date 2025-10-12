@@ -51,6 +51,11 @@ class CounterScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, TesbihPage.screenRoute);
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        elevation: 5,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                      ),
                       child: Text(
                         'تسبيحة',
                         style: TextStyle(
@@ -71,6 +76,11 @@ class CounterScreen extends StatelessWidget {
                         Navigator.pushNamed(
                             context, TesbihatAlzahra2Page.screenRoute);
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        elevation: 5,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                      ),
                       child: Text(
                         'تسبيحة الزهراء',
                         style: TextStyle(

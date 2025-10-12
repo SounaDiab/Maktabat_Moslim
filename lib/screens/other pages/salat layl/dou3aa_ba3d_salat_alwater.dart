@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/container_scrollview.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
+import '../../../widgets/container_scrollview.dart';
 import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../salat_allayl.dart';
-import 'dou3aa_ba3d_salat_alwater.dart';
-import 'sawabaha_wa_fawa2idaha.dart';
+import 'dou3aa_7azin.dart';
+import 'waktaha_wakaifyatiha.dart';
 
-class Dou3aa7azin extends StatefulWidget {
-  static String screenRoute = 'dou3aa_7azin_screen';
-  const Dou3aa7azin({super.key});
+class Dou3aaBa3dSalatAlwater extends StatefulWidget {
+  static String screenRoute = 'dou3aa_ba3d_salat_alwater_screen';
+  const Dou3aaBa3dSalatAlwater({super.key});
 
   @override
-  State<Dou3aa7azin> createState() => _Dou3aa7azinState();
+  State<Dou3aaBa3dSalatAlwater> createState() => _Dou3aaBa3dSalatAlwaterState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _Dou3aa7azinState extends State<Dou3aa7azin> {
+class _Dou3aaBa3dSalatAlwaterState extends State<Dou3aaBa3dSalatAlwater> {
   bool isIcon = true;
   @override
   void initState() {
@@ -32,7 +32,8 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState = prefs.getBool('isFavorite_dou3aa_7azin_screen');
+    bool? savedState =
+        prefs.getBool('isFavorite_dou3aa_ba3d_salat_alwater_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -40,7 +41,7 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isFavorite_dou3aa_7azin_screen', value);
+    await prefs.setBool('isFavorite_dou3aa_ba3d_salat_alwater_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -90,17 +91,20 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء الحزين', Dou3aa7azin.screenRoute);
+                      .addFavorite('دعاء بعد صلاة الوتر',
+                          Dou3aaBa3dSalatAlwater.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('دعاء الحزين', Dou3aa7azin.screenRoute,
-                          Dou3aa7azin.screenRoute);
+                      .removeFavorite(
+                          'دعاء بعد صلاة الوتر',
+                          Dou3aaBa3dSalatAlwater.screenRoute,
+                          Dou3aaBa3dSalatAlwater.screenRoute);
                 }
               },
             ),
           ],
           title: Text(
-            'دعاء الحزين',
+            'دعاء بعد صلاة الوتر',
             style: TextStyle(
               fontSize: isTablet
                   ? 40
@@ -143,7 +147,7 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
                 child: ListOfNineVerses(
                   title: '',
                   subtitle:
-                      ' أُناجِيكَ يا مَوْجُوداً فِي كُلِّ مَكانٍ لَعَلَّكَ تَسْمَعُ نِدائِي، فَقَدْ عَظُمَ جُرْمي وَقَلَّ حَيائِي. مَوْلايَ يا مَوْلايَ، أَيَّ الاهْوالِ أتَذَكَّرُ وَأيَّها أنْسى؟ وَلَوْ لَمْ يَكُنْ إِلاّ المَوْتُ لَكَفى! كَيْفَ وَما بَعْدَ المَوْتِ أعْظَمُ وَأدْهى؟! مَوْلايَ يا مَوْلايَ، حَتّى مَتى وَإِلى مَتى أقُولُ لَكَ العُتْبى مَرَّةً بَعْدَ أخْرى ثُمَّ لا تَجِدُ عِنْدِي صِدْقا وَلا وَفاءً فَياغَوْثَاهُ ثُمَّ وَاغَوْثاهُ بِكَ يا الله مِنْ هَوىً قَدْ غَلَبَني وَمِنْ عَدُوٍّ قَدْ اسْتَكْلَبَ عَلَيَّ وَمِنْ دُنْيا قَدْ تَزَيَّنَتْ لِي وَمِنْ نَفْسٍ أمَّارَةٍ بِالسُّوءِ إِلاّ مارَحِمَ رَبِّي. مَولايَ يا مَولايَ، إنْ كُنْتَ رَحِمْتَ مِثْلِي فَارْحَمْنِي وَإنْ كُنْتَ قَبِلْتَ مِثْلي فَاقْبَلْني! يا قابِلَ السَّحَرَةِ اقْبَلْني! يا مَنْ لَمْ أزَلْ أتَعَرَّفُ مِنْهُ الحُسْنى يا مَنْ يُغَذِّيَني بِالنِعَمِ صَباحا وَمَساءً ارْحَمْني، يَوْمَ آتِيكَ فَرْداً شاخِصا إلَيْكَ بَصَري مُقَلَّداً عَمَلِي قَدْ تَبَرَّأَ جَميعُ الخَلْقِ مِنِّي. نَعَمْ، وَأبِي وَأمِّي وَمَنْ كانَ لَهُ كَدِّي وَسَعْيِي. فَإنْ لَمْ تَرْحَمْنِي فَمَنْ يَرْحَمُنِي؟ وَمَنْ يُؤْنِسُ فِي القَبْرِ وَحْشَتِي؟ وَمَنْ يُنْطِقُ لِسانِي إذا خَلَوْتُ بِعَمَلِي وَسائَلْتَنِي عَمَّا أنْتَ أعْلَمُ بِهِ مِنِّي؟ فَإنْ قُلْتُ: نَعَمْ، فَأيْنَ المَهْرَبُ مِنْ عَدْلِكَ؟ وَإنْ قُلْتُ: لَمْ أفْعَلْ، قُلْتَ: ألَمْ أكُنْ الشَّاهِدَ عَلَيْكَ؟ فَعَفْوُكَ عَفْوُكَ يا مَوْلايَ قَبْلَ سَرابِيلِ القَطِرانِ، عَفْوُكَ عَفْوُكَ يا مَوْلايَ قَبْلَ جَهَنَّمَ وَالنِّيرانِ، عَفْوُكَ عَفْوُكَ يا مَولايَ قَبْلَ أنْ تُغَلَّ الايْدِي إِلى الاعْناقِ يا أرْحَمَ الرَّاحِمِينَ وَخَيْرَ الغافِرينَ.',
+                      'إِلهِي، تَعَرَّضَ لَكَ فِي هذَا اللَّيْلِ الْمُتَعَرِّضُونَ، وَقَصَدَكَ الْقاصِدُونَ، وَأَمَّلَ فَضْلَكَ وَمَعْرُوفَكَ الطَّالِبُونَ. وَلَكَ فِي هذَا اللَّيْلِ نَفَحاتٌ وَجَوائِزُ، وَعَطايا وَمَواهِبُ، تَمُنُّ بِها عَلَى مَنْ تَشَاءُ مِنْ عِبادِكَ، وَتَمْنَعُها مَنْ لَمْ تَسْبِقْ لَهُ الْعِنايَةُ مِنْكَ، وَها أَنَا ذَا عُبَيْدُكَ الْفَقِيرُ إِلَيْكَ، الْمُؤَمِّلُ فَضْلَكَ وَمَعْرُوفَكَ، فَإِنْ كُنْتَ، يا مَوْلايَ، تَفَضَّلْتَ فِي هـذِهِ اللَّيْلَةِ عَلَى أَحَدٍ مِنْ خَلْقِكَ، وَعُدْتَ عَلَيْهِ بِعائِدَةٍ مِنْ عَطْفِكَ، فَصَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، الطَّيِّبينَ الطَّاهِرِينَ، الْخَيِّرِينَ الْفاضِلِينَ، وَجُدْ عَلَيَّ بِطَوْلِكَ وَمَعْرُوفِكَ، يا رَبَّ الْعالَمِينَ، وَصَلَّى اللهُ عَلَى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَآلِهِ الطَّاهِرِينَ وَسَلَّمَ تَسْلِيماً، إِنَّ اللهَ حَمِيدٌ مَجِيدٌ. اللّهُمَّ، إِنّي أَدْعُوكَ كَما أَمَرْتَ، فَاسْتَجِبْ لِي كَما وَعَدْتَ، إِنَّكَ لا تُخْلِفُ الْمِيعادَ.',
                   weight: FontWeight.w600,
                   size: isTablet ? _fontSizeTablet : _fontSize,
                 ),
@@ -152,10 +156,10 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
           ),
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-          pushNext: SawabahaWaFawa2idaha.screenRoute,
-          pushBack: Dou3aaBa3dSalatAlwater.screenRoute,
+          pushNext: Dou3aa7azin.screenRoute,
+          pushBack: WaktahaWakaifyatiha.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الحزين.mp3',
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء بعد صلاة الوتر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

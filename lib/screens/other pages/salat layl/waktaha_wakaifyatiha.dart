@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/container_scrollview.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +9,7 @@ import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../counter page/tesbiha_page.dart';
 import '../salat_allayl.dart';
-import 'dou3aa_7azin.dart';
+import 'dou3aa_ba3d_salat_alwater.dart';
 import 'name_list_page.dart';
 import 'sawabaha_wa_fawa2idaha.dart';
 
@@ -60,6 +60,15 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
     }
   }
 
+  Key selectableKey = UniqueKey();
+  // bool _hasSelection = false;
+
+  void _clearSelection() {
+    setState(() {
+      selectableKey = UniqueKey(); // إعادة بناء SelectableText
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).textScaleFactor;
@@ -69,6 +78,7 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: () {
           setState(() {
             _showHiddenButtons = !_showHiddenButtons;
@@ -153,8 +163,8 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
                       title: '',
                       subtitle:
                           'وقتها من إنتصاف الليل إلى طلوع الفجر، وأفضله السحر وهو الثلث الأخير من الليل. وهي إحدى عشر ركعة، "نافلة الليل": ( ثمان ركعات + ركعتا الشفع + ركعة الوتر )\n\n'
-                          'ثمان ركعات كل إثنتين على حدة تقرأ فيها ما شئت من السور، وإن كان يستحب في أول ركعتين أن تقرأ الحمد والتوحيد في الأولى، والحمد والكافرون في الثانية.\n\n'
-                          'ثم ركعتا الشفع تقرأ فيها ما شئت ويستحب أن تقرأ في الأولى الحمد والفلق وفي الثانية الحمد والناس بدون قنوت.\n\n'
+                          'ثمان ركعات كل إثنتين على حدة تقرأ فيها ما شئت من السور، وإن كان يستحب في أول ركعتين أن تقرأ الحمد والتوحيد في الاولى، والحمد والكافرون في الثانية.\n\n'
+                          'ثم ركعتا الشفع تقرأ فيها ما شئت ويستحب أن تقرأ في الاولى الحمد والفلق وفي الثانية الحمد والناس بدون قنوت.\n\n'
                           'ثم ركعة الوتر ويستحب أن تقرأ فيها الحمد مرة واحدة والتوحيد ثلاث مرات والمعوذتين مرة واحدة وتقنت فيها بالقنوت التالي، تقرأ دعاء الفرج:\n\n'
                           '- لا إله إلا الله الحليم الكريم لا إله إلا الله العلي العظيم، سبحان الله رب السماوات السبع ورب الأراضين السبع وما فيهن وما بينهن رب العرش العظيم، والحمد لله رب العالمين وسلام على المرسلين.\n'
                           '- تستغفر لأربعين مؤمناً ومؤمنةً أحياءً وأمواتاً: "اللهم إغفر لفلان.......\n'
@@ -167,6 +177,20 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
                       size: isTablet ? _fontSizeTablet : _fontSize,
                     ),
                   ],
+                ),
+              ),
+              Positioned.fill(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    setState(() {
+                      _showHiddenButtons = !_showHiddenButtons;
+                    });
+                    FocusScope.of(context)
+                        .unfocus(); // إخفاء الكيبورد لو كان ظاهر
+                    // اخفاء التحديد
+                    _clearSelection;
+                  },
                 ),
               ),
               if (_showHiddenButtons)
@@ -204,9 +228,10 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
             ],
           ),
           bottomNavigationBar: AddCustomBottomNavigationBar(
-            pushNext: Dou3aa7azin.screenRoute,
+            pushNext: Dou3aaBa3dSalatAlwater.screenRoute,
             pushBack: SawabahaWaFawa2idaha.screenRoute,
-            soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/وقتها وكيفيتها.mp3',
+            soud:
+                'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/وقتها وكيفيتها.mp3',
             onTap: (double fontSize) {
               setState(() {
                 isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;

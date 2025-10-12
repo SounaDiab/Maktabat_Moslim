@@ -30,14 +30,6 @@ class _TesbihPageState extends State<TesbihPage> {
             size: isTablet ? 50 : 25,
           ),
         ),
-        // title: Text(
-        //   'تسبيح',
-        //   style: TextStyle(
-        //     fontSize: isTablet ? 50 : 25,
-        //     fontWeight: FontWeight.bold,
-        //     fontFamily: 'Tajawal',
-        //   ),
-        // ),
       ),
       body: SingleChildScrollView(
         child: Container(

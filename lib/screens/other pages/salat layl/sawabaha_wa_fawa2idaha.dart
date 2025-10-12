@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/container_scrollview.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -81,7 +81,7 @@ class _SawabahaWaFawa2idahaState extends State<SawabahaWaFawa2idaha> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -151,7 +151,7 @@ class _SawabahaWaFawa2idahaState extends State<SawabahaWaFawa2idaha> {
                       'جاء ذكر صلاة الليل في الكتاب الكريم في مواضع عديدة منها قوله تعالى: ﴿وَمِنَ اللَّيْلِ فَتَهَجَّدْ بِهِ نَافِلَةً لَّكَ عَسَى أَن يَبْعَثَكَ رَبُّكَ مَقَامًا مَّحْمُودًا﴾(الإسراء:79).\n\n'
                       'وقوله عزّ وجلّ: ﴿إِنَّ نَاشِئَةَ اللَّيْلِ هِيَ أَشَدُّ وَطْءًا وَأَقْوَمُ قِيلًاً﴾(المزمل:6)، وبها أوصى الأنبياء والملائكة يقول النبي صلى الله عليه وآاله: "ما زال جبرائيل يوصيني بقيام الليل حتى ظننت أن خيار أمتي لن يناموا من الليل إلا قليلاً"، وفي وصيته صلى الله عليه وآاله لأمير المؤمنين عليه السلام: "عليك بصلاة الليل يكّررها أربعاً".\n\n'
                       'ولها من الفضل ما يذهل العبد إذا قدر على الإحاطة، به فهي شرف المؤمن ودأب الصالحين، ومبعدة الداء من الأجساد ومصححة البدن، والمانعة من نزول العذاب، وهي من روح اللَّه تعالى وتجلب رضاه، وتحسّن الخلق وغير ذلك مما روي.\n\n'
-                      'فمن الطبيعي أن تكون شعار الأولياء ومنهاج الأصفياء وسبيل الأتقياء فأهل الولاية المتربّون في مدرسة أهل البيت عليهم السلام هم أهل صلاة الليل والاستغفار بالأسحار، وبالإمكان بلوغ ما نروم إليه من الحديث المصدّر بقوله عليه السلام: "ليس منّا.." حينما نقرأ تعريف مولانا الصادق عليه السلام عن شيعته وهو يقول: "شيعتنا أهل الورع والاجتهاد وأهل الوفاء والأمانة وأهل الزهد والعبادة، أصحاب إحدى وخمسين ركعة في اليوم والليلة، القائمون بالليل، الصائمون بالنهار، يزكّون أموالهم ويحجّون البيت ويجتنبون كل محرم".',
+                      'فمن الطبيعي أن تكون شعار الاولياء ومنهاج الأصفياء وسبيل الأتقياء فأهل الولاية المتربّون في مدرسة أهل البيت عليهم السلام هم أهل صلاة الليل والاستغفار بالأسحار، وبالإمكان بلوغ ما نروم إليه من الحديث المصدّر بقوله عليه السلام: "ليس منّا.." حينما نقرأ تعريف مولانا الصادق عليه السلام عن شيعته وهو يقول: "شيعتنا أهل الورع والاجتهاد وأهل الوفاء والأمانة وأهل الزهد والعبادة، أصحاب إحدى وخمسين ركعة في اليوم والليلة، القائمون بالليل، الصائمون بالنهار، يزكّون أموالهم ويحجّون البيت ويجتنبون كل محرم".',
                   weight: FontWeight.w600,
                   size: isTablet ? _fontSizeTablet : _fontSize,
                 ),
@@ -199,7 +199,8 @@ class _SawabahaWaFawa2idahaState extends State<SawabahaWaFawa2idaha> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: WaktahaWakaifyatiha.screenRoute,
           pushBack: Dou3aa7azin.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ثوابها وفوائدها.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ثوابها وفوائدها.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
