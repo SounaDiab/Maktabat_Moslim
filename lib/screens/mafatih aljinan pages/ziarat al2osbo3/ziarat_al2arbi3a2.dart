@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ziarat_al2osbou3.dart';
@@ -58,7 +58,6 @@ class _ZiaratAl2arbi3a2State extends State<ZiaratAl2arbi3a2> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -91,7 +90,7 @@ class _ZiaratAl2arbi3a2State extends State<ZiaratAl2arbi3a2> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -102,74 +101,32 @@ class _ZiaratAl2arbi3a2State extends State<ZiaratAl2arbi3a2> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'زيارة يوم الأربعاء', ZiaratAl2arbi3a2.screenRoute);
+                          'زيارة يوم الاربعاء', ZiaratAl2arbi3a2.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'زيارة يوم الأربعاء',
+                          'زيارة يوم الاربعاء',
                           ZiaratAl2arbi3a2.screenRoute,
                           ZiaratAl2arbi3a2.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'زيارة يوم الأربعاء',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'زيارة يوم الاربعاء'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title:
-                      'َهُو باسم مُوسى بن جعفر وعلي بن مُوسى الرّضا ومحمّد التقي وعلي النقي ؛ زيارتهم (عليهم السلام):',
-                  subtitle:
-                      'اَلسَّلامُ عَلَيْكُمْ يا اَوْلِياءَ اللهِ اَلسَّلامُ عَلَيْكُمْ يا حُجَجَ اللهِ اَلسَّلامُ عَلَيْكُمْ يا نُورَ اللهِ فى ظُلُماتِ الاَْرْضِ اَلسَّلامُ عَلَيْكُمْ صَلَواتُ اللهِ عَلَيْكُمْ وَعَلى آلِ بَيْتِكُمُ الطَّيِّبينَ الطّاهِرينَ بِاَبى اَنْتُمْ وَاُمّى لَقَدْ عَبَدْتُمُ اللهَ مُخْلِصينَ وَجاهَدْتُمْ فِي اللهِ حَقَّ جِهادِهِ حَتّى أتاكم الْيَقينُ فَلَعَنَ اللهُ اَعْداءكُمْ مِنَ الْجِنِّ وَالاِْنْسِ اَجَمْعَينَ وَاَنَا اَبْرَأُ اِلَى اللهِ وَاِلَيْكُمْ مِنْهُمْ، يا مَوْلايَ يا اَبا اِبْراهيمَ مُوسَى بْنَ جَعْفَر يا مَوْلايَ يا اَبَا الْحَسَنِ عَلِيَّ بْنَ مُوسى يا مَوْلايَ يا اَبا جَعْفَر مُحَمَّدَ بْنَ عَلِيٍّ يا مَوْلايَ يا اَبَا الْحَسَنِ عَلِيَّ بْنَ مُحَمَّد اَنَا مَوْلىً لَكُمْ مُؤْمِنٌ بِسِرِّكُمْ وَجَهْرِكُمْ مُتَضَيِّفٌ بِكُمْ في يَوْمِكُمْ هذا وَهُوَ يَوْمُ الاَْرْبَعاءِ وَمُسْتَجيرٌ بِكُمْ فَاَضيفُوني وَ اَجيرُوني بِـآلِ بَيْتِـكُـمُ الطَّيـِّبيـنَ الطّاهِـريـنَ.',
-                  weight: FontWeight.w900,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة يوم الاربعاء',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiaratAl5amis.screenRoute,
           pushBack: ZiaratAlsoulasa2.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الاربعاء.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/zyarat_arbi3a2.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

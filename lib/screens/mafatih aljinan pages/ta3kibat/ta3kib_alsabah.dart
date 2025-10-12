@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/favorites_provider.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../favorites_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_screen.dart';
 import '../ta3kibat.dart';
 import 'ta3kib_aldohr.dart';
@@ -63,7 +63,6 @@ class _Ta3kibAlsabahState extends State<Ta3kibAlsabah> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -97,7 +96,7 @@ class _Ta3kibAlsabahState extends State<Ta3kibAlsabah> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -117,62 +116,21 @@ class _Ta3kibAlsabahState extends State<Ta3kibAlsabah> {
               },
             ),
           ],
-          title: Text(
-            'تعقيب صلاة الصبح',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'تعقيب صلاة الصبح'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اللَّهُمَّ إِنِّي أَسْأَلُكَ يَا عَالِماً بِكُلِّ خَفِيَّةٍ ، يَا مَنِ السَّمَاءُ بِقُدْرَتِهِ مَبْنِيَّةٌ ، يَا مَنِ الْأَرْضُ بِقُدْرَتِهِ مَدْحِيَّةٌ ، يَا مَنِ الشَّمْسُ وَ الْقَمَرُ بِنُورِ جَلَالِهِ مُضِيئَةٌ ، يَا مَنِ الْبِحَارُ بِقُدْرَتِهِ مَجْرِيَّةٌ  يَا مُنْجِيَ يُوسُفَ مِنْ رِقِّ الْعُبُودِيَّةِ ، يَا مَنْ يَصْرِفُ كُلَّ نَقِمَةٍ وَ بَلِيَّةٍ ، يَا مَنْ حَوَائِجُ السَّائِلِينَ عِنْدَهُ مَقْضِيَّةٌ ، يَا مَنْ لَيْسَ لَهُ حَاجِبٌ يُغْشَى ، وَ لَا وَزِيرٌ يُرْشَى ، صَلِّ عَلَى مُحَمَّدٍ وَ آلِ مُحَمَّدٍ ، وَ احْفَظْنِي فِي سَفَرِي وَ حَضَرِي ، وَ لَيْلِي وَ نَهَارِي ، وَ يَقَظَتِي وَ مَنَامِي ، وَ نَفْسِي وَ أَهْلِي ، وَ مَالِي وَ وُلْدِي ، وَ الْحَمْدُ لِلَّهِ وَحْدَهُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'تعقيب صلاة الصبح',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ta3kibAldohr.screenRoute,
           pushBack: Ta3kibat3ama.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/تعقيب الصباح.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ta3kib_sabah.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

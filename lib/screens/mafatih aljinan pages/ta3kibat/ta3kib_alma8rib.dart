@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/favorites_provider.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../favorites_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_screen.dart';
 import '../ta3kibat.dart';
 import 'ta3kib_al3asr.dart';
@@ -61,7 +61,6 @@ class _Ta3kibAlma8ribState extends State<Ta3kibAlma8rib> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -94,7 +93,7 @@ class _Ta3kibAlma8ribState extends State<Ta3kibAlma8rib> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -116,62 +115,21 @@ class _Ta3kibAlma8ribState extends State<Ta3kibAlma8rib> {
               },
             ),
           ],
-          title: Text(
-            'تعقيب صلاة المغرب',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'تعقيب صلاة المغرب'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'إِنَّ الله وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيماً، أَللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ النَّبِي وَعَلَى ذُرِّيَّتِهِ وَعَلَى أهل بيته، أَللَّهُمَّ إِنِّي أَسْأَلُكَ مُوجِباتِ رَحْمَتِكَ وَعَزَائِمَ مَغْفِرَتِكَ وَالنَّجَاةَ مِنَ النَّارِ وَمِنْ كُلِّ بَلِيَّةٍ وَالْفَوزَ بِالْجَنَّةِ وَالرِّضْوانِ فِي دَارِ السَّلامِ وَجِوارِ نَبِيِّكَ مُحَمَّدٍ عَلَيْهِ وَآلِهِ السَّلَامُ أَللَّهُمَّ مَا بِنَا مِنْ نِعْمَةٍ فَمِنْكَ لا إله إلا أنت أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ وَصَلَّى اللَّهُ عَلَى سَيِّدِنَا وَنَبِيِّنَا مُحَمَّدٍ وَعَلَى آلِهِ الطَّيبِينَ الطَّاهِرِينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'تعقيب صلاة المغرب',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ta3kibAl3isha2.screenRoute,
           pushBack: Ta3kibAl3asr.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/تعقيب المغرب.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ta3kib_ma8rib.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
-import 'package:maktabat_almoslim/widgets/ta3kibat_style.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
+import '../../../widgets/scroll_title.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ziarat_al2osbou3.dart';
@@ -59,7 +58,6 @@ class _ZiaratAlsabtState extends State<ZiaratAlsabt> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -92,7 +90,7 @@ class _ZiaratAlsabtState extends State<ZiaratAlsabt> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -111,81 +109,21 @@ class _ZiaratAlsabtState extends State<ZiaratAlsabt> {
               },
             ),
           ],
-          title: Text(
-            'زيارة يوم السبت',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'زيارة يوم السبت'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title:
-                      'ذِكْرُ زيارةِ النّبيِّ (صلى الله عليه وآله وسلم) في يَومِه وَهُوَ يَومُ السّبتِ:',
-                  subtitle:
-                      'َشْهَدُ اَنْ لا اِلـهَ إلاّ اللهُ وَحْدَهُ لا شَريكَ لَهُ وَاَشْهَدُ اَنَّكَ رَسُولُهُ وَاَنَّكَ مُحَمَّدُ بْنُ عَبْدِ اللهِ وَاَشْهَدُ اَنَّكَ قَدْ بَلَّغْتَ رِسالاتِ رَبِّكَ وَنَصَحْتَ لاُِمَّتِكَ وَجاهَدْتَ فى سَبيلِ اللهِ بِالْحِكْمَةِ وَالمَوْعِظَةِ الْحَسَنَةِ وَاَدَّيْتَ الَّذى عَلَيْكَ مِنَ الْحَقِّ وَاَنَّكَ قَدْ رَؤُفْتَ بِالْمُؤْمِنينَ وَغَلَظْتَ عَلَى الْكافِرينَ وَعَبَدْتَ اللهَ مُخْلِصاً حَتّى أتاكَ اليَقينُ فَبَلَغَ اللهُ بِكَ اشَرَفَ مَحَلِّ الْمُكَرَّمينَ اَلْحَمْدُ للهِِ الَّذِي اسْتَنْقَذَنا بِكَ مِنَ الشِّرْكِ وَالضَّلالِ اَللّـهُمَّ صَلِّ عَلى مُحَمَّد وَآلِهِ وَاجْعَلْ صَلَواتِكَ وَصَلَواتِ مَلائِكَتِكَ الْمُقَرَّبينَ وَاَنْبِيائِكَ الْمـُرْسَلينَ وَعِبادِكَ الصّالِحينَ وَاَهْلِ السَّماواتِ وَالاَْرَضينَ وَمَنْ سَبَّحَ لَكَ يا رَبَّ الْعالَمينَ مِنَ الاَْوَّلينَ وَالاخِرينَ عَلى مُحَمَّد عَبْدِكَ وَرَسُوِلِكَ وَنَبِيِّكَ وَاَمينِكَ وَنَجِيبِكَ وَحَبيبِكَ وَصَفِيِّكَ وَ صَفْوَتِكَ وَخاصَّتِكَ وَخالِصَتِكَ وَخِيَرَتِكَ مِنْ خَلْقِكَ وَاَعْطِهِ الْفَضْلَ وَالْفَضيلَةَ وَالْوَسيلَةَ وَالدَّرَجَةَ الرَّفيعَةَ وَابْعَثْهُ مَقاماً مَحَمْوُداً يَغْبِطُهُ بِهِ الاَْوَّلُونَ'
-                      'وَالاخِرُونَ اَللّـهُمَّ اِنَّكَ قُلْتَ وَلَوْ اَنَّهُمْ اِذْ ظَلَمُوا اَنْفُسَهُمْ جاؤوكَ فَاسْتَغْفَرُوا اللهَ وَاسْتَغْفَرَ لَهُمُ الرَّسُولُ لَوَجَدُوا اللهَ تَوّاباً رَحيماً اِلـهى فَقَدْ اَتَيْتُ نَبِيَّكَ مُسْتَغْفِراً تائِباً مِنْ ذُنُوبى فَصَلِّ عَلى مُحَمَّد وَآلِهِ وَ اْغِفْرها لي، يا سَيِّدَنا اَتَوَجَّهُ بِكَ وَبِاَهْلِ بَيْتِكَ اِلَى اللهِ تَعالى رَبِّكَ وَرَبّى لِيَغْفِرَ لى ثمّ قل ثلاثاً : اِنّا للهِِ وَاِنّا اِلَيْهِ راجِعُونَ ثمّ قل : اُصِبْنا بِكَ يا حَبيبَ قُلُوبِنا فَما اَعْظَمَ الْمُصيبَةَ بِكَ حيَْثُ انْقَطَعَ عَنّا الْوَحْيُ وَحَيْثُ فَقَدْناكَ فَاِنّا للهِِ وَاِنّا اِلَيْهِ راجِعُونَ يا سَيِّدَنا يا رَسُولَ اللهِ صَلَواتُ اللهِ عَلَيْكَ وَعَلى آلِ بَيْتِكَ الطّاهِرينَ هذا يَوْمُ السَّبْتِ وَهُوَ يَوْمُكَ وَاَنَا فيهِ ضَيْفُكَ وَجارُكَ فَاَضِفْنى وَاجِرْنى فَاِنَّكَ كَريمٌ تُحِبُّ الضِّيافَةَ وَمَأْمُورٌ بِالاِْجارَةِ فَاَضِفْني وَأحْسِنْ ضِيافَتى وَاَجِرْنا وَاَحْسِنْ اِجارَتَنا بِمَنْزِلَةِ اللهِ عِنْدَكَ وَعِنْدَ آلِ بَيْتِكَ وَبِمَنْزِلَتِهِمْ عِنْدَهُ وَبِما اسْتَوْدَعَكُمْ مِنْ عِلْمِهِ فَاِنَّهُ اَكْرَمُ الاَْكْرَمينَ.',
-                  weight: FontWeight.w900,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'يقول مؤلّف الكتاب عبّاس القُمّي عُفى عَنْه: انّي كلّما زرته (صلى الله عليه وآله وسلم) بهذه الزّيارة بَدَأت بزيارته عَلى نحو ما علّمه الامام الرّضا (عليه السلام) البزنطي ثمّ قرأت هذِهِ الزّيارة، فَقَدْ رُوي بسند صحيح إنّ ابن أبي بصير سأل الرّضا (عليه السلام) كيف يُصلّى على النبيّ (صلى الله عليه وآله وسلم) ويسلّم عليه بَعد الصلاة فأجابَ (عليه السلام) بقوله:',
-                  weight: FontWeight.w400,
-                  size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                ),
-              ),
-              Container(
-                child: Ta3kibatStyle(
-                  text:
-                      'اَلسَّلامُ عَلَيْكَ يا رَسُولَ اللهِ وَرَحْمةُ اللهِ وَبَرَكاتُهُ اَلسَّلامُ عَلَيْكَ يا مُحَمَّدُ بْنَ عَبْدِ اللهِ اَلسَّلامُ عَلَيْكَ يا خِيَرَةَ اللهِ اَلسَّلامُ عَلَيْكَ يا حَبيبَ اللهِ اَلسَّلامُ عَلَيْكَ يا صِفْوَهَ اللهِ اَلسَّلامُ عَلَيْكَ يا اَمينَ اللهِ اَشْهَدُ اَنَّكَ رَسُولُ اللهِ وَاَشْهَدُ اَنَّكَ مُحمَّدُ بْنُ عَبْدِ اللهِ وَاَشْهَدُ اَنَّكَ قَدْ نَصَحْتَ لاُِمَّتِكَ وَجاهَدْتَ فى سَبيلِ رَبِّكِ وَعَبَدْتَهُ حَتّى أتاكَ الْيَقينُ فَجَزاكَ اللهُ يا رَسُولَ اللهِ اَفْضَلَ ما جَزى نَبِيّاً عَنْ اُمَّتِهِ اَللّـهُمَّ صَلِّ عَلى مَحَمِّد وآلِ مُحَمِّد اَفْضَلَ ما صَلَّيْتَ عَلى اِبْرهِيمَ وَآلِ إبراهيمَ اِنَّكَ حَميدٌ مَجيدٌ.',
-                  weight: FontWeight.w900,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة يوم السبت',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiaratAl2a7ad.screenRoute,
           pushBack: ZiaratAljom3a.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة السبت.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/zyarat_sabt.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

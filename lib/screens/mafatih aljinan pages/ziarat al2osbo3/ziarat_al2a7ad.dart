@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/favorites_provider.dart';
-import 'package:maktabat_almoslim/screens/favorites_screen.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../favorites_provider.dart';
+import '../../favorites_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../ziarat_al2osbou3.dart';
 import 'ziarat_al2isnain.dart';
 import 'ziarat_alsabt.dart';
@@ -58,7 +58,6 @@ class _ZiaratAl2a7adState extends State<ZiaratAl2a7ad> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -91,7 +90,7 @@ class _ZiaratAl2a7adState extends State<ZiaratAl2a7ad> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -102,89 +101,30 @@ class _ZiaratAl2a7adState extends State<ZiaratAl2a7ad> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'زيارة يوم الأحد', ZiaratAl2a7ad.screenRoute);
+                          'زيارة يوم الاحد', ZiaratAl2a7ad.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('زيارة يوم الأحد',
+                      .removeFavorite('زيارة يوم الاحد',
                           ZiaratAl2a7ad.screenRoute, ZiaratAl2a7ad.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'زيارة يوم الأحد',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'زيارة يوم الاحد'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'زيارةُ أميرِ المؤمنينَ (عليه السلام):',
-                  subtitle:
-                      'اَلسَّلامُ عَلَى الشَّجَرَةِ النَّبَوِيَّةِ وَالدَّوْحَةِ الْهاشِمِيَّةِ المُضيئَةِ المُثْمِرَةِ بِالنَّبُوَّةِ الْمُونِقَةِ بِالاِْمامَةِ وَعَلى ضَجيعَيْكَ آدَمَ وَنُوح عَلَيْهِمَا السَّلامُ، اَلسَّلامُ عَلَيْكَ وَعَلى اَهْلِ بَيْتِكَ الطَّيِّبينَ الطّاهِرينَ، اَلسَّلامُ عَلَيْكَ وَ عَلَى الْمَلائِكَةِ الُْمحْدِقينَ بِكَ وَالْحافّينَ بِقَبْرِكَ يا مَوْلايَ يا اَميرَ الْمُوْمِنينَ هذا يَوْمُ الاَْحَدِ وَهُوَ يَوْمُكَ وَبِاسْمِكَ وَاَنَا ضَيْفُكَ فيهِ وَ جارُكَ فَاَضِفْنى يا مَوْلاىَ وَاَجِرْنى فَاِنَّكَ كَريمٌ تُحِبُّ الضِّيافَةَ وَ مَأْمُورٌ بِالاِْجارَةِ فَافْعَلْ ما رَغِبْتُ اِلَيْكَ فيهِ وَرَجَوْتُهُ مِنْكَ بِمَنْزِلَتِكَ وَ آلِ بَيْتِكَ عِنْدَاللهِ وَمَنْزِلَتِهِ عِنْدَكُمْ وَبِحَقِّ ابْنِ عَمِّكَ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ وَعَلَيْهِمْ اَجْمَعينَ.',
-                  weight: FontWeight.w900,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'زيارةُ الزّهْرَاءِ سَلامُ اللهِ عَليها:',
-                  subtitle:
-                      'اَلسَّلامُ عَلَيْكِ يا مُمْتَحَنَةُ امْتَحَنَكِ الَّذى خَلَقَكِ فَوَجَدَكِ لِمَا امْتَحَنَكِ صابِرَةً اَنَا لَكِ مُصَدِّقٌ صابِرٌ عَلى ما اَتى بِهِ اَبُوكِ وَوَصِيُّهُ صَلَواتُ اللهِ عَلَيْهِما وَاَنَا أَسْأَلُكِ اِنْ كُنْتُ صَدَّقْتُكِ إلاّ اَلْحَقْتِنى بِتَصْديقى لَهُما لِتُسَرَّ نَفْسى فَاشْهَدى اَنّى ظاهِرٌ بِوَلايَتِكِ وَوَلايَةِ آلِ بَيْتِكِ صَلَواتُ اللهِ عَلَيْهِمْ اَجْمَعينَ.',
-                  weight: FontWeight.w900,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'أيضاً زِيارَتُها بِرواية اُخرى:',
-                  subtitle:
-                      'اَلسَّلامُ عَلَيْكِ يا مُمْتَحَنَةُ اِمْتَحَنَكِ الَّذى خَلَقَكِ قَبْلَ اَنْ يَخْلُقَكِ وَكُنْتِ لِما امْتَحَنَكِ بِه صابِرَةً وَنَحْنُ لَكِ اَولِياءُ مُصَدِّقُونَ وَلِكُلِّ ما اَتى بِهِ اَبُوكِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ وَاَتى بِهِ وَصِيُّهُ عَلَيْهِ السَّلامُ مُسَلِّمُونَ وَ نَحْنُ نَسْأَلُكَ اَللّـهُمَّ اِذْ كُنّا مُصَدِّقينَ لَهُمْ اَنْ تُلْحِقَنا بِتَصْديقِنا بِالدَّرَجَةِ الْعالِيَةِ لِنُبَشِّرَ اَنْفُسَنا بِاَنّا قَدْ طَهُرْنا بِوَلايَتِهِمْ عَلَيْهِمُ السَّلامُ.',
-                  weight: FontWeight.w900,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة يوم الاحد',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiaratAl2isnain.screenRoute,
           pushBack: ZiaratAlsabt.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الاحد.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/zyarat_a7ad.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

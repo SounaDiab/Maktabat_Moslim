@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ta3kibat.dart';
@@ -58,7 +58,6 @@ class _Ta3kibAl3isha2State extends State<Ta3kibAl3isha2> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -91,7 +90,7 @@ class _Ta3kibAl3isha2State extends State<Ta3kibAl3isha2> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -113,63 +112,21 @@ class _Ta3kibAl3isha2State extends State<Ta3kibAl3isha2> {
               },
             ),
           ],
-          title: Text(
-            'تعقيب صلاة العشاء',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'تعقيب صلاة العشاء'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اَللّـهُمَّ اِنَّهُ لَيْسَ لي عِلْمٌ بِمَوْضِعِ رِزْقي وَاِنَّما اَطْلُبُهُ بِخَطَرات تَخْطُرُ عَلى قَلْبي فَاَجُولُ فى طَلَبِهِ الْبُلْدانَ فَاَنَا فيما اَنَا طالِبٌ كَالْحَيْرانِ لا اَدْري اَفى سَهْل هَوُ اَمْ في جَبَل اَمْ في اَرْض اَمْ في سَماء اَمْ في بَرٍّ اَمْ في بَحْر وَعَلى يَدَيْ مَنْ وَمِنْ قِبَلِ مَنْ وَقَدْ عَلِمْتُ اَنَّ عِلْمَهُ عِنْدَكَ وَاَسْبابَهُ بِيَدِكَ وَاَنْتَ الَّذي تَقْسِمُهُ بِلُطْفِكَ وَتُسَبِّبُهُ بِرَحْمَتِكَ '
-                      'اَللّـهُمَّ فَصَلِّ عَلى مُحَمَّد وَآلِهِ وَاجْعَلْ يا رَبِّ رِزْقَكَ لي واسِعاً وَمَطْلَبَهُ سَهْلاً وَمَأخَذَهُ قَريباً وَلا تُعَنِّني بِطَلَبِ ما لَمْ تُقَدِّرْ لي فيهِ رِزْقاً فَاِنَّكَ غَنِىٌّ عَنْ عَذابي وَاَنَا فَقيرٌ اِلى رَحْمَتِكَ فَصَلِّ عَلى مُحَمَّد وَآلِهِ وَجُدْ عَلى عَبْدِكَ بِفَضْلِكَ اِنَّكَ ذُوفَضْل عَظيم.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'تعقيب صلاة العشاء',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ta3kibat3ama.screenRoute,
           pushBack: Ta3kibAlma8rib.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/تعقيب العشاء.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ta3kib_3isha2.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
