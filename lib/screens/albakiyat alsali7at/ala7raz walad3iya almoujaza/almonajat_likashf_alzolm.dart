@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ala7raz_walad3iya_almoujaza.dart';
@@ -16,15 +16,13 @@ class AlmonajatLikashfAlzolm extends StatefulWidget {
   const AlmonajatLikashfAlzolm({super.key});
 
   @override
-  State<AlmonajatLikashfAlzolm> createState() =>
-      _AlmonajatLikashfAlzolmState();
+  State<AlmonajatLikashfAlzolm> createState() => _AlmonajatLikashfAlzolmState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AlmonajatLikashfAlzolmState
-    extends State<AlmonajatLikashfAlzolm> {
+class _AlmonajatLikashfAlzolmState extends State<AlmonajatLikashfAlzolm> {
   bool isIcon = true;
   @override
   void initState() {
@@ -43,8 +41,7 @@ class _AlmonajatLikashfAlzolmState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_almonajat_likashf_alzolm_screen', value);
+    await prefs.setBool('isFavorite_almonajat_likashf_alzolm_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +60,6 @@ class _AlmonajatLikashfAlzolmState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +81,7 @@ class _AlmonajatLikashfAlzolmState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +91,7 @@ class _AlmonajatLikashfAlzolmState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(
-                          'المناجاة لكشف الظلم',
+                      .addFavorite('المناجاة لكشف الظلم',
                           AlmonajatLikashfAlzolm.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
@@ -108,62 +103,21 @@ class _AlmonajatLikashfAlzolmState
               },
             ),
           ],
-          title: Text(
-            'المناجاة لكشف الظلم',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'المناجاة لكشف الظلم'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اللّهُمَّ إنَّ ظُلْمِ عِبادِكَ قَدْ تَمَكَّنَ في بِلادِكَ حَتّى أَماتَ العَدْلَ وَقَطَعَ السُّبُلَ ومَحَقَ الحَقَّ وَأَبْطَلَ الصِّدْقَ وَأَخْفى البِرَّ وَأَظْهَرَ الشَّرَّ وَأَخْمَدَ التَّقْوى وَأَزالَ الهُدى وَأَزاحَ الخَيْرَ وَأَثْبَتَ الضَّيْرَ وَأَنْمى الفَسادَ وَقَوّى العِنادَ وَبَسَطَ الجَوْرِ وَعَدى الطَّوْرِ، اللّهُمَّ يارَبِّ لايَكْشِفُ ذلِكَ إِلاّ سُلْطانُكَ وَلا يَجْرِمَنَّهُ إِلاّ إمْتِنانُكَ، اللّهُمَّ رَبِّ فَأَبْتِرْ الظُّلْمَ وَبُثَّ جِبالَ الغَشْمِ وَأَخْمِدْ سُوقَ المُنْكَرِ وَأَعِزَّ مَنْ عَنْهُ يَنْزَجِرُ وَاحْصِدْ شَافَةَ أَهْلِ الجَورِ وَأَلْبِسْهُمْ الخَوْرَ بَعْدَ الكَورِ، وَعَجِّلْ اللّهُمَّ إلَيْهِمْ البَياتَ وأَنْزِلْ عَلَيْهُمْ المَثُلاتِ وَأَمِتْ حَياةَ المُنْكَرِ لِيُؤمَنَ المخ‍ وفُ وَيَسْكُنَ المَلْهُوفُ وَيَشْبَعَ الجائِعُ وَيُحْفَظَ الضائِعُ وَيَأوى الطَّريدُ وَيَعُودَ الشَّريدُ وَيُغْنى الفَقيرُ وَيُجارَ المُسْتَجيرُ وَيُوَقَّرَ الكَبيرُ وَيُرْحَمَ الصَّغيرُ ويُعَزَّ المَظْلُومُ وَيُذَلَّ الظَّالِمُ وَيُفَرَّحَ المَغْمُومُ وَتَنْفَرِجَ الغَمّاءُ وَتَسْكُنَ الدَّهْماءُ وَيَمُوتَ الاخْتِلافُ وَيَعْلُوَ العِلْمُ وَيَشْمُلَ السِّلْمُ وَيُجْمَعَ الشَّتاتُ وَيَقْوى الايمانُ وَيُتْلى القُرآنُ إنَّكَ أَنْتَ الدَّيّانُ المُنْعِمُ المَنّانُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'المناجاة لكشف الظلم',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBishokrAllah.screenRoute,
           pushBack: AlmonajatBitalabAl7aj.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة لكشف الظلم.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة لكشف الظلم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

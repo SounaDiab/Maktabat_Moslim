@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ala7raz_walad3iya_almoujaza.dart';
@@ -16,15 +16,13 @@ class AlmonajatBitalabAl7aj extends StatefulWidget {
   const AlmonajatBitalabAl7aj({super.key});
 
   @override
-  State<AlmonajatBitalabAl7aj> createState() =>
-      _AlmonajatBitalabAl7ajState();
+  State<AlmonajatBitalabAl7aj> createState() => _AlmonajatBitalabAl7ajState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AlmonajatBitalabAl7ajState
-    extends State<AlmonajatBitalabAl7aj> {
+class _AlmonajatBitalabAl7ajState extends State<AlmonajatBitalabAl7aj> {
   bool isIcon = true;
   @override
   void initState() {
@@ -43,8 +41,7 @@ class _AlmonajatBitalabAl7ajState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_almonajat_bitalab_al7aj_screen', value);
+    await prefs.setBool('isFavorite_almonajat_bitalab_al7aj_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +60,6 @@ class _AlmonajatBitalabAl7ajState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +81,7 @@ class _AlmonajatBitalabAl7ajState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +91,7 @@ class _AlmonajatBitalabAl7ajState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(
-                          'المناجاة بطلب الحج',
+                      .addFavorite('المناجاة بطلب الحج',
                           AlmonajatBitalabAl7aj.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
@@ -108,62 +103,21 @@ class _AlmonajatBitalabAl7ajState
               },
             ),
           ],
-          title: Text(
-            'المناجاة بطلب الحج',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'المناجاة بطلب الحج'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اللّهُمَّ إرْزُقْني الحَجُّ الَّذي افْتَرَضْتَهُ عَلى مَنْ اسْتَطاعَ إلَيْهِ سَبيلاً وَاجْعَلْ لي فيهِ هادِيا وَإلَيْهِ دَليلاً، وَقَرِّبْ لي بُعْدَ المَسالِكِ وَأَعِنّي عَلى تَأديَةِ المَناسِكِ وَحَرِّمْ بِإحْرامي عَلى النّارِ جَسَدي وَزِدْ لِلْسَفَرِ قُوَّتي وَجَلَدي وَارْزُقْني رَبِّ بِالوُقوفِ بَيْنَ يَدَيْكَ وَالافاضَةَ إلَيْكَ وَأظْفِرْ بي بِالنَّجْحِ بِوافِرِ الرَّبحِ وَأَصْدِرْني رَبِّ مِنْ مَوْقِفِ الحَجِّ الاَكْبَرِ إِلى مُزْدَلَفَةِ المَشْعَرِ واجْعَلْها زُلْفَةً إِلى رَحْمَتِكَ وَطَريقا إِلى جَنَّتِكَ وَقِفْني مَوْقِفَ المَشْعَرِ الحَرامِ وَمَقامَ وُقُوفِ الاحْرامِ وَأَهِّلني لِتَأديَةِ المَناسِكِ وَنَحْرِ الهَدْي التَّوامِكَ بِدَمٍ يَثُجُّ وَأَوْداجٍ تَمُجُّ وَإراقَةِ الدِّماءِ المَسْفوحَةِ وَالهَدايا المَذْبوحَةِ وَفَري أَوْداجِها عَلى ما أَمَرْتَ وَالتَّنَفُّل بِها كَما وَسَمْتَ، وَاحْضِرْني اللّهُمَّ صَلاةَ العيدِ راجيا لِلْوَعْدِ خائِفا مِنَ الوَعيدِ حالِقا شَعْرَ رَأسي وَمُقَصِّراً ومُجْتَهِداً في طاعَتِكَ مُشَمِّراً راميا للجِمارِ بَسَبْعٍ بَعْدَ سَبْعٍ مِنَ الاحْجارِ، وَأَدْخِلْني اللّهُمَّ عَرْصَةَ بَيْتِكَ وَعَقْوَتَكَ وَمَحَلَّ أَمْنِكَ وَكَعْبَتَكَ وَمَساكينِكَ وَسُؤالِكَ وَمَحاويجِكَ، وَجُدْ عَلَيَّ اللّهُمَّ بِوافِرِ الاَجْرِ مِنَ الانْكِفاءِ وَالنَّفْرِ وَاخْتِمْ اللّهُمَّ مَناسِكَ حَجّي وَانْقَضاء عَجِّي بِقَبُولٍ مِنْكَ لي وَرأفَةٍ مِنْكَ بي ياأَرْحَمَ الرّاحِمينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'المناجاة بطلب الحج',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatLikashfAlzolm.screenRoute,
           pushBack: AlmonajatBitalabAltawba.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بطلب الحج.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بطلب الحج.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

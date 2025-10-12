@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ala7raz_walad3iya_almoujaza.dart';
@@ -16,15 +16,13 @@ class AlmonajatBelistikala extends StatefulWidget {
   const AlmonajatBelistikala({super.key});
 
   @override
-  State<AlmonajatBelistikala> createState() =>
-      _AlmonajatBelistikalaState();
+  State<AlmonajatBelistikala> createState() => _AlmonajatBelistikalaState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AlmonajatBelistikalaState
-    extends State<AlmonajatBelistikala> {
+class _AlmonajatBelistikalaState extends State<AlmonajatBelistikala> {
   bool isIcon = true;
   @override
   void initState() {
@@ -34,8 +32,7 @@ class _AlmonajatBelistikalaState
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState =
-        prefs.getBool('isFavorite_almonajat_belistikala_screen');
+    bool? savedState = prefs.getBool('isFavorite_almonajat_belistikala_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -43,8 +40,7 @@ class _AlmonajatBelistikalaState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_almonajat_belistikala_screen', value);
+    await prefs.setBool('isFavorite_almonajat_belistikala_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +59,6 @@ class _AlmonajatBelistikalaState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +80,7 @@ class _AlmonajatBelistikalaState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +90,7 @@ class _AlmonajatBelistikalaState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(
-                          'المناجاة بالاستقالة',
+                      .addFavorite('المناجاة بالاستقالة',
                           AlmonajatBelistikala.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
@@ -108,62 +102,21 @@ class _AlmonajatBelistikalaState
               },
             ),
           ],
-          title: Text(
-            'المناجاة بالاستقالة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'المناجاة بالاستقالة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اللّهُمَّ إنَّ الرَّجاءَ لِسَعَةِ رَحْمَتِكَ أَنْطَقَني بِاسْتِقالَتِكَ وَالاَمَلَ لاناتِكَ وَرِفْقِكَ شَجَّعَني عَلى طَلَبِ أَمانِكَ وَعَفْوِكَ، وَليَ يارّبِّ ذُنُوبٌ قَدْ وَاجَهَتْها أَوْجُهُ الانْتِقامِ وَخَطايا قَدْ لاحَظَتْها أَعْيُنُ الاصْطِلامِ وَاسْتَوْجَبَتُ بِها عَلى عَدْلِكَ أَليمَ العَذابِ وَاسْتَحْقَقْتُ بِاجْتِراحِها مُبيرَ العِقابِ وَخِفْتُ تَعْويقَها لاجابَتي وَرَدَّها إيّايَ عَنْ قَضاء حاجَتي بِإبْطالِها لِطَلِبَتي وَقَطْعَها لاَسْبابِ رَغْبَتي مِنْ أَجْلِ ما قَدْ أَنْقَضَ ظَهْري مِنْ ثُقْلِها وَبَهَظَني مِنَ الاسْتِقْلالِ بِحَمْلِها، ثُمَّ تَراجَعْتُ رَبِّ إِلى حِلْمِكَ عَنْ الخاطِئينَ وَعَفْوِكَ عَنْ المُذْنِبينَ وَرَحْمَتِكَ لِلْعاصينَ فَأَقْبَلْتُ بِثِقَتي مُتَوَكِّلاً عَلَيْكَ طارِحا نَفْسي بَيْنَ يَدَيْكَ شاكِيا بَثِّي إلَيْكَ سائِلاً مالا أَسْتَوْجِبُهُ مِنْ تَفْريجِ الهَمِّ وَلا أَسْتَحِقُهُ مِنْ تَنْفيسِ الغَمِّ مُسْتَقيلاً لَكَ إيايَ وَاثِقا مَوْلايَ بِكَ، اللّهُمَّ فَامْنُنْ عَلَيَّ بِالفَرَجِ وَتَطَوَّلْ بِسِهولَةِ الَمخْرَجِ وَادْلُلْني بِرأفَتِكَ عَلى سَمْتِ المَنْهَجِ وَأزْلِقْني بِقُدْرَتِكَ عَنْ الطَريقِ الاعْوَجِ وَخَلِّصْني مِنْ سِجْنِ الكَرْبِ بِإقالَتِكَ وَأَطْلِقْ أسْري بِرَحْمَتِكَ وَ طُلْ عَلَيَّ بِرِضْوانِكَ وَجُدْ عَلَيَّ بِإحْسانِكَ وَأقِلْني عَثْرَتي وَفَرِّجْ كُرْبَتي وَارْحَمْ عَبْرَتي وَلا تَحْجُبْ دَعْوَتي وَاشْدُدْ بِإلاقالَةِ أَزْري وَقَوِّ بِها ظَهْري وَأَصْلِحْ بِها أَمْري وَأَطِلْ بِها عُمْري وارْحَمْني يَوْمَ حَشْري وَوَقْتَ نَشْري، إنَّكَ جَوادٌ كَريمٌ غَفُورٌ رَحيمٌ وَصَلِّ عَلى مُحَمَّدٍ وَآلِهِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'المناجاة بالاستقالة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBelsafaar.screenRoute,
           pushBack: AlmonajatBelisti5araa.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالاستقالة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالاستقالة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

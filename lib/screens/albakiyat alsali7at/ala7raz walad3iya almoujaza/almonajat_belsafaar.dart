@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ala7raz_walad3iya_almoujaza.dart';
@@ -16,15 +16,13 @@ class AlmonajatBelsafaar extends StatefulWidget {
   const AlmonajatBelsafaar({super.key});
 
   @override
-  State<AlmonajatBelsafaar> createState() =>
-      _AlmonajatBelsafaarState();
+  State<AlmonajatBelsafaar> createState() => _AlmonajatBelsafaarState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AlmonajatBelsafaarState
-    extends State<AlmonajatBelsafaar> {
+class _AlmonajatBelsafaarState extends State<AlmonajatBelsafaar> {
   bool isIcon = true;
   @override
   void initState() {
@@ -34,8 +32,7 @@ class _AlmonajatBelsafaarState
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState =
-        prefs.getBool('isFavorite_almonajat_belsafaar_screen');
+    bool? savedState = prefs.getBool('isFavorite_almonajat_belsafaar_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -43,8 +40,7 @@ class _AlmonajatBelsafaarState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_almonajat_belsafaar_screen', value);
+    await prefs.setBool('isFavorite_almonajat_belsafaar_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +59,6 @@ class _AlmonajatBelsafaarState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +80,7 @@ class _AlmonajatBelsafaarState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -96,8 +91,7 @@ class _AlmonajatBelsafaarState
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'المناجاة للسفر',
-                          AlmonajatBelsafaar.screenRoute);
+                          'المناجاة للسفر', AlmonajatBelsafaar.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -108,62 +102,21 @@ class _AlmonajatBelsafaarState
               },
             ),
           ],
-          title: Text(
-            'المناجاة للسفر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'المناجاة للسفر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اللّهُمَّ إِنِّي أُريدُ سَفَراً فَخِرْ لي فيهِ وَأَوْضِحْ لي فيهِ سَبيلَ الرَأي وَفَهِّمْنيهِ وَافْتَحْ لي عَزْمي بِالاسْتِقامَةِ وَاشْمُلْني في سَفَري بِالسَّلامَةِ وَأَفِدْني جَزيلَ الحَظِّ وَالكَرامَةِ وَاكْلا بي بِحُسْنِ الحِفْظِ وَالحِراسَةِ، وَجَنِّبْنيَ اللّهُمَّ وَعْثاءَ الاسْفارِ وَسَهِّلْ لي حُزُونَةِ الاوْعارِ وَاطْوِ لي بِساطَ المَراحِلِ وقَرِّبْ مِنّي بُعْدَ نأي المَناهِلِ وَباعِدْ في المَسيرِ بَيْنَ خُطَى الرَّواحِلِ، حَتّى تُقَرِّبَ نِياطَ البَعيدِ وَتُسَهِّلَ وُعُورَ الشَّديدِ، وَلَقِّني اللّهُمَّ في سَفَري نُجْحَ طائِرِ الواقيَةِ وَهَبْني فيهِ غُنْمَ العافيةِ وَخَضيرَ الاسْتِقْلالِ ودَليلِ مُجاوَزَةِ الاهْوَالِ وَباعِثْ وُفُورَ الكِفايَةِ وَسافِحْ خَضيرِ الوِلايَةِ، وَاجْعَلْهُ اللّهُمَّ سَبَبَ عَظيمِ السِّلْمِ حاصِلَ الغُنْمِ وَاجْعَلْ الَّلْيلَ عَلَيَّ سِتْراً مِنَ الافاتِ وَالنَّهارَ مانِعا مِنَ الهَلَكاتِ وَاقْطَعْ عَنّي قِطَعَ لُصُوصِه بِقُدْرَتِكَ وَاحْرُسْني مِنْ وَحُوشِهِ بِقُوَّتِكَ، حَتّى تَكونَ السَّلامَةُ فيهِ مُصاحِبَتي وَالعافيَةُ فيهِ مُقارِنَتي وَالُيمْنُ سائِقي وَاليُسْرُ مُعانِقي وَالعُسْرُ مُفارِقي وَالفَوْزُ مُوافِقي والامْنُ مُرافِقي إنَّكَ ذُو الطَوْلِ وَالمَنِّ وَالقُوَّةِ وَالحَوْلِ، وَأنْتَ عَلى كُلِّ شَيٍ قَديرٍ وَبِعِبادِكَ بَصيرٌ خَبيرٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'المناجاة للسفر',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBitalabAlrizk.screenRoute,
           pushBack: AlmonajatBelistikala.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالسفر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالسفر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

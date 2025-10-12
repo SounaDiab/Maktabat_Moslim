@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ala7raz_walad3iya_almoujaza.dart';
@@ -16,15 +16,13 @@ class AlmonajatBelisti5araa extends StatefulWidget {
   const AlmonajatBelisti5araa({super.key});
 
   @override
-  State<AlmonajatBelisti5araa> createState() =>
-      _AlmonajatBelisti5araaState();
+  State<AlmonajatBelisti5araa> createState() => _AlmonajatBelisti5araaState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AlmonajatBelisti5araaState
-    extends State<AlmonajatBelisti5araa> {
+class _AlmonajatBelisti5araaState extends State<AlmonajatBelisti5araa> {
   bool isIcon = true;
   @override
   void initState() {
@@ -43,8 +41,7 @@ class _AlmonajatBelisti5araaState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_almonajat_belisti5araa_screen', value);
+    await prefs.setBool('isFavorite_almonajat_belisti5araa_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +60,6 @@ class _AlmonajatBelisti5araaState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +81,7 @@ class _AlmonajatBelisti5araaState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +91,7 @@ class _AlmonajatBelisti5araaState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(
-                          'المناجاة بالاستخارة',
+                      .addFavorite('المناجاة بالاستخارة',
                           AlmonajatBelisti5araa.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
@@ -108,62 +103,21 @@ class _AlmonajatBelisti5araaState
               },
             ),
           ],
-          title: Text(
-            'المناجاة بالاستخارة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'المناجاة بالاستخارة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اللّهُمَّ إنَّ خِيرَتَكَ فيما اسْتَخَرْتُكَ فيه تُنيلُ الرَّغائِبِ وَتُجْزِلُ المَواهِبِ وَتُغْنِمُ المَطالِبِ وَتُطيبُ المَكاسِبِ وَتَهْدي إِلى أجْمَلِ المَذاهِبِ، تَسُوقُ إِلى أحْمَدِ العَواقِبِ وَتَقي مَخُوفَ النَّوائِبِ، اللّهُمَّ إِنِّي أَسْتَخيرُكَ فيما عَزَمَ رَأيي عَلَيْهِ وَقادَني عَقْلي إلَيْهِ، وَسَهِّلْ اللّهُمَّ فيهِ ماتَوَعَّرَ وَيَسِّرْ مِنْهُ ماتَعَسَّرَ وَإكْفِني فيهِ المُهِمَّ وَادْفَعْ بِهِ عَنّي كُلَّ مُلِمٍّ، وَإجْعَلْ يارَبِّ عَواقِبَهُ غُنْماً وَمَخُوفَهُ سِلْماً وَبُعْدَهُ قُرْباً وجَدْبَهُ خَصْباً، وَأرْسِلْ اللّهُمَّ إجابَتي وَأنْجِحْ طَلِبَتي وَاقْضِ حاجَتي وَاقْطَعْ عَنّي عَوائِقِها وَامْنَعْ عَنّي بَوائِقِها وَاعْطِني اللّهُمَّ لِواءَ الظَّفَرِ وَالخِيرَةَ فيما اسْتَخَرْتُكَ وُفُورِ المَغْنَمِ فيما دَعَوْتُكَ وَعَوائِدَ الافْضالِ فيما رَجَوْتُكَ، وَاقْرِنْهُ اللّهُمَّ بِالنَّجاحِ وَخُصَّهُ بِالصَّلاحِ وَأَرِني أَسْبابَ الخِيْرَةِ فيه واضحة وَأعْلامَ غَيِّها لائِحَةً وَاشْدُدْ خِناقَ تَعْسيرِها وَانْعَشْ صَريعَ تَيْسيرِها وَبَيِّنْ اللّهُمَّ مُلْتَبَسَها وَأَطْلِقْ مُحْتَبَسَها وَمَكِّنْ أُسَّها حَتّى تَكونَ خِيَرَةً مُقْبِلَةً بِالغُنْمِ مُزيلَةً لِلْغُرْمِ عاجِلَةً لِلْنّفْعِ باقيَةَ الصُّنْعِ إنَّك مَليٌ بِالمَزيدِ مُبْتَديٌ بِالجُودِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'المناجاة بالاستخارة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmonajatBelistikala.screenRoute,
           pushBack: FiBa3dAla7razWalad3iyaAlmoujaza.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالاستخارة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالاستخارة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ala7raz_walad3iya_almoujaza.dart';
@@ -23,8 +23,7 @@ class AlmonajatBitalabAl7awa2ij extends StatefulWidget {
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AlmonajatBitalabAl7awa2ijState
-    extends State<AlmonajatBitalabAl7awa2ij> {
+class _AlmonajatBitalabAl7awa2ijState extends State<AlmonajatBitalabAl7awa2ij> {
   bool isIcon = true;
   @override
   void initState() {
@@ -43,8 +42,7 @@ class _AlmonajatBitalabAl7awa2ijState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_almonajat_bitalab_al7awa2ij_screen', value);
+    await prefs.setBool('isFavorite_almonajat_bitalab_al7awa2ij_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +61,6 @@ class _AlmonajatBitalabAl7awa2ijState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +82,7 @@ class _AlmonajatBitalabAl7awa2ijState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +92,7 @@ class _AlmonajatBitalabAl7awa2ijState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(
-                          'المناجاة بطلب الحوائج',
+                      .addFavorite('المناجاة بطلب الحوائج',
                           AlmonajatBitalabAl7awa2ij.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
@@ -108,62 +104,21 @@ class _AlmonajatBitalabAl7awa2ijState
               },
             ),
           ],
-          title: Text(
-            'المناجاة بطلب الحوائج',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'المناجاة بطلب الحوائج'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'جَديرٌ مَنْ أَمَرْتَهُ بِالدُّعاءِ أَنْ يَدْعوكَ وَمَنْ وَعَدْتَهُ بِالاجابَةِ أَنْ يَرْجوكَ وَليَ اللّهُمَّ حاجَةٌ قَدْ عَجَزَتْ عَنْها حيلَتي وَكَلَّتْ فيها طاقَتي وَضَعُفَ عَنْ مَرامِها قُوَّتي وَسَوَّلَتْ لي نَفْسي الاَمّارَةُ بِالسّوءِ وَعَدُوّي الغَرورُ الَّذي أَنا مِنْهُ مَبْلوٌ أَنْ أَرْغَبَ إلَيْكَ فيها، اللّهُمَّ وَأَنْجِحْها بِأَيْمَنِ النَّجاحِ وَاهْدِها سَبيلَ الفَلاحِ وَاشْرَحْ بِالرَّجاءِ لاسْعافِكَ صَدْري وَيَسِّرْ في أَسْبابِ الخَيْرِ أمْري وَصَوِّرْ إِلى الفَوْزِ بِبُلوغِ مارَجَوْتُهُ بِالوِّصولِ إِلى ما أَمَلْتُهُ، وَوَفِقْني اللّهُمَّ في قَضاء حاجَتي بِبِلوغِ أُمْنِيَتي وَتَصْديقِ رَغْبَتي، وَأَعِذْني اللّهُمَّ بِكَرَمِكَ مِنَ الخَيْبَةِ وَالقُنوطِ وَالاَناةِ وَالتَّثْبيطِ اللّهُمَّ إنَّكَ مَليٌ بِالمَنائِحِ الجَزيلَةِ وَفيُّ بِها وَأنْتَ عَلى كُلِّ شَيٍ قَديرٌ بِعِبادِكَ خَبيرٌ بَصيرٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'المناجاة بطلب الحوائج',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiAsarBa3dSowarWalayat.screenRoute,
           pushBack: AlmonajatBishokrAllah.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بطلب الحوائج.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بطلب الحوائج.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
