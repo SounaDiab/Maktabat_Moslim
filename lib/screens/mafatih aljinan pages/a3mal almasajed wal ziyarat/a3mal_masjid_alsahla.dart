@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/search_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
+import '../../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Util/items.dart';
 import '../../../widgets/line_from_index.dart';
 import '../../search_provider.dart';
 import '../a3mal_almasajed_walziyarat.dart';
+import 'masjid alsahla/a3mal_masjed_alsahla.dart';
+import 'masjid alsahla/alsalat_waldouaa_fi_masjed_zaid.dart';
+import 'masjid alsahla/fi_fadl_masjed_alsahla.dart';
 
 class A3malMasjidAlsahla extends StatefulWidget {
   static String screenRoute = 'a3mal_masjid_alsahla_screen';
@@ -74,24 +79,62 @@ class _A3malMasjidAlsahlaState extends State<A3malMasjidAlsahla> {
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return LineFromIndex(
-                    text: item['title']!,
-                    route: item['route']!,
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<MafatihAljinanCubit, MafatihAljinanState>(
+          builder: (context, state) {
+            if (state is MafatihAljinanLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is MafatihAljinanLoaded) {
+              final mafatihAljinan = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                A3malMasjedAlsahla.screenRoute,
+                FiFadlMasjedAlsahla.screenRoute,
+                AlsalatWaldouaaFiMasjedZaid.screenRoute,
+              ];
+              for (var item in mafatihAljinan) {
+                if (item.title == 'اعمال المساجد والزيارات') {
+                  for (var subItem in item.index) {
+                    if (subItem.title == 'اعمال مسجد السهلة وزيد وصعصعة') {
+                      for (var inSubItem in subItem.index) {
+                        allTitles.add({
+                          'title': inSubItem.title,
+                          'route': allRoutes
+                              .map((e) => e)
+                              .toList()[inSubItem.id - 1],
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: allTitles.length,
+                      itemBuilder: (context, i) {
+                        final title = allTitles[i]['title'];
+                        final route = allTitles[i]['route'];
+
+                        return ListTile(
+                          title: LineFromIndex(
+                            text: title,
+                            route: route,
+                          ),
+                        );
+                      }),
+                ),
+              );
+            } else if (state is MafatihAljinanError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
