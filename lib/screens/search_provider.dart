@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SearchProvider with ChangeNotifier {
-  List<Map<String, String>> _allItems = [];
-  List<Map<String, String>> _filteredItems = [];
+  List<Map<String, dynamic>> _allItems = [];
+  List<Map<String, dynamic>> _filteredItems = [];
 
-  List<Map<String, String>> get filteredItems => _filteredItems;
+  List<Map<String, dynamic>> get filteredItems => _filteredItems;
 
-  void setItems(List<Map<String, String>> items) {
+  void setItems(List<Map<String, dynamic>> items) {
     _allItems = items;
     _filteredItems = items;
     notifyListeners();

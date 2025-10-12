@@ -18,7 +18,7 @@ class OtherScreen extends StatelessWidget {
     final isTablet = screenWidth >= 600;
     return WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).pop();
+        Navigator.of(context).pushReplacementNamed(WelcomeScreen.screenRoute);
         return true;
       },
       child: Scaffold(
@@ -53,8 +53,6 @@ class OtherScreen extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  // margin: EdgeInsets.symmetric(horizontal: 5),
-                  // padding: EdgeInsets.symmetric(vertical: 10),
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, SalatAllayl.screenRoute);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/welcome_screen.dart';
+import 'welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'favorites_provider.dart';

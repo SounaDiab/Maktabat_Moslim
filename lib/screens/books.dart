@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/welcome_screen.dart';
+import 'welcome_screen.dart';
 import '../Util/books_item.dart';
 
 class Books extends StatefulWidget {
@@ -86,7 +86,7 @@ class _BooksState extends State<Books> {
                           fontSize: isTablet ? 24 : 9,
                           fontFamily: 'Tajawal',
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                         ),
                       ),
                     ],
