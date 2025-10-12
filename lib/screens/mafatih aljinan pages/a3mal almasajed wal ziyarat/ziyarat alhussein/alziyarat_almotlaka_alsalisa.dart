@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alhoussein_wa2adabiha.dart';
@@ -63,7 +63,6 @@ class _AlziyaratAlmotlakaAlsalisaState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _AlziyaratAlmotlakaAlsalisaState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -108,64 +107,22 @@ class _AlziyaratAlmotlakaAlsalisaState
               },
             ),
           ],
-          title: Text(
-            'الزيارة المطلقة الثالثة للحسين (عليه السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'الزيارة المطلقة الثالثة للحسين (عليه السلام)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'هيَ ما رواها ابن طاوُس في المزار وروى لها فضلاً كثيراً ، قال بحذف الاسناد عن جابر الجُعفي ، قال : قال الصّادق (عليه السلام) لجابر : كَم بَيْنك وبين قبر الحسين (عليه السلام) ؟ قال : قلت: بأبي أنت وأمّي يوم وبعض يوم آخر ، قال : فتزُوره ؟ فقال : نعم ، قال : فقال : اَلا اُبشرك اَلا افرحك ببعض ثوابه ؟ قلت : بلى جعلتُ فداك ، قال : فقال لي: انّ الرّجُل منكم ليأخذ في جهازه ويتهيّأ لزيارته فيتباشر به أهل السّماء، فاذا خرج من باب منزله راكباً أو ماشياً وكّل الله به أربعة آلاف ملك من الملائكة يصلّون عليه حتّى يوافي الحسين (عليه السلام) ، يا مفضّل إنْ أتيت قبر الحسين بن علي (عليهما السلام) فقف بالباب وقُل هذه الكلمات فانّ لك بكلّ كلمة كفلاً من رحمة الله ، فقلت : ما هي جعلت فداك ؟ قال : تقول :\n\n'
-                      'اَلسَّلامُ عَلَيْكَ يا وارِثَ آدَمَ صَفْوَةِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ نُوح نَبِيِّ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ اِبْراهيمَ خَليلِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ مُوسى كَليمِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ عيسى رُوحِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ مُحَمَّد سَيِّدِ رُسُلِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ عَليِّ اَميرِ الْمُؤْمِنينَ وَخَيْرِ الْوَصِيّينَ، اَلسَّلامُ عَلَيْكَ يا وارِثَ الْحَسَنِ الرَّضِيِّ الطّاهِرِ الرّاضِى الْمَرْضِيِّ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الْوَصِيُّ الْبَرُّ التَّقِيُّ، اَلسَّلامُ عَلَيْكَ وَعَلى الاَْرْواحِ الَّتي حَلَّتْ بِفِنائِكَ وَاَناخَتْ بِرَحْلِكَ، اَلسَّلامُ عَلَيْكَ وَعَلَى الْمَلائِكَةِ الْحافّينَ بِكَ، اَشْهَدُ اَنَّكَ قَدْ اَقَمْتَ الصَّلاةَ وَآتَيْتَ الزَّكاةَ وَاَمَرْتَ بِالْمَعْرُوفِ وَنَهَيْتَ عَنِ الْمُنْكَرِ وَجاهَدْتَ الْمُلْحِدينَ وَعَبَدْتَ اللهَ حَتّى اَتاكَ الْيَقينُ، اَلسَّلامُ عَلَيْكَ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ.\n\n'
-                      'ثمّ تسعى الى القبر فَلَكَ بكلّ قدم رفعتها أو وضعتها كثواب المتشحّط بدمه في سبيل اللهِ، فاذا وصلت الى القبر ووقفت عنده فامرر عليه يدك وقُل : اَلسَّلامُ عَلَيْكَ يا حُجَّةَ اللهِ فِي اَرْضِهِ، ثمّ تمضي الى صلاتِك ولك بكلّ ركعة ركعتها عنده كثواب مَنْ حجّ ألف حجّة واعتمر ألف عُمرة واعتق ألف رقبة، وكأنّما وقف في سبيل الله ألف مرّة مع نبيّ مُرسل … الخبر.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الزيارة المطلقة الثالثة للحسين (عليه السلام)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlziyaratAlmotlakaAlrabi3a.screenRoute,
           pushBack: AlziyaratAlmotlakaAlsaniya.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة المطلقة الثالثة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة المطلقة الثالثة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

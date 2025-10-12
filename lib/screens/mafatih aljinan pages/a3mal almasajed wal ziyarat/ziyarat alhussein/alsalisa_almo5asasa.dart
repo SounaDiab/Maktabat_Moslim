@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alhoussein_wa2adabiha.dart';
@@ -59,7 +59,6 @@ class _AlsalisaAlmo5asasaState extends State<AlsalisaAlmo5asasa> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _AlsalisaAlmo5asasaState extends State<AlsalisaAlmo5asasa> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -91,76 +90,33 @@ class _AlsalisaAlmo5asasaState extends State<AlsalisaAlmo5asasa> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الثالثة المخصوصة: زيارة النصف من شعبان',
+                      .addFavorite('الثالثة المخصصة: زيارة النصف من شعبان',
                           AlsalisaAlmo5asasa.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الثالثة المخصوصة: زيارة النصف من شعبان',
+                          'الثالثة المخصصة: زيارة النصف من شعبان',
                           AlsalisaAlmo5asasa.screenRoute,
                           AlsalisaAlmo5asasa.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الثالثة المخصوصة: زيارة النصف من شعبان',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الثالثة المخصصة: زيارة النصف من شعبان'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اعلم انّه قد وردت أحاديث كثيرة في فضل زيارته في النّصف من شعبان ويكفيها فضلاً انّها رويت بعدّة اسناد معتبرة عن الامام زين العابدين وعن الامام جعفر الصّادق (عليهما السلام) قالا : من أحبّ أن يصافحه مائة ألف نبيّ وأربعة وعشرون ألف نبيّ فليزر قبر أبي عبد الله الحسين بن علي (عليهما السلام) في النّصف من شعبان فانّ أرواح النّبيّين (عليهم السلام) يستأذنون الله في زيارته فيؤذن لهم، فطوبى لمن صافح هؤلاء وصافحوه ومنهم خمسة اولو العزم من الرّسل هم نوح وابراهيم ومُوسى وعيسى ومحمّد صلّى الله عليه وآله وعليهم اجمعين.\n\n'
-                      'قال الرّاوي : قلنا له ما معنى اولي العزم؟ قال : بعثوا الى شرق الارض وغربها جنّها وانسها. وقد وردت فيه زيارتان ، فالاولى هي ما أوردناه لزيارته (عليه السلام) في أوّل يوم من رجب، والثّانية ما رواه الشّيخ الكفعمي في كتاب البلد الامين عن الصّادق (عليه السلام) وهي كما يلي : تقِف عند قبره وتقُول :\n\n'
-                      'اَلْحَمْدُ للهِ الْعَلِيِّ الْعَظيمِ وَالسَّلامُ عَلَيْكَ اَيُّهَا الْعَبْدُ الصّالِحُ الزَّكيُّ اُودِعُكَ شَهادَةً مِنّي لَكَ تُقَرِّبُني اِلَيْكَ فِي يَوْمِ شَفاعَتِكَ، اَشْهَدُ اَنَّكَ قُتِلْتَ وَلَمْ تَمُتْ بَلْ بِرَجاءِ حَياتِكَ حَيِيَتْ قُلُوبُ شيعَتِكَ، وَبِضِياءِ نُورِكَ اهْتَدَى الطّالِبُونَ اِلَيْكَ، وَاَشْهَدُ اَنَّكَ نُورُ اللهِ الَّذي لَمْ يُطْفَأْ وَلا يُطْفَأُ اَبَداً، وَاَنَّكَ وَجْهُ اللهِ الَّذي لَمْ يَهْلِكْ وَلا يُهْلَكُ اَبَداً، وَاَشْهَدُ اَنَّ هذِهِ التُّرْبَةَ تُرْبَتُكَ، وَهذَا الْحَرَمَ حَرَمُكَ، وَهذَا الْمَصْرَعَ مَصْرَعُ بَدَنِكَ لا ذَليلَ وَاللهِ مُعِزُّكَ وَلا مَغْلُوبَ وَاللهِ ناصِرُكَ، هذِهِ شَهادَةٌ لي عِنْدَكَ اِلى يَوْمَ قَبْضِ روُحي بِحَضْرَتِكَ، وَالسَّلامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الثالثة المخصصة: زيارة النصف من شعبان',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alrbi3aAlmo5asasa.screenRoute,
           pushBack: AlsaniaAlmo5asasa.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثالثة المخصصة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثالثة المخصصة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

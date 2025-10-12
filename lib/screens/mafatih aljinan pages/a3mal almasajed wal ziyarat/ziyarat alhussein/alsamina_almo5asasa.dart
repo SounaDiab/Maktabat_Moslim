@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alhoussein_wa2adabiha.dart';
@@ -59,7 +59,6 @@ class _AlsaminaAlmo5asasaState extends State<AlsaminaAlmo5asasa> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _AlsaminaAlmo5asasaState extends State<AlsaminaAlmo5asasa> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -92,78 +91,35 @@ class _AlsaminaAlmo5asasaState extends State<AlsaminaAlmo5asasa> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'الثامنة المخصوصة: زيارة الأربعين أي اليوم العشرين من صفر',
+                          'الثامنة المخصصة: زيارة الاربعين اي اليوم العشرين من صفر',
                           AlsaminaAlmo5asasa.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الثامنة المخصوصة: زيارة الأربعين أي اليوم العشرين من صفر',
+                          'الثامنة المخصصة: زيارة الاربعين اي اليوم العشرين من صفر',
                           AlsaminaAlmo5asasa.screenRoute,
                           AlsaminaAlmo5asasa.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الثامنة المخصوصة: زيارة الأربعين أي اليوم العشرين من صفر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title:
+                    'الثامنة المخصصة: زيارة الاربعين اي اليوم العشرين من صفر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روى الشّيخ في التّهذيب والمصباح عن الامام الحسن العسكري (عليه السلام)قال: علامات المؤمن خمس: صلاة احدى وخمسين أي الفرائض اليوميّة وهي سبع عشرة ركعة والنّوافل اليوميّة وهي أربع وثلاثون ركعة، وزيارة الاربعين، والتختّم باليمين وتعفير الجبين بالسّجود، والجهر بِبِسْمِ اللهِ الرَّحْمنِ الرَّحيمِ، وقد رويت زيارته في هذا اليوم على نحوين، أحدهما ما رواه الشّيخ في التّهذيب والمصباح عن صفوان الجمّال قال : قال لي مولاي الصّادق صلوات الله عليه في زيارة الاربعين: تزُور عند ارتفاع النّهار وتقول :\n\n'
-                      'اَلسَّلامُ عَلى وَلِيِّ اللهِ وَحَبيبِهِ، اَلسَّلامُ عَلى خَليلِ اللهِ وَنَجيبِهِ، اَلسَّلامُ عَلى صَفِيِّ اللهِ وَابْنِ صَفِيِّهِ، اَلسَّلامُ عَلى الْحُسَيْنِ الْمَظْلُومِ الشَّهيدِ، اَلسَّلامُ على اَسيرِ الْكُرُباتِ وَقَتيلِ الْعَبَراتِ، اَللّـهُمَّ اِنّي اَشْهَدُ اَنَّهُ وَلِيُّكَ وَابْنُ وَلِيِّكَ وَصَفِيُّكَ وَابْنُ صَفِيِّكَ الْفائِزُ بِكَرامَتِكَ، اَكْرَمْتَهُ بِالشَّهادَةِ وَحَبَوْتَهُ بِالسَّعادَةِ، وَاَجْتَبَيْتَهُ بِطيبِ الْوِلادَةِ، وَجَعَلْتَهُ سَيِّداً مِنَ السادَةِ، وَقائِداً مِنَ الْقادَةِ، وَذائِداً مِنْ الْذادَةِ، وَاَعْطَيْتَهُ مَواريثَ الاَْنْبِياءِ، وَجَعَلْتَهُ حُجَّةً عَلى خَلْقِكَ مِنَ الاَْوْصِياءِ، فَاَعْذَرَ فىِ الدُّعاءِ وَمَنَحَ النُّصْحَ، وَبَذَلَ مُهْجَتَهُ فيكَ لِيَسْتَنْقِذَ عِبادَكَ مِنَ الْجَهالَةِ وَحَيْرَةِ الضَّلالَةِ، وَقَدْ تَوازَرَ عَلَيْهِ مَنْ غَرَّتْهُ الدُّنْيا، وَباعَ حَظَّهُ بِالاَْرْذَلِ الاَْدْنى، وَشَرى آخِرَتَهُ بِالَّثمَنِ الاَْوْكَسِ، وَتَغَطْرَسَ وَتَرَدّى فِي هَواهُ، وَاَسْخَطَكَ وَاَسْخَطَ نَبِيَّكَ، وَاَطاعَ مِنْ عِبادِكَ اَهْلَ الشِّقاقِ وَالنِّفاقِ وَحَمَلَةَ الاَْوْزارِ '
-                      'الْمُسْتَوْجِبينَ النّارَ، فَجاهَدَهُمْ فيكَ صابِراً مُحْتَسِباً حَتّى سُفِكَ فِي طاعَتِكَ دَمُهُ وَاسْتُبيحَ حَريمُهُ، اَللّـهُمَّ فَالْعَنْهُمْ لَعْناً وَبيلاً وَعَذِّبْهُمْ عَذاباً اَليماً، اَلسَّلامُ عَلَيْكَ يَا بْنَ رَسُولِ اللهِ، اَلسَّلامُ عَلَيْكَ يَا بْنَ سَيِّدِ الاَْوْصِياءِ، اَشْهَدُ اَنَّكَ اَمينُ اللهِ وَابْنُ اَمينِهِ، عِشْتَ سَعيداً وَمَضَيْتَ حَميداً وَمُتَّ فَقيداً مَظْلُوماً شَهيداً، وَاَشْهَدُ اَنَّ اللهَ مُنْجِزٌ ما وَعَدَكَ، وَمُهْلِكٌ مَنْ خَذَلَكَ، وَمُعَذِّبٌ مَنْ قَتَلَكَ، وَاَشْهَدُ اَنَّكَ وَفَيْتَ بِعَهْدِ اللهِ وَجاهَدْتَ فِي سَبيلِهِ حَتّى اَتياكَ الْيَقينُ، فَلَعَنَ اللهُ مَنْ قَتَلَكَ، وَلَعَنَ اللهُ مَنْ ظَلَمَكَ، وَلَعَنَ اللهُ اُمَّةً سَمِعَتْ بِذلِكَ فَرَضِيَتْ بِهِ، اَللّـهُمَّ اِنّي اُشْهِدُكَ اَنّي وَلِيٌّ لِمَنْ والاهُ وَعَدُوٌّ لِمَنْ عاداهُ بِاَبي اَنْتَ وَاُمّي يَا بْنَ رَسُولِ اللهِ، اَشْهَدُ اَنَّكَ كُنْتَ نُوراً فىِ الاَْصْلابِ الشّامِخَةِ وَالاَْرْحامِ الْمُطَهَّرَةِ، لَمْ تُنَجِّسْكَ الْجاهِلِيَّةُ بِاَنْجاسِها وَلَمْ تُلْبِسْكَ الْمُدْلَهِمّاتُ مِنْ '
-                      'ثِيابِها، وَاَشْهَدُ اَنَّكَ مِنْ دَعائِمِ الدّينِ وَاَرْكانِ الْمُسْلِمينَ وَمَعْقِلِ الْمُؤْمِنينَ، وَاَشْهَدُ اَنَّكَ الاِْمامُ الْبَرُّ التَّقِيُّ الرَّضِيُّ الزَّكِيُّ الْهادِي الْمَهْدِيُّ، وَاَشْهَدُ اَنَّ الاَْئِمَّةَ مِنْ وُلْدِكَ كَلِمَةُ التَّقْوى وَاَعْلامُ الْهُدى وَالْعُرْوَةُ الْوُثْقى، وَالْحُجَّةُ على اَهْلِ الدُّنْيا، وَاَشْهَدُ اَنّي بِكُمْ مُؤْمِنٌ وَبِاِيابِكُمْ، مُوقِنٌ بِشَرايِعِ ديني وَخَواتيمِ عَمَلي، وَقَلْبي لِقَلْبِكُمْ سِلْمٌ وَاَمْري لاَِمْرِكُمْ مُتَّبِعٌ وَنُصْرَتي لَكُمْ مُعَدَّةٌ حَتّى يَأذَنَ اللهُ لَكُمْ، فَمَعَكُمْ مَعَكُمْ لا مَعَ عَدُوِّكُمْ صَلَواتُ اللهِ عَلَيْكُمْ وَعلى اَرْواحِكُمْ وَاَجْسادِكُمْ وَشاهِدِكُمْ وَغائِبِكُمْ وَظاهِرِكُمْ وَباطِنِكُمْ آمينَ رَبَّ الْعالِمينَ.\n\n'
-                      'ثمّ تصلّي ركعتين وتدعو بما أحببت وترجع.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الثامنة المخصصة: زيارة الاربعين اي اليوم العشرين من صفر',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlziyaratAl2o5ra.screenRoute,
           pushBack: Alsadbi3aAlmo5asasaAlsania.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثامن المخصصة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثامن المخصصة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

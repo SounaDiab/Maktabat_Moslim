@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alhoussein_wa2adabiha.dart';
@@ -59,7 +59,6 @@ class _AlsaniaAlmo5asasaState extends State<AlsaniaAlmo5asasa> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _AlsaniaAlmo5asasaState extends State<AlsaniaAlmo5asasa> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -91,81 +90,33 @@ class _AlsaniaAlmo5asasaState extends State<AlsaniaAlmo5asasa> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الثانية المخصوصة: زيارة النصف من رجب',
+                      .addFavorite('الثانية المخصصة: زيارة النصف من رجب',
                           AlsaniaAlmo5asasa.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الثانية المخصوصة: زيارة النصف من رجب',
+                          'الثانية المخصصة: زيارة النصف من رجب',
                           AlsaniaAlmo5asasa.screenRoute,
                           AlsaniaAlmo5asasa.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الثانية المخصوصة: زيارة النصف من رجب',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الثانية المخصصة: زيارة النصف من رجب'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'وهي زيارة اُخرى غير ما مرّ ، أوردها المى(قدس سرهما)(رحمه الله) في المزار للنّصف من رجب خاصّة ويسمّى (أي النّصف من رجب) بالغفيلة لغفلة عامّة النّاس عن فضله، فاذا أردت ذلك وأتيت الصّحن فادخل أي ادخل الرّوضة وكبّر الله تعالى ثلاثاً وقِف على القبر وقُل :\n\n'
-                      'اَلسَّلامُ عَلَيْكُمْ يا آلَ اللهِ، اَلسَّلامُ عَلَيْكُمْ يا صَفْوَةَ اللهِ، اَلسَّلامُ عَلَيْكُمْ يا خِيَرَةَ اللهِ مِنْ خَلْقِهِ، اَلسَّلامُ عَلَيْكُمْ يا سادَةَ السّاداتِ، اَلسَّلامُ عَلَيْكُمْ يا لُيُوثَ الْغاباتِ، اَلسَّلامُ عَلَيْكُمْ يا سُفُنَ النَّجاةِ، اَلسَّلامُ عَلَيْكَ يا اَبا عَبْدِاللهِ الْحُسَيْنِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ عِلْمِ الاَْنْبِياءِ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ، اَلسَّلامُ عَلَيْكَ يا وارِثَ آدَمَ صَفْوَةِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ نُوح نَبِيِّ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ اِبْراهيمَ خَليلِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ اِسْماعيلَ ذَبيحِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ مُوسى كَليمِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ عيسى رُوحِ اللهِ، اَلسَّلامُ عَلَيْكَ يا وارِثَ مُحَمَّد حَبيبِ اللهِ، اَلسَّلامُ عَلَيْكَ يَا بْنَ مُحَمَّد الْمُصْطَفى، اَلسَّلامُ عَلَيْكَ يَا بْنَ عَلِيِّ الْمُرْتَضى، اَلسَّلامُ عَلَيْكَ يَا بْنَ فاطِمَةَ الزَّهْراءِ، اَلسَّلامُ '
-                      'عَلَيْكَ يَا بْنَ خَديجَةَ الكُبرى، اَلسَّلامُ عَلَيْكَ يا شَهيدُ ابْنَ الشَّهيدِ، اَلسَّلامُ عَلَيْكَ يا قَتيلُ ابْنَ الْقَتيلِ ،اَلسَّلامُ عَلَيْكَ يا وَلِيَّ اللهِ وَابْنَ وَلِيِّهِ، اَلسَّلامُ عَلَيْكَ يا حُجَّةَ اللهِ وَابْنَ حُجَّتِهِ عَلى خَلْقِهِ، اَشْهَدُ اَنَّكَ قَدْ اَقَمْتَ الصَّلاةَ وَآتَيْتَ الزَّكاةَ وَاَمَرْتَ بِالْمَعْرُوفِ وَنَهَيْتَ عَنْ الْمُنْكَرِ، وَرُزِئْتَ بِوالِديكَ وَجاهَدْتَ عَدُوَّكَ، وَاَشْهَدُ اَنَّكَ تَسْمَعُ الْكَلامَ وَتَرُدُّ الْجَوابَ، وَاَنَّكَ حَبيبُ اللهِ وَخَليلُهُ وَنَجيبُهُ وَصَفِيُّهُ وَابْنُ صَفِيِّهِ، يا مَوْلايَ وَابْنَ مَوْلايَ، زُرْتُكَ مُشْتاقاً فَكُنْ لي شَفيعاً اِلى اللهِ يا سَيِّدي وَاَسْتَشْفِعُ اِلَى اللهِ بِجَدِّكَ سَيِّدِ النَّبِيّينَ، وَبِأبيكَ سَيِّدِ الْوَصِيّينَ، وَبِاُمِّكَ فاطِمَةَ سَيِّدَةِ نِساءِ الْعالَمينَ، اَلا لَعَنَ اللهُ قاتِليكَ وَلَعَنَ اللهُ ظالِميكَ وَلَعَنَ اللهُ سالِبيكَ وَمُبْغِضيكَ مِنَ الاْوَّلينَ وَالاْخِرينَ، وَصَلَّى اللهُ عَلى سَيِّدِنا مُحَمِّد وَآلِهِ الطَّيِّبينَ الطّاهِرينَ.\n\n'
-                      'ثمّ قبّل القبر الطّاهر وتوجّه الى قبر عليّ بن الحسين (عليهما السلام) فزره وقُل:\n\n'
-                      'اَلسَّلامُ عَلَيْكَ يا مَوْلايَ وَابْنَ مَوْلايَ، لَعَنَ اللهُ قاتِليكَ وَلَعَنَ اللهُ ظالِميكَ، اِنّي اَتَقَرَّبُ اِلَى اللهِ بِزِيارَتِكُمْ وَبِمَحَبَّتِكُمْ وَاَبَرَأُ اِلَى اللهِ مِنْ اَعْدائِكُمْ، وَالسَّلامُ عَلَيْكَ يا مَوْلايَ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ.\n\n'
-                      'ثمّ امض الى قبُور الشّهداء رضوان الله عليهم، فاذا بلغتها فقف وقُل:\n\n'
-                      'اَلسَّلامُ عَلَى الاَْرْواحِ المُنيخَةِ بِقَبْرِ اَبي عَبْدِاللهِ الْحُسَيْنِ عَلَيْهِ اَلسَّلامُ، اَلسَّلامُ عَلَيْكُمْ يا طاهِرينَ مِنَ الدَّنَسِ، اَلسَّلامُ عَلَيْكُمْ يا مَهْدِيُّونَ، اَلسَّلامُ عَلَيْكُمْ يا اَبْرارَ اللهِ، اَلسَّلامُ عَلَيْكُمْ وَعَلَى الْمَلائِكَةِ الْحافِّينَ بِقُبُورِكُمْ اَجْمَعينَ، جَمَعَنَا اللهُ وَاِيّاكُمْ فِي مُسْتَقَرِّ رَحْمَتِهِ وَتَحْتَ عَرْشِهِ اِنَّهُ اَرْحَمُ الرَّاحِمينَ، وَاَلسَّلامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ.\n\n'
-                      'ثمّ امض الى حرم العبّاس بن امير المؤمنين (عليهما السلام) فاذا بلغته فقِف على باب قبّته وقُل : سَلامُ اللهِ وَسَلامُ مَلائِكَتِهِ الْمُقَرَّبينَ الى آخر ما سبق من زيارته.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الثانية المخصصة: زيارة النصف من رجب',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlsalisaAlmo5asasa.screenRoute,
           pushBack: Al2oulaAlmo5asasa.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثانية المخصصة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثانية المخصصة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

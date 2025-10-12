@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
-import 'package:maktabat_almoslim/widgets/she3er.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
+import '../../../../widgets/scroll_title.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alnabi_walzahraa_wal2a2ima.dart';
@@ -60,7 +59,6 @@ class _Alwada3State extends State<Alwada3> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +80,7 @@ class _Alwada3State extends State<Alwada3> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -101,93 +99,21 @@ class _Alwada3State extends State<Alwada3> {
               },
             ),
           ],
-          title: Text(
-            'الوداع',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الوداع'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اذا أردت أن تخرج من المدينة فاغتسل وامض الى قبر النّبي (صلى الله عليه وآله وسلم) واعمل ما كنت تعمله مِن قبل ثمّ ودّعه وقُل :\n\n'
-                      'اَلسَّلامُ عَلَيْكَ يا رَسُولَ اللهِ، اَسْتَوْدِعُكَ اللهَ وَاَسْتَرْعيكَ وَاَقْرَأُ عَلَيْكَ السَّلامُ، آمَنْتُ بِاللهِ وَبِما جِئْتَ بِهِ وَدَلَلْتَ عَلَيْهِ، اَللّـهُمَّ لا تَجْعَلْهُ آخِرَ الْعَهْدِ مِنّي لِزِيارَةِ قَبْرِ نَبِيِّكَ، فَاِنْ تَوَفَّيْتَني قَبْلَ ذلِكَ فَاِنّي اَشْهَدُ في مَماتي عَلى ما شَهِدْتُ عَلَيْهِ في حَياتي اَنْ لا اِلهَ إلاّ اَنْتَ وَاَنَّ مُحَمَّداً عَبْدُكَ وَرَسُولُكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ.\n\n'
-                      'وقال الصّادق (عليه السلام) ليونس بن يعقوب : قُل في وداع النّبي (صلى الله عليه وآله وسلم) صَلَّى اللهُ عَلَيْكَ، السَّلامُ عَلَيْكَ لا جَعَلَهُ اللهُ آخِرَ تَسْليمي عَلَيْكَ.\n\n'
-                      'أقول : قد قلنا في كتاب هديّة الزّائرين عند بيان ما ينبغي أن يصنع زوّار المدينة الطيّبة انّ مِن مهام الامور أن يغتنموا الفرصة ما أقاموا في المدينة المعظّمة، فيكثروا من الصّلاة في مسجد النّبي (صلى الله عليه وآله وسلم) فانّ الصّلاة فيه تعدل عشرة آلاف صلاة في غيره من المواضِع، وأفضل الاماكن فيه مسجد الرّوضة وهو بين القبر والمنبر، واعلم انّه قال شيخنا في التحيّة : انّ موضع جسد نبيّنا والائمة صلوات الله عليهم أجمعين في الارض أشرف من الكعبة المعظّمة باتّفاق جميع الفقهاء كما صرّح به الشّهيد في القواعد، وفي حديث حسن عن الحضرمي قال : أمرني الصّادق (عليه السلام) : أن أكثر من الصّلاة في مسجد النّبي (صلى الله عليه وآله وسلم) ما امكنتني الصّلاة وقال : انّه لا يتيسّر لك دائماً الحضُور في هذه البُقعة الشّريفة الخ.\n\n'
-                      'وروى الشّيخ الطّوسي (رحمه الله) في التّهذيب بسند معتبر عن مرازم عن الصّادق صلوات الله وسلامه عليه قال : الصّيام بالمدينة والقيام عند الاساطين ليس بمفروض ولكن من شآء فليصم فانّه خير له انّما المفروض الصّلوات الخمس وصيام شهر رمضان، فاكثروا الصّلاة في هذا المسجد ما استطعتم فانّه خير لكم، واعلموا انّ الرّجل قد يكون كيّساً في أمر الدّنيا فيقال : ما أكيس فلاناً فكيف من كاس في أمر آخرته، وكرّر ما امكنتك في كلّ يوم زيارة النّبي (صلى الله عليه وآله وسلم) وكذلك زيارة أئمة البقيع (عليهم السلام) وسلّم على النّبي (صلى الله عليه وآله وسلم) مهما وقع بصرك على حجرته، وراقب نفسك ما دمت في المدينة، وصُن نفسك من المعاصي والمظالم، وتدبّر في شرف تلك المدينة ولا سيّما مسجدها مسجد النّبي (صلى الله عليه وآله وسلم)، فتلك البقاع هي مواضع أقدام النّبي (صلى الله عليه وآله وسلم)وقد تردّد النّبي (صلى الله عليه وآله وسلم) في مسالك هذه المدينة وأسواقها وصلّى في مسجدها، وهناك موضع الوحي والتّنزيل، وكان يهبط فيها جبرئيل والملائكة المقرّبون، ولنعم ما قيل :',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: She3er(
-                  subtitle:
-                      'اَرْضٌ مَشى جِبْريلُ في عَرَصاتِها    وَاللهُ شَرَّفَ اَرْضَها وَسَماءَها',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'وتصدّق ما استطعت في المدينة ولا سيّما في المسجد وخاصّة على السّادة وذريّة الرّسول (صلى الله عليه وآله وسلم) فانّ لها ثواباً جزيلاً وأجراً عظيماً، وقال العلامة المجلسي (رحمه الله): في رواية معتبرة انّ درهماً يتصدّق بها فيها يعدل عشرة آلاف درهم في غيرها، وجاور المدينة الطّيّبة ان أمكنتك فانّها مستحبّة، وقد ورد في فضلها أحاديث مستفيضة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: She3er(
-                  subtitle:
-                      'سَقَى اللهُ قَبْراً بِالْمَدينَةِ غَيْثَهُ    فَقَدْ حَلَّ فيهِ الاَْمْنُ بِالْبَرَكاتِ\n\n'
-                      'نَبِيُّ الْهُدى صَلّى عَلَيْهِ مَليكُهُ    وَبَلَّغَ عَنّا رُوحَهُ التُّحَفاتِ\n\n'
-                      'وَصَلّى عَلَيْهِ اللهُ ما ذَرَّ شارِقٌ    وَلاحَتْ نُجُومُ اللَّيْلِ مُبْتَدِراتِ',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الوداع',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAlnabiWalzahraaWal2a2imaBelbaki3.screenRoute,
           pushBack: ZikrAlmasajedAlmo3azama.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الوداع.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الوداع.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

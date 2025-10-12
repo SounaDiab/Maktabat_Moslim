@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alnabi_walzahraa_wal2a2ima.dart';
@@ -61,7 +61,6 @@ class _ZikrAlmasajedAlmo3azamaState extends State<ZikrAlmasajedAlmo3azama> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -83,7 +82,7 @@ class _ZikrAlmasajedAlmo3azamaState extends State<ZikrAlmasajedAlmo3azama> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -105,63 +104,21 @@ class _ZikrAlmasajedAlmo3azamaState extends State<ZikrAlmasajedAlmo3azama> {
               },
             ),
           ],
-          title: Text(
-            'ذكر المساجد المعظمة بالمدينة المنورة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'ذكر المساجد المعظمة بالمدينة المنورة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'منها مسجد قبا الّذي اسّس على التّقوى من اوّل يوم، وروي انّ من ذهب اليه فصلّى فيه ركعتين رجع بثواب العمرة فأمض اليه وَصلّ فيه ركعتين للتحيّة وسبّح تسبيح الزّهراء (عليها السلام) ثمّ زر بالزّيارة الجامعة الّتي تفتح بالسّلام على أولياء الله، وقد جعلناها أولى الزّيارة الجامعة وستأتي في أواخر الباب ان شاء الله، ثمّ ادع الله وقل : يا كائِناً قَبْلَ كُلَّ شَىْء وهو دعاء طويل وايرادُه هنا ينافي ما نبغيه من الاختصار فليطلبه من شاء من مزار البحار، وتصلّي في مشربة امّ ابراهيم أي غرفة امّ ابراهيم ابن رسُول الله (صلى الله عليه وآله وسلم) وقد كانت هناك مسكن رسُول الله (صلى الله عليه وآله وسلم) ومصلاّه، وكذلك في مسجد الفضيخ وهُو قريب من مسجد قبا ويُسمّى ايضاً مسجد ردّ الشّمس، وفي مسجد الفتح أيضاً وتسمّى أيضاً بمسجد الاحزاب . وقُل اذا فرغت من الصّلاة في مسجد الفتح : يا صَريخَ الْمَكْرُوبينَ، وَيا مُجيبَ دَعْوَةِ الْمُضْطَرّينَ، وَيا مُغيثَ الْمَهْمُومينَ، اكْشِفْ عَنّي ضُرّي وَهَمّي وَكَرْبي وَغَمّي كَما كَشَفْتَ عَنْ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ هَمَّهُ، وَكَفَيْتَهُ هَوْلَ عَدُوِّهِ، وَاكْفِني ما اَهَمَّني مِنَ أَمْرِ الدُّنْيا وَالاْخِرَةِ، يا اَرْحَمَ الرّاحِمينَ.\n\n'
-                      'وتصّلّي ما استطعت في دار الامام زين العابدين ودار الامام جعفر الصّادق (عليهما السلام) وفي مسجد سلمان ومسجد أمير المؤمنين (عليه السلام) المحاذي قبر حمزة ومسجد المباهلة وتدعُو بما تشاء ان شاء الله تعالى.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'ذكر المساجد المعظمة بالمدينة المنورة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alwada3.screenRoute,
           pushBack: ZiyaratKobourAlshohada2.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ذكر المساجد المعظمة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ذكر المساجد المعظمة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

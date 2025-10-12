@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alnabi_walzahraa_wal2a2ima.dart';
@@ -60,7 +60,6 @@ class _ZiyaratFatimaBent2asadState extends State<ZiyaratFatimaBent2asad> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _ZiyaratFatimaBent2asadState extends State<ZiyaratFatimaBent2asad> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -93,75 +92,34 @@ class _ZiyaratFatimaBent2asadState extends State<ZiyaratFatimaBent2asad> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'زيارة فاطمة بنت أسد والدة أمير المؤمنين (عليه السلام)',
+                          'زيارة فاطمة بنت اسد والدة امير المؤمنين (عليه السلام)',
                           ZiyaratFatimaBent2asad.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'زيارة فاطمة بنت أسد والدة أمير المؤمنين (عليه السلام)',
+                          'زيارة فاطمة بنت اسد والدة امير المؤمنين (عليه السلام)',
                           ZiyaratFatimaBent2asad.screenRoute,
                           ZiyaratFatimaBent2asad.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'زيارة فاطمة بنت أسد والدة أمير المؤمنين (عليه السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'زيارة فاطمة بنت اسد والدة امير المؤمنين (عليه السلام)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle: 'تقف عند قبرها وتقول :\n\n'
-                      'اَلسَّلامُ عَلى نَبِيِّ اللهِ، اَلسَّلامُ عَلى رَسُولِ اللهِ، اَلسَّلامُ عَلى مُحَمَّد سَيِّدِ الْمُرْسَلينَ، اَلسَّلامُ عَلى مُحَمَّد سَيِّدِ الاَْوَّلينَ، اَلسَّلامُ عَلى مُحَمَّد سَيِّدِ الاْخِرينَ، اَلسَّلامُ عَلى مَنْ بَعَثَهُ اللهُ رَحْمَةً لِلْعالَمينَ، اَلسَّلامُ عَلَيْكَ اَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ، اَلسَّلامُ عَلى فاطِمَةَ بِنْتِ اَسَد الْهاشِمِيَّةِ، اَلسَّلامُ عَلَيْكِ اَيَّتُهَا الصِّدّيقَةُ الْمَرْضِيَّةُ، اَلسَّلامُ عَلَيْكِ اَيَّتُهَا التَّقِيَّةُ النَّقِيَّةُ، اَلسَّلامُ عَلَيْكِ اَيَّتُهَا الْكَريمَةُ الرَّضِيَّةُ، اَلسَّلامُ عَلَيْكِ يا كافِلَةَ مُحَمَّد خاتَمِ النَّبِيّينَ، اَلسَّلامُ عَلَيْكِ يا والِدَةَ سَيِّدِ الْوَصِيّينَ، اَلسَّلامُ عَلَيْكِ يا مَنْ ظَهَرَتْ شَفَقَتُها عَلى رَسُولِ اللهِ خاتَمِ النَّبيّينَ، اَلسَّلامُ عَلَيْكِ يا مَنْ تَرْبِيَتُها لِوَلِىِّ اللهِ الاَْمينِ، اَلسَّلامُ عَلَيْكِ وَعَلى رُوحِكِ وَبَدَنِكِ الطّاهِرِ، اَلسَّلامُ عَلَيْكِ وَعَلى وَلَدِكِ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ، اَشْهَدُ اَنَّكِ اَحْسَنْتِ الْكِفالَةَ، وَاَدَّيْتِ الاَْمانَةَ، وَاجْتَهَدْتِ في مَرْضاتِ اللهِ، وَبالَغْتِ في حِفْظِ رَسُولِ اللهِ، عارِفَةً بِحَقِّهِ، مُؤْمِنَةً بِصِدْقِهِ، مُعْتَرِفَةً بِنُبُوَّتِهِ، مُسْتَبْصِرَةً بِنِعْمَتِهِ، كافِلَةً بِتَرْبِيَتِهِ، مُشْفِقَةً عَلى نَفْسِهِ، واقِفَةً عَلى خِدْمَتِهِ، مُخْتارَةً رِضاهُ، وَاَشْهَدُ اَنَّكِ مَضَيْتِ عَلَى الاِْيْمانِ وَالَّتمَسُّكِ بِاَشْرَفِ الاَْدْيانِ، راضِيَةً مَرْضِيَّةً طاهِرَةً زَكِيَّةً تَقِيَّةً نَقِيَّةً، فَرَضِيَ اللهُ عَنْكِ وَاَرْضاكِ، وَجَعَلَ الْجَنَّةَ مَنْزِلَكِ وَمَأواكِ اَللّـهُمَّ صَلِّ عَلى مُحَمَّد وَآلِ مُحَمَّد وَانْفَعْني بِزِيارَتِها، وَثَبِّتْني عَلى مَحَبَّتِها، وَلا تَحْرِمْني شَفاعَتَها، وَشَفاعَةَ الاَْئِمَّةِ مِنْ ذُرِّيَّتِها، وَارْزُقْني مُرافَقَتَها، وَاحْشُرْني مَعَها وَمَعَ اَوْلادِهَا الطّاهِرينَ، اَللّـهُمَّ لا تَجْعَلْهُ آخِرَ الْعَهْدِ مِنْ زِيارَتي اِيّاها، وَارْزُقْنِي الْعَوْدَ اِلَيْها اَبَداً ما اَبْقَيْتَني، وَاِذا تَوَفَّيْتَني فَاحْشُرْني في زُمْرَتِها، وَاَدْخِلْني في شَفاعَتِها، بِرَحْمَتِكَ يا اَرْحَمَ الرّاحِمِينَ، اَللّـهُمَّ بِحَقِّها عِنْدَكَ وَمَنْزِلَتَها لَدَيْكَ، اِغْفِرْ لي وَلِوالِدَىَّ وَلِجَمِيعِ الْمُؤْمِنينَ وَالْمُؤْمِناتِ، وَآتِنا فِي الدُّنْيا حَسَنَةً وَفِي الاْخِرَةِ حَسَنَةً وَقِنا بِرَحْمَتِكَ عَذابَ النّارِ.\n\n'
-                      'ثمّ تصلّي ركعتين للزّيارة وتدعُو بما تشاء وتنصرف.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة فاطمة بنت اسد والدة امير المؤمنين (عليه السلام)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratHamza.screenRoute,
           pushBack: ZikrSa2irAlziyarat.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة فاطمة بنت اسد.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة فاطمة بنت اسد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

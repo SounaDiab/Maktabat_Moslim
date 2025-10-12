@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ziyarat_alkazimin.dart';
@@ -62,7 +62,6 @@ class _Ziyarat2o5raLmohamadAltakiState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -84,7 +83,7 @@ class _Ziyarat2o5raLmohamadAltakiState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,78 +94,34 @@ class _Ziyarat2o5raLmohamadAltakiState
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'زيارة أخرى للإمام محمد بن علي التقي (عليهما السلام)',
+                          'زيارة اخرى للامام محمد بن على التقى (عليهما السلام)',
                           Ziyarat2o5raLmohamadAltaki.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'زيارة أخرى للإمام محمد بن علي التقي (عليهما السلام)',
+                          'زيارة اخرى للامام محمد بن على التقى (عليهما السلام)',
                           Ziyarat2o5raLmohamadAltaki.screenRoute,
                           Ziyarat2o5raLmohamadAltaki.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'زيارة أخرى للإمام محمد بن علي التقي (عليهما السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'زيارة اخرى للامام محمد بن على التقى (عليهما السلام)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'قال السّيد ابن طاوُس في المزار: اذا زُرت الامام موسى الكاظم (عليه السلام) فقِف على قبر الجواد (عليه السلام) وقبّله وقُل :\n\n'
-                      'اَلسَّلامُ عَلَيْكَ يا اَبا جَعْفَر مُحَمَّدَ بْنَ عَلِيٍّ الْبَرَّ التَّقِيَّ الاِْمامَ الْوَفِيَّ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الرَّضِيُّ الزَّكِيُّ، اَلسَّلامُ عَلَيْكَ يا وَلِيَّ اللهِ، اَلسَّلامُ عَلَيْكَ يا نَجِيَّ اللهِ، اَلسَّلامُ عَلَيْكَ يا سَفيرَ اللهِ، اَلسَّلامُ عَلَيْكَ يا سِرَّ اللهِ، اَلسَّلامُ عَلَيْكَ يا ضِياءَ اللهِ، اَلسَّلامُ عَلَيْكَ يا سَناءَ اللهِ، اَلسَّلامُ عَلَيْكَ يا كَلِمَةَ اللهِ، اَلسَّلامُ عَلَيْكَ يا رَحْمَةَ اللهِ، اَلسَّلامُ عَلَيْكَ اَيُّهَا النُّوُرُ السّاطِعُ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الْبَدْرُ الطّالِعُ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الطَّيِّبُ مِنَ الطَّيِّبينَ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الطّاهِرُ مِنَ الْمُطَهَّرينَ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الاْيَةُ الْعُظْمى، اَلسَّلامُ عَلَيْكَ اَيُّهَا الْحُجَّةُ الْكُبْرى، اَلسَّلامُ عَلَيْكَ اَيُّهَا الْمُطَهَّرُ مِنَ الزَّلاَّتِ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الْمُنَزَّهُ عَنِ الْمُعْضِلاتِ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الْعَلِىُّ عَنْ نَقْصِ الاَْوْصافِ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الرَّضِيُّ عِنْدَ الاَْشْرافِ، اَلسَّلامُ عَلَيْكَ يا عَمُودَ الدّينَ، اَشْهَدُ اَنَّكَ وَلِيَّ اللهِ وَحُجَّتُهُ في اَرْضِهِ وَأنَّكَ جَنْبُ اللهِ وَخيَرَةُ اللهِ وَمُسْتَوْدَعُ عِلْمِ اللهِ وَعِلْمِ الاَْنْبِياءِ، وَرُكْنُ الاْيمانِ وَتَرْجُمانُ الْقُرْآنِ، وَاَشْهَدُ اَنَّ مَنِ اتَّبَعَكَ عَلَى الْحَقِّ وَالْهُدى، وَاَنَّ مَنْ اَنْكَرَكَ وَنَصَبَ لَكَ الْعَداوَةَ عَلَى الضَّلالَةِ وَالرَّدى اَبْرَءُ اِلَى اللهِ وَاِلَيْكَ مِنْهُمْ في الدُّنْيا وَالاْخِرَةِ، وَاَلسَّلامُ عَلَيْكَ ما بَقيتُ وَبَقِيَ اللَّيْلُ وَالنَّهارُ.\n\n'
-                      'وقل في الصّلاة عليه :\n\n'
-                      'اَللّـهُمَّ صَلِّ عَلى مُحَمَّد وَاَهْلِ بَيْتِهِ، وَصَلِّ عَلى مُحَمَّد بْنِ عَلِيِّ الزَّكِيِّ التَّقِيِّ وَالْبَرِّ الْوَفِيِّ وَالْمُهَذَّبِ التَّقِيِّ هادِى الاُْمَّةِ، وَوارِثِ الاَْئِمَّةِ، وَخازِنِ الرَّحْمَةِ، وَيَنْبُوعِ الْحِكْمَةِ، وَقائِدِ الْبَرَكَةِ، وَعَديلِ الْقُرْآنِ في الطّاعَةِ، وَواحِدِ الاَْوْصِياءِ في الاِْخْلاصِ وَالْعِبادَةِ، وَحُجَّتِكَ الْعُلْيا وَمَثَلِكَ الاَْعْلى، وَكَلِمَتِكَ الْحُسْنى الدّاعي اِلَيْكَ، وَالدّالِّ عَلَيْكَ، الَّذي نَصَبْتَهُ عَلَماً لِعِبادِكَ، وَمُتَرْجِماً لِكِتابِكَ، وَصادِعاً بِاَمْرِكَ، وَناصِراً لِدينِكَ، وَحُجَّةً عَلى خَلْقِكَ، وَنُوراً تَخْرُقُ بِهِ الظُّلَمَ، وَقُدْوَةً تُدْرَكُ بِهَا الْهِدايَةُ، وَشَفيعاً تُنالُ بِهِ الْجَنَّةُ، اَللّـهُمَّ وَكَما اَخَذَ في خُشُوعِهِ لَكَ حَظَّهُ، وَاسْتَوْفى مِنْ خَشْيَتِكَ نَصيبَهُ، فَصَلِّ عَلَيْهِ اَضْعافَ ما صَلَّيْتَ عَلى وَلِيٍّ ارْتَضَيْتَ طاعَتَهُ، وَقَبِلْتَ خِدْمَتَهُ، وَبَلِّغْهُ مِنّا تَحِيَّةً وَسَلاماً، وَآتِنا في مُوالاتِهِ مِنْ لَدُنْكَ فَضْلاً وَاِحْساناً وَمَغْفِرَةً وَرِضْواناً، اِنَّكَ ذُو الْمَنِّ الْقَديمِ وَالصَّفْحِ الْجَميلِ.\n\n'
-                      'ثمّ صلّ صلاة الزّيارة وقُل بعد السّلام : اَللّـهُمَّ اَنْتَ الرَّبُّ وَاَنَا الْمَرْبُوبُ .. الدعاء.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة اخرى للامام محمد بن على التقى (عليهما السلام)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ziyarat2o5raLmohamadAltakiAlsaniya.screenRoute,
           pushBack: Ziyarat2o5raLmousa.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة اخرى لمحمد التقي.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة اخرى لمحمد التقي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
