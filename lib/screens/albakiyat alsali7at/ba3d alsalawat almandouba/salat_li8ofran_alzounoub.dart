@@ -117,7 +117,7 @@ class _SalatLi8ofranAlzounoubState extends State<SalatLi8ofranAlzounoub> {
           pushNext: SalatAlwasiya.screenRoute,
           pushBack: SalatLilzaka2WjoudatAlhofez.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة لغفران الذنوب.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

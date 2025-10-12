@@ -119,7 +119,7 @@ class _SalatAl2isti5araZatAlrka3State extends State<SalatAl2isti5araZatAlrka3> {
           pushNext: SalatLiddainWlkifayatZolmAlsoltan.screenRoute,
           pushBack: SalatLi7adisAlnafs.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الاستخارة ذات الرقاع.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

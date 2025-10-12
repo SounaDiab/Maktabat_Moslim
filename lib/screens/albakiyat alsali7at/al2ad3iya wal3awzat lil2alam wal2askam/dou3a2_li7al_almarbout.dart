@@ -117,7 +117,7 @@ class _Dou3a2Li7alAlmarboutState extends State<Dou3a2Li7alAlmarbout> {
           pushNext: AwzatAl7oma.screenRoute,
           pushBack: Dou3a2Lilso2lolWlilawram.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لحل المربوط.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

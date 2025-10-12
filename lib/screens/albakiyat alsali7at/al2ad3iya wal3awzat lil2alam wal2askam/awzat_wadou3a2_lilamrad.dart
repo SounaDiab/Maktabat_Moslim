@@ -117,7 +117,7 @@ class _AwzatWadou3a2LilamradState extends State<AwzatWadou3a2Lilamrad> {
           pushNext: Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute,
           pushBack: Dou3a2Al3afiya.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة ودعاء للامراض.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

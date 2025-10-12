@@ -120,7 +120,7 @@ class _Dou3a2Liwaja3AlbatenWalcolonState
           pushNext: Dou3a2Lilso2lolWlilawram.screenRoute,
           pushBack: AwzaLiwaja3Alasnan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع البطن والقولون.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -122,7 +122,7 @@ class _FiDa3awatMa2souraKablSalatWfiAdbarihaState
           pushBack:
               FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في دعوات مأثورة قبل الصلاة وفي ادبارها.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

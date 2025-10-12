@@ -124,7 +124,7 @@ class _Dou3a2AlsajadFiZikrAltawbaState
           pushNext: FiBa3dAla7razWalad3iyaAlmoujaza.screenRoute,
           pushBack: FiBa3dMaYata3alakBelmawt.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء السجاد في ذكر التوبة وطلبها.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

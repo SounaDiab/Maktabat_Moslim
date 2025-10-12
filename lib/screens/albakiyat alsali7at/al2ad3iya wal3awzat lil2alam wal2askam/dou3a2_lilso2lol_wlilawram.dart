@@ -118,7 +118,7 @@ class _Dou3a2Lilso2lolWlilawramState extends State<Dou3a2Lilso2lolWlilawram> {
           pushNext: Dou3a2Lita3asorAlwilada.screenRoute,
           pushBack: Dou3a2Liwaja3AlbatenWalcolon.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للثؤلول وللاورام.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

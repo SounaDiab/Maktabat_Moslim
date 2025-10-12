@@ -118,7 +118,7 @@ class _SalatAl7ojaFiJamkaranState extends State<SalatAl7ojaFiJamkaran> {
           pushNext: SalatAl5awfMenAlzalim.screenRoute,
           pushBack: SalatAlisti8asa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الحجة في جمكران.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

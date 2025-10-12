@@ -116,7 +116,7 @@ class _AwzaLiwaja3Al3awraState extends State<AwzaLiwaja3Al3awra> {
           pushNext: AwzaLiwaja3Alrokba.screenRoute,
           pushBack: Aldou3a2Lilbaras.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة موجع العورة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

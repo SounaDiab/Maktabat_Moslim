@@ -127,7 +127,7 @@ class _FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airahaState
           pushNext: FiAd3iyatAl3ilalWalmarad.screenRoute,
           pushBack: FiZikrDou3a2ainLildin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر بعض ما ورد للهم والغم والخوف وغيرها.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

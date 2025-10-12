@@ -120,7 +120,7 @@ class _AwzaLidaf3WasawisAlshaitanState
           pushNext: AwzaLil2amnMenAlsarik.screenRoute,
           pushBack: Al7erzMenAl3ain.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لدفع وساوس الشيطان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

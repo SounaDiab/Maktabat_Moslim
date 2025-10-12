@@ -113,7 +113,7 @@ class _SalatAlhadiyaState extends State<SalatAlhadiya> {
           pushNext: SalatLailatAldafn.screenRoute,
           pushBack: SalatAl2a3rabi.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الهدية.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

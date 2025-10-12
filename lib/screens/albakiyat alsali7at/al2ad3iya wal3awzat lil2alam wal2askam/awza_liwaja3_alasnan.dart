@@ -116,7 +116,7 @@ class _AwzaLiwaja3AlasnanState extends State<AwzaLiwaja3Alasnan> {
           pushNext: Dou3a2Liwaja3AlbatenWalcolon.screenRoute,
           pushBack: Dou3a2Liwaja3Alfam.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لوجع الاسنان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

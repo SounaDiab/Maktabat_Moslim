@@ -117,7 +117,7 @@ class _SalatAlwaladLiwalidayhState extends State<SalatAlwaladLiwalidayh> {
           pushNext: SalatAlja2i3.screenRoute,
           pushBack: SalatLailatAldafn.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الولد لوالديه.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

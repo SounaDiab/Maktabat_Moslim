@@ -121,7 +121,7 @@ class _Alta3kibatAl5asaBfaridatAlsob7State
               .screenRoute,
           pushBack: Alta3kibatAl3amaa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/التعقيبات الخاصة بفريضة الصبح.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

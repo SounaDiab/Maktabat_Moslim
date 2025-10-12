@@ -120,7 +120,7 @@ class _SalatLiddainWlkifayatZolmAlsoltanState
           pushNext: SalatAl7aja.screenRoute,
           pushBack: SalatAl2isti5araZatAlrka3.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة للدين ولكفاية ظلم السلطان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -127,7 +127,7 @@ class _Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2anState
           pushNext: FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh.screenRoute,
           pushBack: Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في عدة من الادعية يدعى بها صباحا ومساء.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

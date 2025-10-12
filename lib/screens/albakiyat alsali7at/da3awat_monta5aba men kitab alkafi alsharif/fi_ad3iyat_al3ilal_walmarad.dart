@@ -118,7 +118,7 @@ class _FiAd3iyatAl3ilalWalmaradState extends State<FiAd3iyatAl3ilalWalmarad> {
           pushNext: FiBa3dAla7razWal3owaz.screenRoute,
           pushBack: FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ادعية العلل والمرض.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

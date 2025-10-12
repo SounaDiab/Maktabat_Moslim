@@ -116,7 +116,7 @@ class _AlmonajatBelsafaarState extends State<AlmonajatBelsafaar> {
           pushNext: AlmonajatBitalabAlrizk.screenRoute,
           pushBack: AlmonajatBelistikala.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بالسفر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

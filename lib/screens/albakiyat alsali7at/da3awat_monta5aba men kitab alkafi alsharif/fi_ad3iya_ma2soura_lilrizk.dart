@@ -118,7 +118,7 @@ class _FiAd3iyaMa2souraLilrizkState extends State<FiAd3iyaMa2souraLilrizk> {
           pushNext: FiZikrDou3a2ainLildin.screenRoute,
           pushBack: FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ادعية مأثورة للرزق.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

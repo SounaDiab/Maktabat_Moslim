@@ -116,7 +116,7 @@ class _Aldou3a2LilbarasState extends State<Aldou3a2Lilbaras> {
           pushNext: AwzaLiwaja3Al3awra.screenRoute,
           pushBack: Aldou3a2LikarakirAlbatn.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء للبرص.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

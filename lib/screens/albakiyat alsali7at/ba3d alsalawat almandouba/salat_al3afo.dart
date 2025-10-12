@@ -113,7 +113,7 @@ class _SalatAl3afoState extends State<SalatAl3afo> {
           pushNext: SalatAl2a3rabi.screenRoute,
           pushBack: SalatAlwasiya.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة العفو.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

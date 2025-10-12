@@ -113,7 +113,7 @@ class _AwzatAl7omaState extends State<AwzatAl7oma> {
           pushNext: Dou3a2Lilza7ir.screenRoute,
           pushBack: Dou3a2Li7alAlmarbout.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة الحمى.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -116,7 +116,7 @@ class _Al3awzaLibtalAlsi7rState extends State<Al3awzaLibtalAlsi7r> {
           pushNext: Al7erzMenAl3ain.screenRoute,
           pushBack: AwzaLiwaja3Al3ain.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/العوذة لابطال السحر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

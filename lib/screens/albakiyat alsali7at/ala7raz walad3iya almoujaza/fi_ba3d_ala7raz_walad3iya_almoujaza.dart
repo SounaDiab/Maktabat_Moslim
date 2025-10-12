@@ -124,7 +124,7 @@ class _FiBa3dAla7razWalad3iyaAlmoujazaState
           pushNext: AlmonajatBelisti5araa.screenRoute,
           pushBack: Dou3a2AlsajadFiZikrAltawba.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة في بعض الاحراز والادعية الموجزة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

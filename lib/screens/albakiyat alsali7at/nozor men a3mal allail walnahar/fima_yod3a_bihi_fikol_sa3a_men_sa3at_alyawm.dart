@@ -121,7 +121,7 @@ class _FimaYod3aBihiFikolSa3aMenSa3atAlyawmState
           pushNext: FimaYata3alakBel8odat.screenRoute,
           pushBack: FiAzkarWda3awatTokra2Saba7anWamasa2an.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/فيما يدعى به به في كل ساعة من ساعات اليوم.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

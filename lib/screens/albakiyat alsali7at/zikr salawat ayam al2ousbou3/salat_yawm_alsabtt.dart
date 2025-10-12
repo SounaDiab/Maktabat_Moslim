@@ -116,7 +116,7 @@ class _SalatYawmAlsabttState extends State<SalatYawmAlsabtt> {
           pushNext: SalatYawmAl2a7add.screenRoute,
           pushBack: SalatYawmAljom3aa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة يوم السبت.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

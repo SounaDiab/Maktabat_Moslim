@@ -129,7 +129,7 @@ class _FiNozorMemaYo3malFiAlnaharMabainaTolou3AlshamesW8roubahaState
           pushNext: FimaYo3malMen7inAl8ouroub2ela7inAlnawm.screenRoute,
           pushBack: Alta3kibatAl5asaBfaridatAlsob7.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في نزر مما يعمل في النهار ما بين طلوع الشمس وغروبها.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

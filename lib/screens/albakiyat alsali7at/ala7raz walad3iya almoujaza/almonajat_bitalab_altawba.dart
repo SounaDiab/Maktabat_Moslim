@@ -118,7 +118,7 @@ class _AlmonajatBitalabAltawbaState extends State<AlmonajatBitalabAltawba> {
           pushNext: AlmonajatBitalabAl7aj.screenRoute,
           pushBack: AlmonajatBilisti3aza.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بطلب التوبة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -113,7 +113,7 @@ class _SalatAl3asraState extends State<SalatAl3asra> {
           pushNext: SalatLziyadatAlrizk.screenRoute,
           pushBack: SalatLilmohemat.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة العسرة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

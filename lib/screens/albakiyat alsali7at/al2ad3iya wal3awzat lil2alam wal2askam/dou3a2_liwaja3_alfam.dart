@@ -116,7 +116,7 @@ class _Dou3a2Liwaja3AlfamState extends State<Dou3a2Liwaja3Alfam> {
           pushNext: AwzaLiwaja3Alasnan.screenRoute,
           pushBack: Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع الفم.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

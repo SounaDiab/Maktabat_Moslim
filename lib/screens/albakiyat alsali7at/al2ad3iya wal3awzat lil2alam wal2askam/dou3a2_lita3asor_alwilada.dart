@@ -118,7 +118,7 @@ class _Dou3a2Lita3asorAlwiladaState extends State<Dou3a2Lita3asorAlwilada> {
           pushNext: Dou3a2Li7alAlmarbout.screenRoute,
           pushBack: Dou3a2Lilso2lolWlilawram.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لتعسر الولادة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

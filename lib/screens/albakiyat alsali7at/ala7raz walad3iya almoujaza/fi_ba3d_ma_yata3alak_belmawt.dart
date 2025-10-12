@@ -120,7 +120,7 @@ class _FiBa3dMaYata3alakBelmawtState extends State<FiBa3dMaYata3alakBelmawt> {
           pushNext: Dou3a2AlsajadFiZikrAltawba.screenRoute,
           pushBack: FiAsarBa3dSowarWalayat.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في بعض ما يتعلق بالموت.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -127,7 +127,7 @@ class _FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5iraState
           pushNext: Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute,
           pushBack: FiBa3dAla7razWal3owaz.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في دعوات موجزات لجميع حوائج الدنيا والاخرة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -115,7 +115,7 @@ class _Dou3a2Al3afiyaState extends State<Dou3a2Al3afiya> {
           pushNext: AwzatWadou3a2Lilamrad.screenRoute,
           pushBack: AwzaLil3akrab.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء العافية.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

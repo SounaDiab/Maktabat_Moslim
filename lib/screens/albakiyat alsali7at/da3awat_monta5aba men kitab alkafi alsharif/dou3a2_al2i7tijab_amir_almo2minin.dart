@@ -121,7 +121,7 @@ class _Dou3a2Al2i7tijabAmirAlmo2mininState
               Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute,
           pushBack: FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء احتجاب امير المؤمنين.mp3',
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3a2_ali7tijab.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
