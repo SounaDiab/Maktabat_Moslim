@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/al7akiba%20alramadaneya/a3mal_wa2ad3iyat_ayam_ramadan.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_alhakiba_alramadaneya.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../al7akiba%20alramadaneya/a3mal_wa2ad3iyat_ayam_ramadan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import 'alyawm_2al7adi_wal3ishrin.dart';
@@ -16,7 +16,8 @@ class Alyawm2alsaniWal3ishrin extends StatefulWidget {
   const Alyawm2alsaniWal3ishrin({super.key});
 
   @override
-  State<Alyawm2alsaniWal3ishrin> createState() => _Alyawm2alsaniWal3ishrinState();
+  State<Alyawm2alsaniWal3ishrin> createState() =>
+      _Alyawm2alsaniWal3ishrinState();
 }
 
 double _fontSize = 18;
@@ -32,7 +33,8 @@ class _Alyawm2alsaniWal3ishrinState extends State<Alyawm2alsaniWal3ishrin> {
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState = prefs.getBool('isFavorite_alyawm_2alsani_wal3ishrin_screen');
+    bool? savedState =
+        prefs.getBool('isFavorite_alyawm_2alsani_wal3ishrin_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -43,7 +45,7 @@ class _Alyawm2alsaniWal3ishrinState extends State<Alyawm2alsaniWal3ishrin> {
     await prefs.setBool('isFavorite_alyawm_2alsani_wal3ishrin_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -59,7 +61,6 @@ class _Alyawm2alsaniWal3ishrinState extends State<Alyawm2alsaniWal3ishrin> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,18 +82,18 @@ class _Alyawm2alsaniWal3ishrinState extends State<Alyawm2alsaniWal3ishrin> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(
-                          'اليوم الثاني والعشرين', Alyawm2alsaniWal3ishrin.screenRoute);
+                      .addFavorite('اليوم الثاني والعشرين',
+                          Alyawm2alsaniWal3ishrin.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -103,62 +104,21 @@ class _Alyawm2alsaniWal3ishrinState extends State<Alyawm2alsaniWal3ishrin> {
               },
             ),
           ],
-          title: Text(
-            'اليوم الثاني والعشرين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'اليوم الثاني والعشرين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اَللّـهُمَّ افْتَحْ لى فيهِ اَبْوابَ فَضْلِكَ، وَاَنْزِلْ عَلَيَّ فيهِ بَرَكاتِكَ، وَوَفِّقْني فيهِ لِمُوجِباتِ مَرْضاتِكَ، وَاَسْكِنّي فيهِ بُحْبُوحاتِ جَنّاتِكَ، يا مُجيبَ دَعْوَةِ الْمُضْطَرّينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlhakibaAlramadaneya(
+          text: 'اليوم الثاني والعشرين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alyawm2alsalisWal3ishrin.screenRoute,
           pushBack: Alyawm2al7adiWal3ishrin.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الثاني والعشرين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الثاني والعشرين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
