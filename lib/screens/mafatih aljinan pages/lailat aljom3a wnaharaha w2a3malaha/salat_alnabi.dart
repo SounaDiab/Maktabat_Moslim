@@ -124,7 +124,7 @@ class _SalatAlnabiState extends State<SalatAlnabi> {
           pushNext: SalatAmirAmo2minin.screenRoute,
           pushBack: A3malNaharAljom3a.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام النبي.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

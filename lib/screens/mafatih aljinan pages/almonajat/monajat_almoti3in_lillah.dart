@@ -127,7 +127,7 @@ class _MonajatAlmoti3inLillahState extends State<MonajatAlmoti3inLillah> {
           pushNext: MonajatAlmoridin.screenRoute,
           pushBack: MonajatAlshakirin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/مناجاة الطيعين لله.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

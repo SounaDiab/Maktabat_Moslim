@@ -126,7 +126,7 @@ class _MonajatAlmoftakirinState extends State<MonajatAlmoftakirin> {
           pushNext: MonajatAl3arifin.screenRoute,
           pushBack: MonajatAlmotawasilin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة المفتقرين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

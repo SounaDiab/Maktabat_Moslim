@@ -128,7 +128,7 @@ class _SalatAl2imamAljawadState extends State<SalatAl2imamAljawad> {
           pushNext: SalatAl2imamAlhadi.screenRoute,
           pushBack: SalatAl2imamAlrida.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام الجواد.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -127,7 +127,7 @@ class _A3malNaharAljom3aState extends State<A3malNaharAljom3a> {
           pushNext: SalatAlnabi.screenRoute,
           pushBack: A3malLailatAljom3a.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال نهار الجمعة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

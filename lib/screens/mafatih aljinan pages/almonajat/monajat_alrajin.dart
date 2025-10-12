@@ -126,7 +126,7 @@ class _MonajatAlrajinState extends State<MonajatAlrajin> {
           pushNext: MonajatAlra8ibin.screenRoute,
           pushBack: MonajatAl5a2ifin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/مناجاة الراجين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -131,7 +131,7 @@ class _SalasKalimat3anAmirAlmo2mininState
           pushNext: AlmonajatBelsafar.screenRoute,
           pushBack: MonajatL2amirAlmo2minin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ثلاث كلمات عن امير المؤمنين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

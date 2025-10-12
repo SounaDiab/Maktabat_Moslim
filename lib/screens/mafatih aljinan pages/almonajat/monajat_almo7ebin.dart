@@ -126,7 +126,7 @@ class _MonajatAlmo7ebinState extends State<MonajatAlmo7ebin> {
           pushNext: MonajatAlmotawasilin.screenRoute,
           pushBack: MonajatAlmoridin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة المحبين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -130,7 +130,7 @@ class _SalatAl2imamZainAl3abidinState extends State<SalatAl2imamZainAl3abidin> {
           pushNext: SalatAl2imamAlbaker.screenRoute,
           pushBack: SalatAl2imamAlhussein.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام زين العابدين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

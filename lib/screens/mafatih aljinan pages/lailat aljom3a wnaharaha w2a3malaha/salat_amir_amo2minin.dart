@@ -127,7 +127,7 @@ class _SalatAmirAmo2mininState extends State<SalatAmirAmo2minin> {
           pushNext: SalatAlsaidaAlzahraa.screenRoute,
           pushBack: SalatAlnabi.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة امير المؤمنين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -128,7 +128,7 @@ class _SalatAl2imamAlhassanState extends State<SalatAl2imamAlhassan> {
           pushNext: SalatAl2imamAlhussein.screenRoute,
           pushBack: SalatAlsaidaAlzahraa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الامام الحسن.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

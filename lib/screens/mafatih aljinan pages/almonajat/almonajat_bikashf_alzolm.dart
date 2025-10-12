@@ -127,7 +127,7 @@ class _AlmonajatBikashfAlzolmState extends State<AlmonajatBikashfAlzolm> {
           pushNext: AlmonajatAlsha3baneya.screenRoute,
           pushBack: AlmonajatBelsafar.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة بكشف الظلم.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
