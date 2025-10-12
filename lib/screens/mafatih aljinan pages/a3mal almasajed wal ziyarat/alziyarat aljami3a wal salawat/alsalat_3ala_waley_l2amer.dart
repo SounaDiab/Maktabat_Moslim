@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../alziyarat_aljami3a_walsalawat.dart';
@@ -60,7 +60,6 @@ class _Alsalat3alaWaleyL2amerState extends State<Alsalat3alaWaleyL2amer> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _Alsalat3alaWaleyL2amerState extends State<Alsalat3alaWaleyL2amer> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -92,74 +91,35 @@ class _Alsalat3alaWaleyL2amerState extends State<Alsalat3alaWaleyL2amer> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الصلاة على ولي الأمر المنتظر (عليه السلام)',
+                      .addFavorite(
+                          'الصلاة على ولي الامر المنتظر (عجل الله فرجه الشريف)',
                           Alsalat3alaWaleyL2amer.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الصلاة على ولي الأمر المنتظر (عليه السلام)',
+                          'الصلاة على ولي الامر المنتظر (عجل الله فرجه الشريف)',
                           Alsalat3alaWaleyL2amer.screenRoute,
                           Alsalat3alaWaleyL2amer.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الصلاة على ولي الأمر المنتظر (عليه السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'الصلاة على ولي الامر المنتظر (عجل الله فرجه الشريف)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اَللّـهُمَّ صَلِّ عَلى وَلِيِّكَ وَابْنِ اَوْلِيائِكَ الَّذينَ فَرَضْتَ طاعَتَهُمْ وَاَوْجَبْتَ حَقَّهُمْ وَاَذْهَبْتَ عَنْهُمُ الرِّجْسَ وَطَهَّرْتَهُمْ تَطْهيراً، اَللّـهُمَّ انْصُرْهُ وَانْتَصِرْ بِهِ لِدينِكَ وَانْصُرْ بِهِ اَوْلِياءَكَ وَاَوْلِياءَهُ وَشيعَتَهُ وَاَنْصارَهُ، وَاجْعَلْنا مِنْهُمْ، اَللّـهُمَّ اَعِذْهُ مِنْ شَرِّ كُلِّ باغ وَطاغ وَمِنْ شَرِّ جَميعِ خَلْقِكَ، وَاحْفُظْهُ مِنْ بَيْنِ يَديهِ وَمِنْ خَلْفِهِ وَعَنْ يَمينِهِ وَعَنْ شِمالِهِ، وَاحْرُسْهُ وَامْنَعْهُ اَنْ يوُصَلَ اِلَيْهِ بِسوُء، وَاحْفَظْ فيهِ رَسُولَكَ، وَآلِ رَسوُلِكَ وَاَظْهِرْ بِهِ الْعَدْلَ وَاَيِّدْهُ بِالنَّصْرِ، وَانْصُرْ ناصِريهِ وَاخْذُلْ خاذِليهِ، وَاقْصِمْ بِهِ جَبابِرَةَ الْكُفْرِ وَاقْتُلْ بِهِ الْكُفّارَ وَالْمُنافِقينَ وَجَميعَ الْمُلْحِدينَ حيثُ كانُوا مِنْ مَشارِقِ الاَْرْضَ وَمَغارِبِها وَبَرِّها وَبَحْرِها وَامْلاَْ بِهِ الاَْرْضِ عَدْلاً وَاَظْهِرْ بِهِ دينَ نَبِيِّكَ عَلَيْهِ وَآلِهِ السَّلامُ، وَاجْعَلْنِى اللّهُمَّ مِنْ اَنْصارِهِ وَاَعْوانِهِ وَاَتْباعِهِ وَشيعَتِهِ وَاَرِنى فى آلِ مُحَمَّد ما يَأمَلوُنَ وَفى عَدُوِّهُمْ ما يَحْذَرُونَ اِلـهَ الْحَقِّ آمينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الصلاة على ولي الامر المنتظر (عجل الله فرجه الشريف)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Ziyarat2alYasin.screenRoute,
           pushBack: Alsalat3alaLhassanAl3askari.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على ولي الامر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على ولي الامر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

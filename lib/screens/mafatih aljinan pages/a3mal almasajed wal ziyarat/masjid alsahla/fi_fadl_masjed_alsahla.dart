@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../a3mal_masjid_alsahla.dart';
@@ -60,7 +60,6 @@ class _FiFadlMasjedAlsahlaState extends State<FiFadlMasjedAlsahla> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _FiFadlMasjedAlsahlaState extends State<FiFadlMasjedAlsahla> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -93,75 +92,35 @@ class _FiFadlMasjedAlsahlaState extends State<FiFadlMasjedAlsahla> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'في فضل مسجد السهلة وأعماله, وأعمال مسجد زيد ومسجد صعصعة',
+                          'في فضل مسجد السهلة واعماله, واعمال مسجد زيد ومسجد صعصعة',
                           FiFadlMasjedAlsahla.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'في فضل مسجد السهلة وأعماله, وأعمال مسجد زيد ومسجد صعصعة',
+                          'في فضل مسجد السهلة واعماله, واعمال مسجد زيد ومسجد صعصعة',
                           FiFadlMasjedAlsahla.screenRoute,
                           FiFadlMasjedAlsahla.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'في فضل مسجد السهلة وأعماله, وأعمال مسجد زيد ومسجد صعصعة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title:
+                    'في فضل مسجد السهلة واعماله, واعمال مسجد زيد ومسجد صعصعة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اعلم انّه ليس في تلك البقاع مسجد يضاهي مسجد السّهلة فضلاً وشرفاً بعد مسجد الكوفة وهو بيت ادريس (عليه السلام) وابراهيم (عليه السلام) ومنزل خضر (عليه السلام) ومسكنه، وعن أبي بصير عن الصّادق صلوات الله وسلامه عليه قال : قال لي : يا أبا محمّد كأنّي أرى نزول القائم صلوات الله عليه في مسجد السّهلة بأهله وعياله ويكون منزله، وما بعث الله نبيّاً الاّ وقد صلّى فيه والمقيم فيه كالمقيم في فُسطاط رسول الله (صلى الله عليه وآله وسلم)، وما من مؤمن ولا مؤمنة الاّ وقلبه يحنّ اليه وفيه صخرة فيها صورة كلّ نبيّ، وما صلّى فيه أحد فدعا الله بنيّه صادقة الاّ صرفه الله بقضاء حاجته، '
-                      'وما مِن أحد استجاره الاّ أجاره الله ممّا يخاف منه، قلت : هذا لهو الفضل ، قال : نزيدك ؟ قلت : نعم ، قال : هو من البقاع التّي أحبّ الله أن يدعى فيها وما من يوم ولا ليلة الاّ والملائكة تزُور هذا المسجد يعبدون الله فيه، أما انّي لو كنت بالقرب منكم ما صلّيت صلاة الاّ فيه، يا أبا محمّد ما لم أصف اكثر ، قلت : جعلت فداك لا يزال القائم (عليه السلام) فيه أبداً ؟ قال : نعم .. الخ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'في فضل مسجد السهلة واعماله, واعمال مسجد زيد ومسجد صعصعة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlsalatWaldouaaFiMasjedZaid.screenRoute,
           pushBack: A3malMasjedAlsahla.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل مسجد السهلة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل مسجد السهلة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

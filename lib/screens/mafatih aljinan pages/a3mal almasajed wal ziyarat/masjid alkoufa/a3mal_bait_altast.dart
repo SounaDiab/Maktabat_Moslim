@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -59,7 +59,6 @@ class _A3malBaitAltastState extends State<A3malBaitAltast> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _A3malBaitAltastState extends State<A3malBaitAltast> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,64 +102,21 @@ class _A3malBaitAltastState extends State<A3malBaitAltast> {
               },
             ),
           ],
-          title: Text(
-            'أعمال بيت الطست',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'التعقيبات العامة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title:
-                      'المتّصل بدكّة القضاء ، تُصلّي هناك ركعتين فاذا سلّمت وسبّحت فقُل :',
-                  subtitle:
-                      'اَللّـهُمَّ اِنّي ذَخَرْتُ تَوْحيدي اِيّاكَ وَمَعْرِفَتي بِكَ وَاِخْلاصي لَكَ وَاِقْراري بِرُبُوبِيَّتِكَ، وَذَخَرْتُ وِلايَةَ مَنْ اَنْعَمْتَ عَلَيَّ بِمَعْرِفَتِهِمْ مِنْ بَرِيَّتِكَ مُحَمَّد وَعِتْرَتِهِ صَلَّى اللهُ عَلَيْهِمْ لِيَوْمِ فَزَعي اِلَيْكَ عاجِلاً وَآجِلاً، وَقَدْ فَزِعْتُ اِلَيْكَ وَاِلَيْهِمْ يا مَوْلايَ في هذَا الْيَوْمِ وَفي مَوْقِفي هذا وَسَأَلْتُكَ ما زَكى مِنْ نِعْمَتِكَ وَاِزاحَةَ ما اَخْشاهُ مِنْ نِقْمَتِكَ، وَالْبَرَكَةَ فيـما رَزَقْتَنيهِ، وَتَحْصينَ صَدْري مِنْ كُلِّ هَمّ وَجائِحَة وَمَعْصِيَة في ديني وَدُنْيايَ وَآخِرَتي يا اَرْحَمَ الرّاحِمينَ.\n\n'
-                      'وروي انّ الصّادق (عليه السلام) قد صلّى ركعتين في بيت الطّست.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'التعقيبات العامة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZikrAlsalatWaldou3aaFiWasatAlmasjid.screenRoute,
           pushBack: A3malDikatAlkada2WbaitAltast.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال بيت الطست.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال بيت الطست.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

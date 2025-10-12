@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../alziyarat_aljami3a_walsalawat.dart';
@@ -46,7 +46,7 @@ class _Alsalat3alaAmirAlmo2mininState extends State<Alsalat3alaAmirAlmo2minin> {
         'isFavorite_alsalat_3ala_amir_almo2minin_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -62,7 +62,6 @@ class _Alsalat3alaAmirAlmo2mininState extends State<Alsalat3alaAmirAlmo2minin> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -84,14 +83,14 @@ class _Alsalat3alaAmirAlmo2mininState extends State<Alsalat3alaAmirAlmo2minin> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('الصلاة على امير المؤمنين (عليه السلام)',
@@ -106,99 +105,58 @@ class _Alsalat3alaAmirAlmo2mininState extends State<Alsalat3alaAmirAlmo2minin> {
               },
             ),
           ],
-          title: Text(
-            'الصلاة على امير المؤمنين (عليه السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الصلاة على امير المؤمنين (عليه السلام)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اَللّـهُمَّ صَلِّ عَلى اَميرِ الْمُؤْمِنينَ عَلِىِّ بْنِ اَبى طالِب اَخى نَبِيِّكَ وَوَلِيِّهِ وَصَفِيِّهِ وَوَزيرِهِ، وَمُسْتَوْدَعِ عَلْمِهِ، وَمَوْضِعِ سِرِّهِ، وَبابِ حِكْمَتِهِ، وَالنّاطِقِ بِحُجَّتِهِ، وَالدّاعى اِلى شَريعَتِهِ، وَخَليفَتِهِ فى اُمَّتِهِ، وَمُفَرِّجِ الْكرْبِ عَنْ وَجْهِهِ، قاصِمِ الْكَفَرَةِ وَمُرْغِمِ الْفَجَرَةِ الَّذى جَعَلْتَهُ مِنْ نَبِيِّكَ بِمَنْزِلَةِ هاروُنَ مِنْ مُوسى، اَللّـهُمَّ والِ مَنْ والاهُ وَعادِ مَنْ عاداهُ، وَانْصُرْ مَنْ نَصَرَهُ، وَاخْذُلْ مَنْ خَذَلَهُ، وَالْعَنْ مَنْ نَصَبَ لَهُ مِنَ الاَْوَّلينَ وَالاْخِرينَ، وَصَلِّ عَلَيْهِ اَفْضَلَ ما صَلَّيْتَ عَلى اَحَد مِنْ اَوْصِياءِ اَنْبِيائِكَ يا رَبَّ الْعالَمينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الصلاة على امير المؤمنين (عليه السلام)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: Alsalat3alaAlsayidaFatima.screenRoute,
-        pushBack: Alsalat3alaAlnabi.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على أمير المؤمنين.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
+          pushNext: Alsalat3alaAlsayidaFatima.screenRoute,
+          pushBack: Alsalat3alaAlnabi.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على أمير المؤمنين.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
               ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ),
       ),
     );
   }

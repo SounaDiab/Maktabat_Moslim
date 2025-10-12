@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -60,7 +60,6 @@ class _ZiyaratMouslimBen3akilState extends State<ZiyaratMouslimBen3akil> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,14 +81,14 @@ class _ZiyaratMouslimBen3akilState extends State<ZiyaratMouslimBen3akil> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
@@ -105,104 +104,59 @@ class _ZiyaratMouslimBen3akilState extends State<ZiyaratMouslimBen3akil> {
               },
             ),
           ],
-          title: Text(
-            'زيارة مسلم بن عقيل (قدس الله روحه ونور ضريحه)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'زيارة مسلم بن عقيل (قدس الله روحه ونور ضريحه)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'فاذا فرغت من أعمال جامع الكوفة فامض الى قبر مسلم بن عقيل رضوان الله عليه وقِف عنده وقُل :\n\n'
-                      'اَلْحَمْدُ للهِ الْمَلِكِ الْحَقِّ الْمُبينِ، الْمُتَصاغِرِ لِعَظَمَتِهِ جَبابِرَةُ الطّاغينَ، الْمُعْتَرِفِ بِرُبُوبِيَّتِهِ جَميعُ اَهْلِ السَّماواتِ وَالاَْرَضينَ، الْمُقِرِّ بِتَوْحيدِهِ سائِرُ الْخَلْقِ اَجْمَعينَ، وَصَلَّى اللهُ عَلى سَيِّدِ الاَْنامِ وَاَهْلِ بَيْتِهِ الْكِرامِ، صَلاةً تَقَرُّ بِها اَعْيُنُهُمْ، وَيَرْغَمُ بِها اَنْفُ شانِئِهِمْ مِنَ الْجِنِّ وَالاِْنْسِ اَجْمَعينَ، سَلامُ اللهِ الْعِليِّ الْعَظيمِ وَسَلامُ مَلائِكَتِهِ الْمُقَرَّبينَ وَاَنْبِيائِهِ الْمُرْسَلينَ وَاَئِمَّتِهِ الْمُنْتَجَبينَ وَعِبادِهِ الصّالِحينَ وَجَميعِ الشُّهَداءِ وَالصِّدّيقينَ، وَالزّاكِياتُ الطَّيِّباتُ فيـما تَغْتَدي وَتَرُوحُ عَلَيْكَ يا مُسْلِمَ بْنَ عَقيلِ بْنِ أبي طالِب وَرَحْمَةُ اللهِ وَبَرَكاتُهُ، اَشْهَدُ اَنَّكَ اَقَمْتَ الصَّلاةَ، وَآتَيْتَ الزَّكاةَ، وَاَمَرْتَ بِالْمَعْرُوفِ، وَنَهَيْتَ عَنْ الْمُنْكَرِ، وَجاهَدْتَ فِي اللهِ حَقَّ جِهادِهِ، وَقُتِلْتَ عَلى مِنْهاجِ الُْمجاهِدينَ في سَبيلِهِ حَتّى لَقِيْتَ اللهَ عَزَّوَجَلَّ وَهُوَ عَنْكَ راض، وَاَشْهَدُ اَنَّكَ وَفَيْتَ بِعَهْدِ اللهِ، وَبَذَلْتَ نَفْسَكَ في نُصْرَةِ حُجَّةِ اللهِ وَابْنِ حُجَّتِهِ حَتّى اَتاكَ الْيَقينُ، اَشْهَدُ لَكَ بِالتَّسْليمِ وَالْوَفاءِ وَالنَّصيحَةِ لِخَلَفِ النَّبِيِّ الْمُرْسَلِ، وَالسِّبْطِ الْمُنْتَجَبِ، وَالدَّليلِ الْعالِمِ وَالْوَصِيِّ الْمُبَلِّغِ، '
-                      'وَالْمَظْلُومِ الْمُهْتَضَمِ، فَجَزاكَ اللهُ عَنْ رَسُولِهِ وَعَنْ اَميرِ الْمُؤْمِنينَ وَعَنِ الْحَسَنِ وَالْحُسَيْنِ اَفْضَلَ الْجَزاءَ بِما صَبَرْتَ وَاحْتَسَبْتَ وَاَعَنْتَ فَنِعْمَ عُقْبَى الدّارِ، لَعَنَ اللهُ مَنْ قَتَلَكَ، وَلَعَنَ اللهُ مَنْ اَمَرَ بِقَتْلِكَ، وَلَعَنَ اللهُ مَنْ ظَلَمَكَ، وَلَعَنَ اللهُ مَنِ افْتَرى عَلَيْكَ، وَلَعَنَ اللهُ مَنْ جَهِلَ حَقَّكَ وَاسْتَخَفَّ بِحُرْمَتِكَ، وَلَعَنَ اللهُ مَنْ بايَعَكَ وَغَشَّكَ وَخَذَلَكَ وَاَسْلَمَكَ، وَمَنْ اَلَبَّ عَلَيْكَ وَمَنْ لَمْ يُعِنْكَ، اَلْحَمْدُ للهِ الَّذي جَعَلَ النّارَ مَثْواهُمْ وَبِئْسَ الْوِرْدُ الْمَوْرُودُ، اَشْهَدُ اَنَّكَ قُتِلْتَ مَظْلُوماً، وَاَنَّ اللهَ مُنْجِزٌ لَكُمْ ما وَعَدَكُمْ جِئْتُكَ زائِراً عارِفاً بِحَقِّكُمْ مُسَلِّماً لَكُمْ تابِعاً لِسُنَّتِكُمْ، وَنُصْرَتي لَكُمْ مُعَدَّةٌ حَتّى يَحْكُمَ اللهُ وَهُوَ خَيْرُ الْحاكِمينَ، فَمَعَكُمْ مَعَكُمْ لا مَعَ عَدُوِّكُمْ، صَلَواتُ اللهِ عَلَيْكُمْ وَعَلى اَرْواحِكُمْ وَاَجْسادِكُمْ وَشاهِدِكُمْ وَغائِبِكُمْ، وَالسَّلامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ، قَتَلَ اللهُ اُمَّةً قَتَلَتْكُمْ بِالاَْيْدي وَالاَْلْسُنِ.\n\n'
-                      'وجَعَلَ هذه الكلمات في المزار الكبير بمنزلة الاستئذان، وقال : بعد ذِكرِها : ثمّ ادخل وادنُ من القبر وعلى الرّواية السّابقة أشِر الى الضّريح ثمّ قُل:\n\n'
-                      'اَلسَّلامُ عَلَيْكَ اَيُّهَا الْعَبْدُ الصّالِحُ الْمُطيعُ للهِ وَلِرَسُولِهِ وَلاَِميرِالْمُؤْمِنينَ وَالْحَسَنِ وَالْحُسَيْنِ عَلَيْهِمُ السَّلامُ، الْحَمْدُ لله وَسَلامٌ عَلى عِبادِهِ الَّذينَ اصْطَفى مُحَمَّد وَآلِهِ، وَالسَّلامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ وَمَغْفِرَتُهُ وَعَلى رُوحِكَ وَبَدَنِكَ، اَشْهَدُ اَنَّكَ مَضَيْتَ عَلى مامَضى عَلَيْهِ الْبَدْرِيُّونَ الُْمجاهِدُونَ في سَبيلِ اللهِ، الْمُبالِغُونَ في جِهادِ اَعْدائِهِ وَنُصْرَةِ اَوْلِيائِهِ، فَجَزاكَ اللهُ اَفْضَلَ الْجَزاءِ، وَاَكْثَرَ الْجَزاءِ، وَاَوْفَرَ جَزاءِ اَحَد مِمَّنْ وَفى بِبَيْعَتِهِ، وَاسْتَجابَ لَهُ دَعْوَتَهُ، وَاَطاعَ وُلاةَ اَمْرِهِ ،اَشْهَدُ اَنَّكَ قَدْ بالَغْتَ فِي النَّصيحَةِ وَاَعْطَيْتَ غايَةَ الَْمجْهُودِ حَتّى بَعَثَكَ اللهُ فِي الشُّهَداءِ، وَجَعَلَ رُوحَكَ مَعَ اَرْواحِ السُّعَداءِ، وَاَعْطاكَ مِنْ جِنانِهِ اَفْسَحَها مَنْزِلاً، وَاَفْضَلَها غُرَفاً، وَرَفَعَ ذِكْرَكَ فِي الْعِليّينَ، وَحَشَرَكَ مَعَ النَّبيّينَ وَالصِّدّيقينَ وَالشُّهَداءِ وَالصّالِحينَ وَحَسُنَ اوُلئِكَ رَفيقاً، اَشْهَدُ اَنَّكَ لَمْ تَهِنْ وَلَمْ تَنْكُلْ، وَاَنَّكَ قَدْ مَضَيْتَ عَلى بَصيرَة مِنْ اَمْرِكَ مُقْتَدِياً بِالْصّالِحينَ وَمُتَّبِعاً لِلنَّبيّينَ، فَجَمَعَ اللهُ بَيْنَنا وَبَيْنَكَ وَبَيْنَ رَسُولِهِ وَاَوْلِيائِهِ في مَنازِلِ الُْمخْبِتينَ فَاِنَّهُ اَرْحَمُ الرّاحِمينَ.\n\n'
-                      'ثمّ صلّ ركعتين في جانب الرّأس واهدها الى جنابه ثمّ قل : اَللّـهُمَّ صَلِّ عَلى مُحَمَّد وَآلِ مُحَمَّد وَلا تَدَعْ لى ذَنْباً وهذا هو الدّعاء الّذي يدعى به في مرقد العبّاس وسيأتي ذكره فاذا شئت أن تودعه فودّعه بالوداع الّذي سيذكر في ذيل زيارة العبّاس.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة مسلم بن عقيل (قدس الله روحه ونور ضريحه)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: ZiyaratHaniBen3orwa.screenRoute,
-        pushBack: MounajatAmirAlmo2minin.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة مسلم بن عقيل.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
+          pushNext: ZiyaratHaniBen3orwa.screenRoute,
+          pushBack: MounajatAmirAlmo2minin.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة مسلم بن عقيل.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
               ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ),
       ),
     );
   }

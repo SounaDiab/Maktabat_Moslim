@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../alziyarat_aljami3a_walsalawat.dart';
@@ -63,7 +63,6 @@ class _Alsalat3alaMoussaBinJa3farState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _Alsalat3alaMoussaBinJa3farState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -107,62 +106,22 @@ class _Alsalat3alaMoussaBinJa3farState
               },
             ),
           ],
-          title: Text(
-            'الصلاة على موسى بن جعفر (عليهما السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child:
+                ScrollTitle(title: 'الصلاة على موسى بن جعفر (عليهما السلام)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اَللّـهُمَّ صَلِّ عَلَى الاَْمينِ الْمُؤْتَمَنِ مُوسَى بْنِ جَعْفَر، الْبَرِّ الْوَفِىِّ الطّاهِرِ الزَّكِىِّ، النُّورِ الْمُبينِ الُْمجْتَهِدِ الُْمحْتَسِبِ، الصّابِرِ عَلَى الاَْذى فيكَ، اَللّـهُمَّ وَكَما بَلَّغَ عَنْ آبائِهِ مَا اسْتُوْدِعَ مِنْ اَمْرِكَ وَنَهْيِكَ، وَحَمَلَ عَلَى الَْمحَجَّةَ وَكابَدَ اَهْلَ الْعِزَّةِ وَالشِّدَّةِ فيما كانَ يَلْقى مِنْ جُهّالِ قَوْمِهِ، رَبِّ فَصَلِّ عَلَيْهِ اَفْضَلَ وَاَكْمَلَ ما صَلَّيْتَ عَلى اَحَد مِمَّنْ اَطاعَكَ وَنَصَحَ لِعِبادِكَ، اِنَّكَ غَفوُرٌ رَحيمٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الصلاة على موسى بن جعفر (عليهما السلام)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaAliBinMoussa.screenRoute,
           pushBack: Alsalat3alaJa3farBinMohamad.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على موسى بن جعفر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على موسى بن جعفر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

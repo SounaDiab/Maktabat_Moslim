@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -63,7 +63,6 @@ class _A3malDikatAlkada2WbaitAltastState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _A3malDikatAlkada2WbaitAltastState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,76 +94,33 @@ class _A3malDikatAlkada2WbaitAltastState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('أعمال دكة القضاء وبيت الطست',
+                      .addFavorite('اعمال دكة القضاء وبيت الطست',
                           A3malDikatAlkada2WbaitAltast.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'أعمال دكة القضاء وبيت الطست',
+                          'اعمال دكة القضاء وبيت الطست',
                           A3malDikatAlkada2WbaitAltast.screenRoute,
                           A3malDikatAlkada2WbaitAltast.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'أعمال دكة القضاء وبيت الطست',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'اعمال دكة القضاء وبيت الطست'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'واعلم انّ دكّة القضاء قد كانت بناءً في جامع الكوفة يشبه الحانوت يجلس عليها امير المؤمنين (عليه السلام) للقضاء والحكم، وكانت هُنالك اسطوانة قصيرة كتب عليها الاية اِنَّ اللهَ يَأمُرُ بِالْعَدْلِ وَالاِحْسانِ، وَبيت الطّست هو المكان الذي برزت منه معجزة لامير المؤمنين (عليه السلام) في بنت عزباء كانت قد غاصت في ماء فيهِ العلق فولجت في جوفها فنمت وكبرت ممّا امتصه من الدّم، فَعَلا بذلك بطن البنت فحسبها اخوتها حبلى، فراموا قتلها فأتوا أمير المؤمنين (عليه السلام) ليحكم بينهم، فأمر بستار فضرب في جانِب من المسجد وجعلت البنت خلفه وأمر بقابلة الكوفة ففحصتها واعلنت رأيها ، فقالت : يا أمير المؤمنين انّها حبلى تحمل جنيناً في جوفها، فأمر (عليه السلام) بطست من الحمأة فأجلست البنت عليه فاحسّت العلقة بذفر الحمأة فانسلّت من جوفها نحو الطّست، وفي بعض الرّوايات انّه (عليه السلام) مدّ يده فأتى بقطع من الثّلج من جبال الشّام وجعله عند الطّست فانسلّت العلقة، واعلم '
-                      'ايضاً انّ المشهور في ترتيب اعمال جامع الكوفة هو أن تتلو أعمال وسط المسجد اعمال الاسطوانة الرّابعة فتؤخّر اعمال دكّة القضا وبيت الطّست عن جميع اعمال المسجد وتؤدّي عند الفراغ من أعمالِ دكّة الصّادق (عليه السلام)، ونحن نجاري في الترتيب السّيد ابن طاووس في مصباح الزّائر والعلامة المجلسي في البحار والشّيخ خضر في المزار، وأمّا من تابع المشهور فليؤخّر اعمال دكّة القضاء وبيت الطّست عن الكلّ وليأتها بعد أعمال دكّة الصّادق (عليه السلام)، وبالجملة نقول ثمّ امض الى دكّة القضا فصلّ عليها ركعتين تقرأ فيها بعد الحمد ما أردت من السّور فاذا فرغت منها وسبّحت تسبيح الزّهراء (عليها السلام) فقُل :\n\n'
-                      'يا مالِكي وَمُمَلِّكي وَمُتَغَمِّدي بِالنِّعَمِ الْجِسامِ مِنْ غَيْرِ اسْتِحْقاق، وَجْهي خاضِعٌ لِما تَعْلُوهُ الاَْقْدامُ لِجَلالِ وَجْهِكَ الْكَريمِ، لا تَجْعَلْ هذِهِ الشِّدَّةَ وَلا هذِهِ الِْمحْنَةَ مُتَّصِلَةً بِاِسْتئصالِ الشَّأفَةِ وَامْنَحْني مِنْ فَضْلِكَ ما لَمْ تَمْنَحْ بِهِ اَحَداً مِنْ غَيْرِ مَسْأَلَة، اَنْتَ الْقَديمُ الاَْوَّلُ الَّذي لَمْ تَزَلْ وَلا تَزالُ، صَلِّ عَلى مُحَمَّد وَآلِ مُحَمَّد وَاغْفِرْ لي وَارْحَمْني وَزَكِّ عَمَلي، وَبارِكْ لي في اَجَلي، وَاجْعَلْني مِنْ عُتَقائِكَ وَطُلَقائِكَ مِنَ النّارِ بِرَحْمَتِكَ يا اَرْحَمَ الرّاحِمينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'اعمال دكة القضاء وبيت الطست',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malBaitAltast.screenRoute,
           pushBack: A3malJami3Alkoufa.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال دكة القضاء وبيت الطست.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال دكة القضاء وبيت الطست.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

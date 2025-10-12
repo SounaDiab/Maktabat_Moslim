@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -61,7 +61,6 @@ class _A3malAl2ostwanaAl5amisaState extends State<A3malAl2ostwanaAl5amisa> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -83,7 +82,7 @@ class _A3malAl2ostwanaAl5amisaState extends State<A3malAl2ostwanaAl5amisa> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -93,76 +92,33 @@ class _A3malAl2ostwanaAl5amisaState extends State<A3malAl2ostwanaAl5amisa> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('أعمال الأسطوانة الخامسة',
+                      .addFavorite('اعمال الاسطوانة الخامسة',
                           A3malAl2ostwanaAl5amisa.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'أعمال الأسطوانة الخامسة',
+                          'اعمال الاسطوانة الخامسة',
                           A3malAl2ostwanaAl5amisa.screenRoute,
                           A3malAl2ostwanaAl5amisa.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'أعمال الأسطوانة الخامسة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'اعمال الاسطوانة الخامسة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اعلم انّ من المقامات ذوات المزيّة في جامع الكوفة الاسطوانة الخامسة ينبغي أن يُصلّى عندها وتطلب المسألات، ففي رواية معتبرة انّها بقعة صلّى فيها ابراهيم خليل الرّحمن، ولا ينافى هذا ما في سائر الرّوايات فلعلّه (عليه السلام)كان قد صلّى في مختلف هذه المواضع الواردة في مختلف الرّوايات، وفي رواية مُعتبرة عن الصّادق (عليه السلام) قال : الاسطوانة الخامسة هي مقامُ جبرئيل (عليه السلام)، ويظهر من الرّواية السّالفة انّها مقام الحسن (عليه السلام)، وبالاجمال انّ ما يظهر منَ الرّوايات هُو انّ عند الاسطوانة السّابعة والاسطوانة الخامسة اشرف المقامات في الجامع، وقالَ السّيد ابن طاووس ثمّ تُصلّي عند الاسطوانة الخامِسة ركعتين تقرأ فيهما الحمد وما شئت من السّور فاذا سلّمت وسبّحت فقُل :\n\n'
-                      'اَللّـهُمَّ اِنّي اَسْاَلُكَ بِجَميعِ اَسْمائِكَ كُلِّها ما عَلِمْنا مِنْها وَما لا نَعْلَمُ، وَاَسْاَلُكَ بِاِسْمِكَ الْعَظيمِ الاَْعْظَمِ الْكَبيرِ الاَْكْبَرِ الَّذي مَنْ دَعاكَ بِهِ اَجَبْتَهُ، وَمَنْ سَأَلَكَ بِهِ اَعْطَيْتَهُ، وَمَنِ اسْتَنْصَرَكَ بِهِ نَصَرْتَهُ، وَمَنِ اسْتَغْفَرَكَ بِهِ غَفَرْتَ لَهُ، وَمَنِ اسْتَعانَكَ بِهِ اَعَنْتَهُ، وَمَنِ اسْتَرْزَقَكَ بِهِ رَزَقْتَهُ، وَمَنِ اسْتَغاثَكَ بِهِ اَغَثْتَهُ، وَمَنِ اسْتَرْحَمَكَ  بِهِ رَحِمْتَهُ، وَمَنِ اسْتَجارَكَ بِهِ اَجَرْتَهُ، وَمَنْ تَوَكَّلَ عَلَيْكَ بِهِ كَفَيْتَهُ، وَمَنِ اسْتَعْصَمَكَ بِهِ عَصَمْتَهُ، وَمَنِ اسْتَنْقَذَكَ بِهِ مِنَ النّارِ اَنْقَذْتَهُ، وَمَنِ اسْتَعْطَفَكَ بِهِ تَعَطَّفْتَ، لَهُ وَمَنْ اَمَّلَكَ بِهِ اَعْطَيْتَهُ، الَّذِي اتَّخَذْتَ بِهِ آدَمَ صَفِيّاً، وَنُوحاً نَجِيّاً، وَاِبْراهيمَ خَليلاً، وَمُوسى كَليماً، وَعيسى رُوحاً، وَمُحَمَّداً حَبيباً، وَعَلِيّاً وَصِيّاً، صَلَّى اللهُ عَلَيْهِمْ اَجْمَعينَ اَنْ تَقْضِيَ لي حَوآئِجي، وَتَعْفُوَ عَمّا سَلَفَ مِنْ ذُنُوبي، وَتَتَفَضَّلَ عَلَيَّ بِما اَنْتَ اَهْلُهُ وَلِجَميعِ الْمُؤْمِنينَ وَالْمُؤْمِناتِ لِلدُّنْيا وَالاْخِرَةِ، يا مُفَرِّجَ هَمِّ الْمَهْمُومينَ وَيا غِياثَ الْمَلْهُوفينَ لا اِلـهَ اِلاّ اَنْتَ سُبْحانَكَ يا رَبَّ الْعالَمينَ.\n\n'
-                      'أقول : روي عن الصّادق (عليه السلام) انّه قال لبعض أصحابه : صلّ عند الاسطوانة الخامسة ركعتين فانّه مُصلّى ابراهيم (عليه السلام)وقل : اَلسَّلامُ عَلى اَبينا آدَمَ وَاُمِّنا حَوّاءَ الخ، بما يقرب ممّا قد قلته عند الاسطوانة السّابعة وأنت مستقبل القبلة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'اعمال الاسطوانة الخامسة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AamalAl2ostwanaAlsalisa.screenRoute,
           pushBack: A3malAl2ostwanaAlsabi3a.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الاسطوانة الخامسة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الاسطوانة الخامسة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

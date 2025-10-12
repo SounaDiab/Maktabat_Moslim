@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../alziyarat_aljami3a_walsalawat.dart';
@@ -63,7 +63,6 @@ class _Alsalat3alaLhassanWalhusseinState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return Scaffold(
@@ -107,63 +106,21 @@ class _Alsalat3alaLhassanWalhusseinState
             },
           ),
         ],
-        title: Text(
-          'الصلاة على الحسن والحسين (عليهما السلام)',
-          style: TextStyle(
-            fontSize: isTablet
-                ? 40
-                : size > 1.0
-                    ? 20
-                    : 23,
-            fontWeight: FontWeight.bold,
-          ),
+        title: SizedBox(
+          height: 30,
+          child: ScrollTitle(title: 'الصلاة على الحسن والحسين (عليهما السلام)'),
         ),
       ),
-      body: ContainerScrollview(
-        widget: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      'اللهم صلِّ على محمد وآل محمد',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              child: ListOfNineVerses(
-                title: '',
-                subtitle:
-                    'اَللّـهُمَّ صَلِّ عَلَى الْحَسَنِ وَالْحُسَيْنِ عَبْدَيْكَ وَوَلِيَّيْكَ، وَابْنَىْ رَسُولِكَ، وَسِبْطَى الرَّحْمَةِ، وَسَيِّدَىْ شَبابِ اَهْلِ الْجَنَّةِ، اَفْضَلَ ما صَلَّيْتَ عَلى اَحَد مِنْ اَوْلادِ النَّبِيّينَ وَالْمُرْسَلينَ، اَللّـهُمَّ صَلِّ عَلَى الْحَسَنِ ابْنِ سَيِّدِ النَّبِيّينَ وَوَصِىِّ اَميرِ الْمُؤْمِنينَ، اَلسَّلامُ عَلَيْكَ يَا بْنَ رَسُولِ اللهِ، اَلسَّلامُ عَلَيْكَ يَا ابْنَ سَيِّدِ الْوَصِيّينَ، اَشْهَدُ اَنَّكَ يَا ابْنَ اَميرِ الْمُؤْمِنينَ اَمينُ اللهِ وَابْنُ اَمينِهِ، عِشْتَ مَظْلُوماً وَمَضَيْتَ شَهيداً، وَاَشْهَدُ اَنَّكَ الاِْمامُ الزَّكِىُّ الْهادِى الْمَهْدِىُّ، اَللّـهُمَّ صَلِّ عَلَيْهِ وَبَلِّغْ رُوحَهُ وَجَسَدَهُ عَنّى فى هذِهِ السّاعَةِ اَفْضَلَ التَّحِيَّةِ وَالسَّلامِ، اَللّـهُمَّ صَلِّ عَلَى الْحُسَيْنِ بْنِ عَلِىٍّ الْمَظْلُومِ الشَّهيدِ، قَتيلِ الْكَفَرَةِ وَطَريحِ الْفَجَرَةِ، اَلسَّلامُ عَلَيْكَ يا اَبا عَبْدِاللهِ، اَلسَّلامُ عَلَيْكَ يَا بْنَ رَسُولِ اللهِ، اَلسَّلامُ عَلَيْكَ يَا ابْنَ اَميرِ الْمُؤْمِنينَ اَشْهَدُ موُقِناً اَنَّكَ اَمينُ اللهِ وَابْنُ اَمينِهِ، قُتِلْتَ مَظْلُوماً وَمَضَيْتَ شَهيداً، وَاَشْهَدُ اَنَّ اللهَ تَعالى الطّالِبُ بِثارِكَ، وَمُنْجَزٌ ما وَعَدَكَ مِنَ النَّصْرِ وَالتَّاْييدِ فى هَلاكِ عَدُوِّكَ وَاِظْهارِ دَعْوَتِكَ، وَاَشْهَدُ اَنَّكَ وَفَيْتَ بِعَهْدِ اللهِ، وَجاهَدْتَ '
-                    'فى سَبيلِ، اللهِ وَعَبْدتَ اللهَ مُخْلِصاً حَتّى أتاكَ الْيَقينُ لَعَنَ اللهُ اُمَّةً قَتَلَتْكَ، وَلَعَنَ اللهُ اُمَّةً خَذَلَتْكَ، وَلَعَنَ اللهُ اُمَّةً اَلَبَّتْ عَلَيْكَ، وَاَبْرَأُ اِلَى اللهِ تَعالى مِمَّنْ اَكْذَبَكَ وَاسْتَخَفَّ بِحَقِّكَ وَاسْتَحَلَّ دَمَكَ، بِاَبى اَنْتَ وَاُمّى يا اَبا عَبْدِاللهِ لَعَنَ اللهُ قاتِلَكَ، وَلَعَنَ اللهُ خاذِلَكَ، وَلَعَنَ اللهُ مَنْ سَمِعَ وَاعِيَتَكَ فَلَمْ يُجِبْكَ وَلَمْ يَنْصُرْكَ، وَلَعَنَ اللهُ مَنْ سَبا نِساءَكَ اَنَا اِلَى اللهِ مِنْهُمْ بَرئٌ وَمِمَّنْ والاهُمْ وَمالاََهُمْ وَاَعانَهُمْ عَلَيْهِ، وَاَشْهَدُ اَنَّكَ وَالاَْئِمَّةَ مِنْ وُلْدِكَ كَلِمَةُ التَّقْوى وَبابُ الْهُدى وَالْعُرْوَةُ الْوُثْقى وَالْحُجَّةُ عَلى اَهْلِ الدُّنْيا، وَاَشْهَدُ اَنّى بِكُمْ مُؤْمِنٌ وَبِمَنْزِلَتِكُمْ موُقِنٌ، وَلَكُمْ تابِعٌ بِذاتِ نَفْسى وَشَرايِعِ دينى وَخَواتيمِ عَمَلى وَمُنْقَلَبى فى دُنْياىَ وَآخِرَتى.',
-                weight: FontWeight.w600,
-                size: isTablet ? _fontSizeTablet : _fontSize,
-              ),
-            ),
-          ],
-        ),
+      body: BlocBuilderMafatihAljinan(
+        text: 'الصلاة على الحسن والحسين (عليهما السلام)',
+        fontSize: _fontSize,
+        fontSizeTablet: _fontSizeTablet,
       ),
       bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Alsalat3alaAliBinLhussein.screenRoute,
         pushBack: Alsalat3alaAlsayidaFatima.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على الحسن والحسين.mp3',
+        soud:
+            'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على الحسن والحسين.mp3',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

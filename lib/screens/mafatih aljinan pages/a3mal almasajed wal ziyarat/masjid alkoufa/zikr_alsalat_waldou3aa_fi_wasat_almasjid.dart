@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -63,7 +63,6 @@ class _ZikrAlsalatWaldou3aaFiWasatAlmasjidState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _ZikrAlsalatWaldou3aaFiWasatAlmasjidState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -107,64 +106,21 @@ class _ZikrAlsalatWaldou3aaFiWasatAlmasjidState
               },
             ),
           ],
-          title: Text(
-            'ذكر الصلاة والدعاء في وسط المسجد',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'ذكر الصلاة والدعاء في وسط المسجد'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'تُصلّي هناك ركعتين تقرأ في الاولى الحمد والتّوحيد (قُلْ هُوَ اللهُ اَحَدٌ) وفي الثّانية الحمد والجحد (قُلْ يا اَيُّهَا الْكافِرُونَ) فاذا سلّمت وسبّحت فقُل :\n\n'
-                      'اَللّـهُمَّ اَنْتَ السَّلامُ وَمِنْكَ السَّلامُ وَاِلَيْكَ يَعُودُ السَّلامُ وَدارُكَ دارُ السَّلامِ، حَيِّنا رَبَّنا مِنْكَ بِالسَّلامِ، اَللّـهُمَّ اِنّي صَلَّيْتُ هذِهِ الصَّلاةَ ابْتِغاءَ رَحْمَتِكَ وَرِضْوانِكَ وَمَغْفِرَتِكَ، وَتَعْظيماً لِمَسْجِدِكَ، اَللّـهُمَّ فَصَلِّ عَلى مُحَمَّد وَآلِ مُحَمَّد وَارْفَعْها في عِلِّيّينَ وَتَقَبَّلها مِنّي يا اَرْحَمَ الرّاحِمينَ.\n\n'
-                      'أقول : قد دعى هذا المقام بدكّة المِعراج ووجه التسمية على ما يظهر انّ رسول الله (صلى الله عليه وآله وسلم) استأذن الله تعالى ليلة المعراج فهبط الى الارض في هذه البُقعة فصلّى ركعتين، والرّواية قد أثبتناها في أوّل الفصل.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'ذكر الصلاة والدعاء في وسط المسجد',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malAl2ostwanaAlsabi3a.screenRoute,
           pushBack: A3malBaitAltast.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ذكر الصلاة والدعاء في وسط المسجد.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ذكر الصلاة والدعاء في وسط المسجد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

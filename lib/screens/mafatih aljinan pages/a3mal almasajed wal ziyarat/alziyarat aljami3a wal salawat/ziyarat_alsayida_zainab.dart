@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../alziyarat_aljami3a_walsalawat.dart';
@@ -60,7 +60,6 @@ class _ZiyaratAlsayidaZainabState extends State<ZiyaratAlsayidaZainab> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _ZiyaratAlsayidaZainabState extends State<ZiyaratAlsayidaZainab> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -104,66 +103,22 @@ class _ZiyaratAlsayidaZainabState extends State<ZiyaratAlsayidaZainab> {
               },
             ),
           ],
-          title: Text(
-            'زيارة السيدة زينب الكبرى (عليها السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child:
+                ScrollTitle(title: 'زيارة السيدة زينب الكبرى (عليها السلام)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'السلام عليك يا بنت سلطان الانبياء، السلام عليك يا بنت صاحب الحوض واللواء، السلام عليك يا بنت فاطمة الزهراء، السلام عليك يا بنت خديجة الكبرى، السلام عليك يا بنت سيد الاوصياء وركن الاولياء أمير المؤمنين، السلام عليك يا بنت ولي الله، السلام عليك يا ام المصائب يا زينب بنت علي ورحمة الله وبركاته.\n\n'
-                      'السلام عليك أيتها الفاضلة الرشيدة، السلام عليك أيتها العاملة الكاملة، السلام عليك أيتها الجليلة الجميلة، السلام عليك أيتها التقية النقية، السلام عليك أيتها المظلومة المقهورة، السلام عليك أيتها الرضية المرضية، السلام عليك يا تالية المعصوم، السلام عليك يا ممتحنة في تحمل المصائب بالحسين المظلوم، السلام عليك أيتها البعيدة عن الآفاق، السلام عليك أيتها الاسيرة في البلدان، السلام على من شهد بفضلها الثقلان، السلام عليك أيتها المتحيرة في وقوفك في القتلى وناديت جدك رسول الله(ص) بهذا النداء: صلى عليك مليك السماء هذا حسين بالعراء مسلوب العمامة والرداء مقطع الاعضاء وبناتك سبايا،\n'
-                      'السلام على روحك الطيبة وجسدك الطاهر، السلام عليك يا مولاتي وابنة مولاي وسيدتي وابنة سيدتي ورحمة الله وبركاته.\n\n'
-                      'أشهد أنك قد أقمت الصلاة وآتيت الزكاة وأمرت بالمعروف ونهيت عن المنكر وأطعت الله ورسوله وصبرت على الاذي في جنب الله حتى أتاك اليقين، فلعن الله من جحدك ولعن الله من ظلمك ولعن الله من لم يعرف حقك ولعن الله أعداء آل محمد من الجن والانس من الاولين والآخرين وضاعف عليهم العذاب الاليم.\n\n'
-                      'أتيتك يا مولاتي وابنة مولاي قاصدا وافدا عارفا بحقك فكوني شفيعا إلى الله في غفران ذنوبي، وقضاء حوائجي، واعطاء سؤلي وكشف ضري، وأن لك ولابيك وأجدادك الطاهرين جاها عظيما وشفاعة مقبولة، السلام عليك وعلى آبائك الطاهرين المطهرين وعلى الملائكة المقيمين في حرمكِ الشريف المبارك.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة السيدة زينب الكبرى (عليها السلام)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HadisAlkisa2.screenRoute,
           pushBack: SalatJa3farAltayar.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة السيدة زينب.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة السيدة زينب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

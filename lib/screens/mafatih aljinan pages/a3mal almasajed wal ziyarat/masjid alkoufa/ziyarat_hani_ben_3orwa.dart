@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -60,7 +60,6 @@ class _ZiyaratHaniBen3orwaState extends State<ZiyaratHaniBen3orwa> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _ZiyaratHaniBen3orwaState extends State<ZiyaratHaniBen3orwa> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -92,76 +91,35 @@ class _ZiyaratHaniBen3orwaState extends State<ZiyaratHaniBen3orwa> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('زيارةهاني بن عروة (رحمة الله ورضوانه عليه)',
+                      .addFavorite(
+                          'زيارة هانئ بن عروة (رحمة الله ورضوانه عليه)',
                           ZiyaratHaniBen3orwa.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'زيارةهاني بن عروة (رحمة الله ورضوانه عليه)',
+                          'زيارة هانئ بن عروة (رحمة الله ورضوانه عليه)',
                           ZiyaratHaniBen3orwa.screenRoute,
                           ZiyaratHaniBen3orwa.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'زيارةهاني بن عروة (رحمة الله ورضوانه عليه)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'زيارة هانئ بن عروة (رحمة الله ورضوانه عليه)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'تقف عند قبره وتسلّم على رسول الله (صلى الله عليه وآله وسلم) وتقول :\n\n'
-                      'سَلامُ اللهِ الْعَظيمِ وَصَلَواتُهُ عَلَيْكَ يا هانِيَ بْنَ عُرْوَةَ، اَلسَّلامُ عَلَيْكَ اَيُّهَا الْعَبْدُ الصّالِحُ النّاصِحُ للهِ وَلِرَسُولِهِ وَلاَِميرِ الْمُؤْمِنينَ وَالْحَسَنِ وَالْحُسَيْنِ عَلَيْهِمُ السَّلامُ، اَشْهَدُ اَنَّكَ قُتِلْتَ مَظْلُوماً، فَلَعَنَ اللهُ مَنْ قَتَلَكَ وَاسْتَحَلَّ دَمَكَ، وَحَشى قُبُورَهُمْ ناراً، اَشْهَدُ اَنَّكَ لَقِيْتَ اللهَ وَهُوَ راض عَنْكَ بِما فَعَلْتَ وَنَصَحْتَ، وَاَشْهَدُ اَنَّكَ قَدْ بَلَغْتَ دَرَجَةَ الشُّهَداءِ وَجَعَلَ رُوحَكَ مَعَ اَرْواحِ السُّعَداءِ بِما نَصَحْتَ للهِ وَلِرَسُولِهِ مُجْتَهِداً، وَبَذَلْتَ نَفْسَكَ في ذاتِ اللهِ وَمَرْضاتِهِ، فَرَحِمَكَ اللهُ وَرَضِيَ عَنْكَ وَحَشَرَكَ مَعَ مُحَمَّد وَآلِهِ الطّاهِرينَ، وَجَمَعَنا وَاِيّاكُمْ مَعَهُمْ في دارِ النَّعيمِ، وَسَلامٌ عَلَيْكَ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ.\n\n'
-                      'ثمّ صلّ ركعتين واهدها الى هاني وادعُ لنفسك بما شئت وودّعه بما تودّع به مسلم.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'زيارة هانئ بن عروة (رحمة الله ورضوانه عليه)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiFadlAlkoufaWamasjidouha.screenRoute,
           pushBack: ZiyaratMouslimBen3akil.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة هاني بن عروة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة هانئ بن عروة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

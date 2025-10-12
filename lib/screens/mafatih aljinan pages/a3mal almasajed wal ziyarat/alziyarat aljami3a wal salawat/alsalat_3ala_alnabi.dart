@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../../widgets/list_of_nine_verses.dart';
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../alziyarat_aljami3a_walsalawat.dart';
@@ -59,7 +59,6 @@ class _Alsalat3alaAlnabiState extends State<Alsalat3alaAlnabi> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _Alsalat3alaAlnabiState extends State<Alsalat3alaAlnabi> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -91,74 +90,34 @@ class _Alsalat3alaAlnabiState extends State<Alsalat3alaAlnabi> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الصلاة على النبي (صلى الله عليه وآله وسلم)',
+                      .addFavorite('الصلاة على النبي (صل الله عليه وآله وسلم)',
                           Alsalat3alaAlnabi.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الصلاة على النبي (صلى الله عليه وآله وسلم)',
+                          'الصلاة على النبي (صل الله عليه وآله وسلم)',
                           Alsalat3alaAlnabi.screenRoute,
                           Alsalat3alaAlnabi.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الصلاة على النبي (صلى الله عليه وآله وسلم)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child:
+                ScrollTitle(title: 'الصلاة على النبي (صل الله عليه وآله وسلم)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اَللّـهُمَّ صَلِّ عَلى مُحَمَّد كَما حَمَلَ وَحْيَكَ، وَبَلَّغَ رِسالاتِكَ، وَصَلِّ عَلى مُحَمَّد كَما اَحَلَّ حَلالَكَ، وَحَرَّمَ حَرامَكَ، وَعَلَّمَ كِتابَكَ، وَصَلِّ عَلى مُحَمَّد كَما اَقامَ الصَّلاةَ، وَآتَى الزَّكاةَ، وَدَعا اِلى دينِكَ، وَصَلِّ عَلى مُحَمَّد كَما صَدَّقَ بِوَعْدِكَ، وَاَشْفَقَ مِنْ وَعيدِكَ، وَصَلِّ عَلى مُحَمَّد كَما غَفَرْتَ بِهِ الذُّنُوبَ، وَسَتَرْتَ بِهِ الْعُيُوبَ وَفَرَّجْتَ بِهِ الْكُرُوبَ، وَصَلِّ عَلى مُحَمَّد كَما دَفَعْتَ بِهِ الشَّقاءَ، وَكَشَفْتَ بِهِ الْغَمّاءَ، وَاَجَبْتَ بِهِ الدُّعاءَ، وَنَجَّيْتَ بِهِ مِنَ الْبَلاءِ، وَصَلِّ عَلى مُحَمَّد كَما رَحِمْتَ بِهِ الْعِبادَ، وَاَحْيَيْتَ بِهِ الْبِلادَ، وَقَصَمْتَ بِهِ الْجَبابِرَةَ، وَاَهْلَكْتَ بِهِ الْفَراعِنَةَ، وَصَلِّ عَلى مُحَمَّد كَما اَضْعَفْتَ بِهِ الاَْمْوالَ، وَاَحْرَزْتَ بِهِ مِنَ الاَْهْوالِ، وَكَسَرْتَ بِهِ الاَْصْنامَ، وَرَحِمْتَ بِهِ الاَْنامَ، وَصَلِّ عَلى مُحَمَّد كَما بَعَثْتَهُ بِخَيْرِ الاَْدْيانِ، وَاَعْزَزْتَ بِهِ الاْيمانَ، وَتَبَّرْتَ بِهِ الاَْوْثانَ، وَعَظَّمْتَ بِهِ الْبَيْتَ الْحَرامَ، وَصَلِّ عَلى مُحَمَّد وَاَهْلِ بَيْتِهِ الطّاهِرينَ الاَْخْيارِ وَسَلِّمْ تَسْليماً.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الصلاة على النبي (صل الله عليه وآله وسلم)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaAmirAlmo2minin.screenRoute,
           pushBack: AakibZiyaratAl2a2ima.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على النبي.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على النبي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../alziyarat_aljami3a_walsalawat.dart';
@@ -60,7 +60,6 @@ class _AakibZiyaratAl2a2imaState extends State<AakibZiyaratAl2a2ima> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _AakibZiyaratAl2a2imaState extends State<AakibZiyaratAl2a2ima> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -105,69 +104,22 @@ class _AakibZiyaratAl2a2imaState extends State<AakibZiyaratAl2a2ima> {
               },
             ),
           ],
-          title: Text(
-            'فيما يدعى به عقيب زيارات الأئمة (عليهم السلام)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'فيما يدعى به عقيب زيارات الأئمة (عليهم السلام)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'قال السيد ابن طاووس : يستحبّ أن يدعى بهذا الدّعاء عقيب زيارات الائمة (عليهم السلام) :\n\n'
-                      'اَللّـهُمَّ اِنْ كانَتْ ذُنوُبى قَدْ اَخْلَقَتْ وَجْهى عِنْدَكَ وَحَجَبَتْ دُعائى عَنْكَ وَحالَتْ بَيْنى وَبَيْنَكَ، فَاَسْاَلُكَ اَنْ تُقْبِلَ عَلَىَّ بِوَجْهِكَ الْكَريمِ وَتَنْشُرَ عَلَىَّ رَحْمَتَكَ وَتُنَزِّلَ عَلىَّ بَرَكاتِكَ، وَاِنْ كانَتْ قَدْ مَنَعَتْ اَنْ تَرْفَعَ لى اِلَيْكَ صَوتاً اَوْ تَغْفِرَ لى ذَنْباً اَوْ تَتَجاوَزَ عَنْ خَطيئَة مُهْلِكَة فَها اَنَاذا مُسْتَجيرٌ بِكَرَمِ وَجْهِكَ وَعِزِّ جَلالِكَ، مُتَوَسِّلٌ اِلَيْكَ مُتَقَرِّبٌ اِلَيْكَ بِاَحَبِّ خَلْقِكَ اِلَيْكَ وَاَكْرَمِهِمْ عَلَيْكَ وَاَوْلاهُمْ بِكَ، وَاَطْوَعِهِمْ لَكَ، وَاَعْظَمِهِمْ مَنْزِلَةً وَمَكاناً عِنْدَكَ مُحَمَّد، وَبِعِتْرَتِهِ الطّاهِرينَ الاَْئِمَّةِ الْهُداةِ الْمَهْدِيّينَ، الَّذينَ فَرَضْتَ عَلى خَلْقِكَ طاعَتَهُمْ وَاَمَرْتَ بِمَوَدَّتِهِمْ، وَجَعَلْتَهُمْ وُلاةَ الاَْمْرِ مِنْ بَعْدِ رَسُولِكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، يا مُذِلَّ كُلِّ جَبّار عَنيد، وَيا مُعِزَّ الْمُؤْمِنينَ بَلَغَ مَجْهُودى فَهَبْ لى نَفْسِىَ السّاعَةَ وَرَحْمَةً مِنْكَ تَمُنُّ بِها عَلَىَّ يا اَرْحَمَ الرّاحِمينَ.\n\n'
-                      'ثمّ قبّل الضّريح وضع خدّيك عليه وقُل :\n\n'
-                      'اَللّـهُمَّ اِنَّ هذا مَشْهَدٌ لا يَرْجُو مَنْ فاتَتْهُ فيهِ رَحْمَتُكَ اَنْ يَنالَها فى غَيْرِهِ، وَلا اَحَدٌ اَشْقى مِنْ امْرِئ قَصَدَهُ مُؤَمِّلاً فَآبَ عَنْهُ خائِباً، اَللّـهُمَّ اِنّى اَعوُذُ بِكَ مِنْ شَرِّ الاِْيابِ وَخَيْبَةِ الْمُنْقَلَبِ وَالْمُناقَشَةِ عِنْدَ الْحِسابِ، وَحاشاكَ يا رَبِّ اَنْ تَقْرِنَ طاعَةَ وَلِيِّكَ بِطاعَتِكَ وَمُوالاتَهُ بِمُوالاتِكَ وَمَعْصِيَتَهُ بِمَعْصِيَتِكَ ثُمَّ تُؤْيِسْ زآئِرَهُ وَالْمُتَحَمِّلَ مِنْ بُعْدِ الْبِلادِ اِلى قَبْرِهِ، وَعِزَّتِكَ يا رَبِّ لا يَنْعَقِدُ عَلى ذلِكَ ضَميرى، اِذْ كانَتِ الْقُلُوبُ اِلَيْكَ بِالْجَميلِ تُشيرُ.\n\n'
-                      'ثمّ صلّ للزّيارة ، فاذا شئت أن تودع وتنصرف فقُل : اَلسَّلامُ عَلَيْكُمْ يا اَهْلَ بَيْتِ النُّبُوَّةِ وَمَعْدِنَ الرِّسالَةِ سَلامَ مُوَدِّع لا سَئم وَلا قال وَرَحْمَةُ اللهِ وَبَرَكاتُهُ.\n\n'
-                      'والشّيخ المفيد (رحمه الله) ايضاً قد ذكر هذا الدّعاء ولكنّه بعد كلمة (وبالجميل تشير) ، قال : ثمّ قل :\n\n'
-                      'يا وَلِىَّ اللهِ اِنَّ بَيْنى وَبَيْنَ اللهِ عَزَوَجَلَّ ذُنوُباً لا يَأتى عَلَيْها اِلاّ رِضاكَ، فَبِحَقِّ مَنِ ائْتَمَنَكَ عَلى سِرِّهِ، وَاسْتَرْعاكَ اَمْرَ خَلْقِهِ، وَقَرَنَ طاعَتَكَ بِطاعَتِهِ، وَمُوالاتَكَ بِمُوالاتِهِ، تَوَلَّ صَلاحَ حالى مَعَ اللهِ عَزَّوَجَلَّ، وَاجْعَلْ حَظّى مِنْ زِيارَتِكَ تَخْليطى بِخالِصى زُوّارِكَ الَّذينَ تَسْأَلُ اللهَ عَزَّوَجَلَّ فى عِتْقِ رِقابِهِمْ، وَتَرْغَبُ اِلَيْهِ فى حُسْنِ ثَوابِهِمْ، وَها اَنَا الْيَوْمَ بِقَبْرِكَ لائِذٌ، وَبِحُسْنِ دِفاعِكَ عَنّى عائِذٌ، فَتَلافَنى يا مَوْلاىَ وَاَدْرِكْنى وَاَسْأَلِ اللهَ عَزَّوَجَلَّ فى اَمْرى، فَاِنَّ لَكَ عِنْدَاللهِ مَقاماً كَريماً وَجاهاً عَظيماً صَلَّى اللهُ عَلَيْكَ وَسَلَّمَ تَسْليماً.\n\n'
-                      'أقول : الافضل للزّائر اذا أراد أن يدعو في مشهد من المشاهد الشّريفة بل الافضل للدّاعي أينما كان وأيّا ما كانت حاجته ، أن يبدأ بالدّعاء لصحّة حجّة العصر وصاحب الامر (عليه السلام) وهذا أمر هامّ ذا فوائد هامّة لا يناسب المقام شرحها والشّيخ (رحمه الله) قد بسط الكلام في ذلك في الباب العاشر من كتاب النّجم الثّاقب وذكر أدعية تخصّ المقام فليراجعه من شاء، وأخصر تلك الدّعوات هو ما مرّ في أعمال اللّيلة الثّالثة والعشرين من شهر رمضان في خلال أدعية العشر الاواخر ونحن قد أوردنا في خلال آداب زيارة الحسين (عليه السلام) دعاء يدعى به في كافّة المشاهد الشّريفة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'فيما يدعى به عقيب زيارات الأئمة (عليهم السلام)',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Alsalat3alaAlnabi.screenRoute,
           pushBack: MaYozarKol2imam.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ما يدعى به عقيب زيارة الأئمة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ما يدعى به عقيب زيارة الأئمة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

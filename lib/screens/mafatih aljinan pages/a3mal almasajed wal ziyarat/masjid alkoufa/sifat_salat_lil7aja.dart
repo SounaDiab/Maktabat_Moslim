@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -59,7 +59,6 @@ class _SifatSalatLil7ajaState extends State<SifatSalatLil7aja> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _SifatSalatLil7ajaState extends State<SifatSalatLil7aja> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,65 +102,21 @@ class _SifatSalatLil7ajaState extends State<SifatSalatLil7aja> {
               },
             ),
           ],
-          title: Text(
-            'صفة صلاة للحاجة في المحل المذكور',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صفة صلاة للحاجة في المحل المذكور'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'تصلّي أربع ركعات فاذا فرغت وسبّحت فقُل :',
-                  subtitle:
-                      'اَللّـهُمَّ اِنّي اَسْاَلُكَ يا مَنْ لا تَراهُ الْعُيُونُ، وَلا تُحيطُ  بِهِ الظُّنوُنُ وَلا يَصِفُهُ الواصِفُونَ، وَلا تُغَيِّرُهُ الْحَوادِثُ، وَلا تُفْنيهِ الدُّهُورُ، تَعْلَمُ مَثاقيلَ الْجِبالِ، وَمَكائيلَ الْبِحارِ، وَوَرَقَ الاَْشْجارِ، وَرَمْلَ الْقِفارِ، وَما اَضأَتْ بِهِ الشَّمْسُ وَالْقَمَرُ، وَاَظْلَمَ عَلَيْهِ اللَّيْلُ، وَوَضَحَ عَلَيْهِ النَّهارُ، وَلا تُواري مِنْكَ سَماءٌ سَماءً، وَلا اَرْضٌ اَرْضاً، وَلا جَبَلٌ ما في اَصْلِهِ، وَلا بَحْرٌ ما في قَعْرِهِ، اَسْاَلُكَ اَنْ تُصَلِّيَ عَلى مُحَمَّد وَآلِ مُحَمَّد، وَاَنْ تَجْعَلَ خَيْرَ اَمْري آخِرَهُ، وَخَيْرَ اَعْمالي خَواتيمَها، وَخَيْرَ اَيّامي يَوْمَ اَلْقاكَ، اِنَّكَ عَلى كُلِّ شَيْء قَديرُ، اَللّـهُمَّ مَنْ اَرادَني بِسُوء فَاَرِدْهُ، وَمَنْ كادَني فَكِدْهُ، وَمَنْ بَغاني بِهَلَكَة '
-                      'فَاَهْلِكْهُ، وَاكْفِني ما اَهَمَّني مِمَّنْ دَخَلَ هَمُّهُ عَلَيَّ، اَللّـهُمَّ اَدْخِلْني في دِرْعِكَ الْحَصينَةِ، وَاسْتُرْني بِسِتْرِكَ الْواقي، يا مَنْ يَكْفي مِنْ كُلِّ شَيْء وَلا يَكْفي مِنْهُ شَيْءٌ، اِكْفِني ما اَهَمَّني مِنْ اَمْرِ الدُّنْيا وَالاْخِرَةِ، وَصَدِّقْ قَوْلي وَفِعْلي يا شَفيقُ يا رَفيقُ فَرِّجْ عَنِّي الْمَضيقَ وَلا تُحَمِّلْني ما لا اُطيقُ، اَللّـهُمَّ احْرُسْني بِعَيْنِكَ الَّتي لا تَنامُ، وَارْحَمْني بِقُدْرَتِكَ عَلَيَّ يا اَرْحَمَ الرّاحِمينَ، يا عَلِيُّ يا عَظيمُ اَنْتَ عالِمٌ بِحاجَتي وَعَلى قَضائِها قَديرٌ، وَهِيَ لَدَيْكَ يَسيرٌ، وَاَنَا اِلَيْكِ فَقيرٌ فَمُنَّ بِها عَليَّ يا كَريمُ اِنَّكَ عَلى كُلِّ شَيْء قَديرُ.\n\n'
-                      'ثمّ تسجد وتقول : اِلْهي قَدْ عَلِمْتَ حَوائِجي فَصَلِّ عَلى مُحَمَّد وَآلِ محمد واقضيها وقَدْ أحصيَتَ ذُنُوبي فصلِّ على محمد وآلهِ  وَاغْفِرها يا كَريمُ ثم تقلب خدك الايمن وتقول : إن كنت بِئسَ العبدُ فأنتَ نِعْمَ الربُّ افعل بي ما أنتَ أهْلُهُ ولا تفعلْ بي ما أنا أهلُهُ يا أرْحَمَ الرَّحِمينَ، ثم تقلّب خدِك الايسر وتقول : اللّهمَّ إن عَظُيمَ الذّنبُ منَ عَبدِك فَلْيَحْسُن العَفْوُ مِنْ عِنْدِك ياكريم، ثمّ تعود الى السّجود وتقول : اِرْحَمْ مَنْ اَساءَ وَاقْتَرَفَ، وَاسْتَكانَ وَاعْتَرَفَ.\n\n'
-                      'أقول : هذا الدعاء الى كلمة وَاغْفِرها يا كَريمُ هو الدّعاء الوارد في كتاب المزار القديم في عمل مقام الامام زين العابدين (عليه السلام) في أعمال صحن مسجد السّهلة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'صفة صلاة للحاجة في المحل المذكور',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malMi7rabAmirAlmo2minin.screenRoute,
           pushBack: SifatSalat.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صفة صلاة للحاجة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صفة صلاة للحاجة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

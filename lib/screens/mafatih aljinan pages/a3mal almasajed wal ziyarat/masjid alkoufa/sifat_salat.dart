@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../fadl_lakoufa_wmasjidoha.dart';
@@ -59,7 +59,6 @@ class _SifatSalatState extends State<SifatSalat> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _SifatSalatState extends State<SifatSalat> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -91,73 +90,31 @@ class _SifatSalatState extends State<SifatSalat> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('صفة صلاة أخرى في هذا المقام',
+                      .addFavorite('صفة صلاة اخرى في هذا المقام',
                           SifatSalat.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('صفة صلاة أخرى في هذا المقام',
+                      .removeFavorite('صفة صلاة اخرى في هذا المقام',
                           SifatSalat.screenRoute, SifatSalat.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'صفة صلاة أخرى في هذا المقام',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صفة صلاة اخرى في هذا المقام'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'وهي ركعتان فاذا فرغت منها وسبّحت فقل :',
-                  subtitle:
-                      'اَللّـهُمَّ اِنّي حَلَلْتُ بِساحَتِكَ لِعِلْمي بِوَحْدانِيَّتِكَ وَصَمَدانِيَّتِكَ، وَاَنَّهُ لا قادِرً عَلى قَضاءِ حاجَتي غَيْرُكَ، وَقَدْ عَلِمْتُ يا رَبِّ اَنَّهُ كُلَّما شاهَدْتُ نِعْمَتَكَ عَلَيَّ اشْتَدَّتْ فاقَتي اِلَيْكَ، وَقَدْ طَرَقَني يا رَبِّ مِنْ مُهِمِّ اَمْري ما قَدْ عَرَفْتَهُ، لاَِنَّكَ عالِمٌ غَيْرُ مُعَلَّم وَاَسْاَلُكَ بِالاِْسْمِ الَّذي وَضَعْتَهُ عَلَى السَّماواتِ فَانْشَقَّتْ، وَعَلَى الاَْرْضَينَ فَانْبَسَطَتْ، وَعَلَى النُّجُومِ فَانْتَشَرَتْ، وَعَلَى الْجِبالِ فَاسْتَقَرَّتْ، وَاَسْاَلُكَ بِالاِْسْمِ الَّذي جَعَلْتَهُ عِنْدَ مُحَمَّدّ وَعِنْدَ عَلِيٍّ وَعِنْدَ الْحَسَنِ وَعِنْدَ الْحُسَيْنِ وَعِنْدَ الاَْئِمَّةَ كُلِّهِمْ صَلَواتُ اللهِ عَلَيْهِمْ اَجْمَعينَ، اَنْ تُصَلِّيَ عَلى مُحَمَّد وَآلِ مُحَمَّد وَاَنْ تَقْضِيَ لي يا رَبِّ حاجَتي، وَتُيَسِّرَ عَسيرَها، وَتَكْفِيَني مُهِمَّها، وَتَفْتَحَ لي قُفْلَها، فَاِنْ فَعَلْتَ ذلِكَ فَلَكَ الْحَمْدُ، وَاِنْ لَمْ تَفْعَلْ فَلَكَ الْحَمْدُ غَيْرَ جائِر في حُكْمِكَ وَلا حائِف في عَدْلِكَ.\n\n'
-                      'ثمّ تبسط خدّك الايمن على الارضِ وتقول : اَللّـهُمَّ اِنَّ يُونُسَ بْنَ مَتّى عَبْدَكَ وَنَبِيَّكَ دَعاكَ في بَطْنِ الْحُوتِ فَاسْتَجَبْتَ لَهُ، وَاَنَا اَدْعُوكَ فَاسْتَجِبْ لي بِحَقِّ مُحَمَّد وَآلِ مُحَمَّد، وتدعو بما تحبّ ثمّ تقلّب خدّك الايسر وتقول : اَللّـهُمَّ اِنَّكَ اَمَرْتَ بِالدُّعاءِ وَتَكَفَّلْتَ بِالاِْجابَةِ، وَاَنَا اَدْعُوكَ كَما اَمَرْتَني فَصَلِّ عَلى مُحَمَّد وَآلِ مُحَمَّد وَاسْتَجِبْ لي كَما وَعَدْتَني يا كَريمُ ثمّ تعود الى السجود وتقول : يا مُعِزَّ كُلِّ ذَليل، وَيا مُذِلَّ كُلِّ عَزيز، تَعْلَمُ كُرْبَتي فَصَلِّ عَلى مُحَمَّد وَآلِ مُحَمَّد وَفَرِّجْ عَنّي يا كَريمُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'صفة صلاة اخرى في هذا المقام',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SifatSalatLil7aja.screenRoute,
           pushBack: A3malBabAlfaraj.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صفة صلاة اخرى.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صفة صلاة اخرى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
