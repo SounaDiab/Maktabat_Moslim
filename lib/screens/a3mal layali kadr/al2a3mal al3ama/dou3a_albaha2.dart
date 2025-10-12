@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/a3mal%20layali%20kadr/al2a3mal_al3ama.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../a3mal%20layali%20kadr/al2a3mal_al3ama.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import 'a3mal_ashar_ramdan.dart';
@@ -43,7 +43,7 @@ class _Dou3aAlbaha2State extends State<Dou3aAlbaha2> {
     await prefs.setBool('isFavorite_dou32_albaha2_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -58,7 +58,6 @@ class _Dou3aAlbaha2State extends State<Dou3aAlbaha2> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,14 +79,14 @@ class _Dou3aAlbaha2State extends State<Dou3aAlbaha2> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('دعاء البهاء', Dou3aAlbaha2.screenRoute);
@@ -99,47 +98,22 @@ class _Dou3aAlbaha2State extends State<Dou3aAlbaha2> {
               },
             ),
           ],
-          title: Text(
-            'دعاء البهاء',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء البهاء'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ بَهائِكَ بِأَبْهاهُ، وَكُلُّ بَهائِكَ بَهِيٌّ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِبَهائِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ جَمالِكَ بِأَجْمَلِهِ، وَكُلُّ جَمالِكَ جَمِيلٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِجَمالِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ جَلالِكَ بِأَجَلِّهِ، وَكُلُّ جَلالِكَ جَلِيلٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِجَلالِكَ كُلِّهِ.اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ عَظَمَتِكَ بِأَعْظَمِها، وَكُلُّ عَظَمَتِكَ عَظِيمَةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِعَظَمَتِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ نُورِكَ بِأَنْوَرِهِ، وَكُلُّ نُورِكَ نَيِّرٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِنُورِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ رَحْمَتِكَ بِأَوْسَعِها، وَكُلُّ رَحْمَتِكَ واسِعَةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِرَحْمَتِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ كَلِماتِكَ بِأَتَمِّها، وَكُلُّ كَلِماتِكَ تامَّةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِكَلِماتِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ كَمالِكَ بِأَكْمَلِهِ، وَكُلُّ كَمالِكَ كامِلٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِكَمالِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ أَسْمائِكَ بِأَكْبِرِها، وَكُلُّ أَسْمائِكَ كَبِيرَةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِأَسْمائِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ عِزَّتِكَ بِأَعَزِّها، وَكُلُّ عِزَّتِكَ عَزِيزَةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِعِزَّتِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ مَشِيئَتِكَ بِأَمْضاها، وَكُلُّ مَشِيئَتِكَ ماضِيَةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِمَشِيئَتِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ قُدْرَتِكَ بِالْقُدْرَةِ الَّتِي اسْتَطَلْتَ بِها عَلَى كُلِّ شَيْءٍ، وَكُلُّ قُدْرَتِكَ مُسْتَطِيلَةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِقُدْرَتِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ عِلْمِكَ بِأَنْفَذِهِ، وَكُلُّ عِلْمِكَ نافِذٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِعِلْمِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ قَوْلِكَ بِأَرْضاهُ، وَكُلُّ قَوْلِكَ رَضِيٌّ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِقَوْلِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ مَسائِلِكَ بِأَحَبِّها إِلَيْكَ، وَكُلُّ مَسائِلِكَ إِلَيْكَ حَبِيبةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِمَسائِلِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ شَرَفِكَ بِأَشْرَفِهِ، وَكُلُّ شَرَفِكَ شَرِيفٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِشَرَفِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ سُلْطانِكَ بِأَدْوَمِهِ، وَكُلُّ سُلْطانِكَ دائِمٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِسُلْطانِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ مُلْكِكَ بِأَفْخَرِهِ، وَكُلُّ مُلْكِكَ فاخِرٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِمُلْكِكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ عُلُوِّكَ بِأَعْلاهُ، وَكُلُّ عُلُوِّكَ عالٍ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِعُلُوِّكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ مَنِّكَ بِأَقْدَمِهِ، وَكُلُّ مَنِّكَ قَدِيمٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِمَنِّكَ كُلِّهِ. اللّهُمَّ، إِنِّي أَسْأَلُكَ مِنْ آياتِكَ بِأَكْرَمِها، وَكُلُّ آياتِكَ كَرِيمَةٌ، اللّهُمَّ، إِنِّي أَسْأَلُكَ بِآياتِكَ كُلِّها. اللّهُمَّ، إِنِّي أَسْأَلُكَ بِما أَنْتَ فِيهِ مِنَ الشَّأْنِ وَالْجَبَرُوتِ، وَأَسْأَلُكَ بِكُلِّ شَأْنٍ وَحْدَهُ وَجَبَرُوتٍ وَحْدَها. اللّهُمَّ، إِنِّي أَسْأَلُكَ بِما تُجِيبُنِي بِهِ حِينَ أَسْأَلُكَ، فَأَجِبْنِي يا اللهُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'دعاء البهاء',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2AbiHamzaAlsamali.screenRoute,
           pushBack: A3malAsharRamdan.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء البهاء.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء البهاء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

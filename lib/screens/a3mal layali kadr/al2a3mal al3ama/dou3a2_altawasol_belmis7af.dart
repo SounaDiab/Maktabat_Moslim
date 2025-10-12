@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al3ama.dart';
@@ -16,7 +15,8 @@ class Dou3a2AltawasolBelmis7af extends StatefulWidget {
   const Dou3a2AltawasolBelmis7af({super.key});
 
   @override
-  State<Dou3a2AltawasolBelmis7af> createState() => _Dou3a2AltawasolBelmis7afState();
+  State<Dou3a2AltawasolBelmis7af> createState() =>
+      _Dou3a2AltawasolBelmis7afState();
 }
 
 double _fontSize = 18;
@@ -32,7 +32,8 @@ class _Dou3a2AltawasolBelmis7afState extends State<Dou3a2AltawasolBelmis7af> {
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState = prefs.getBool('isFavorite_dou3a2_altawasol_belmis7af_screen');
+    bool? savedState =
+        prefs.getBool('isFavorite_dou3a2_altawasol_belmis7af_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -43,7 +44,7 @@ class _Dou3a2AltawasolBelmis7afState extends State<Dou3a2AltawasolBelmis7af> {
     await prefs.setBool('isFavorite_dou3a2_altawasol_belmis7af_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -58,7 +59,6 @@ class _Dou3a2AltawasolBelmis7afState extends State<Dou3a2AltawasolBelmis7af> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,66 +80,44 @@ class _Dou3a2AltawasolBelmis7afState extends State<Dou3a2AltawasolBelmis7af> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء التوسل بالمصحف', Dou3a2AltawasolBelmis7af.screenRoute);
+                      .addFavorite('دعاء التوسل بالمصحف',
+                          Dou3a2AltawasolBelmis7af.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('دعاء التوسل بالمصحف', Dou3a2AltawasolBelmis7af.screenRoute,
+                      .removeFavorite(
+                          'دعاء التوسل بالمصحف',
+                          Dou3a2AltawasolBelmis7af.screenRoute,
                           Dou3a2AltawasolBelmis7af.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء التوسل بالمصحف',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء التوسل بالمصحف'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'ثمّ تأخذ المصحف فتنشره وتضعه بين يديك، وتقول:"اللّهُمَّ، إِنّي أَسْأَلُكَ بِكِتَابِكَ الْمُنْزَلِ وَمَا فِيهِ، وَفيهِ اسْمُكَ الأَكْبَرُ، وَأَسْمَاؤُكَ الْحُسْنَى، وَمَا يُخَافُ وَيُرْجَى، أَنْ تَجْعَلَني مِنْ عُتَقَائِكَ مِنَ النّارِ" وتدعو بما بدا لك من حاجة.ثم تضع المصحف على رأسك، وقل:"اللّهُمَّ، بِحَقِّ هَذَا الْقُرْآنِ، وَبِحَقِّ مَنْ أَرْسَلْتَهُ بِهِ، وَبِحَقِّ كُلِّ مُؤْمِنٍ مَدَحْتَهُ فِيهِ، وَبِحَقِّكَ عَلَيْهِمْ، فَلا أَحَدَ أَعْرَفُ بِحَقِّكَ مِنْكَ".ثمّ قل عشر مرات: "بِكَ يَا اللّه"، وعشر مرات "بِمُحَمَّدٍ صلى الله عليه وآله وسلم"، وعشر مرات "بِعَلِيٍّ عليه السلام"، وعشر مرَّات "بِفَاطِمَةَ عليها السلام"، وعشر مرات "بِالْحَسَنِ عليه السلام"، وعشر مرات "بِالحُسَيْنِ عليه السلام"، وعشر مرات "بِعَلِيِّ بْنِ الحُسَيْنِ عليه السلام"، وعشر مرات "بِمُحَمَّدِ بْنِ عَلِيٍّ عليه السلام"، وعشر مرات "بِجَعْفَرِ بْنِ مُحَمَّدٍ عليه السلام" وعشر مرات "بِمُوسَى بْنِ جَعْفَرٍ عليه السلام"، وعشر مرات "بِعَلِيِّ بْنِ مُوسى عليه السلام"، وعشر مرات "بِمُحَمَّد بْنِ عَلِيٍّ عليه السلام"، وعشر مرات "بِعَلِيِّ بْنِ مُحَمَّدٍ عليه السلام"، وعشر مرات "بِالْحَسَنِ بْنِ عَلِيٍّ عليه السلام"، وعشر مرات "بِالحُجَّةِ عجل الله تعالى فرجه الشريف" وتسأل حاجتك.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'دعاء التوسل بالمصحف',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAl2imamAlhussein.screenRoute,
           pushBack: SalatRok3atain.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء التوسل بالمصحف.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء التوسل بالمصحف.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

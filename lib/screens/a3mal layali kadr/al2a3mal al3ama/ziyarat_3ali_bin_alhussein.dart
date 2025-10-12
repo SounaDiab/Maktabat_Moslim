@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al3ama.dart';
@@ -45,7 +45,7 @@ class _Ziyarat3aliBinAlhusseinState extends State<Ziyarat3aliBinAlhussein> {
     await prefs.setBool('isFavorite_ziyarat_3ali_bin_alhussein_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -60,7 +60,6 @@ class _Ziyarat3aliBinAlhusseinState extends State<Ziyarat3aliBinAlhussein> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,14 +81,14 @@ class _Ziyarat3aliBinAlhusseinState extends State<Ziyarat3aliBinAlhussein> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('زيارة علي بن الحسين عليه السلام',
@@ -104,47 +103,22 @@ class _Ziyarat3aliBinAlhusseinState extends State<Ziyarat3aliBinAlhussein> {
               },
             ),
           ],
-          title: Text(
-            'زيارة علي بن الحسين عليه السلام',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'زيارة علي بن الحسين عليه السلام'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'السَّلامُ عَلَيْكَ يا مَوْلايَ وَابْنَ مَوْلاَيَ وَرَحْمَةُ اللهِ وَبَرَكاتُهُ لَعَنَ اللهُ مَنْ ظَلَمَكَ وَلَعَنَ اللهُ مَنْ قَتَلَكَ وَضاعَفَ عَلَيْهِمُ الْعَذابَ الأَلِيمَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'زيارة علي بن الحسين عليه السلام',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAlshohada.screenRoute,
           pushBack: ZiyaratAl2imamAlhussein.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة علي بن الحسين عليه السلام.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة علي بن الحسين عليه السلام.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

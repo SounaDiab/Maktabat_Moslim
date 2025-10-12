@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al3ama.dart';
@@ -43,7 +43,7 @@ class _Dou3a2YaMafza3iState extends State<Dou3a2YaMafza3i> {
     await prefs.setBool('isFavorite_dou32_ya_mafza3i_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -58,7 +58,6 @@ class _Dou3a2YaMafza3iState extends State<Dou3a2YaMafza3i> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,17 +79,18 @@ class _Dou3a2YaMafza3iState extends State<Dou3a2YaMafza3i> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء يا مفزعي', Dou3a2YaMafza3i.screenRoute);
+                      .addFavorite(
+                          'دعاء يا مفزعي', Dou3a2YaMafza3i.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -101,47 +101,22 @@ class _Dou3a2YaMafza3iState extends State<Dou3a2YaMafza3i> {
               },
             ),
           ],
-          title: Text(
-            'دعاء يا مفزعي',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء يا مفزعي'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'يا مَفْزَعِي عِنْدَ كُرْبَتِي، وَيا غَوْثِي عِنْدَ شِدَّتِي، إِلَيْكَ فَزِعْتُ، وَبِكَ اسْتَغَثْتُ، وَبِكَ لُذْتُ، لا أَلُوذُ بِسِواكَ، وَلا أَطْلُبُ الْفَرَجَ إِلّا مِنْكَ، فَأَغِثْنِي، وَفَرِّجْ عَنِّي، يا مَنْ يَقْبَلُ الْيَسِيرَ، وَيَعْفُو عَنِ الْكَثِيرَ، اقْبَلْ مِنِّيَ الْيَسِيرَ، وَاعْفُ عَنِّيَ الْكَثِيرَ، إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ. اللّهُمَّ، إِنِّي أَسْأَلُكَ إِيْماناً تُباشِرُ بِهِ قَلْبِي، وَيَقِيناً حَتَّى أَعْلَمَ أَنَّهُ لَنْ يُصِيبَنِي إِلّا ما كَتَبْتَ لِي، وَرَضِّنِي مِنَ الْعَيْشِ بِما قَسَمْتَ لِي، يا أَرْحَمَ الرَّاحِمِينَ. يا عُدَّتِي فِي كُرْبَتِي، وَيا صَاحِبِي فِي شِدَّتِي، وَيا وَلِيِّي فِي نِعْمَتِي، وَيا غايَتِي فِي رَغْبَتِي، أَنْتَ السَّاتِرُ عَوْرَتِي، وَالآمِنُ رَوْعَتِي، وَالْمُقِيلُ عَثْرَتِي، فَاغْفِرْ لِي خَطِيئَتِي، يا أَرْحَمَ الرَّاحِمِينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'دعاء يا مفزعي',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Altasbihat.screenRoute,
           pushBack: Dou3a2Idris.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا مفزعي.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا مفزعي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

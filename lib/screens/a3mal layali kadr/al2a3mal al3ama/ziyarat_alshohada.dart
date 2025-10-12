@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al3ama.dart';
@@ -43,7 +43,7 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
     await prefs.setBool('isFavorite_ziyarat_alshohada_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -58,7 +58,6 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,14 +79,14 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('زيارة الشهداء (رضوان الله عليهم)',
@@ -102,47 +101,22 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
               },
             ),
           ],
-          title: Text(
-            'زيارة الشهداء (رضوان الله عليهم)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'زيارة الشهداء (رضوان الله عليهم)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'السَّلامُ عَلَيْكُمْ أَيُّها الصِّدِّيقُونَ السَّلامُ عَلَيْكُمْ أَيُّها الشُّهَداءُ الصَّابِرُونَ أَشْهَدُ أَنَّكُمْ جاهَدْتُمْ فِي سَبِيلِ اللهِ وَصَبَرْتُمْ عَلَى الأَذَى فِي جَنْبِ اللهِ وَنَصَحْتُمْ لِلَّهِ وَلِرَسُولِهِ حَتَّى أَتَاكُمُ الْيَقِينُ أَشْهَدُ أَنَّكُمْ أَحْياءٌ عِنْدَ رَبِّكُمْ تُرْزَقُونَ فَجَزاكُمُ اللهُ عَنِ الإِسْلامِ وَأَهْلِهِ أَفْضَلَ جَزاءِ الْمُحْسِنِينَ وَجَمَعَ بَيْنَنا وَبَيْنَكُمْ فِي مَحَلِّ النَّعِيمِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'زيارة الشهداء (رضوان الله عليهم)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAbiAlfadl.screenRoute,
           pushBack: Ziyarat3aliBinAlhussein.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الشهداء.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الشهداء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
