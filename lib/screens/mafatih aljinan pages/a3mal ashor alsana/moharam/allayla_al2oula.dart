@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../moharam.dart';
@@ -58,7 +58,6 @@ class _AllaylaAl2oulaState extends State<AllaylaAl2oula> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,7 +79,7 @@ class _AllaylaAl2oulaState extends State<AllaylaAl2oula> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -90,147 +89,69 @@ class _AllaylaAl2oulaState extends State<AllaylaAl2oula> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الليلة الأولى', AllaylaAl2oula.screenRoute);
+                      .addFavorite('الليلة الاولى', AllaylaAl2oula.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الليلة الأولى',
+                          'الليلة الاولى',
                           AllaylaAl2oula.screenRoute,
                           AllaylaAl2oula.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الليلة الأولى',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الليلة الاولى'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الليلة الاولى',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
+        ),
+        bottomNavigationBar: AddCustomBottomNavigationBar(
+          pushNext: AlyawmAl2awal.screenRoute,
+          pushBack: FiA3malShaherMoharam.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الاولى.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
                 child: Text(
-                  'روى لها السّيد في الاقبال عدّة صلوات :',
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
                   style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: isTablet ? _fontSizeTablet + 4 : _fontSize - 1,
-                    color: const Color.fromARGB(255, 17, 126, 20),
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
                 ),
               ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الاولى :',
-                  subtitle: 'مائة ركعة يقرأ في كلّ ركعة الحمد والتّوحيد.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثّانية :',
-                  subtitle:
-                      'ركعتان في الاولى منها الحمد وسورة الانعام وفي الثّانية الحمد وسورة يس.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
+                1,
               ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثّالث :',
-                  subtitle:
-                      'ركعتان في كلّ منهما الحمد واحدى عشرة مرّة قُلْ هُوَ اللهُ اَحَدٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'في الحديث عن النّبي (صلى الله عليه وآله وسلم) قال : من أدّى هذه الصّلاة في هذه اللّيلة وصام صبيحتها وهو أوّل يوم من السّنة فهو كمن يدوم على الخير سنة ولا يزال محفوظاً من السّنة الى قابل فاِن ماتَ قبل ذلك صار الى الجنّة وأورد السيّد أيضاً دعاء مبسُوطاً يدعى به عند رؤية الهلال في هذه اللّيلة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
         ),
-        bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: AlyawmAl2awal.screenRoute,
-        pushBack: FiA3malShaherMoharam.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الاولى.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
       ),
     );
   }

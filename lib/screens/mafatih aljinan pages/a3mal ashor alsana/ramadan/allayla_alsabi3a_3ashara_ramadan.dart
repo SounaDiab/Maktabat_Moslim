@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
-import 'package:maktabat_almoslim/widgets/she3er.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
+import '../../../../widgets/scroll_title.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ramadan.dart';
@@ -63,7 +62,6 @@ class _AllaylaAlsabi3a3asharaRamadanState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +83,7 @@ class _AllaylaAlsabi3a3asharaRamadanState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,135 +93,70 @@ class _AllaylaAlsabi3a3asharaRamadanState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الليلة السابعة عشرة',
+                      .addFavorite('الليلة السابعة عشر',
                           AllaylaAlsabi3a3asharaRamadan.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الليلة السابعة عشرة',
+                          'الليلة السابعة عشر',
                           AllaylaAlsabi3a3asharaRamadan.screenRoute,
                           AllaylaAlsabi3a3asharaRamadan.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الليلة السابعة عشرة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الليلة السابعة عشر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'ليلة مباركة جدّاً وفيها تقابل الجيشان في بدر ، جيش رسول الله (صلى الله عليه وآله وسلم) وجيش كفّار قريش، وفي يومها كانت غزوة بدر ونصر الله جيش رسول الله (صلى الله عليه وآله وسلم) على المشركين وكان ذلك أعظم فتوح الاسلام ولذلك قال علماؤنا يستحبّ الاكثار من الصّدقة والشّكر في هذا اليوم وللغسل والعبادة في ليله أيضاً فضل عظيم.\n\n'
-                      'أقول : في روايات عديدة انّ النّبي (صلى الله عليه وآله وسلم) قال لاصحابه ليلة بدر من منكم يمضي في هذه اللّيلة الى البئر فيستقي لنا؟ فصمتوا ولم يقدم منهم أحد على ذلك، فأخذ امير المؤمنين (عليه السلام) قربة وانطلق يبغي الماء، وكانت ليلة ظلمآء باردة ذات رياح حتّى ورد البئر وكان عميقاً مظلماً، فلم يجد دلواً يستقي به فنزل في البئر وملا القربة، فارتقى وأخذ في الرّجوع، فعصفت عليه عاصفة جلس على الارض لشدّتها حتّى سكنت، فنهض واستأنف المسير واذا بعاصفة كالاولى تعترض طريقه فتجلسه على الارض، فلمّا هدأت العاصفة قام يواصل مسيره واذا بعاصفة ثالثة تعصف عليه فجلس على الارض، فلمّا زالت عنه قام وسلك طريقه حتّى بلغ النّبي (صلى الله عليه وآله وسلم) فسأله النّبي (صلى الله عليه وآله وسلم) فقال : يا أبا الحسن لماذا أبطأت ؟ فقال : عصفت عليّ عواصف ثلاث زعزعتني فمكثت لكي تزول ، فقال (صلى الله عليه وآله وسلم) : وهل علمت ما هي تلك العواصف يا علي ؟ فقال (عليه السلام) : لا ، فقال (صلى الله عليه وآله وسلم) : كانت العاصفة الاولى جبرئيل ومعه ألف ملك سلّم عليك وسلّموا، والثّانية كانت ميكائيل ومعه ألف ملك سلّم عليك وسلّموا، والثّالثة قد كانت اسرافيل ومعه ألف ملك سلّم عليك وسلّموا، وكلّهم قد هبطوا مدداً لنا.\n\n'
-                      'أقول : الى هذا قد أشار من قال انّها كانت لامير المؤمنين (عليه السلام) ثلاثة آلاف منقبة في ليلة واحدة ويشير اليه السّيد الحميري في مدحه له (عليه السلام) في الشّعر :',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: She3er(
-                  subtitle: 'اُقسِمُ بِاللهِ وَآلائِهِ\n'
-                      'وَالْمَرْءُ عَمّا قالَ مَسْؤُولُ\n\n'
-                      'اِنَّ عَلِىَّ بنَ اَبى طالِب\n'
-                      'عَلَى التُّقى وَالْبِرِّ مَجْبُولُ\n\n'
-                      'كانَ اِذَا الْحَربُ مَرَتْهَا الْقَنا\n'
-                      'وَاَحَجَمَتْ عَنْهَا البَهاليلُ\n\n'
-                      'يَمْشي اِلَى الْقِرْنِ وَفي كَفِّهِ\n'
-                      'اَبْيَضُ ماضِي الْحَدِّ مَصْقُولٌ\n\n'
-                      'مَشْيَ الْعَفَرْنا بَيْنَ اَشْبالِهِ\n'
-                      'اَبْرَزَهُ لِلْقَنَصِ الْغيلُ\n\n'
-                      'ذاكَ الَّذي سَلَّمَ في لَيْلَة\n'
-                      'عَلَيْهِ ميكالٌ وَجِبْريلُ\n\n'
-                      'ميكالُ في اَلْف وَجِبْريلُ في\n'
-                      'اَلْفِ وَيَتْلُوهُمْ سَرافيلُ\n\n'
-                      'لَيْلَةَ بَدْر مَدَداً اُنْزِلُوا\n'
-                      'كَاَنَّهُمْ طَيْرٌ اَبابيلُ',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'الليلة السابعة عشر',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: A3malAllailaAltasi3a3asharaRamadan.screenRoute,
-        pushBack: YawmAlnisfMenRamadan.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة السابعة عشرة من رمضان.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
+          pushNext: A3malAllailaAltasi3a3asharaRamadan.screenRoute,
+          pushBack: YawmAlnisfMenRamadan.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة السابعة عشرة من رمضان.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
               ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ),
       ),
     );
   }

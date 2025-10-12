@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../zi_lhoja.dart';
@@ -59,7 +59,6 @@ class _AlyawmAl3ashirZilhojaState extends State<AlyawmAl3ashirZilhoja> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _AlyawmAl3ashirZilhojaState extends State<AlyawmAl3ashirZilhoja> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,153 +102,58 @@ class _AlyawmAl3ashirZilhojaState extends State<AlyawmAl3ashirZilhoja> {
               },
             ),
           ],
-          title: Text(
-            'اليوم العاشر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'اليوم العاشر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20),
+        body: BlocBuilderMafatihAljinan(
+          text: 'اليوم العاشر',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
+        ),
+        bottomNavigationBar: AddCustomBottomNavigationBar(
+          pushNext: AlyawmAl5amis3asharZilhoja.screenRoute,
+          pushBack: AllaylaAl3ashiraZilhoja.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم العاشر من ذي الحجة.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
                 child: Text(
-                  'يوم عيد الاضحى وهو يوم ذو شرافة بالغة واعماله عديدة :',
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
                   style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: isTablet ? _fontSizeTablet + 4 : _fontSize - 1,
-                    color: const Color.fromARGB(255, 17, 126, 20),
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
                 ),
               ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الاوّل :',
-                  subtitle:
-                      'الغُسل وهو سنّة مؤكّدة في هذا اليوم وقد أوجبه بعض العلماء.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثّاني :',
-                  subtitle:
-                      'أداء صلاة العيد كما وصفناها في عيد الفطر ولكن يستحبّ أن يؤخّر في هذا اليوم الافطار عن الصّلاة كما يستحبّ أن يفطر على لحم الاضحية.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
+                1,
               ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثّالث :',
-                  subtitle:
-                      'قراءة الدّعوات المأثورة قبل صلاة العيد وبعدها وهي مذكورة في كتاب الاقبال، ولعلّ أفضل الادعية في هذا اليوم هو الدّعاء الثّامن والاربعون من الصّحيفة الكاملة أوّلها اَللّـهُمَّ هـذا يَوْمٌ مُبارَكٌ فادع به وادع أيضاً بالدّعاء السّادس والاربعين يا مَنْ يَرْحَمُ مَنْ لا يَرْحَمُهُ الْعِبادُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الرّابع :',
-                  subtitle: 'قراءة دعاء النّدبة وسيأتي ان شاء الله تعالى.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الخامس :',
-                  subtitle: 'التّضحية وهي سنّة مؤكّدة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'السّادس :',
-                  subtitle:
-                      'أن يكبرّ بالتّكبيرات الاتية عقيب خمس عشرة فريضة اوّلها فريضة ظهر العيد وآخرها فريضة فجر اليوم الثّالث عشر ، هذا لمن كان في مِنى وأمّا من كان في سائر البلاد فيكبر بها عقيب عشر فرائض تبدأ من فريضة ظهر العيد وتنتهي بفجر اليوم الثّاني عشر والتّكبيرات على رواية الكافي الصّحيحة كما يلي : اللهُ اَكْبَرُ اللهُ اَكْبَرُ لا اِلـهَ اِلاَّ اللهُ، وَاللهُ اَكْبَرُاللهُ اَكْبَرُاللهُ اَكْبَرُ وللهِ الْحَمْدُ، اللهُ اَكْبَرُ عَلى ما هَدانا، اَللهُ اَكْبَرُ عَلى ما رَزَقَنا مِنْ بَهيمَةِ الاَنْعامِ، وَالْحَمْدُ للهِ عَلى ما اَبْلانا ويستحبّ تكرار هذه التكبيرات عقيب الفرائض ما تيسّر، كما يستحبّ التّكبير بها بعد النّوافل أيضاً.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
         ),
-        bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: AlyawmAl5amis3asharZilhoja.screenRoute,
-        pushBack: AllaylaAl3ashiraZilhoja.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم العاشر من ذي الحجة.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
       ),
     );
   }

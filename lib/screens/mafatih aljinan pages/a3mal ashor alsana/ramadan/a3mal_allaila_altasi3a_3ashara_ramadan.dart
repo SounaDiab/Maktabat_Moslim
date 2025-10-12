@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/list_of_nine_verses.dart';
+import '../../../../widgets/scroll_title.dart';
 import '../../../favorites_provider.dart';
 import '../../../favorites_screen.dart';
 import '../ramadan.dart';
@@ -62,7 +62,6 @@ class _A3malAllailaAltasi3a3asharaRamadanState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -84,7 +83,7 @@ class _A3malAllailaAltasi3a3asharaRamadanState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -94,138 +93,70 @@ class _A3malAllailaAltasi3a3asharaRamadanState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('أعمال الليلة التاسعة عشرة',
+                      .addFavorite('اعمال الليلة التاسعة عشر',
                           A3malAllailaAltasi3a3asharaRamadan.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'أعمال الليلة التاسعة عشرة',
+                          'اعمال الليلة التاسعة عشر',
                           A3malAllailaAltasi3a3asharaRamadan.screenRoute,
                           A3malAllailaAltasi3a3asharaRamadan.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'أعمال الليلة التاسعة عشرة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'اعمال الليلة التاسعة عشر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الاوّل :',
-                  subtitle:
-                      'أن يقول مائة مرّة اَسْتَغْفِرُ اللهَ واَتُوبُ اِلَيْهِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني :',
-                  subtitle:
-                      'مائة مرّة اَللّـهُمَّ الْعَنْ قَتَلَةَ اَميرِ الْمُؤمِنينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثالث :',
-                  subtitle:
-                      'دعاء يا ذَا الَّذي كانَ وقد مضى الدّعاء في القسم الرّابع من الكتاب.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الرابع :',
-                  subtitle:
-                      'يقول : اَللّـهُمَّ اْجْعَلْ فيـما تَقْضي وَتُقَدِّرُ مِنَ الاَمْرِ الَْمحْتُومِ، وَفيـما تَفْرُقُ مِنَ الاَمْرِ الحَكيمِ في لَيْلَةِ الْقَدْرِ، وَفِي الْقَضاءِ الَّذي لا يُرَدُّ وَلا يُبَدَّلْ، اَنْ تَكْتُبَني مِنْ حُجّاجِ بَيْتِكَ الْحَرامِ، الْمَبْرُورِ حَجُّهُمُ، الْمَشْكُورِ سَعْيُهُمُ، الْمَغْفُورِ ذُنُوبُهُمُ الْمُكَفَّرِ عَنْهُمْ سَيِّئاتُهُمْ وَاجْعَلْ فيـما تَقْضي وَتُقَدِّرُ اَنْ تُطيلَ عُمْري وَتُوَسِّعَ عَلَيَّ في رِزْقي، وَتَفْعَلَ بي كَذا وَكَذا ويسأل حاجته عوض هذه الكلمة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'اعمال الليلة التاسعة عشر',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: AllaylaAlwa7idaWal3ishrounRamadan.screenRoute,
-        pushBack: AllaylaAlsabi3a3asharaRamadan.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الليلة التاسعة عشرة من رمضان.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
+          pushNext: AllaylaAlwa7idaWal3ishrounRamadan.screenRoute,
+          pushBack: AllaylaAlsabi3a3asharaRamadan.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الليلة التاسعة عشرة من رمضان.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
               ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ),
       ),
     );
   }
