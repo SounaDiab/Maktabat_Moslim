@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/search_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../business logic/cubit/albakiyat_alsalihat_cubit.dart';
+import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 import '../../Util/items.dart';
 import '../../widgets/line_from_index.dart';
 import '../albakiyat_alsali7at_home_screen.dart';
 import '../search_provider.dart';
+import 'zikr salawat ayam al2ousbou3/salat_yawm_al2a7add.dart';
+import 'zikr salawat ayam al2ousbou3/salat_yawm_alsabtt.dart';
+import 'zikr salawat ayam al2ousbou3/salat_yawm_al2isnainn.dart';
+import 'zikr salawat ayam al2ousbou3/salat_yawm_alsoulasaa2.dart';
+import 'zikr salawat ayam al2ousbou3/salat_yawm_al2arbi3aa2.dart';
+import 'zikr salawat ayam al2ousbou3/salat_yawm_al5amiss.dart';
+import 'zikr salawat ayam al2ousbou3/salat_yawm_aljom3aa.dart';
 
 class ZikrSalawatAyamAl2osbou3 extends StatefulWidget {
   static String screenRoute = 'zikr_salawat_ayam_al2osbou3_screen';
@@ -70,24 +79,60 @@ class _ZikrSalawatAyamAl2osbou3State extends State<ZikrSalawatAyamAl2osbou3> {
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return LineFromIndex(
-                    text: item['title']!,
-                    route: item['route']!,
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<AlbakiyatAlsalihatCubit, AlbakiyatAlsalihatState>(
+          builder: (context, state) {
+            if (state is AlbakiyatAlsalihatLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is AlbakiyatAlsalihatLoaded) {
+              final albakiyatAlsalihat = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                SalatYawmAlsabtt.screenRoute,
+                SalatYawmAl2a7add.screenRoute,
+                SalatYawmAl2isnainn.screenRoute,
+                SalatYawmAlsoulasaa2.screenRoute,
+                SalatYawmAl2arbi3aa2.screenRoute,
+                SalatYawmAl5amiss.screenRoute,
+                SalatYawmAljom3aa.screenRoute,
+              ];
+              for (var item in albakiyatAlsalihat) {
+                if (item.title == 'ذكر صلوات ايام الاسبوع') {
+                  for (var subItem in item.index) {
+                    allTitles.add({
+                      'title': subItem.title,
+                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                    });
+                  }
+                }
+              }
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: allTitles.length,
+                      itemBuilder: (context, i) {
+                        final title = allTitles[i]['title'];
+                        final route = allTitles[i]['route'];
+
+                        return ListTile(
+                          title: LineFromIndex(
+                            text: title,
+                            route: route,
+                          ),
+                        );
+                      }),
+                ),
+              );
+            } else if (state is AlbakiyatAlsalihatError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
