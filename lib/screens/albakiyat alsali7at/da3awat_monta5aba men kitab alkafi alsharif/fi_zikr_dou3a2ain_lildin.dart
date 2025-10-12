@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
@@ -60,7 +60,6 @@ class _FiZikrDou3a2ainLildinState extends State<FiZikrDou3a2ainLildin> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _FiZikrDou3a2ainLildinState extends State<FiZikrDou3a2ainLildin> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -92,83 +91,33 @@ class _FiZikrDou3a2ainLildinState extends State<FiZikrDou3a2ainLildin> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('في ذكر دعائين للدين',
+                      .addFavorite('في ذكر  دعائين للدين',
                           FiZikrDou3a2ainLildin.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'في ذكر دعائين للدين',
+                          'في ذكر  دعائين للدين',
                           FiZikrDou3a2ainLildin.screenRoute,
                           FiZikrDou3a2ainLildin.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'في ذكر دعائين للدين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'في ذكر  دعائين للدين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الأول :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : قل : اللّهُمَّ لَحْظَةً مِنْ لَحَظاتِكَ تُيَسِّرُ عَلَيَّ غُرَمائي بِها القَضاء وَتُيَسِّرُ لي بِها الاقْتِضاءَ إنَّكَ عَلى كُلِّ شَيٍ قَديرٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني :',
-                  subtitle:
-                      'هذا الدعاء المروي عن موسى بن جعفر (عليه السلام) : اللّهُمَّ ارْدُدْ إِلى جَميعِ خَلْقك مَظالِمَهُمْ الَّتي قِبَلي صَغيرها وَكَبيرَها في يُسْرٍ مِنْكَ وَعافيةٍ وَمالَمْ تَبْلُغْهُ قوَّتي وَلَمْ تَسَعْهُ ذاتُ يَدي وَلَمْ يقوَ عَلَيْهِ بَدَني ويَقيني وَنَفْسي فَأدِّهِ عَنّي مِنْ جَزيلِ ماعِندَكَ مِنْ فَضْلِكَ، ثُمَّ لاتَخْلِفْ عَلَيَّ مِنْهُ شَيْئاً تَقْضيهِ مِنْ حَسَناتي ياأرْحَمْ الرّاحِمينَ. أشْهَدُ أنْ لا إلهَ إِلاّ الله وَحْدَهُ لاشَريكَ لَهُ، وَأشْهَدُ أنَّ مُحَمَّداً عَبْدُهُ وَرَسُولُهُ، وَأنَّ الدينَ كَما شَرَعَ وَأنَّ الاسْلامَ كَما وَصَفَ وَأنَّ الكتاب كَما أَنْزَلَ وَأنَّ القَوْلَ كَما حَدَّثَ، وَأنَّ الله هوَ الحَقُّ المُبينُ ذَكَرَ الله مُحَمَّداً وَأهْلَ بَيْتِهِ بِخَيْرٍ وَحَيّا مُحَمَّداً وَأهْلَ بَيْتِهِ بالسَّلامِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'في ذكر  دعائين للدين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha.screenRoute,
           pushBack: FiAd3iyaMa2souraLilrizk.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر دعائين للدين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر دعائين للدين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

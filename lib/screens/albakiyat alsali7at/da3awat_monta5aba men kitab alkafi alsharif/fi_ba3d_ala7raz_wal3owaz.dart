@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
@@ -16,8 +16,7 @@ class FiBa3dAla7razWal3owaz extends StatefulWidget {
   const FiBa3dAla7razWal3owaz({super.key});
 
   @override
-  State<FiBa3dAla7razWal3owaz> createState() =>
-      _FiBa3dAla7razWal3owazState();
+  State<FiBa3dAla7razWal3owaz> createState() => _FiBa3dAla7razWal3owazState();
 }
 
 double _fontSize = 18;
@@ -61,7 +60,6 @@ class _FiBa3dAla7razWal3owazState extends State<FiBa3dAla7razWal3owaz> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -83,7 +81,7 @@ class _FiBa3dAla7razWal3owazState extends State<FiBa3dAla7razWal3owaz> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -105,108 +103,21 @@ class _FiBa3dAla7razWal3owazState extends State<FiBa3dAla7razWal3owaz> {
               },
             ),
           ],
-          title: Text(
-            'في بعض الاحراز والعوذ',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'في بعض الاحراز والعوذ'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الأول :',
-                  subtitle:
-                      'روي أنّه شكا رجل إلى الصادق (عليه السلام) الوحشة. فقال (عليه السلام) : ألا أخبركم بشي إذا قلتموه، لم تستوحشوا بليل أو نهار : بِسْمِ الله وَبِالله وَتَوَكَّلْتُ عَلى الله إنَّهُ مَنْ يَتَوَكَّلْ عَلى الله فَهوَ حَسْبُهُ إنَّ الله بالِغُ أمْرِهِ قَدْ جَعَلَ الله لِكُلِّ شَيٍ قَدْراً، اللّهُمَّ اجْعَلْني في كَنَفِكَ وَفي جِوارِكَ وَاجْعَلْني في أمانِكَ وَفي مَنْعِكَ. وروي أن رجلاً قالها ثلاثين سنة وتركها ليلة فلسعته عقرب.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني :',
-                  subtitle:
-                      'روي أنّه من بات في دار أو غرفة وحده، فليقرأ اَّية الكرسي وليقل : اللّهُمَّ آنِسْ وَحْشَتي وَآمِنْ رَوْعَتي وَأعِنّي عَلى وَحْدَتي.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثالث :',
-                  subtitle:
-                      'روي أنّه رقى النبي (صلّى الله عليه وآله وسلم) حسناً وحسيناً (عليهما السلام) بهذه الكلمات : أعيذُكُما بِكَلِماتِ الله التّامَةِ وَأسْمائِهِ الحُسْنى كُلِّها عامَةً مِن شَرِّ السامَّةِ وَالهامَّةِ وَمِنْ شَرِّ كُلِّ عَينٍ لامّةٍ وَمِنْ شَرِّ حاسِدٍ إذا حَسَدَ. ثم قال (عليه السلام) هكذا كان يعوذ إبراهيم إسماعيل وإسحاق.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الرابع :',
-                  subtitle:
-                      'روي أنّ رسول الله (صلّى الله عليه وآله وسلم) كان في بعض مغازيه، إذا شكوا إليه البراغيث أنها تؤذيهم، قال إذا أخذ أحدكم مضجعه، فليقل : أيُّها الاسوَدُ الوثّابُ الَّذي لايُبالي غَلْقا وَلابابا عَزَمْتُ عَلَيْكَ بِأُمِّ الكِتابِ أنْ لاتُؤذيني وَأصْحابي إِلى أنْ يَذْهَبُ اللَّيْلُ وَيَجيَ الصُّبْحُ بِما جاءَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الخامس :',
-                  subtitle:
-                      'روي أن أمير المؤمنين (عليه السلام) قال : إذا رأيت السَّبع فقل : أعوذُ بِرَبِّ دانيالَ وَالجُبِّ مِنْ كُلِّ أسَدٍ مُسْتأسِدٍ.\n\n'
-                      'وعن الصادق (عليه السلام) أنك إذا لقيت سبعا، فاقرأ في وجهه اَّية الكرسي، وقل له : عَزَمْتُ عَلَيْكَ بِعَزيمَةِ الله وعَزيمَةِ مُحَمَّدٍ صَلّى الله عَلَيْهِ وَآلِهِ وَعَزيمَةِ سُلَيمانَ بِنِ داودَ وَعَزيمَةِ أميرِ المؤمِنينَ عَليِّ بِنْ أبي طالِبٍ عَلَيْهِ السَّلامِ وَالأَئِمَّةِ الطّاهرينَ عَلَيْهِمْ السَّلامُ مِنْ بَعْدِهِ، فانه سينصرف عنك إن شاء الله تعالى.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'السادس :',
-                  subtitle:
-                      'عن رسول الله (صلّى الله عليه وآله وسلم) أنه قال لأمير المؤمنين (عليه السلام)، إذا وقعت في ورطة أو بليّة فقل : بِسْمِ الله الرَّحْمنِ الرّحيمِ وَلاحَوْلَ وَلاقوَّةَ إِلاّ بِالله العَليّ العظيمِ، فان الله عزَّ وجلَّ يصرف عنك مايشاء من أنواع البلاء.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'في بعض الاحراز والعوذ',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute,
           pushBack: FiAd3iyatAl3ilalWalmarad.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في بعض الاحراز العوذ.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في بعض الاحراز العوذ.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

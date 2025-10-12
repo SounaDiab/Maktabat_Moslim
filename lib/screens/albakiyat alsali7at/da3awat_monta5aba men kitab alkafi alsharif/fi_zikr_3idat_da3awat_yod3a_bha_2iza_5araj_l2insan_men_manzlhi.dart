@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
@@ -66,7 +66,6 @@ class _FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhiState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -88,7 +87,7 @@ class _FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhiState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -99,13 +98,13 @@ class _FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhiState
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'في ذكر عدة دعوات يدعى بها إذا خرج الانسان من منزله',
+                          'في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله',
                           FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi
                               .screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'في ذكر عدة دعوات يدعى بها إذا خرج الانسان من منزله',
+                          'في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله',
                           FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi
                               .screenRoute,
                           FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi
@@ -114,128 +113,22 @@ class _FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhiState
               },
             ),
           ],
-          title: Text(
-            'في ذكر عدة دعوات يدعى بها إذا خرج الانسان من منزله',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'وهي ثمانية أدعية :\n'
-                      'الأول :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : إنّ الانسان إذا خرج من منزله، قال حين يريد أن يخرج، ثلاثا : الله أكْبَرُ، وثلاثا : بِالله أخْرُجُ وَبِالله أدْخُلُ وَعَلىْ الله أتَوَكَّلُ.\n\n'
-                      'ثم يقول : اللّهُمَّ افْتَحْ لي في وَجْهي هذا بِخَيْرٍ وَاخْتِمْ لي بِخَيْرٍ وَقِني شَرَّ كُلِّ دابَةٍ أنْتَ آخِذٌ بِناصيَتِها. إنَّ رَبّي عَلى صِراطٍ مُسْتَقيمٍ. فإذا فعل ذلك، لم يزل في ضمان الله عزَّ وجلَّ، حتى يرده الله إلى المكان الذي كان فيه.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني :',
-                  subtitle:
-                      'عن السجاد (عليه السلام) قال : تقول حين تخرج من باب الدار : بِسْمِ الله وَبِالله تَوَكَّلْتُ عَلى اللّهِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثالث :',
-                  subtitle:
-                      'عن الباقر (عليه السلام) قال : من قال حين يخرج من منزله : بِسْمِ الله حَسْبيَ الله تَوَكَّلْتُ عَلى الله ، اللّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ أموري كُلِّها وَأعوذُ بِكَ مِنْ خِزْي الدُّنْيا وَعَذابِ الاخِرَةِ، كفاه الله ماأهمّه من أمر دنياه واَّخرته.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الرابع :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : إذا خرجت من منزلك فقل : بِسْمِ الله تَوَكَّلْتُ عَلى الله لاحَوْلَ وَلاقوَّةَ إِلاّ بِالله ، اللّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ ما خَرَجْتُ لَهُ، اللّهُمَّ أوْسِعْ عَليَّ مِنْ فَضْلِكَ وَأتْمِمْ عَليَّ نِعْمَتَكَ وَاسْتَعْمِلْني في طاعَتِكَ وَاجْعَلْ رَغْبَتي فيما عِنْدَكَ، وَتَوَفَني عَلى مِلَّتِكَ وَمِلَّةِ رَسولِكَ صَلّى الله عَلَيْهِ وَآلِهِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الخامس :',
-                  subtitle:
-                      'عن الرضا (عليه السلام) قال : كان أبي (عليه السلام) إذا خرج من منزله قال: بِسْمِ الله الرَّحْمنِ الرَّحيمِ خَرَجْتُ بِحَوْلِ الله وَقوَّتِهِ لابِحَوْلٍ مِنّي وَلاقوَّتي، بَلْ بِحَوْلِكَ وَقوَّتِكَ يارَبِّ مُتَعَرِّضا لِرِزْقِكَ فَاتِني بِهِ في عافيةٍ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'السادس :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : من قرأ قل هو الله أحد حين يخرج من منزله عشر مرات لم يزل في حفظ الله عزَّ وجلَّ وكلاته حتى يرجع إلى منزله.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'السابع :',
-                  subtitle:
-                      'عن أبي الحسن موسى (عليه السلام) قال : إذا أردت السفر فقف على باب دارك واقرأ فاتحة الكتاب أمامك وعن يمينك وعن شمالك، وكذلك قل هو الله أحد، وكذلك قل أعوذ برب الناس، وقل أعوذ برب الفلق ثم قل : اللّهُمَّ احْفَظْني وَاحْفَظْ مامَعي وَسَلِّمْني وَسَّلِّمْ مامَعي وَبَلِّغْني وَبَلِّغْ مامَعي بَلاغاً حَسَناً.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثامن :',
-                  subtitle:
-                      'عنه (عليه السلام) أيضاً قال : إذا خرجت من منزلك في سفر أو حضر فقل: بِسْمِ الله آمَنْتُ بِالله وَتَوَكَّلْتُ عَلى الله ماشاءَ الله لاحَوْلَ وَلاقوَّةَ إِلاّ بِاللّهِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-          pushNext:
-              FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute,
+          pushNext: FiDa3awatMa2souraKablSalatWfiAdbariha.screenRoute,
           pushBack: FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر عدة دعوات يدعى بها اذا خرج الانسان من منزله.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
@@ -65,7 +65,6 @@ class _FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenhState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -87,7 +86,7 @@ class _FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenhState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -98,13 +97,13 @@ class _FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenhState
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'في أدعية يدعى بها عند النوم وعند الانتباه منه',
+                          'في ادعية يدعى بها عند النوم وعند الانتباه منه',
                           FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh
                               .screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'في أدعية يدعى بها عند النوم وعند الانتباه منه',
+                          'في ادعية يدعى بها عند النوم وعند الانتباه منه',
                           FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh
                               .screenRoute,
                           FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenh
@@ -113,119 +112,24 @@ class _FiAd3iyaYod3aBha3indAlnomW3indL2intibahMenhState
               },
             ),
           ],
-          title: Text(
-            'في أدعية يدعى بها عند النوم وعند الانتباه منه',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'في ادعية يدعى بها عند النوم وعند الانتباه منه'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الاول :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : من قال حين يأخذ مضجعه ثلاث مرات :\n\n'
-                      'الحَمْدُ لله الَّذي عَلا فَقَهَرَ وَالحَمْدُ لله الَّذي بَطَنَ فَخَبَرَ، وَالحَمْدُ لله الَّذي مَلَكَ فَقَدَرَ، وَالحَمْدُ لله الَّذي يُحْيي المَوْتى وَيُميتُ الاحْياءَ وهوَ عَلى كُلِّ شَيٍ قَديرٌ. خرج من الذنوب كهيئة يوم ولدته امه. والشيخ والصدوق أيضا، قد رويا هذه الرواية في (عدة الداعي) عن الصادق (عليه السلام) قال : هذا أدنى ما يجزيك من الحمد، وفي هذه الرواية قد أتى التحميد الثاني تلو الحمد الثالث.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني :',
-                  subtitle:
-                      'وعنه (عليه السلام) قال : إن رسول الله (صلّى الله عليه وآله وسلم) كان إذا أوى إلى فراشه يقرأ اَّية الكرسي ويقول: بِسْمِ الله آمَنْتُ بِالله وَكَفَرْتُ بِالطّاغوتِ، اللّهُمَّ إحْفَظْنىِّ في مَنامي وَفي يَقْظَتي.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثالث :',
-                  subtitle:
-                      'عن المفضل بن عمر قال : قال لي الصادق إن استطعت أن لاتبيت ليلة حتى تعوّذ بأحد عشر حرفا ؛ قلت أخبرني بها، قال قل : أعوذُ بِعِزَّةِ الله وَأعوذُ بِقُدْرَةِ الله وَأعوذُ بِسُلْطانِ الله وَأعوذُ بِجَمالِ الله وَأعوذُ بِدَفْعِ الله وَأعوذُ بِمَنْعِ الله وَأعوذُ بِجَمْعِ الله وَأعوذُ بِمُلْكِ الله وَأعوذُ بِرَسولِ الله صَلّى الله عَلَيْهِ وَآلِهِ مِنْ شَرِّ ما خَلَقَ وَبَرَأَ وَذَرَاءَ. وتعوّذ به كلما شئت.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الرابع :',
-                  subtitle:
-                      'عن الصادق (صلوات الله وسلامه عليه) قال: من قرأ قل هو الله أحد مائة مرة، إذا أوى إلى فراشه، غفر الله له من ذنوبه ذنوب خمسين سنة، وعنه (عليه السلام) أيضاً أن من قرأ حين يأوي إلى مضجعه قل ياأيها الكافرون، وقل هو الله أحد.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الخامس :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال النبي صلّى الله عليه واله : من أراد شَيْئاً من قيام الليل وأخذ مضجعه فليقل : اللّهُمَّ لاتؤمِنّي مَكْرَكَ وَلاتُنْسِني ذِكْرَكَ وَلاتَجْعَلْني مِنَ الغافِلينَ أقُومُ ساعَةَ كَذا وَكَذا، فإن فعل ذلك وكّل الله عزَّ وجلَّ به ملكا ينبهه تلك الساعة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'السادس :',
-                  subtitle:
-                      'وعنه (عليه السلام) أيضاً قال : إذا قام أحدكم من الليل فقل : سُبْحانَ الله رَبِّ النَبيين وَإلهِ المُرْسَلينَ وَرَبِّ المُسْتَضْعَفينَ، وَالحَمْدُ لله الَّذي يُحْيي المَوتى وَهوَ عَلى كُلِّ شَيٍ قَديرٌ. فإذا قال ذلك يقول الله عزَّ وجلَّ صدق عبدي وشكر.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'السابع :',
-                  subtitle:
-                      'عن عبد الرحمن بن الحجاج قال : كان الصادق (عليه السلام) إذا قام اَّخر الليل يرفع صوته حتى يسمع أهل الدار ويقول : اللّهُمَّ أعِنّي عَلى هَوْلِ المُطَّلَعِ وَوَسِّعْ عَليَّ ضيقَ المُضْطَجَعِ، وَإرْزُقْني خَيْرَ ما قَبْلَ المَوْتِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'في ادعية يدعى بها عند النوم وعند الانتباه منه',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext:
               FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute,
           pushBack:
               Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ادعية يدعى بها عند النوم عند الانتباه منه.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ادعية يدعى بها عند النوم عند الانتباه منه.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

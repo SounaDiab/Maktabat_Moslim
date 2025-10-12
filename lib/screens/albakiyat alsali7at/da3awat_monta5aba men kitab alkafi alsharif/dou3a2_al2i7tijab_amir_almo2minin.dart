@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
@@ -63,7 +63,6 @@ class _Dou3a2Al2i7tijabAmirAlmo2mininState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _Dou3a2Al2i7tijabAmirAlmo2mininState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,77 +94,34 @@ class _Dou3a2Al2i7tijabAmirAlmo2mininState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء احتجاب أمير المؤمنين عليه السلام',
+                      .addFavorite('دعاء الاحتجاب',
                           Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'دعاء احتجاب أمير المؤمنين عليه السلام',
+                          'دعاء الاحتجاب',
                           Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute,
                           Dou3a2Al2i7tijabAmirAlmo2minin.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء احتجاب أمير المؤمنين عليه السلام',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء الاحتجاب'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'ٱحْتَجَبْتُ بِنُورِ وَجْهِ اللهِ الْقَدِيمِ الْكَامِلِ وَتَحَصَّنْتُ بِحِصْنِ اللهِ الْقَوِيِّ ٱلشَّامِلِ وَرَمَيْتُ مَنْ بَغَىٰ عَلَيَّ بِسَهْمِ اللهِ وَسَيْفِهِ الْقَاتِلِ.\n\n'
-                      'أَللّهُمَّ يَا غَالِباً عَلَىٰ أَمْرِهِ وَيَا قَائِماً فَوْقَ خَلْقِهِ وَيَا حَائِلاً بَيْنَ الْمَرْءِ وَقَلْبِهِ حُلْ بَيْنِي وَبَيْنَ ٱلشَّيْطَانِ وَنَزْغِهِ وَبَيْنَ مَالاَ طَاقَةَ لِي بِهِ مِنْ أَحَدٍ مِنْ عِبَادِكَ كُفَّ عَنِّي أَلْسِنَتَهِمْ وَٱغْلُلْ أَيَدِيَهِمْ وَأَرْجُلَهِمْ وَٱجْعَلْ بَيْنِي وَبَيْنَهُمْ سَدّاً مِنْ نُورِ عَظَمَتِكَ وَحِجَاباً مِنْ قُوَّتِكَ وَجُنْداً مِنْ سُلْطَانِكَ فَإِنَّكَ حَيَّ قَادِرٌ.\n\n'
-                      'أَللّهُمَّ أَغْشِ عَنِّي أَبْصَارَ ٱلنَّاظِرِينَ حَتَّىٰ أَرِدَ الْمَوَارِدَ وَٱغْشِ عَنِّي أَبْصَارَ ٱلنُّورِ وَأَبْصَارَ ٱلظُّلْمِةَ وَأَبْصَارَ الْمُرِيدِينَ لِيَ ٱلسُّوءَ حَتَّىٰ لاَ أُبَالِي مِنْ أَبْصَارِهِمْ ﴿يَكَادُ سَنَا بَرْقِهِ يَذْهَبُ بِالأَبْصَارِ * يُقَلِّبُ اللهُ اللَّيْلَ وَالنَّهَارَ إِنَّ فِي ذَلِكَ لَعِبْرَةً لأُوْلِي الأَبْصَارِ﴾ بِسْمِ اللهِ ٱلرَّحْمٰنِ ٱلرِّحَيِمِ كَهَيَعِصَ كِفَايَتُنَا وَهُوَ حَسْبِي، بِسْمِ اللهِ ٱلرَّحْمٰنِ ٱلرِّحَيِمِ، حَمِعَسِقَ حِمَايَتُنَا وَهُوَ حَسْبِي ﴿كَمَاء أَنزَلْنَاهُ مِنَ السَّمَاءِ فَاخْتَلَطَ بِهِ نَبَاتُ الأَرْضِ فَأَصْبَحَ هَشِيماً تَذْرُوهُ الرِّيَاحُ﴾ ﴿هُوَ اللهُ الَّذِي لاَ إِلَهَ إِلاَّ هُوَ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ هُوَ الرَّحْمٰنُ الرَّحِيمُ ﴾ ﴿يَوْمَ الآزِفَةِ إِذِ الْقُلُوبُ لَدَى الْحَنَاجِرِ كَاظِمِينَ مَا لِلظَّالِمِينَ مِنْ حَمِيمٍ وَلاَ شَفِيعٍ يُطَاعُ﴾ ﴿عَلِمَتْ نَفْسٌ مَّا أَحْضَرَتْ * فَلاَ أُقْسِمُ بِالْخُنَّسِ * الْجَوَارِ الْكُنَّسِ * وَاللَّيْلِ إِذَا عَسْعَسَ * وَالصُّبْحِ إِذَا تَنَفَّسَ﴾ ﴿ص وَالْقُرْآنِ ذِي الذِّكْرِ * بَلِ الَّذِينَ كَفَرُوا فِي عِزَّةٍ وَشِقَاقٍ﴾ (شَاهَتِ الْوُجُوهُ – ثلاث مرات) كَلَّتِ ٱلأَلْسُنُ وَعَمِيَتِ ٱلأَبْصَارُ أَللّهُمَّ ٱجْعَلْ خَيْرَهُمْ بَيْنَ عَيْنَيْهِمْ وَشَرَّهُمْ تَحْتَ قَدَمَيْهِمْ وَخَاتَمَ سُلَيْمَانَ بَيْنَ أَكْتَافِهِمْ ﴿فَسَيَكْفِيكَهُمُ اللهُ وَهُوَ السَّمِيعُ الْعَلِيمُ * صِبْغَةَ اللهِ وَمَنْ أَحْسَنُ مِنَ اللهِ صِبْغَةً﴾ كَهَيَعِصَ ٱكْفِنَا حَمِعَعَسِقَ ٱحْمِنَا سُبْحَانَ الْقَادِرِ الْقَاهِرِ الْكَافِي ﴿وَجَعَلْنَا مِن بَيْنِ أَيْدِيهِمْ سَدّاً وَمِنْ خَلْفِهِمْ سَدّاً فَأَغْشَيْنَاهُمْ فَهُمْ لاَ يُبْصِرُونَ﴾ ﴿صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لاَ يَعْقِلُونَ﴾ ﴿أُولَئِكَ الَّذِينَ طَبَعَ اللهُ عَلَى قُلُوبِهِمْ وَسَمْعِهِمْ وَأَبْصَارِهِمْ وَأُولَئِكَ هُمُ الْغَافِلُونَ﴾ تَحَصَّنتُ بِذِي الْمُلْكِ وَالْمَلَكُوتِ وَٱعتَصَمْتُ بِذِي الْعِزِ وَالْعَظَمِة وَالْجَبَرُوتِ وَتَوَكَّلتُ عَلَىٰ الْحَيِّ ٱلّذِي لاَ يَمُوتُ دَخَلتُ فِي حِرْزِ اللهِ وَفِي حِفْظِ اللهِ وَفِي أَمَانِ اللهِ مِنْ شَرِّ الْبَرِيَّة أَجْمَعِينَ، كَهَيَعِصَ، حَمِعَسِقَ وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللهِ الْعِلِّي الْعَظِيمِ وَصَلَّىٰ اللهُ عَلَىٰ مُحَمَّدٍ وَآلِهِ ٱلطَّاهِرِينَ بِرَحْمَتِكَ يَا أَرَحَمَ ٱلرَّاحِمِينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'دعاء الاحتجاب',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext:
               Fi3idaMenAl2ad3iyaAllatiYod3aBihaSaba7anWmasa2an.screenRoute,
           pushBack: FiDa3awatMojzatLjami37wa2ejAldoniaWal2a5ira.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء احتجاب امير المؤمنين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء احتجاب امير المؤمنين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

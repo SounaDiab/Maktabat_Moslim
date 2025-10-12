@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
@@ -61,7 +61,6 @@ class _FiAd3iyatAl3ilalWalmaradState extends State<FiAd3iyatAl3ilalWalmarad> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -83,7 +82,7 @@ class _FiAd3iyatAl3ilalWalmaradState extends State<FiAd3iyatAl3ilalWalmarad> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -93,111 +92,33 @@ class _FiAd3iyatAl3ilalWalmaradState extends State<FiAd3iyatAl3ilalWalmarad> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('في أدعية العلل والامراض',
+                      .addFavorite('في ادعية العلل والامراض',
                           FiAd3iyatAl3ilalWalmarad.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'في أدعية العلل والامراض',
+                          'في ادعية العلل والامراض',
                           FiAd3iyatAl3ilalWalmarad.screenRoute,
                           FiAd3iyatAl3ilalWalmarad.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'في أدعية العلل والامراض',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'في ادعية العلل والامراض'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الأول :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : تقول للاوجاع : بِسْمِ الله وَبِالله كَمْ مِنْ نِعْمَةٍ لله في عِرْقٍ ساكِنٍ وَغَيْرِ ساكِنٍ عَلى عَبْدٍ شاكِرٍ وَغَيْرَ شاكِرٍ، وتأخذ لحيتك بيدك اليمنى بعد صلاة مفروضة وتقول ثلاث مرات : اللّهُمَّ فَرِّجْ عَنّي كُرْبَتي وَعَجِّلْ عافيَتي وَاكْشِفْ ضُرّي، واحرص أن يكون ذلك مع دموع وبكاء.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : ضع يدك على موضع الالم فقل : بِسْمِ الله وَبِالله مُحَمَّدٌ رَسولُ الله صَلّى الله عَلَيْهِ وَآلِهِ وَلاحَوْلَ وَلاقوَّةَ إِلاّ بِالله ، اللّهُمَّ إمْسَحْ عَنّي ما أجِدُ، وتمسح بيدك اليمنى موضع الوجع ثلاث مرات.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثالث :',
-                  subtitle:
-                      'عن الباقر (عليه السلام) قال : مرض علي (عليه السلام) فأتاه رسول الله (صلّى الله عليه وآله وسلم)، فقال له : قل : اللّهُمَّ إِنِّي أَسْأَلُكَ تَعْجيلَ عافيتِكَ وَصَبْراً عَلى بَليّتِكَ وَخُروجا إِلى رَحْمَتِكَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الرابع :',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال : تضع يدك على موضع الوجع، وتقول ثلاث مرات : اللّهُمَّ إِنِّي أَسْأَلُكَ بِحَقِّ القُرآنِ العَظيمِ الَّذي نَزَلَ بِهِ الرّوحُ الامينُ وَهوَ عِنْدَكَ في أمِّ الكِتابِ عَلّيٌ حَكيمٌ أنْ تَشْفيني بِشِفائِكَ وَتُداويني بِدَوائِكَ وَتُعافيني مِنْ بَلائِكَ وَتُصَلّيَ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ عَلَيْهِمْ السَّلامُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الخامس :',
-                  subtitle:
-                      'عن أبي حمزة قال: عرض لي وجع في ركبتي، فشكوت ذلك إلى الباقر (عليه السلام) فقال : إذا أنت صلّيت فقل : ياأجْوَدَ مَنْ أعْطى وَيا أرْحَمَ مَنْ إسْتُرْحِمَ ارْحَمْ ضُعْفي وَقِلَّةَ حيلَتي، إعْفِني مِنْ وَجَعي. قال ففعلته، وعوفيت.\n\n'
-                      'أقول : قد أوردنا في الباب الثالث ص1071 دعوات يدعى بها للعلل والاسقام.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'في ادعية العلل والامراض',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiBa3dAla7razWal3owaz.screenRoute,
           pushBack: FiZikrBa3dMaWaradLilhamWal8amWal5awfWa8airaha.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ادعية العلل والمرض.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ادعية العلل والمرض.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
