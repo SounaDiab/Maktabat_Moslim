@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/a3mal%20almasajed%20wal%20ziyarat/ziyarat%202a2imat%20sir/almakam_al2awal.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../mafatih%20aljinan%20pages/a3mal%20almasajed%20wal%20ziyarat/ziyarat%202a2imat%20sir/almakam_al2awal.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../almonajat.dart';
@@ -59,7 +59,6 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -92,7 +91,7 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,110 +102,69 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'مناجات العارفين', AlmakamAl2awal.screenRoute);
+                          'مناجاة العارفين', AlmakamAl2awal.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'مناجات العارفين',
+                          'مناجاة العارفين',
                           AlmakamAl2awal.screenRoute,
                           AlmakamAl2awal.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'مناجات العارفين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'مناجاة العارفين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'اِلـهي قَصُرَتِ الاَْلْسُنُ عَنْ بُلُوغِ ثَنائِكَ كَما يَليقُ بِجَلالِكَ، وَعَجَزَتِ الْعُقُولُ عَنْ اِدْراكِ كُنْهِ جَمالِكَ، وَانْحَسَرَتِ الاَْبْصارُ دُونَ النَّظَرِ اِلى سُبُحاتِ وَجْهِكَ، وَلَمْ تَجْعَلْ لِلْخَلْقِ طَريقاً اِلى مَعْرِفَتِكَ اِلاّ بِالْعَجْزِ عَنْ مَعْرِفَتِكَ، اِلـهي فَاجْعَلْنا مِنَ الَّذينَ تَرَسَّخَتْ اَشْجارُ الشَّوْقِ اِلَيْكَ في حَدائِقِ صُدُورِهِمْ، وَاَخَذَتْ لَوْعَةُ مَحَبَّتِكَ بِمَجامِعِ قُلُوبِهِمْ، فَهُمْ اِلى اَوْكارِ الاَْفْكارِ يَأْوُونَ، وَفي رِياضِ الْقُرْبِ وَالْمُكاشَفَةِ يَرْتَعُونَ، وَمِنْ حِياضِ الَْمحَبَّةِ بِكَاْسِ الْمُلاطَفَةِ يَكْرَعُونَ، وَشَرايِـعَ الْمُصافاتِ يَرِدُونَ، قَدْ كُشِفَ الْغِطاءُ عَنْ اَبْصارِهِمْ، وَانْجَلَتْ ظُلْمَةُ الرَّيْبِ عَنْ عَقائِدِهِمْ وَضَمائِرِهِمْ، وَانْتَفَتْ مُخالَجَةُ الشَّكِّ عَنْ قُلُوبِهِمْ وَسَرائِرِهِمْ، وَانْشَرَحَتْ بِتَحْقيقِ الْمَعْرِفَةِ صُدُورُهُمْ، وَعَلَتْ لِسَبْقِ السَّعادَةِ فِي الزَّهادَةِ هِمَمُهُمْ، وَعَذُبَ في مَعينِ الْمُعامَلَةِ شِرْبُهُمْ، وَطابَ في مَجْلِسِ الاُْنْسِ سِرُّهُمْ، وَاَمِنَ في مَوْطِنِ الَْمخافَةِ سِرْبُهُمْ، وَاطْمَأنَّتْ بِالرُّجُوعِ اِلى رَبِّ الاَْرْبابِ اَنْفُسُهُمْ، وَتَيَقَّنَتْ بِالْفَوْزِ وَالْفَلاحِ اَرْواحُهُمْ، وَقَرَّتْ بِالنَّظَرِ اِلى مَحْبُوبِهِمْ اَعْيُنُهُمْ، وَاسْتَقَرَّ بِإدْراكِ السُّؤْلِ وَنَيْلِ الْمَأْمُولِ قَرارُهُمْ، وَرَبِحَتْ في بَيْعِ الدُّنْيا بِالاْخِرَةِ تِجارَتُهُمْ، اِلـهي ما أَلَذَّ خَواطِرَ الاِْلْهامِ بِذِكْرِكَ عَلَى الْقُلُوبِ، وَما اَحْلَى الْمَسيرَ اِلَيْكَ بِالاَْوْهامِ في مَسالِكِ الْغُيُوبِ، وَما اَطْيَبَ طَعْمَ حُبِّكَ، وَما اَعْذَبَ شِرْبَ قُرْبِكَ، فَاَعِذْنا مِنْ طَرْدِكَ وَاِبْعادِكَ، وَاجْعَلْنا مِنْ اَخَصِّ عارِفيكَ، وَاَصْلَحِ عِبادِكَ، وَاَصْدَقِ طائِعيكَ، وَاَخْلَصِ عُبّادِكَ، يا عَظيمُ يا جَليلُ، يا كَريمُ يا مُنيلُ، بِرَحْمَتِكَ وَمَنِّكَ يا اَرْحَمَ الرّاحِمينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'مناجاة العارفين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: MonajatAlzakirin.screenRoute,
-        pushBack: MonajatAlmoftakirin.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة العارفين.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
+          pushNext: MonajatAlzakirin.screenRoute,
+          pushBack: MonajatAlmoftakirin.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المناجاة العارفين.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
               ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ),
       ),
     );
   }

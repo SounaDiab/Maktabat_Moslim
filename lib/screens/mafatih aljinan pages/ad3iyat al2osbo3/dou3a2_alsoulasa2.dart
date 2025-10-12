@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ad3iyat_al2osbo3.dart';
@@ -58,7 +58,6 @@ class _Dou3a2Alsoulasa2State extends State<Dou3a2Alsoulasa2> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -91,7 +90,7 @@ class _Dou3a2Alsoulasa2State extends State<Dou3a2Alsoulasa2> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -113,63 +112,21 @@ class _Dou3a2Alsoulasa2State extends State<Dou3a2Alsoulasa2> {
               },
             ),
           ],
-          title: Text(
-            'دعاء يوم الثلثاء',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء يوم الثلثاء'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'بِسْمِ الله الرَّحْمنِ الرَّحِيمِ الحَمْدُ للهِ وَالحَمْدُ حَقُهُ كَما يَسْتِحِقُّهُ حَمْداً كَثِيراً، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي ؛ إِنَّ النَّفْسَ لاَمّارَةٌ بِالسُّوءِ إِلاّ مارَحِمَ رَبِّي، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطانِ الَّذِي يَزِيدُنِي ذَنْباً إِلى ذَنْبِي، وَاحْتَرِزُ بِهِ مِنْ كُلِّ جَبّارٍ فاجِرٍ، وَسُلْطانٍ جائِرٍ، وَعَدُوٍ قاهِرٍ. اللّهُمَّ اجْعَلْنِي مِنْ جُنْدِكَ فَإِنَّ جُنْدَكَ هُمُ الغالِبُونَ، وَاجْعَلْنِي مِنْ حِزْبِكَ فَإِنَّ حِزْبَكَ هُمُ المُفْلِحُونَ، وَاجْعَلْنِي مِنْ أوْلِيائِكَ فَإِنَّ أَوْلِياَئكَ لاخَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنُون. اللّهُمَّ اصْلِحْ لِي دِينِي فَإِنَّهُ عِصْمَةُ أَمْرِي، وَاصْلِحْ لِي آخِرَتِي فَإِنَّها دارُ مَقَرِّي وَإِلَيْها مِن مُجاوَرَةِ اللئامِ مَفَرِّي، وَاجْعَلْ الحَياةَ زِيادَةً لِي فِي كُلِّ خَيْرٍ وَالوَفاةَ راحَةً لِي مِنْ كُلِّ شَرٍ اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَتَمامِ عِدَّةِ المُرْسَلِينَ، وَعَلى آلِهِ الطَّيِّبِينَ الطَّاهِرِينَ وَأَصْحابِهِ المُنْتَجَبِينَ، وَهَبْ لِي فِي الثُّلاثاءِ ثَلاثا: لاتَدَعْ لِي ذَنْباً إِلاّ غَفَرْتَهُ، وَلا غَمّاً إِلاّ أَذْهَبْتَهُ، وَلا عَدُوّاً إِلاّ دَفَعْتَهُ.\n\n'
-                      'بِبِسْمِ الله خَيْرِ الاَسَّماء، بِسْمِ الله رَبِّ الاَرْضِ وَالسَّماء اسْتَدْفِعُ كُلَّ مَكْرُوهٍ أَوَّلُهُ سَخَطُهُ، وَأَسْتَجْلِبُ كُلَّ مَحْبُوبٍ أَوَّلُهُ رِضاهُ، فَاخْتِمْ لِي مِنْكَ بِالغُفْرانِ ياوَلِيَّ الاِحْسانِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'دعاء يوم الثلثاء',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Al2arbi3a2.screenRoute,
           pushBack: Dou3a2Al2isnain.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الثلثاء.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3a2_soulasa2.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

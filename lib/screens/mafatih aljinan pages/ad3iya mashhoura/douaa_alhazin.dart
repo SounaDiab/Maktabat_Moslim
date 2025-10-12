@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ad3iya_mashhoura.dart';
@@ -58,7 +58,6 @@ class _DouaaAlhazinState extends State<DouaaAlhazin> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -91,7 +90,7 @@ class _DouaaAlhazinState extends State<DouaaAlhazin> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -110,66 +109,15 @@ class _DouaaAlhazinState extends State<DouaaAlhazin> {
               },
             ),
           ],
-          title: Text(
-            'دعاء الحزين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء الحزين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'وهو دعاء شريف يدعى به بعد صلاة الليل وهو على ما في كتاب (مصباح المتهجد) كما يلي:',
-                  weight: FontWeight.w400,
-                  size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      ' أُناجِيكَ يا مَوْجُوداً فِي كُلِّ مَكانٍ لَعَلَّكَ تَسْمَعُ نِدائِي، فَقَدْ عَظُمَ جُرْمي وَقَلَّ حَيائِي. مَوْلايَ يا مَوْلايَ، أَيَّ الاهْوالِ أتَذَكَّرُ وَأيَّها أنْسى؟ وَلَوْ لَمْ يَكُنْ إِلاّ المَوْتُ لَكَفى! كَيْفَ وَما بَعْدَ المَوْتِ أعْظَمُ وَأدْهى؟! مَوْلايَ يا مَوْلايَ، حَتّى مَتى وَإِلى مَتى أقُولُ لَكَ العُتْبى مَرَّةً بَعْدَ أخْرى ثُمَّ لا تَجِدُ عِنْدِي صِدْقا وَلا وَفاءً فَياغَوْثَاهُ ثُمَّ وَاغَوْثاهُ بِكَ يا الله مِنْ هَوىً قَدْ غَلَبَني وَمِنْ عَدُوٍّ قَدْ اسْتَكْلَبَ عَلَيَّ وَمِنْ دُنْيا قَدْ تَزَيَّنَتْ لِي وَمِنْ نَفْسٍ أمَّارَةٍ بِالسُّوءِ إِلاّ مارَحِمَ رَبِّي. مَولايَ يا مَولايَ، إنْ كُنْتَ رَحِمْتَ مِثْلِي فَارْحَمْنِي وَإنْ كُنْتَ قَبِلْتَ مِثْلي فَاقْبَلْني! يا قابِلَ السَّحَرَةِ اقْبَلْني! يا مَنْ لَمْ أزَلْ أتَعَرَّفُ مِنْهُ الحُسْنى يا مَنْ يُغَذِّيَني بِالنِعَمِ صَباحا وَمَساءً ارْحَمْني، يَوْمَ آتِيكَ فَرْداً شاخِصا إلَيْكَ بَصَري مُقَلَّداً عَمَلِي قَدْ تَبَرَّأَ جَميعُ الخَلْقِ مِنِّي. نَعَمْ، وَأبِي وَأمِّي وَمَنْ كانَ لَهُ كَدِّي وَسَعْيِي. فَإنْ لَمْ تَرْحَمْنِي فَمَنْ يَرْحَمُنِي؟ وَمَنْ يُؤْنِسُ فِي القَبْرِ وَحْشَتِي؟ وَمَنْ يُنْطِقُ لِسانِي إذا خَلَوْتُ بِعَمَلِي وَسائَلْتَنِي عَمَّا أنْتَ أعْلَمُ بِهِ مِنِّي؟ فَإنْ قُلْتُ: نَعَمْ، فَأيْنَ المَهْرَبُ مِنْ عَدْلِكَ؟ وَإنْ قُلْتُ: لَمْ أفْعَلْ، قُلْتَ: ألَمْ أكُنْ الشَّاهِدَ عَلَيْكَ؟ فَعَفْوُكَ عَفْوُكَ يا مَوْلايَ قَبْلَ سَرابِيلِ القَطِرانِ، عَفْوُكَ عَفْوُكَ يا مَوْلايَ قَبْلَ جَهَنَّمَ وَالنِّيرانِ، عَفْوُكَ عَفْوُكَ يا مَولايَ قَبْلَ أنْ تُغَلَّ الايْدِي إِلى الاعْناقِ يا أرْحَمَ الرَّاحِمِينَ وَخَيْرَ الغافِرينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'دعاء الحزين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaAlkamous.screenRoute,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ad3iyat_al2osbo3.dart';
@@ -58,7 +58,6 @@ class _Dou3a2Al2arbi3a2State extends State<Dou3a2Al2arbi3a2> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -91,7 +90,7 @@ class _Dou3a2Al2arbi3a2State extends State<Dou3a2Al2arbi3a2> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -102,110 +101,69 @@ class _Dou3a2Al2arbi3a2State extends State<Dou3a2Al2arbi3a2> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'دعاء يوم الأربعاء', Dou3a2Al2arbi3a2.screenRoute);
+                          'دعاء يوم الاربعاء', Dou3a2Al2arbi3a2.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'دعاء يوم الأربعاء',
+                          'دعاء يوم الاربعاء',
                           Dou3a2Al2arbi3a2.screenRoute,
                           Dou3a2Al2arbi3a2.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء يوم الأربعاء',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء يوم الاربعاء'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'بِسْمِ الله الرَّحْمنِ الرَّحِيمِ الحَمْدُ للهِ الَّذِي جَعَلَ اللّيْلَ لِباساً وَالنَّوْمَ سُباتاً، وَجَعَلَ النَّهارَ نُشُوراً، لَكَ الحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً، حَمْداً دائِماً لايَنْقَطِعُ أَبَداً وَلايُحْصِي لَهُ الخَلائِقُ عَدَداً. اللّهُمَّ لَكَ الحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ وَقَدَّرْتَ وَقَضَيْتَ وَأَمَتَّ وَأَحْيَيْتَ وَأَمْرَضْتَ وَشَفَيْتَ وَعافَيْتَ وَأَبْلَيْتَ، وَعَلى العَرْشِ اسْتَوَيْتَ وَعَلى المُلْكِ احْتَوَيْتَ. أَدْعُوكَ دُعاءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ وَانْقَطَعَتْ حِيلَتُهُ وَاقْتَرَبَ أَجَلُهُ وَتَدانى فِي الدُّنْيا أَمَلُهُ، وَاشْتَدَّتْ إِلى رَحْمَتِكَ فاقَتُهُ وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ. فَصَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَعَلى أَهْلِ بَيْتِهِ الطَّيِّبِينَ الطَّاهِرِينَ، وَارْزُقْنِي شَفاعَةَ مُحَمَّدٍ صَلَّى الله عَلَيْهِ وَآلِهِ، وَلاتَحْرِمْنِي صُحْبَتَهُ إِنَّكَ أَنْتَ أَرحَمُ الرّاحِمِينَ. اللّهُمَّ اقْضِ لِي فِي الاَرْبِعاءِ أَرْبَعاً: اجْعَلْ قُوَّتِي فِي طاعَتِكَ، وَنَشاطِي فِي عِبادَتِكَ، وَرَغْبَتِي فِي ثَوابِكَ، وَزُهْدِي فِيما يُوجِبُ لِي أَلِيمَ عِقابِكَ، إِنَّكَ لَطِيفٌ لِما تَشاءُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'دعاء يوم الاربعاء',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-        pushNext: Dou3a2Al5amis.screenRoute,
-        pushBack: Dou3a2Alsoulasa2.screenRoute,
-        soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الاربعاء.mp3',
-        onTap: (double fontSize) {
-          // تحديث حجم الخط
-          setState(() {
-            isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
-          });
-          print('fontSize: $fontSize');
-          // إغلاق Dialog
-          Navigator.of(context).pop();
-        },
-        onLongPress: () {
-          final snackBar = SnackBar(
-            content: Center(
-              child: Text(
-                '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
+          pushNext: Dou3a2Al5amis.screenRoute,
+          pushBack: Dou3a2Alsoulasa2.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3a2_arbi3a2.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
-            width: 60,
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-            shape: ShapeBorder.lerp(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
               ),
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              1,
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-      ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        ),
       ),
     );
   }

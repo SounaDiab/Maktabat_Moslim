@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ad3iyat_al2osbo3.dart';
@@ -58,7 +58,6 @@ class _Dou3a2Al2isnainState extends State<Dou3a2Al2isnain> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     final args =
@@ -91,85 +90,43 @@ class _Dou3a2Al2isnainState extends State<Dou3a2Al2isnain> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'دعاء يوم الإثنين', Dou3a2Al2isnain.screenRoute);
+                          'دعاء يوم الاثنين', Dou3a2Al2isnain.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'دعاء يوم الإثنين',
+                          'دعاء يوم الاثنين',
                           Dou3a2Al2isnain.screenRoute,
                           Dou3a2Al2isnain.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء يوم الإثنين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء يوم الاثنين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'بِسْمِ الله الرَّحْمنِ الرَّحِيمِ الحَمْدُ للهِ الَّذِي لَمْ يُشْهِدْ أَحَداً حِينَ فَطَرَ السَّماواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ. لَمْ يُشارَكْ فِي الاِلهِيَّةِ، وَلَمْ يُظاهَرْ فِي الوِحْدانِيَّةِ. كَلَّتِ الاَلْسُنُ عَنْ غايَةِ صِفَتِهِ وَالعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ، وَتَواضَعَتِ الجَبابِرَةُ لِهَيْبَتِهِ، وَعَنَتِ الوُجُوهُ لِخَشْيَتِهِ، وَانْقادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ. فَلَكَ الحَمْدُ مُتَواتِراً مُتَّسِقاً ومُتَوالِياً مُسْتَوْسِقاً وَصَلَواتُهُ عَلى رَسُولِهِ أَبَداً وَسَلامُهُ دائِماً سَرْمَداً. اللّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذا صَلاحاً وَأَوْسَطَهُ فَلاحاً وَآخِرَهُ نَجاحاً، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلَهُ فَزَعٌ، وَأَوْسَطُهُ جَزَعٌ وَآخِرُهُ وَجَعٌ.\n\n'
-                      'اللّهُمَّ إِنِّي اسْتَغْفِرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ وَكُلِّ وَعْدٍ وَعَدْتُهُ، وَكُلِّ عَهْدٍ عاهَدْتُهُ ثُمَّ لَمْ أَفِ بِهِ، وَأَسأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ أَو أَمَةٍ مِنْ إِمائِكَ كانَتْ لَهُ قِبَلِي مَظْلِمَةٌ ظَلَمْتُها إِيّاهُ فِي نَفْسِهِ، أَوْ فِي عِرْضِهِ أَوْ فِي مالِهِ أَوْ فِي أَهْلِهِ وَوَلَدِهِ، أَوْ غيْبَةٌ اغْتَبْتُهُ بِها، أَوْ تَحامِلٌ عَلَيْهِ بِمَيْلٍ أَوْ هَوَىً أَوْ أَنَفَةٍ أَوْ حَمِيَّةٍ أَوْ رِياءٍ أَوْ عَصَبِيَّةٍ غائِباً كانَ أَوْ شاهِداً أَوْ حَيّاً كانَ أَوْ مَيِّتاً، فَقَصُرَتْ يَدِي وَضاقَ وُسْعِي عَنْ رَدِّها إِلَيْهِ والتَحَلُّلِ مِنْهُ، فَأَسْأَلُكَ يامَنْ يَمْلِكُ الحاجاتِ وَهِي مُسْتَجِيبَةٌ بمَشيئَتِهِ وَمُسْرِعَةٌ إِلى إِرادَتِهِ أَنْ تُصَلِّيَّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً إِنَّهُ لاتَنْقُصُكَ المَغْفِرَةُ ولاتَضُرُّكَ المَوْهِبَةُ، ياأَرْحَمَ الرَّاحِمِينَ اللّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ اثْنِينِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ: سَعادَةَ فِي أَوَّلِهِ بِطاعَتِكَ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ، يامَنْ هُوَ الاِلهُ وَلا يَغْفِرُ الذُّنُوبَ سِواهُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderMafatihAljinan(
+          text: 'دعاء يوم الاثنين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Alsoulasa2.screenRoute,
           pushBack: Dou3a2Al2a7ad.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الاثنين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3a2_isnain.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
