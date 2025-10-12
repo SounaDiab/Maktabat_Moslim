@@ -1,31 +1,33 @@
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/Douaa_alsabah.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_3alkama.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_al3adila.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_al3asharat.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alaahd.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alfaraj.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alhazin.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_aljawshan_alkabir.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_aljawshan_alsa8ir.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alkamous.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_almashlol.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_almojir.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alsimat.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_altawasol.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_komail.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_makarim_alakhlak.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_nodba.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_yastashir.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/almonajat/almonajat_belsafar.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_al3askari.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_alhadi.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_alhassan.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_alhussein.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_aljawad.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_zain_al3abidin.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_alnabi.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_alsaida_alzahraa.dart';
-import 'package:maktabat_almoslim/screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_amir_amo2minin.dart';
+import '../screens/a3mal layali kadr/al2a3mal al5asa/dou3a2_2alhazin.dart';
+import '../screens/a3mal layali kadr/al2a3mal al5asa/hadis_2alkisa2.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/Douaa_alsabah.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_3alkama.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_al3adila.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_al3asharat.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alaahd.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alfaraj.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alhazin.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_aljawshan_alkabir.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_aljawshan_alsa8ir.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alkamous.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_almashlol.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_almojir.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_alsimat.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_altawasol.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_komail.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_makarim_alakhlak.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_nodba.dart';
+import '../screens/mafatih%20aljinan%20pages/ad3iya%20mashhoura/douaa_yastashir.dart';
+import '../screens/mafatih%20aljinan%20pages/almonajat/almonajat_belsafar.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_al3askari.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_alhadi.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_alhassan.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_alhussein.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_aljawad.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_al2imam_zain_al3abidin.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_alnabi.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_alsaida_alzahraa.dart';
+import '../screens/mafatih%20aljinan%20pages/lailat%20aljom3a%20wnaharaha%20w2a3malaha/salat_amir_amo2minin.dart';
 import '../screens/a3mal layali kadr/a3mal layaly alkadr/al2iste3dad.dart';
 import '../screens/a3mal layali kadr/a3mal layaly alkadr/mawane3_alkoboul.dart';
 import '../screens/a3mal layali kadr/a3mal layaly alkadr/sawab_al2i7ya2.dart';
@@ -503,6 +505,7 @@ import '../screens/herz lmoujahidin/herz_mostakhraj_men_kitab_allah_page.dart';
 import '../screens/herz lmoujahidin/herz_rasoul_allah_page.dart';
 import '../screens/herz lmoujahidin/rokaat_aljayb_lilimam_alrida_aalaih_alsalam_page.dart';
 import '../screens/other pages/salat layl/dou3aa_7azin.dart';
+import '../screens/other pages/salat layl/dou3aa_ba3d_salat_alwater.dart';
 import '../screens/other pages/salat layl/sawabaha_wa_fawa2idaha.dart';
 import '../screens/other pages/salat layl/waktaha_wakaifyatiha.dart';
 
@@ -510,7 +513,7 @@ class Items {
   static final Map<String, List<Map<String, String>>> dataItems = {
     "mafatihAljinanHomeScreenItem": [
       {'title': 'التعقيبات', 'route': Ta3kibat.screenRoute},
-      {'title': 'زيارات أيام الأسبوع', 'route': ZiaratAl2osbou3.screenRoute},
+      {'title': 'زيارات ايام الأسبوع', 'route': ZiaratAl2osbou3.screenRoute},
       {'title': 'أدعية ايام الأسبوع', 'route': Ad3iyatAl2osbo3.screenRoute},
       {
         'title': 'ليلة الجمعة ونهارها وأعمالها',
@@ -681,71 +684,71 @@ class Items {
       },
     ],
     "almonajatItem": [
-      {'title': 'المناجات بالسفر', 'route': AlmonajatBelsafar.screenRoute},
+      {'title': 'المناجاة‍ بالسفر', 'route': AlmonajatBelsafar.screenRoute},
       {
-        'title': 'المناجات بكشف الظلم',
+        'title': 'المناجاة‍ بكشف الظلم',
         'route': AlmonajatBikashfAlzolm.screenRoute
       },
       {
-        'title': 'المناجات الشعبانية',
+        'title': 'المناجاة‍ الشعبانية',
         'route': AlmonajatAlsha3baneya.screenRoute
       },
-      {'title': 'مناجات التائبين', 'route': MonajatAlta2ibin.screenRoute},
-      {'title': 'مناجات الشاكين', 'route': MonajatAlshakin.screenRoute},
+      {'title': 'مناجاة التائبين', 'route': MonajatAlta2ibin.screenRoute},
+      {'title': 'مناجاة الشاكين', 'route': MonajatAlshakin.screenRoute},
       {
-        'title': 'مناجات الخائفين',
+        'title': 'مناجاة الخائفين',
         'route': MonajatAl5a2ifin.screenRoute,
       },
       {
-        'title': 'مناجات  الراجين',
+        'title': 'مناجاة  الراجين',
         'route': MonajatAlrajin.screenRoute,
       },
       {
-        'title': 'مناجات الراغبين',
+        'title': 'مناجاة الراغبين',
         'route': MonajatAlra8ibin.screenRoute,
       },
       {
-        'title': 'مناجات الشاكرين',
+        'title': 'مناجاة الشاكرين',
         'route': MonajatAlshakirin.screenRoute,
       },
       {
-        'title': 'مناجات المطيعين لله',
+        'title': 'مناجاة المطيعين لله',
         'route': MonajatAlmoti3inLillah.screenRoute,
       },
       {
-        'title': 'مناجات المريدين',
+        'title': 'مناجاة المريدين',
         'route': MonajatAlmoridin.screenRoute,
       },
       {
-        'title': 'مناجات المحبين',
+        'title': 'مناجاة المحبين',
         'route': MonajatAlmo7ebin.screenRoute,
       },
       {
-        'title': 'مناجات المتوسلين',
+        'title': 'مناجاة المتوسلين',
         'route': MonajatAlmotawasilin.screenRoute,
       },
       {
-        'title': 'مناجات المفتقرين',
+        'title': 'مناجاة المفتقرين',
         'route': MonajatAlmoftakirin.screenRoute,
       },
       {
-        'title': 'مناجات العارفين',
+        'title': 'مناجاة العارفين',
         'route': MonajatAl3arifin.screenRoute,
       },
       {
-        'title': 'مناجات الذاكرين',
+        'title': 'مناجاة الذاكرين',
         'route': MonajatAlzakirin.screenRoute,
       },
       {
-        'title': 'مناجات المعتصمين',
+        'title': 'مناجاة المعتصمين',
         'route': MonajatAlmo3tasimin.screenRoute,
       },
       {
-        'title': 'مناجات الزاهدين',
+        'title': 'مناجاة الزاهدين',
         'route': MonajatAlzahidin.screenRoute,
       },
       {
-        'title': 'المناجات المنظومة لأمير المؤمنين (ع)',
+        'title': 'المناجاة‍ المنظومة لأمير المؤمنين (ع)',
         'route': MonajatL2amirAlmo2minin.screenRoute,
       },
       {
@@ -789,11 +792,11 @@ class Items {
         'route': FiA3malShaherMoharam.screenRoute,
       },
       {
-        'title': 'الليلة الأولى',
+        'title': 'الليلة الاولى',
         'route': AllaylaAl2oula.screenRoute,
       },
       {
-        'title': 'اليوم الأول',
+        'title': 'اليوم الاول',
         'route': AlyawmAl2awal.screenRoute,
       },
       {
@@ -819,11 +822,11 @@ class Items {
     ],
     "rajabItem": [
       {
-        'title': 'في الأعمال الخاصة بليالي أو أيام خاصة من رجب',
+        'title': 'في الأعمال الخاصة بليالي أو ايام خاصة من رجب',
         'route': Al2a3malAl5asaBrajab.screenRoute,
       },
       {
-        'title': 'اليوم الأول من رجب',
+        'title': 'اليوم الاول من رجب',
         'route': AlyawmAl2awalMenRajab.screenRoute,
       },
       {
@@ -865,11 +868,11 @@ class Items {
         'route': FiFadlShaherSha3ban.screenRoute,
       },
       {
-        'title': 'الليلة الأولى',
+        'title': 'الليلة الاولى',
         'route': AllaylaAl2oulaSha3ban.screenRoute,
       },
       {
-        'title': 'اليوم الأول',
+        'title': 'اليوم الاول',
         'route': AlyawmAl2awalSha3ban.screenRoute,
       },
       {
@@ -895,7 +898,7 @@ class Items {
     ],
     "ramadanItem": [
       {
-        'title': 'دعوات أيام شهر رمضان',
+        'title': 'دعوات ايام شهر رمضان',
         'route': Da3awatAyamShaherRamadan.screenRoute,
       },
       {
@@ -903,7 +906,7 @@ class Items {
         'route': FiFadelShaherRamadanWa2a3maloh.screenRoute,
       },
       {
-        'title': 'ما يعم الليالي والأيام',
+        'title': 'ما يعم الليالي والايام',
         'route': MaYa3omAllayaliWal2ayam.screenRoute,
       },
       {
@@ -927,7 +930,7 @@ class Items {
         'route': DouaaAlsa7ar.screenRoute,
       },
       {
-        'title': 'في أعمال أيام شهر رمضان',
+        'title': 'في أعمال ايام شهر رمضان',
         'route': Fi2a3mal2ayamShaherRamadan.screenRoute,
       },
       {
@@ -935,15 +938,15 @@ class Items {
         'route': Fi2a3malShaherRamadanAl5asa.screenRoute,
       },
       {
-        'title': 'صلوات الليالي ودعوات الأيام المشهورة',
+        'title': 'صلوات الليالي ودعوات الايام المشهورة',
         'route': SalawatAllayaliWada3awatAl2ayamaAlmashhoura.screenRoute,
       },
       {
-        'title': 'الليلة الأولى',
+        'title': 'الليلة الاولى',
         'route': AllaylaAl2oulaRamadan.screenRoute,
       },
       {
-        'title': 'اليوم الأول',
+        'title': 'اليوم الاول',
         'route': AlyawmAl2awalRamadan.screenRoute,
       },
       {
@@ -1029,7 +1032,7 @@ class Items {
     ],
     "shawalItem": [
       {
-        'title': 'الليلة الأولى',
+        'title': 'الليلة الاولى',
         'route': AllaylaAl2oulaShawal.screenRoute,
       },
       {
@@ -1047,7 +1050,7 @@ class Items {
         'route': FiA3malShaherZilhoja.screenRoute,
       },
       {
-        'title': 'اليوم الأول',
+        'title': 'اليوم الاول',
         'route': AlyawmAl2awalZilhoja.screenRoute,
       },
       {
@@ -1113,11 +1116,11 @@ class Items {
         'route': FiShaherSafar.screenRoute,
       },
       {
-        'title': 'في شهر ربيع الأول',
+        'title': 'في شهر ربيع الاول',
         'route': FiShaherRabi3Al2awal.screenRoute,
       },
       {
-        'title': 'في شهر ربيع الثاني والجمادى الأولى والآخرة',
+        'title': 'في شهر ربيع الثاني والجمادى الاولى والآخرة',
         'route': FiShaherRabi3AlsaniWaljamadaAl2oulaWal2a5ira.screenRoute,
       },
       {
@@ -1263,15 +1266,15 @@ class Items {
         'route': ZikrAlsalatWaldou3aaFiWasatAlmasjid.screenRoute,
       },
       {
-        'title': 'أعمال الأسطوانة السابعة',
+        'title': 'أعمال الاسطوانة السابعة',
         'route': A3malAl2ostwanaAlsabi3a.screenRoute,
       },
       {
-        'title': 'أعمال الأسطوانة الخامسة',
+        'title': 'أعمال الاسطوانة الخامسة',
         'route': A3malAl2ostwanaAl5amisa.screenRoute,
       },
       {
-        'title': 'عمل الأسطوانة الثالثة مقام الإمام زين العابدين (عليه السلام)',
+        'title': 'عمل الاسطوانة الثالثة مقام الإمام زين العابدين (عليه السلام)',
         'route': AamalAl2ostwanaAlsalisa.screenRoute,
       },
       {
@@ -1331,7 +1334,7 @@ class Items {
         'route': Fima3alaAlza2irMora3atoh.screenRoute,
       },
       {
-        'title': 'الزيارة المطلقة الأولى للحسين (عليه السلام)',
+        'title': 'الزيارة المطلقة الاولى للحسين (عليه السلام)',
         'route': AlziyaratAlmotlakaAl2oula.screenRoute,
       },
       {
@@ -1364,7 +1367,7 @@ class Items {
       },
       {
         'title':
-            'الأولى المخصوصة: ما يزار بها (عليه لسلام) في أول رجب وفي النصف منه ومن شعبان',
+            'الاولى المخصوصة: ما يزار بها (عليه لسلام) في أول رجب وفي النصف منه ومن شعبان',
         'route': Al2oulaAlmo5asasa.screenRoute,
       },
       {
@@ -1389,7 +1392,7 @@ class Items {
         'route': AlsadisaAlmo5asasa.screenRoute,
       },
       {
-        'title': 'السابعة المخصوصة: زيارة عاشوراء الزيارة الأولى',
+        'title': 'السابعة المخصوصة: زيارة عاشوراء الزيارة الاولى',
         'route': Alsadbi3aAlmo5asasa.screenRoute,
       },
       {
@@ -1441,7 +1444,7 @@ class Items {
     ],
     "ziyaratAlridaItem": [
       {
-        'title': 'زيارة الإمام الرضا (عليه السلام) الأولى',
+        'title': 'زيارة الإمام الرضا (عليه السلام) الاولى',
         'route': ZiyaratAlimamAlridaAl2oula.screenRoute,
       },
       {
@@ -1452,7 +1455,7 @@ class Items {
     "ziyarat2a2imatSirItem": [
       {
         'title':
-            'المقام الأول: في زيارة أئمة سر من رأى (عليه السلام) وأعمال السرداب',
+            'المقام الاول: في زيارة أئمة سر من رأى (عليه السلام) وأعمال السرداب',
         'route': AlmakamAl2awal.screenRoute,
       },
       {
@@ -1884,7 +1887,7 @@ class LayaliKadr {
     ],
     "Al2a3malAl5asaItem": [
       {
-        'title': 'أعمال الليلة التاسعة',
+        'title': 'أعمال الليلة التاسعة عشر',
         'route': A3malAllaylaLatasi3a3ashar.screenRoute
       },
       {
@@ -1917,8 +1920,8 @@ class LayaliKadr {
         'title': 'دعاء بعد صلاة الوتر',
         'route': Dou3a2Ba3dSalatAlwater.screenRoute
       },
-      {'title': 'دعاء الحزين', 'route': DouaaAlhazin.screenRoute},
-      {'title': 'حديث الكساء الشريف', 'route': HadisAlkisa2.screenRoute},
+      {'title': 'دعاء الحزين', 'route': Dou3a22alhazin.screenRoute},
+      {'title': 'حديث الكساء الشريف', 'route': Hadis2alkisa2.screenRoute},
     ],
   };
 
@@ -2080,34 +2083,34 @@ class Al7akibaAlramadaneya {
         'route': Alyawm2altasi3Wal3ishrin.screenRoute
       },
       //? -30-
-      {'title': 'اليوم الثلاثون', 'route': Alyawm2alsalasin.screenRoute},
+      {'title': 'اليوم الثلاثين', 'route': Alyawm2alsalasin.screenRoute},
     ],
     "a3malW2ad3iyatLayaliRamadanItem": [
       //? -1-
       {'title': 'الليلة الاولى', 'route': Allayla2al2oula.screenRoute},
       //? -13-
       {
-        'title': 'الليلة الثالث عشرة',
+        'title': 'الليلة الثالثة عشر',
         'route': Allayla2alsalisa3ashar.screenRoute
       },
       //? -14-
       {
-        'title': 'الليلة الرابع عشرة',
+        'title': 'الليلة الرابعة عشر',
         'route': Allayla2alrabi3a3ashar.screenRoute
       },
       //? -15-
       {
-        'title': 'الليلة الخامس عشرة',
+        'title': 'الليلة الخامسة عشر',
         'route': Allayla2al5amisa3ashar.screenRoute
       },
       //? -17-
       {
-        'title': 'الليلة السابع عشرة',
+        'title': 'الليلة السابعة عشر',
         'route': Allayla2alsabi3a3ashar.screenRoute
       },
       //? -19-
       {
-        'title': 'الليلة التاسع عشرة',
+        'title': 'الليلة التاسعة عشر',
         'route': Allayla2altasi3a3ashar.screenRoute
       },
       //? -21-
@@ -2276,7 +2279,7 @@ class AlBaqiyatAlSalehat {
         'route': SalatAl2isti5araZatAlrka3.screenRoute
       },
       {
-        'title': 'صلاة للذين ولكفاية ظلم السلطان',
+        'title': 'صلاة للدَين ولكفاية ظلم السلطان',
         'route': SalatLiddainWlkifayatZolmAlsoltan.screenRoute
       },
       {'title': 'صلاة الحاجة', 'route': SalatAl7aja.screenRoute},
@@ -2310,7 +2313,7 @@ class AlBaqiyatAlSalehat {
         'route': SalatAl5awfMenAlzalim.screenRoute
       },
       {
-        'title': 'صلاة للذكاء وجودة ',
+        'title': 'صلاة للذكاء وجودة الحفظ‍ ',
         'route': SalatLilzaka2WjoudatAlhofez.screenRoute
       },
       {
@@ -2352,7 +2355,7 @@ class AlBaqiyatAlSalehat {
         'route': Aldou3a2LikarakirAlbatn.screenRoute
       },
       {'title': 'الدعاء للبرص', 'route': Aldou3a2Lilbaras.screenRoute},
-      {'title': 'عزوذة لوجع العورة', 'route': AwzaLiwaja3Al3awra.screenRoute},
+      {'title': 'عوذة لوجع العورة', 'route': AwzaLiwaja3Al3awra.screenRoute},
       {'title': 'عوذة لوجع الركبة', 'route': AwzaLiwaja3Alrokba.screenRoute},
       {'title': 'عوذة لوجع العين', 'route': AwzaLiwaja3Al3ain.screenRoute},
       {'title': 'عوذة لابطال السحر', 'route': Al3awzaLibtalAlsi7r.screenRoute},
@@ -2433,7 +2436,7 @@ class AlBaqiyatAlSalehat {
         'title': 'المناجة بالاستقالة',
         'route': AlmonajatBelistikala.screenRoute
       },
-      {'title': 'المناجات للسفر', 'route': AlmonajatBelsafaar.screenRoute},
+      {'title': 'المناجاة للسفر', 'route': AlmonajatBelsafaar.screenRoute},
       {
         'title': 'المناجاة بطلب الرزق',
         'route': AlmonajatBitalabAlrizk.screenRoute
@@ -2512,9 +2515,10 @@ class OtherScreenn {
         'title': 'عنها وثوابها وفوائدها',
         'route': SawabahaWaFawa2idaha.screenRoute
       },
+      {'title': 'وقتها وكيفيتها', 'route': WaktahaWakaifyatiha.screenRoute},
       {
-        'title': 'وقتها وكيفيتها',
-        'route': WaktahaWakaifyatiha.screenRoute
+        'title': 'دعاء بعد صلاة الوتر',
+        'route': Dou3aaBa3dSalatAlwater.screenRoute
       },
       {'title': 'دعاء الحزين', 'route': Dou3aa7azin.screenRoute},
     ],

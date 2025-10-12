@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import '../api/web%20service/json_service.dart';
 
+import '../api/repository/repository.dart';
+import '../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
 import '../screens/a3mal layali kadr/a3mal layaly alkadr/al2iste3dad.dart';
 import '../screens/a3mal layali kadr/a3mal layaly alkadr/mawane3_alkoboul.dart';
 import '../screens/a3mal layali kadr/a3mal layaly alkadr/sawab_al2i7ya2.dart';
@@ -195,11 +198,13 @@ import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_a
 import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_alsoulasaa2.dart';
 import '../screens/albakiyat alsali7at/zikr_salawat_ayam_al2osbou3.dart';
 import '../screens/albakiyat_alsali7at_home_screen.dart';
+import '../screens/alsa7ifa_alsajadiya_home_screen.dart';
 import '../screens/kor2an/screens/index_screen.dart';
 import '../screens/kor2an/screens/juz_index_screen.dart';
 import '../screens/other pages/counter_screen.dart';
 import '../screens/other pages/imsakiya_screen.dart';
 import '../screens/other pages/salat layl/dou3aa_7azin.dart';
+import '../screens/other pages/salat layl/dou3aa_ba3d_salat_alwater.dart';
 import '../screens/other pages/salat layl/name_list_page.dart';
 import '../screens/other pages/salat layl/sawabaha_wa_fawa2idaha.dart';
 import '../screens/other pages/salat layl/waktaha_wakaifyatiha.dart';
@@ -532,6 +537,12 @@ import '../screens/herz lmoujahidin/herz_rasoul_allah_page.dart';
 import '../screens/herz lmoujahidin/rokaat_aljayb_lilimam_alrida_aalaih_alsalam_page.dart';
 
 class AppRoutes {
+  late Repository repository;
+  late A3malLaylatAlkaderCubit a3malLaylatAlkaderCubit;
+  AppRoutes() {
+    repository = Repository(JsonService());
+    a3malLaylatAlkaderCubit = A3malLaylatAlkaderCubit(repository);
+  }
   static final Map<String, WidgetBuilder> routes = {
     WelcomeScreen.screenRoute: (context) => WelcomeScreen(),
     FavoritesScreen.screenRoute: (context) => FavoritesScreen(
@@ -547,6 +558,7 @@ class AppRoutes {
     SalatAllayl.screenRoute: (context) => SalatAllayl(),
     SawabahaWaFawa2idaha.screenRoute: (context) => SawabahaWaFawa2idaha(),
     WaktahaWakaifyatiha.screenRoute: (context) => WaktahaWakaifyatiha(),
+    Dou3aaBa3dSalatAlwater.screenRoute: (context) => Dou3aaBa3dSalatAlwater(),
     Dou3aa7azin.screenRoute: (context) => Dou3aa7azin(),
     NameListPage.screenRoute: (context) => NameListPage(),
     // !
@@ -1005,6 +1017,7 @@ class AppRoutes {
     QuranHomeScreen.screenRoute: (context) => QuranHomeScreen(),
     IndexScreen.screenRoute: (context) => IndexScreen(),
     JuzIndexScreen.screenRoute: (context) => JuzIndexScreen(),
+
     //todo A3mal Layali Kadr
     A3malLayaliKadrHomeScreen.screenRoute: (context) =>
         A3malLayaliKadrHomeScreen(),
@@ -1279,5 +1292,10 @@ class AppRoutes {
     FiAsarBa3dSowarWalayat.screenRoute: (context) => FiAsarBa3dSowarWalayat(),
     FiBa3dMaYata3alakBelmawt.screenRoute: (context) =>
         FiBa3dMaYata3alakBelmawt(),
+
+    //todo Alsahifa AlSajjadiya
+    Alsa7ifaAlsajadiyaHomeScreen.screenRoute: (context) =>
+        Alsa7ifaAlsajadiyaHomeScreen(),
+    // !
   };
 }
