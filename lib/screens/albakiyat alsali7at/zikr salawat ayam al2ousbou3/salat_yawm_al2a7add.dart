@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../zikr_salawat_ayam_al2osbou3.dart';
 import 'salat_yawm_al2isnainn.dart';
 import 'salat_yawm_alsabtt.dart';
 
-class SalatYawmAl2a7add
-    extends StatefulWidget {
-  static String screenRoute =
-      'salat_yawm_al2a7add_screen';
+class SalatYawmAl2a7add extends StatefulWidget {
+  static String screenRoute = 'salat_yawm_al2a7add_screen';
   const SalatYawmAl2a7add({super.key});
 
   @override
-  State<SalatYawmAl2a7add>
-      createState() =>
-          _SalatYawmAl2a7addState();
+  State<SalatYawmAl2a7add> createState() => _SalatYawmAl2a7addState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _SalatYawmAl2a7addState
-    extends State<SalatYawmAl2a7add> {
+class _SalatYawmAl2a7addState extends State<SalatYawmAl2a7add> {
   bool isIcon = true;
   @override
   void initState() {
@@ -37,8 +32,7 @@ class _SalatYawmAl2a7addState
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState = prefs.getBool(
-        'isFavorite_salat_yawm_al2a7add_screen');
+    bool? savedState = prefs.getBool('isFavorite_salat_yawm_al2a7add_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -46,9 +40,7 @@ class _SalatYawmAl2a7addState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_salat_yawm_al2a7add_screen',
-        value);
+    await prefs.setBool('isFavorite_salat_yawm_al2a7add_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -67,7 +59,6 @@ class _SalatYawmAl2a7addState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -89,7 +80,7 @@ class _SalatYawmAl2a7addState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,77 +91,32 @@ class _SalatYawmAl2a7addState
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'صلاة يوم الاحد',
-                          SalatYawmAl2a7add
-                              .screenRoute);
+                          'صلاة يوم الاحد', SalatYawmAl2a7add.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
                           'صلاة يوم الاحد',
-                          SalatYawmAl2a7add
-                              .screenRoute,
-                          SalatYawmAl2a7add
-                              .screenRoute);
+                          SalatYawmAl2a7add.screenRoute,
+                          SalatYawmAl2a7add.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'صلاة يوم الاحد',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة يوم الاحد'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'وعنه (عليه السلام) أيضاً قال : من صلّى يوم الاحد أربع ركعات يقرأ في كل ركعة فاتحة الكتاب وسورة : تَبارَكَ الَّذي بيَدِهِ المُلْكُ، بوأه الله من الجنة حيث يشاء.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة يوم الاحد',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatYawmAl2isnainn.screenRoute,
           pushBack: SalatYawmAlsabtt.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة يوم الاحد.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة يوم الاحد.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

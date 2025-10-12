@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../zikr_salawat_ayam_al2osbou3.dart';
 import 'salat_yawm_al2arbi3aa2.dart';
 import 'salat_yawm_al2isnainn.dart';
 
-class SalatYawmAlsoulasaa2
-    extends StatefulWidget {
-  static String screenRoute =
-      'salat_yawm_alsoulasaa2_screen';
+class SalatYawmAlsoulasaa2 extends StatefulWidget {
+  static String screenRoute = 'salat_yawm_alsoulasaa2_screen';
   const SalatYawmAlsoulasaa2({super.key});
 
   @override
-  State<SalatYawmAlsoulasaa2>
-      createState() =>
-          _SalatYawmAlsoulasaa2State();
+  State<SalatYawmAlsoulasaa2> createState() => _SalatYawmAlsoulasaa2State();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _SalatYawmAlsoulasaa2State
-    extends State<SalatYawmAlsoulasaa2> {
+class _SalatYawmAlsoulasaa2State extends State<SalatYawmAlsoulasaa2> {
   bool isIcon = true;
   @override
   void initState() {
@@ -37,8 +32,8 @@ class _SalatYawmAlsoulasaa2State
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState = prefs.getBool(
-        'isFavorite_salat_yawm_alsoulasaa2_screen');
+    bool? savedState =
+        prefs.getBool('isFavorite_salat_yawm_alsoulasaa2_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -46,9 +41,7 @@ class _SalatYawmAlsoulasaa2State
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_salat_yawm_alsoulasaa2_screen',
-        value);
+    await prefs.setBool('isFavorite_salat_yawm_alsoulasaa2_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -67,7 +60,6 @@ class _SalatYawmAlsoulasaa2State
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -89,7 +81,7 @@ class _SalatYawmAlsoulasaa2State
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,77 +92,32 @@ class _SalatYawmAlsoulasaa2State
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'صلاة يوم الثلاثاء',
-                          SalatYawmAlsoulasaa2
-                              .screenRoute);
+                          'صلاة يوم الثلثاء', SalatYawmAlsoulasaa2.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'صلاة يوم الثلاثاء',
-                          SalatYawmAlsoulasaa2
-                              .screenRoute,
-                          SalatYawmAlsoulasaa2
-                              .screenRoute);
+                          'صلاة يوم الثلثاء',
+                          SalatYawmAlsoulasaa2.screenRoute,
+                          SalatYawmAlsoulasaa2.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'صلاة يوم الثلاثاء',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة يوم الثلثاء'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'وعنه (عليه السلام) أيضا : من صلّى يوم الثلاثاء ست ركعات يقرأ في كل ركعة فاتحة الكتاب وآية : آمن الرسول الى آخرها وسورة إذا زلزلت مرة واحدة غفر الله له ذنوبه حتى يخرج منها كيوم ولدته أمّه.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة يوم الثلثاء',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatYawmAl2arbi3aa2.screenRoute,
           pushBack: SalatYawmAl2isnainn.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة يوم الثلثاء.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة يوم الثلثاء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
