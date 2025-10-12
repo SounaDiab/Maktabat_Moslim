@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al5asa.dart';
@@ -58,7 +58,6 @@ class _Dou3a2YaBatinanState extends State<Dou3a2YaBatinan> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,17 +79,18 @@ class _Dou3a2YaBatinanState extends State<Dou3a2YaBatinan> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء يا باطناً', Dou3a2YaBatinan.screenRoute);
+                      .addFavorite(
+                          'دعاء يا باطناً', Dou3a2YaBatinan.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -101,47 +101,22 @@ class _Dou3a2YaBatinanState extends State<Dou3a2YaBatinan> {
               },
             ),
           ],
-          title: Text(
-            'دعاء يا باطناً',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء يا باطناً'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'يا باطِناً فِي ظُهُورِهِ، وَيا ظاهِراً فِي بُطُونِهِ، وَيا باطِناً لَيْسَ يَخْفَى، وَيا ظاهِراً لَيْسَ يُرَى. يا مَوْصُوفاً لا يَبْلُغُ بِكَيْنُونَتِهِ مَوْصُوفٌ، وَلا حَدٌّ مَحْدُودٌ، وَيا غائِباً غَيْرَ مَفْقُودٍ، وَيا شاهِداً غَيْرَ مَشْهُودٍ يُطْلَبُ فَيُصابُ، وَلَمْ يَخْلُ مِنْهُ السَّماواتُ وَالْأَرْضُ وَما بَيْنَهُما طَرْفَةَ عَيْنٍ، لا يُدْرَكُ بِكَيْفٍ، وَلا يُؤَيَّنُ بِأَيْنٍ وَلا بِحَيْثٍ. أَنْتَ نُورُ النُّورِ، وَرَبُّ الْأَرْبابِ، أَحَطْتَ بِجَمِيعِ الأُمُورِ. سُبْحانَ مَنْ لَيْسَ كَمِثِلهِ شَيْءٌ، وَهُوَ السَّمِيعُ الْبَصِيرُ، سُبْحانَ مَنْ هُوَ هَكَذا، وَلا هَكَذا غَيْرُهُ. ثمّ تدعو بما تشاء.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'دعاء يا باطناً',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatLayl.screenRoute,
           pushBack: ZyaratSa7ibAlzaman.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا باطناً.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا باطناً.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al5asa.dart';
@@ -47,7 +47,7 @@ class _A3malAllaylaLatasi3a3asharState
         'isFavorite_a3mal_allayla_latasi3a_3ashar_screen', value);
   }
 
-      Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -62,7 +62,6 @@ class _A3malAllaylaLatasi3a3asharState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -84,14 +83,14 @@ class _A3malAllaylaLatasi3a3asharState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('اعمال الليلة التاسعة عشر',
@@ -106,83 +105,22 @@ class _A3malAllaylaLatasi3a3asharState
               },
             ),
           ],
-          title: Text(
-            'اعمال الليلة التاسعة عشر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'اعمال الليلة التاسعة عشر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'أعمال الليلة التاسعة عشرة ما يخصّ كلّ ليلة من ليالي القدر إضافة إلى الأعمال العامة المذكورة فهو كما يلي:',
-                  weight: FontWeight.w900,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الأول:',
-                  subtitle:
-                      'تقول مئة مرة: أَسْتَغْفِرُ اللهَ رَبِّي وَأَتُوبُ إِلَيْهِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني:',
-                  subtitle:
-                      'تقول مئة مرة: اللّهُمَّ، الْعَنْ قَتَلَةَ أَمِيرِ الْمُؤْمِنِينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثالث:',
-                  subtitle: 'دعاء الإمام محمد التقي عليه السلام:\n'
-                      'يا ذَا الَّذِي كانَ قَبْلَ كُلِّ شَيْءٍ، ثُمَّ خَلَقَ كُلَّ شَيْءٍ، ثُمَّ يَبْقَى وَيَفْنَى كُلُّ شَيْءٍ. يا ذَا الَّذِي لَيْسَ كَمِثْلِهِ شَيْءٌ، وَيا ذا الَّذِي لَيْسَ فِي السَّماواتِ الْعُلَى، وَلا فِي الْأَرَضِين السُّفْلَى، وَلا فَوْقَهُنَّ، وَلا تَحْتَهُنَّ، وَلا بَيْنَهُنَّ، إِلهٌ يُعْبَدُ غَيْرُهُ. لَكَ الْحَمْدُ حَمْداً لا يَقْوَى عَلَى إِحْصائِهِ إِلّا أَنْتَ، فَصَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، صَلاةً لا يَقْوَى عَلَى إِحْصائِها إِلّا أَنْتَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الرابع: تقول:',
-                  subtitle:
-                      'اللّهُمَّ، اجْعَلْ فِيما تَقْضِي وَتُقَدِّرُ مِنَ الْأَمْرِ الْمَحْتُومِ، وَفِيما تَفْرُقُ مِنَ الْأَمْرِ الْحَكِيمِ، فِي لَيْلَةِ الْقَدْرِ، وَفِي الْقَضاءِ الَّذِي لا يُرَدُّ وَلا يُبَدَّلُ، أَنْ تَكْتُبَنِي مِنْ حُجَّاجِ بَيْتِكَ الْحَرامِ، الْمَبْرُورِ حَجُّهُمُ، الْمَشْكُورِ سَعْيُهُمُ، الْمَغْفُورِ ذُنُوبُهُمُ، الْمُكَفَّرِ عَنْهُمْ سَيِّئاتُهُمْ، وَاجْعَلْ فِيما تَقْضِي وَتُقَدِّرُ، أَنْ تُطِيلَ عُمْرِي وَتُوَسِّعَ عَلَيَّ فِي رِزْقِي، وَتَفْعَلَ بِي كَذا وَكَذا. ويسأل حاجته عوض هذه الكلمة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'اعمال الليلة التاسعة عشر',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: A3malAllaylaAlwahidaWal3eshrin.screenRoute,
           pushBack: Hadis2alkisa2.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الليلة التاسعة عشر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الليلة التاسعة عشر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

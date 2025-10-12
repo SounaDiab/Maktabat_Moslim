@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al5asa.dart';
@@ -43,7 +43,7 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
     await prefs.setBool('isFavorite_zyarat_sa7ib_alzaman_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -58,7 +58,6 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,14 +79,14 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
@@ -103,47 +102,24 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
               },
             ),
           ],
-          title: Text(
-            'زيارة صاحب الزمان عجل الله تعالى فرجه الشريف (آل ياسين)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title:
+                    'زيارة صاحب الزمان عجل الله تعالى فرجه الشريف (آل ياسين)'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'سَلامٌ عَلَى آلِ يس. السَّلامُ عَلَيْكَ يا دَاعِيَ اللهِ وَرَبَّانِيَّ آياتِهِ، السَّلامُ عَلَيْكَ يا بابَ اللهِ وَدَيَّانَ دِينِهِ، السَّلامُ عَلَيْكَ يا خَلِيفَةَ اللهِ وَنَاصِرَ حَقِّهِ، السَّلامُ عَلَيْكَ يا حُجَّةَ اللهِ وَدَلِيلَ إِرادَتِهِ، السَّلامُ عَلَيْكَ يا تالِيَ كِتَابِ اللهِ وَتَرْجُمَانَهُ، السَّلامُ عَلَيْكَ فِي آنَاءِ لَيْلِكَ وَأَطْرَافِ نَهارِكَ، السَّلامُ عَلَيْكَ يا بَقِيَّةَ اللهِ فِي أَرْضِهِ، السَّلامُ عَلَيْكَ يا مِيثاقَ اللهِ الَّذِي أَخَذَهُ وَوَكَّدَهُ، السَّلامُ عَلَيْكَ يا وَعْدَ اللهِ الَّذِي ضَمِنَهُ، السَّلامُ عَلَيْكَ أَيُّها الْعَلَمُ الْمَنْصُوبُ، وَالْعِلْمُ الْمَصْبُوبُ، وَالْغَوْثُ وَالرَّحْمَةُ الْواسِعَةُ، وَعْداً غَيْرَ مَكْذُوبٍ. السَّلامُ عَلَيْكَ حِينَ تَقُومُ، السَّلامُ عَلَيْكَ حِينَ تَقْعُدُ، السَّلامُ عَلَيْكَ حِينَ تَقْرَأُ وَتُبَيِّنُ، السَّلامُ عَلَيْكَ حِينَ تُصَلِّي وَتَقْنُتُ، السَّلامُ عَلَيْكَ حِينَ تَرْكَعُ وَتَسْجُدُ، السَّلامُ عَلَيْكَ حِينَ تُهَلِّلُ وَتُكَبِّرُ، السَّلامُ عَلَيْكَ حِينَ تَحْمَدُ وَتَسْتَغْفِرُ، السَّلامُ عَلَيْكَ حِينَ تُصْبِحُ وَتُمْسِي، السَّلامُ عَلَيْكَ فِي اللَّيلِ إِذا يَغْشَى، وَالنَّهارِ إِذَا تَجَلَّى. السَّلامُ عَلَيْكَ أَيُّها الْإِمامُ الْمَأْمُونُ، السَّلامُ عَلَيْكَ أَيُّها الْمُقَدَّمُ الْمَأْمُولُ، السَّلامُ عَلَيْكَ بِجَوامِعِ السَّلامُ. أُشْهِدُكَ، يا مَوْلايَ، أَنِّي أَشْهَدُ أَنْ لا إِلـهَ إِلّا اللهُ وَحْدَهُ لا شَرِيكَ لَهُ، وَأَنَّ مُحَمَّداً عَبْدُهُ وَرَسُولُهُ، لا حَبِيبَ إِلّا هُوَ وَأَهْلُهُ. وَأُشْهِدُكَ، يا مَوْلايَ، أَنَّ عَلِيّاً أَمِيرَ الْمُؤْمِنِينَ حُجَّتُهُ، وَالْحَسَنَ حُجَّتُهُ، وَالْحُسَيْنَ حُجَّتُهُ، وَعَلِيَّ بْنَ الْحُسَيْنِ حُجَّتُهُ، وَمُحَمَّدَ بْنَ عَلِيٍّ حُجَّتُهُ، وَجَعْفَرَ بْنَ مُحَمَّدٍ حُجَّتُهُ، وَمُوسَى بْنَ جَعْفَرٍ حُجَّتُهُ، وَعَلِيَّ بْنَ مُوسَى حُجَّتُهُ، وَمُحَمَّدَ بْنَ عَلِيٍّ حُجَّتُهُ، وَعَلِيَّ بْنَ مُحَمَّدٍ حُجَّتُهُ، وَالْحَسَنَ بْنَ عَلِيٍّ حُجَّتُهُ. وَأَشْهَدُ أَنَّكَ حُجَّةُ اللهِ، أَنْتُمُ الأَوَّلُ وَالآخِرُ، وَأَنَّ رَجْعَتَكُمْ حَقٌّ لا رَيْبَ فِيها، يَوْمَ لا يَنْفَعُ نَفْساً إِيْمانُهَا لَمْ تَكُنْ امَنَتْ مِنْ قَبْلُ أَوْ كَسَبَتْ فِي إِيْمانِها خَيْراً، وَأَنَّ الْمَوْتَ حَقٌّ، وَأَنَّ ناكِراً وَنَكِيراً حَقٌّ. وَأَشْهَدُ أَنَّ النَّشْرَ حَقٌّ، وَالْبَعْثَ حَقٌّ، وَأَنَّ الصِّراطَ حَقٌّ، وَالْمِرْصادَ حَقٌّ، وَالْمِيزانَ حَقٌّ، وَالْحَشْرَ حَقٌّ، وَالْحِسابَ حَقٌّ، وَالْجَنَّةَ وَالنَّارَ حَقٌّ، وَالْوَعْدَ وَالْوَعِيدَ بِهِما حَقٌّ. يا مَوْلايَ، شَقِيَ مَنْ خالَفَكُمْ، وَسَعِدَ مَنْ أَطاعَكُمْ، فَاشْهَدْ عَلَى ما أَشْهَدْتُكَ عَلَيْهِ، وَأَنَا وَلِيٌّ لَكَ، بَرِيءٌ مِنْ عَدُوِّكَ. فَالْحَقُّ ما رَضَيْتُمُوهُ، وَالْباطِلُ ما أَسْخَطْتُمُوهُ، وَالْمَعْرُوفُ ما أَمَرْتُمْ بِهِ، وَالْمُنْكَرُ مَا نَهَيْتُمْ عَنْهُ، فَنَفْسِي مُؤْمِنَةٌ بِاللهِ وَحْدَهُ لا شَرِيكَ لَهُ، وَبِرَسُولِهِ، وَبِأَمِيرِ الْمُؤْمِنِينَ، وَبِكُمْ يا مَوْلايَ، أَوَّلِكُمْ وَآخِرِكُمْ، وَنُصْرَتِي مُعَدَّةٌ لَكُمْ، وَمَوَدَّتِي خالِصَةٌ لَكُمْ، آمِينَ آمِينَ. دعاء يا باطناًيدعو بهذا الدُّعاء المروي في الإقبال:يا باطِناً فِي ظُهُورِهِ، وَيا ظاهِراً فِي بُطُونِهِ، وَيا باطِناً لَيْسَ يَخْفَى، وَيا ظاهِراً لَيْسَ يُرَى. يا مَوْصُوفاً لا يَبْلُغُ بِكَيْنُونَتِهِ مَوْصُوفٌ، وَلا حَدٌّ مَحْدُودٌ، وَيا غائِباً غَيْرَ مَفْقُودٍ، وَيا شاهِداً غَيْرَ مَشْهُودٍ يُطْلَبُ فَيُصابُ، وَلَمْ يَخْلُ مِنْهُ السَّماواتُ وَالْأَرْضُ وَما بَيْنَهُما طَرْفَةَ عَيْنٍ، لا يُدْرَكُ بِكَيْفٍ، وَلا يُؤَيَّنُ بِأَيْنٍ وَلا بِحَيْثٍ. أَنْتَ نُورُ النُّورِ، وَرَبُّ الْأَرْبابِ، أَحَطْتَ بِجَمِيعِ الأُمُورِ. سُبْحانَ مَنْ لَيْسَ كَمِثِلهِ شَيْءٌ، وَهُوَ السَّمِيعُ الْبَصِيرُ، سُبْحانَ مَنْ هُوَ هَكَذا، وَلا هَكَذا غَيْرُهُ. ثمّ تدعو بما تشاء.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'زيارة صاحب الزمان عجل الله تعالى فرجه الشريف (آل ياسين)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2YaBatinan.screenRoute,
           pushBack: A3malAllaylaAlsalisaWal3ishrin.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة آل ياسين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة آل ياسين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

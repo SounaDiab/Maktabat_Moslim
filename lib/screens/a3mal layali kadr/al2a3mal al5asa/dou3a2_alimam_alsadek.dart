@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2a3mal_al5asa.dart';
@@ -58,7 +58,6 @@ class _Dou3a2AlimamAlsadekState extends State<Dou3a2AlimamAlsadek> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,70 +79,46 @@ class _Dou3a2AlimamAlsadekState extends State<Dou3a2AlimamAlsadek> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'دعاء الامام الصادق عليه السلام في العشر الأواخر',
+                          'دعاء الامام الصادق عليه السلام في العشر الاواخر',
                           Dou3a2AlimamAlsadek.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'دعاء الامام الصادق عليه السلام في العشر الأواخر',
+                          'دعاء الامام الصادق عليه السلام في العشر الاواخر',
                           Dou3a2AlimamAlsadek.screenRoute,
                           Dou3a2AlimamAlsadek.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء الامام الصادق عليه السلام في العشر الأواخر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(
+                title: 'دعاء الامام الصادق عليه السلام في العشر الاواخر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'بسم الله الرحمن الرحيم',
-                  style: TextStyle(
-                    fontSize: isTablet ? _fontSizeTablet + 10 : _fontSize,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      '"اللّهُمَّ، إِنَّكَ قُلْتَ فِي كِتابِكَ الْمُنْزَلِ: ﴿شَهْرُ رَمَضانَ الَّذِي أُنْزِلَ فِيهِ الْقُرْآنُ هُدَىً لِلنَّاسِ وَبَيِّناتٍ مِنَ الْهُدَى وَالْفُرْقان﴾ فَعَظَّمْتَ حُرْمَةَ شَهْرِ رَمَضانَ، بِما أَنْزَلْتَ فِيهِ مِنَ الْقُرْآنَ، وَخَصَصْتَهُ بِلَيْلَةِ الْقَدْرِ، وَجَعَلْتَها خَيْراً مِنْ أَلْفِ شَهْرٍ. اللّهُمَّ، وَهذِهِ أَيَّامُ شَهْرِ رَمَضانَ قَدِ انْقَضَتْ، وَلَيالِيهِ قَدْ تَصَرَّمَتْ، وَقَدْ صِرْتُ يا إِلهِي مِنْهُ إِلَى ما أَنْتَ أَعْلَمُ بِهِ مِنِّي، وَأَحْصَى لِعَدَدِهِ مِنَ الْخَلْقِ أَجْمَعِينَ، فَأَسْأَلُكَ بِما سَأَلَكَ بِهِ مَلائِكَتُكَ الْمُقَرَّبُونَ، وَأَنْبِياؤُكَ الْمُرْسَلُونَ، وَعِبادُكَ الصَّالحُونَ، أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَأَنْ تَفُكَّ رَقَبَتِي مِنَ النَّارِ، وَتُدْخِلَنِي الْجَنَّةَ بِرَحْمَتِكَ، وَأَنْ تَتَفَضَّلَ عَلَيَّ بِعَفْوِكَ وَكَرَمِكَ، وَتَتَقَبَّلَ تَقَرُّبِي، وَتَسْتَجِيبَ دُعائِي، وَتَمُنَّ عَلَيَّ بِالْأَمْنِ يَوْمَ الْخَوْفِ مِنْ كُلِّ هَوْلٍ أَعْدَدْتَهُ لِيَوْمِ الْقِيامَةِ. إِلهِي، وَأَعُوذُ بِوَجْهِكَ الْكَرِيمِ، وَبِجَلالِكَ الْعَظِيمِ، أَنْ يَنْقَضِيَ أَيَّامُ شَهْرِ رَمَضانَ وَلَيالِيهِ، وَلَكَ قِبَلِي تَبِعَةٌ أَوْ ذَنْبٌ تُؤاخِذُنِي بِهِ، أَوْ خَطِيئَةٌ تُرِيدُ أَنْ تَقْتَصَّها مِنِّي، لَمْ تَغْفِرْها لِي. سَيِّدِي سَيِّدِي سَيِّدِي، أَسْأَلُكَ يا لا إِلهَ إِلّا أَنْتَ، إِذْ لا إِلهَ إِلّا أَنْتَ، إِنْ كُنْتَ رَضَيْتَ عَنِّي فِي هذَا الشَّهْرِ، فَازْدَدْ عَنِّي رِضَىً، وَإِنْ لَمْ تَكُنْ رَضيتَ عَنِّي، فَمِنَ الآنَ فَارْضَ عَنِّي، يا أَرْحَمَ الرَّاحِمِينَ، يا اللهُ يا أَحَدُ يا صَمَدُ، يا مَنْ لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُواً أَحَدٌ. وأكثر من قول: يا مُلَيِّنَ الْحَدِيدِ لِداوُودَ عَلَيْهِ السَّلامُ، يا كاشِفَ الضُّرِّ وَالْكُرَبِ الْعِظامِ عَنْ أَيُّوبَ عَلَيْهِ السَّلامُ، أَيْ مُفَرِّجَ هَمِّ يَعْقُوبَ عَلَيْهِ السَّلامُ، أَيْ مُنَفِّسَ غَمِّ يُوسُفَ عَلَيْهِ السَّلامُ، صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، كَما أَنْتَ أَهْلُهُ، أَنْ تُصَلِّيَ عَلَيْهِمْ أَجْمَعِينَ، وَافْعَلْ بِي ما أَنْتَ أَهْلُهُ، وَلا تَفْعَلْ بِي ما أَنَا أَهْلُهُ. ومنها ما رواه في الكافي مسنداً وفي المقنعة، والمصباح مرسلاً، تقول أول ليلة منها ، أي في الليلة الحادية والعشرين:يا مُولِجَ اللَّيْلِ فِي النَّهارِ، وَمُولِجَ النَّهارِ فِي اللَّيْلِ، وَمُخْرِجَ الْحَيِّ مِنَ الْمَيِّتِ، وَمُخْرِجَ الْمَيِّتِ مِنَ الْحَيِّ. يا رازِقَ مَنْ يَشاءُ بِغَيْرِ حِسابٍ يا اللهُ، يا رَحْمنُ، يا اللهُ يا رَحِيمُ، يا اللهُ يا اللهُ يا اللهُ، لَكَ الْأَسْماءُ الْحُسْنَى، وَالْأَمْثالُ الْعُلْيا، وَالْكِبْرِياءُ وَالآلاءُ، أَسْأَلُكَ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَأَنْ تَجْعَلَ اسْمِي فِي هذِهِ اللَّيْلَةِ فِي السُّعَداءِ، وَرُوحِي مَعَ الشُّهَداءِ، وَإِحْسانِي فِي عِلِّيِّينَ، وَإِساءَتِي مَغْفُورَة، وَأَنْ تَهَبَ لِي يَقِيناً تُباشِرُ بِهِ قَلْبِي، وَإِيْماناً يُذْهِبُ الشَّكَّ عَنِّي، وَتُرْضِينِي بِما قَسَمْتَ لِي، وَآتِنا فِي الدُّنْيا حَسَنَةً، وَفِي الآخِرَةِ حَسَنَةً، وَقِنا عَذابَ النَّارِ الْحَرِيقِ، وَارْزُقْنِي فِيها ذِكْرَكَ، وَشُكْرَكَ، وَالرَّغْبَةَ إِلَيْكَ، وَالْإِنابَةَ وَالتَّوْفِيقَ لِما وَفَّقْتَ لَهُ مُحَمَّداً وَآلَ مُحَمَّدٍ، عَلَيْهِ وَعَلَيْهِمُ السَّلامُ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'دعاء الامام الصادق عليه السلام في العشر الاواخر',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2AllaylaAlwahidaWal3ishrin.screenRoute,
           pushBack: A3malAllaylaAlwahidaWal3eshrin.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الامام الصادق عليه السلام في العشر الأواخر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الامام الصادق عليه السلام في العشر الأواخر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
