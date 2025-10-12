@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/Util/items.dart';
-import 'package:maktabat_almoslim/screens/mafatih_aljinan_home_screen.dart';
-import 'package:maktabat_almoslim/widgets/search_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../Util/items.dart';
+import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
+import '../mafatih_aljinan_home_screen.dart';
+import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/line_from_index.dart';
 import '../search_provider.dart';
+import 'ziarat al2osbo3/ziarat_al2a7ad.dart';
+import 'ziarat al2osbo3/ziarat_al2arbi3a2.dart';
+import 'ziarat al2osbo3/ziarat_al2isnain.dart';
+import 'ziarat al2osbo3/ziarat_al5amis.dart';
+import 'ziarat al2osbo3/ziarat_aljom3a.dart';
+import 'ziarat al2osbo3/ziarat_alsabt.dart';
+import 'ziarat al2osbo3/ziarat_alsoulasa2.dart';
 
 class ZiaratAl2osbou3 extends StatefulWidget {
   static String screenRoute = 'ziarat_al2osbou3_screen';
@@ -73,26 +82,60 @@ class _ZiaratAl2osbou3State extends State<ZiaratAl2osbou3> {
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return ListTile(
-                    title: LineFromIndex(
-                      text: item['title']!,
-                      route: item['route']!,
-                    ),
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<MafatihAljinanCubit, MafatihAljinanState>(
+          builder: (context, state) {
+            if (state is MafatihAljinanLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is MafatihAljinanLoaded) {
+              final mafatihAljinan = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                ZiaratAl2a7ad.screenRoute,
+                ZiaratAl2isnain.screenRoute,
+                ZiaratAlsoulasa2.screenRoute,
+                ZiaratAl2arbi3a2.screenRoute,
+                ZiaratAl5amis.screenRoute,
+                ZiaratAljom3a.screenRoute,
+                ZiaratAlsabt.screenRoute,
+              ];
+              for (var item in mafatihAljinan) {
+                if (item.title == 'زيارات ايام الاسبوع') {
+                  for (var subItem in item.index) {
+                    allTitles.add({
+                      'title': subItem.title,
+                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                    });
+                  }
+                }
+              }
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: allTitles.length,
+                      itemBuilder: (context, i) {
+                        final title = allTitles[i]['title'];
+                        final route = allTitles[i]['route'];
+
+                        return ListTile(
+                          title: LineFromIndex(
+                            text: title,
+                            route: route,
+                          ),
+                        );
+                      }),
+                ),
+              );
+            } else if (state is MafatihAljinanError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }

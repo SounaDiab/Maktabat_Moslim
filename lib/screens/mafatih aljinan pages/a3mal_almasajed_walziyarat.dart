@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/mafatih_aljinan_home_screen.dart';
-import 'package:maktabat_almoslim/widgets/search_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
+import '../mafatih_aljinan_home_screen.dart';
+import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/line_from_index.dart';
 import '../../Util/items.dart';
 import '../search_provider.dart';
+import 'a3mal almasajed wal ziyarat/a3mal_masjid_alsahla.dart';
+import 'a3mal almasajed wal ziyarat/adab_alziyarat.dart';
+import 'a3mal almasajed wal ziyarat/alziyarat_aljami3a_walsalawat.dart';
+import 'a3mal almasajed wal ziyarat/fadl_lakoufa_wmasjidoha.dart';
+import 'a3mal almasajed wal ziyarat/kaifyat_wziyarat_amir_almo2minin.dart';
+import 'a3mal almasajed wal ziyarat/ziyarat_2a2imat_sir.dart';
+import 'a3mal almasajed wal ziyarat/ziyarat_alhoussein_wa2adabiha.dart';
+import 'a3mal almasajed wal ziyarat/ziyarat_alkazimin.dart';
+import 'a3mal almasajed wal ziyarat/ziyarat_alnabi_walzahraa_wal2a2ima.dart';
+import 'a3mal almasajed wal ziyarat/ziyarat_alrida.dart';
 
 class A3malAlmasajedWalziyarat extends StatefulWidget {
   static String screenRoute = 'a3mal_almasajed_walziyarat_screen';
@@ -75,24 +87,63 @@ class _A3malAlmasajedWalziyaratState extends State<A3malAlmasajedWalziyarat> {
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return LineFromIndex(
-                    text: item['title']!,
-                    route: item['route']!,
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<MafatihAljinanCubit, MafatihAljinanState>(
+          builder: (context, state) {
+            if (state is MafatihAljinanLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is MafatihAljinanLoaded) {
+              final mafatihAljinan = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                AdabAlziyarat.screenRoute,
+                ZiyaratAlnabiWalzahraaWal2a2ima.screenRoute,
+                KaifyatWziyaratAmirAlmo2minin.screenRoute,
+                FadlLakoufaWmasjidoha.screenRoute,
+                A3malMasjidAlsahla.screenRoute,
+                ZiyaratAlhousseinWa2adabiha.screenRoute,
+                ZiyaratAlkazimin.screenRoute,
+                ZiyaratAlrida.screenRoute,
+                Ziyarat2a2imatSir.screenRoute,
+                AlziyaratAljami3aWalsalawat.screenRoute,
+              ];
+              for (var item in mafatihAljinan) {
+                if (item.title == 'اعمال المساجد والزيارات') {
+                  for (var subItem in item.index) {
+                    allTitles.add({
+                      'title': subItem.title,
+                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                    });
+                  }
+                }
+              }
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: allTitles.length,
+                      itemBuilder: (context, i) {
+                        final title = allTitles[i]['title'];
+                        final route = allTitles[i]['route'];
+
+                        return ListTile(
+                          title: LineFromIndex(
+                            text: title,
+                            route: route,
+                          ),
+                        );
+                      }),
+                ),
+              );
+            } else if (state is MafatihAljinanError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
