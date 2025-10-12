@@ -119,7 +119,7 @@ class _AllaylaAlsalisa3asharaSha3banState
           pushNext: LaylatAlnisfMenSha3ben.screenRoute,
           pushBack: AlyawmAlsalisSha3ben.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الالثالثة عشرةاولى من شعبان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

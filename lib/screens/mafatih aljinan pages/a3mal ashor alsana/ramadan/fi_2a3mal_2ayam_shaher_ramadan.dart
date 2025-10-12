@@ -119,7 +119,7 @@ class _Fi2a3mal2ayamShaherRamadanState
           pushNext: Fi2a3malShaherRamadanAl5asa.screenRoute,
           pushBack: DouaaAlsa7ar.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال ايام شهر رمضان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

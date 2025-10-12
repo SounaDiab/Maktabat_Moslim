@@ -114,7 +114,7 @@ class _AllaylaAl2oulaState extends State<AllaylaAl2oula> {
           pushNext: AlyawmAl2awal.screenRoute,
           pushBack: FiA3malShaherMoharam.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الاولى.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

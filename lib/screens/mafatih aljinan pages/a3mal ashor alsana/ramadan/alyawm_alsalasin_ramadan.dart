@@ -116,7 +116,7 @@ class _AlyawmAlsalasinRamadanState extends State<AlyawmAlsalasinRamadan> {
           pushNext: Da3awatAyamShaherRamadan.screenRoute,
           pushBack: Dou3aaAllaylaAlsalasinRamadan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الثلاثين من رمضان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

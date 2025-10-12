@@ -116,7 +116,7 @@ class _YawmAlnisfMenSha3benState extends State<YawmAlnisfMenSha3ben> {
           pushNext: A3malMaBakyaMenAlshaher.screenRoute,
           pushBack: LaylatAlnisfMenSha3ben.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/يوم النصف من شعبان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

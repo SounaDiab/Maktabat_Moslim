@@ -116,7 +116,7 @@ class _AllaylaAltasi3aZilhojaState extends State<AllaylaAltasi3aZilhoja> {
           pushNext: AlyawmAltasi3Zilhoja.screenRoute,
           pushBack: AlyawmAlsamin3asharZilhoja.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة التاسعة من ذي الحجة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

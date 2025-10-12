@@ -116,7 +116,7 @@ class _FiShaherZilko3daState extends State<FiShaherZilko3da> {
           pushBack: Fi2a3mal3amaWa2a3malAlnayrouzWa2a3malAl2ashhorAlromiya
               .screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في شهر ذي القعدة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

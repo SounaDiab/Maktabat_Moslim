@@ -116,7 +116,7 @@ class _AlyawmAl2awalZilhojaState extends State<AlyawmAl2awalZilhoja> {
           pushNext: AlyawmAlsabi3Zilhoja.screenRoute,
           pushBack: FiA3malShaherZilhoja.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الاول من ذي الحجة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

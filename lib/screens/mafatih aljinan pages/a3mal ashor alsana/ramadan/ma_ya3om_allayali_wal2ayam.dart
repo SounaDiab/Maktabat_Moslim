@@ -117,7 +117,7 @@ class _MaYa3omAllayaliWal2ayamState extends State<MaYa3omAllayaliWal2ayam> {
           pushNext: MaYosta7ab2itanohFiLayaliShaherRamadan.screenRoute,
           pushBack: FiFadelShaherRamadanWa2a3maloh.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ما يعم الليالي والايام.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

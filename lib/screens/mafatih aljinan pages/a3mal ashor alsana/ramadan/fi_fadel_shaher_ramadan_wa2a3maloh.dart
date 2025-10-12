@@ -119,7 +119,7 @@ class _FiFadelShaherRamadanWa2a3malohState
           pushNext: MaYa3omAllayaliWal2ayam.screenRoute,
           pushBack: Da3awatAyamShaherRamadan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل شهر رمضان واعماله.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

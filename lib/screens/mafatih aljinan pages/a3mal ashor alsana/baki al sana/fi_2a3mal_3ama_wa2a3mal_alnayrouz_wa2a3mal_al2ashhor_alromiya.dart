@@ -127,7 +127,7 @@ class _Fi2a3mal3amaWa2a3malAlnayrouzWa2a3malAl2ashhorAlromiyaState
           pushNext: FiShaherZilko3da.screenRoute,
           pushBack: FiShaherRabi3AlsaniWaljamadaAl2oulaWal2a5ira.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال عامة واعمال النيروز واعمال الاشهر الومية.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

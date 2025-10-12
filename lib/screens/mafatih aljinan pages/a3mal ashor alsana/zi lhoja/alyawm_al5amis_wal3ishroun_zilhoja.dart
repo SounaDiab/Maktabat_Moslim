@@ -119,7 +119,7 @@ class _AlyawmAl5amisWal3ishrounZilhojaState
           pushNext: AlyawmAl2a5irMenZilhoja.screenRoute,
           pushBack: AlyawmAlrabi3Wal3ishrounZilhoja.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الخامس والعشرون من ذي الحجة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

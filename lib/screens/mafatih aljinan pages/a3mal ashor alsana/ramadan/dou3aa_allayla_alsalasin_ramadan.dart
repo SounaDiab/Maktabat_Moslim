@@ -119,7 +119,7 @@ class _Dou3aaAllaylaAlsalasinRamadanState
           pushNext: AlyawmAlsalasinRamadan.screenRoute,
           pushBack: Dou3aaAllaylaAltasi3aWal3ishrounRamadan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الليلة الثلاثين من رمضان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

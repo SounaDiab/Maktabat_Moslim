@@ -119,7 +119,7 @@ class _AllaylaAlwa7idaWal3ishrounRamadanState
           pushNext: AlyawmAlwa7idWal3ishrounRamadan.screenRoute,
           pushBack: A3malAllailaAltasi3a3asharaRamadan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الواحدة والعشرون من رمضان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

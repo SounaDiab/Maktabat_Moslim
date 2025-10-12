@@ -127,7 +127,7 @@ class _FiShaherRabi3AlsaniWaljamadaAl2oulaWal2a5iraState
               .screenRoute,
           pushBack: FiShaherRabi3Al2awal.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في شهر ربيع الثاني والجمادى الاولى والاخرة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

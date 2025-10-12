@@ -115,7 +115,7 @@ class _YawmAlnisfMenRajabState extends State<YawmAlnisfMenRajab> {
           pushNext: AlyawmAl5amesWal3ishroun.screenRoute,
           pushBack: LailatAlnisfMenRajab.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/يوم النصف من رجب.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -123,7 +123,7 @@ class _SalawatAllayaliWada3awatAl2ayamaAlmashhouraState
           pushNext: AllaylaAl2oulaRamadan.screenRoute,
           pushBack: Fi2a3malShaherRamadanAl5asa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلوات الليالي ودعوات الايام المشهورة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

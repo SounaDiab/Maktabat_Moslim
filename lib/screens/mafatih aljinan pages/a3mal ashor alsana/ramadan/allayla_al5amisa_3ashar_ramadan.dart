@@ -119,7 +119,7 @@ class _AllaylaAl5amisa3asharRamadanState
           pushNext: YawmAlnisfMenRamadan.screenRoute,
           pushBack: AllaylaAlrabi3a3asharRamadan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الخامسة عشر من رمضان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

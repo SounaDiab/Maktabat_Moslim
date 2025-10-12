@@ -119,7 +119,7 @@ class _AllaylaAlsamina3asharaZilhojaState
           pushNext: AlyawmAlsamin3asharZilhoja.screenRoute,
           pushBack: AlyawmAl5amis3asharZilhoja.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الثامنة عشر من ذي الحجة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -119,7 +119,7 @@ class _ZiyaratAmirAlmo2mininYawmAl8adirState
           pushNext: FiA3malShaherZilhoja.screenRoute,
           pushBack: AlyawmAl2a5irMenZilhoja.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة امير المؤمنين يوم الغدير.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

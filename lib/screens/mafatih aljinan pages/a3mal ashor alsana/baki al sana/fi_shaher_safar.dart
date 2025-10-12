@@ -112,7 +112,7 @@ class _FiShaherSafarState extends State<FiShaherSafar> {
           pushNext: FiShaherRabi3Al2awal.screenRoute,
           pushBack: FiShaherZilko3da.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في شهر صفر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

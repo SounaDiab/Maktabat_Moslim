@@ -119,7 +119,7 @@ class _AlyawmAl5amis3asharZilhojaState
           pushNext: AllaylaAlsamina3asharaZilhoja.screenRoute,
           pushBack: AlyawmAl3ashirZilhoja.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اليوم الخامس عشر من ذي الحجة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -120,7 +120,7 @@ class _Dou3aaAllaylaAlrabi3aWal3ishrounRamadanState
           pushNext: Dou3aaAllaylaAl5amisaWal3ishrounRamadan.screenRoute,
           pushBack: AllaylaAlsalisaWal3ishrounRamadan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الليلة الرابعة والعشرون من رمضان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

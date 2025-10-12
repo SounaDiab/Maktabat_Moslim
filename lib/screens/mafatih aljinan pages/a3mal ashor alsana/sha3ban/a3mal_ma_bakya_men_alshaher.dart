@@ -118,7 +118,7 @@ class _A3malMaBakyaMenAlshaherState extends State<A3malMaBakyaMenAlshaher> {
           pushNext: FiFadlShaherSha3ban.screenRoute,
           pushBack: YawmAlnisfMenSha3ben.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال ما بقي من الشهر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

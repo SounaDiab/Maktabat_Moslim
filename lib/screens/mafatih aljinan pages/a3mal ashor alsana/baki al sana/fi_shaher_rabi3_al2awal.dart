@@ -116,7 +116,7 @@ class _FiShaherRabi3Al2awalState extends State<FiShaherRabi3Al2awal> {
           pushNext: FiShaherRabi3AlsaniWaljamadaAl2oulaWal2a5ira.screenRoute,
           pushBack: FiShaherSafar.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في شهر ربيع الاول.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

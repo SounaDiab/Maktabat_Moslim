@@ -116,7 +116,7 @@ class _DouaaAbi7amzaAlsamaliState extends State<DouaaAbi7amzaAlsamali> {
           pushNext: DouaaAlsa7ar.screenRoute,
           pushBack: Fi2a3mal2asharShaherRamadan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء أبي حمزة الثمالي.mp3',
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/abi_hamza_alsamali.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -116,7 +116,7 @@ class _LaylatAlnisfMenSha3benState extends State<LaylatAlnisfMenSha3ben> {
           pushNext: YawmAlnisfMenSha3ben.screenRoute,
           pushBack: AllaylaAlsalisa3asharaSha3ban.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ليلة النصف من شعبان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
