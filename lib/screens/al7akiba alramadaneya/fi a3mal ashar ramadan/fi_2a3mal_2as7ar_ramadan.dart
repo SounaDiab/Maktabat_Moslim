@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_alhakiba_alramadaneya.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../fi_a3mal_ashar_ramadan.dart';
@@ -44,7 +44,7 @@ class _Fi2a3mal2as7arRamadanState extends State<Fi2a3mal2as7arRamadan> {
     await prefs.setBool('isFavorite_fi_2a3mal_2as7ar_ramadan_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -60,7 +60,6 @@ class _Fi2a3mal2as7arRamadanState extends State<Fi2a3mal2as7arRamadan> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,14 +81,14 @@ class _Fi2a3mal2as7arRamadanState extends State<Fi2a3mal2as7arRamadan> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('في اعمال اسحار شهر رمضان المبارك',
@@ -104,82 +103,21 @@ class _Fi2a3mal2as7arRamadanState extends State<Fi2a3mal2as7arRamadan> {
               },
             ),
           ],
-          title: Text(
-            'في اعمال اسحار شهر رمضان المبارك',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'في اعمال اسحار شهر رمضان المبارك'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الاوّل :',
-                  subtitle:
-                      'أن يتسحّر فلا يدع السّحُور ولو على حشفة تمر أو جرعة من الماء، وأفضل السّحور السّويق والتّمر وفي الحديث انّ الله وملائكته يصلّون على المستغفرين والمستسحرين بالاسحار.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثّاني :',
-                  subtitle:
-                      'أن يقرأ عند السّحور سورة انّا أنزلناه، ففي الحديث ما من مؤمن صام فقرأ «انّا أنْزَلناهُ في ليلة القدر» عند سحوره وعند افطاره الّا كان فيما بينهما كالمتشحّط بدمه في سبيل الله.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثّالث :',
-                  subtitle:
-                      'أن يدعو بهذا الدّعاء العظيم الشّأن الذي روي عن الرّضا صلوات الله وسلامه عليه انّه قال : هو دعاء الباقر (عليه السلام) في أسحار شهر رمضان :\n\n'
-                      'اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ بَهائِكَ بِاَبْهاهُ وَكُلُّ بَهائِكَ بَهِىٌّ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِبَهائِكَ كُلِّهِ، اَللّـهُمَّ  اِنّي اَسْاَلُكَ مِنْ جَمالِكَ بِاَجْمَلِهِ وَكُلُّ جَمالِكَ جَميلٌ، اَللّـهُمَّ  اِنّي اَسْاَلُكَ  بِجَمالِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ جَلالِكَ بِاَجَلِّهِ وَكُلُّ جَلالِكَ جَليلٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِجَلالِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ عَظَمَتِكَ بِاَعْظَمِها وَكُلُّ عَظَمَتِكَ عَظَيمَةٌ، اَللّـهُمَّ  اِنّي اَسْاَلُكَ بِعَظَمَتِكَ كُلِّها، اَللّـهُمَّ اِنّي اَسَأَلُكَ مِنْ نُورِكَ بِاَنْوَرِهِ وَكُلُّ نُورِكَ نَيِّرٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِنُورِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ  مِنْ رَحْمَتِكَ بِاَوْسَعِها وَكُلُّ رَحْمَتِكَ واسِعَةٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِرَحْمَتِكَ كُلِّها، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ كَلِماتِكَ بِاَتَمِّها وَكُلُّ كَلِماتِكَ تامَّةٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِكَلِماتِكَ كُلِّهَا، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ كَمالِكَ بِاَكْمَلِهِ وَكُلُّ كَمالِكَ كامِلٌ، اَللّـهُمَّ  اِنّي اَسْاَلُكَ بِكَمالِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ اَسمائِكَ بِاَكْبَرِها وَكُلُّ اَسْمائِكَ كَبيرَةٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ  بِاَسْمائِكَ كُلِّها، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ عِزَّتِكَ باَعَزِّها وَكُلُّ عِزَّتِكَ عَزيزَةٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِعِزَّتِكَ كُلِّها، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ مَشِيَّتِكَ بِاَمْضاها وَكُلُّ مَشِيَّتِكَ ماضِيَةٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِمَشِيَّتِكَ كُلِّها، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ قُدْرَتِكَ بِالْقُدْرَةِ الَّتي اسْتَطَلْتَ بِها عَلى كُلِّ شَيْء وَكُلُّ قُدْرَتِكَ مُسْتَطيلَةٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِقُدْرَتِكَ كُلِّها، اَللّـهُمَّ  اِنّي اَسْاَلُكَ  مِنْ عِلْمِكَ بِاَنْفَذِهِ وَكُلُّ عِلْمِكَ نافِذٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِعِلْمِكَ كُلِّهِ، اَللّـهُمَّ  اِنّي اَسْاَلُكَ  مِنْ قَوْلِكَ بِاَرْضاهُ وَكُلُّ قَوْلِكَ رَضِيٌّ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِقَوْلِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ مَسائِلِكَ بِاَحَبِّها اِلَيْكَ وَكُلُّ مَسائِلِكَ اِلَيْكَ حَبيبَةٌ، اَللّـهُمَّ  اِنّي اَسْاَلُكَ بِمَسائِلِكَ كُلِّها، اَللّـهُمَّ  اِنّي اَسْاَلُكَ مِنْ شَرَفِكَ بِاَشْرَفِهِ وَكُلُّ شَرَفِكَ شَريفٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِشَرَفِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ سُلْطانِكَ بِاَدْوَمِهِ وَكُلُّ سُلطانِكَ دائِمٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِسُلْطانِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ مُلْكِكَ بِاَفْخَرِهِ وَكُلُّ مُلْكِكَ فاخِرٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِمُلْكِكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ مِنْ عُلُوِّكَ بِاَعْلاهُ وَكُلُّ عُلُوِّكَ عال، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِعُلُوِّكَ كُلِّهِ، اَللّـهُمَّ اِنّي اَسْاَلُكَ  مِنْ مَنِّكَ بِاَقْدَمِهِ وَكُلُّ مَنِّكَ قَديمٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِمَنِّكَ كُلِّهِ، اَللّـهُمَّ  اِنّي اَسْاَلُكَ مِنْ اياتِكَ بِاَكْرَمِها وَكُلُّ آياتِكَ كَريمَةٌ، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِآياتِكَ كُلِّها، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِما اَنْتَ فيهِ مِنَ الشَّأنِ وَالْجَبَرُوتِ، وَاَسْاَلُكَ بِكُلِّ شَأْن وَحْدَهُ جَبَرُوت وَحْدَها، اَللّـهُمَّ اِنّي اَسْاَلُكَ بِما تُجيبُني بِهِ حينَ اَسْاَلُكَ فَاَجِبْني يا اَللهُ.\n\n'
-                      'ثمّ سل حاجتك فانّها تقضى البتّة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlhakibaAlramadaneya(
+          text: 'في اعمال اسحار شهر رمضان المبارك',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Abi7amzaAlsamali.screenRoute,
           pushBack: Dou3a2Alsa7ar.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال اسحار رمضان.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في اعمال اسحار رمضان.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
