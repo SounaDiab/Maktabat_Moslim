@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/al2iste3dad.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/al2iste3dad.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../a3mal_layaly_alkadr.dart';
@@ -60,7 +60,6 @@ class _Mawane3AlkoboulState extends State<Mawane3Alkoboul> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _Mawane3AlkoboulState extends State<Mawane3Alkoboul> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -104,39 +103,22 @@ class _Mawane3AlkoboulState extends State<Mawane3Alkoboul> {
               },
             ),
           ],
-          title: Text(
-            'موانع القبول في ليلة القدر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'موانع القبول في ليلة القدر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: ListOfNineVerses(
-                  title: 'روي أنه يُردّ في تلك الليلة دعاء أحد إلا دعاء:',
-                  subtitle: '1-عاق الوالدين\n'
-                      '2-وقاطع الرحم الماسّة..\n'
-                      '3-ومن كان في قلبه عداوة مؤمن...',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'موانع القبول في ليلة القدر',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SawabAl2i7ya2.screenRoute,
           pushBack: Al2iste3dad.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/موانع القبول في ليلة القدر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/موانع القبول في ليلة القدر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

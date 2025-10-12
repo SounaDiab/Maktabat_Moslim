@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/mawane3_alkoboul.dart';
-import 'package:maktabat_almoslim/screens/a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/sawab_al2i7ya2.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/mawane3_alkoboul.dart';
+import '../../a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/sawab_al2i7ya2.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../a3mal_layaly_alkadr.dart';
@@ -58,7 +58,6 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,7 +79,7 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -91,42 +90,25 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'الإستعداد لليلة القدر', Al2iste3dad.screenRoute);
+                          'الاستعداد لليلة القدر', Al2iste3dad.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('الإستعداد لليلة القدر',
+                      .removeFavorite('الاستعداد لليلة القدر',
                           Al2iste3dad.screenRoute, Al2iste3dad.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الإستعداد لليلة القدر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الاستعداد لليلة القدر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'وينبغي للمصدّق بالدين، وبنصّ القرآن المبين أنْ يجتهد لليلة القدر بكل ما يقدر عليه من الوسائل. ومن الاجتهاد أن يكثر ويبالغ في الدعاء لتوفيقها طول سنته، وأن يرزق فيها أحبّ الأعمال إلى الله وأن يجعلها له خيراً من ألف شهر وأن يقبلها منه ويكتبه فيها من المقرّبين ويرضى عنه ويُرضي عنه نبيّه وأئمته لا سيّما إمام زمانه عجل الله تعالى فرجه الشريف.. ومن الاجتهاد أن يُعدّ العدة لتحصيل مقدمات العبادة من لباسٍ مناسب وعطر، وما يتصدّق به فيها على فقراء مخصوصين لصدقته ويتخير لها أدعية مناسبة. وينبغي أن يزيد في شوقه إلى الفوز بكرامات ما أُعدّ له في هذه الليلة، وأن يعيّن لليلته من الأعمال ما هو أنسب لحاله وإخلاصه وحضوره وصفاته ورضا مولاه... ويجتهد أن لا يشتغل في شيء من أجزاء ليلته عن الله ولو بالمباحات. كما أن عليه أن لا يغفل قلبه عن حقيقة ما يقوم به من الأعمال والأذكار حين اشتغاله بها. ويسهل ذلك بأن يتفكّر إجمالاً في العمل قبل أنْ يدخل فيه. وبالجملة، على السالك أن لا يستقلّ من الخير ولو ذرّة فيتركه لأجل قلّته فيخسر ولا يستكثر شيئاً منه فيعجب، أو يتركه من جهة أنّه لا يقدر عليه بل يفعل منه كلّ ما قدر عليه، ويستصغره بعد فعله في جنب الله. ولا يستبعد أن يجيب الله دعاء عباده لمجرد صورة الدعاء ولو بلقلقة اللسان ويعاملهم بكرم عفوه، وإيّاه إيّاه أن يُقنط أحداً من رحمة الله ولو كان عمله مشوباً ببعض الأكدار، لعلّه إذا لم يترك العمل قد يُوَفّق لبعض النفحات الإلهيّة وينقلب الأمر رأساً على عقب فيفوز مع الفائزين. ... ولا بدّ للمؤمن في أول الليلة من أن يبالغ في التوسل والاستشفاع بخفير الليلة من المعصومين عليهم السلام ويذكر كلّ ما يحتاج إليه من التوفيق في أعماله وأحواله ويجدّ في تلطيف ألفاظ الاسترحام والاستشفاع بهم عليهم السلام. وأعمال ليالي القدر نوعان: نوعٌ منها عام يؤدّى في كلّ ليلة من الليالي الثلاث ونوعٌ خاص يؤتى فيما خصّ كلّ ليلة من الليالي. وسنشرع بما هو عام يشمل الليالي الثلاث.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'الاستعداد لليلة القدر',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Mawane3Alkoboul.screenRoute,

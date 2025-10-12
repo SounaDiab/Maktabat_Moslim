@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/al2iste3dad.dart';
-import 'package:maktabat_almoslim/screens/a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/mawane3_alkoboul.dart';
+import '../../../widgets/bloc_builder_widget.dart';
+import '../../../widgets/scroll_title.dart';
+import '../../a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/al2iste3dad.dart';
+import '../../a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/mawane3_alkoboul.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../a3mal_layaly_alkadr.dart';
@@ -58,7 +58,6 @@ class _SawabAl2i7ya2State extends State<SawabAl2i7ya2> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,7 +79,7 @@ class _SawabAl2i7ya2State extends State<SawabAl2i7ya2> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -91,47 +90,31 @@ class _SawabAl2i7ya2State extends State<SawabAl2i7ya2> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'ثواب إحياء ليلة القدر', SawabAl2i7ya2.screenRoute);
+                          'ثواب احياء ليلة القدر', SawabAl2i7ya2.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('ثواب إحياء ليلة القدر',
+                      .removeFavorite('ثواب احياء ليلة القدر',
                           SawabAl2i7ya2.screenRoute, SawabAl2i7ya2.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'ثواب إحياء ليلة القدر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'ثواب احياء ليلة القدر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي عن النبي صلى الله عليه وآله وسلم قال: "قال موسى: إلهي أُريدُ قربك، قال: قربي لمن استيقظ ليلة القَدر، قال: إلهي أريد رحمتك، قال: رحمتي لمن رحِم المساكين ليلة القدر، قال: إلهي أريد الجواز على الصراط، قال: ذلك لمن تصدّق بصدقةٍ في ليلة القدر، قال: إلهي أريد من أشجار الجنّة، قال: ذلك لمن سبّح تسبيحةً ليلة القدر، قال: إلهي أريد رضاك، قال: رضاي لمن صلّى ركعتين في ليلة القدر".',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderWidget(
+          text: 'ثواب احياء ليلة القدر',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Al2iste3dad.screenRoute,
           pushBack: Mawane3Alkoboul.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ثواب إحياء ليلة القدر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ثواب إحياء ليلة القدر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
