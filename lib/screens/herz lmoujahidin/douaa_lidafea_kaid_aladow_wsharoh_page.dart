@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'douaa_ikhdaa_rikab_aljababira_page.dart';
@@ -61,7 +62,6 @@ class _DouaaLidafeaKaidAladowWsharohPageState
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -83,7 +83,7 @@ class _DouaaLidafeaKaidAladowWsharohPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -105,65 +105,25 @@ class _DouaaLidafeaKaidAladowWsharohPageState
               },
             ),
           ],
-          title: Text(
-            'دعاء لدفع كيد العدو وشره',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1
-                      ? 21
-                      : 24,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء لدفع كيد العدو وشره'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle:
-                        'وهو الدعاء الذي دعا به الإمام الصادق ع لما استدعاه المنصور العباسي للمرة الثانية لقتله فأمنه الله عز وجل, رواه السيد ابن طاوس في مهجه والشيخ الكفعمي في المصباح عنه.\nوقد روى الشطر الأول من الدعاء العلّامة المجلسي في البحار عن عيون أخبار الرضا ع مسنداً عن الإمام الرضا ع عن أبيه صلوات الله عليه, وذكر ما يقارب قصة الدعاء التي ذكرها السيد ابن طاوس.\nوذكر الدعاء أيضاً السيد علي خان في الكلم الطيب عن الصادق ع لكفاية العدو.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثاره:',
-                    subtitle:
-                        'ذكر في حاشية المصباح ملخص قصة الدعاء التي ذكرها صاحب المهج, قال: هذا الدعاء عظيم الشأن وملخص قصته من مهج الدعوات لابن طاوس ما حدث به الربيع, قال:\nحججت مع المنصور, فلما رجعنا إلى المدينة قال لي:\nيا ربيع ائتني بجعفر بن محمد ع ولا تأت به إلا سحباً. فأتيت إلى الصادق ع وأعلمته بما أمرني به المنصور من سحبه, فقال:\nامتثل ما أمرك به.\nقال: فأخذت بكمه وأدخلته على المنصور, وفي يد المنصور عمود من حديد يريد أن يقتل به الصادق ع, ونظرت إلى الصادق ع وهو يحرك شفتيه فلما قرب منه أدناه المنصور وقرّبه حتى أجلسه على السرير ثم دعى بغالية فغليه منها بيده, ثم حمله على بغلة وأمر له ببدرة وخلعة, ثم أمره بالانصراف, فخرج عليه السلام.\nقال الربيع:\nخرجت معه حتى وصلت إلى منزله, فقلت له: يابن رسول الله لم اشك في المنصور انه قاتلك ورايتك تحرك شفتيك عند دخولك عليهو فبحق جدك محمد ص غلا ما علمتني ما قلت.\nفقال ع:\nيا ربيع إني قلت: حسبي الرب من المربوبين... إلى آخره.\nقال ربيع:\nفكتبت ذلك في رق وجعلته في حمايل سيفي فوالله ما رهبت المنصور بعدها.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'الدعاء:',
-                    subtitle: 'حسبي الرب من المربوبين, حسبي الخالق من المخلوقين, حسبي من لم يزل حسبي, حسبي الله الذي لا إله إلا هو عليه توكلت وهو رب العرش العظيم, حسبي الذي لم يزل حسبي, حسبي الله ونعم الوكيل, اللهم احرسني بعينك التي لا تنام, واكنفني بركنك الذي لا يرام, واحفظني بعزك واكفني شر فلان بقدرتك, ومُنَّ عليَّ بنصرك وإلا هلكت وأنت ربي.\n' +
-                        'اللهم إنك أجلُّ وأكبر ممن أخاف وأحذر، اللهم إني أدرأ بك في نحره وأعوذ بك من شره وأستعينك عليه وأستكفيك إياه، يا كافي موسى فرعون ومحمد صلّى الله عليه وآله الأحزاب الذين قال لهم الناس إن الناس قد جمعوا لكم فاخشوهم فزادهم إيماناً وقالوا حسبنا الله ونعم الوكيل، أولئك الذين طبع الله على قلوبهم وسمعهم وأبصارهم وأولئك هم الغافلون لا جرم أنهم في الآخرة هم الأخسرون، وجعلنا من بين أيديهم سداً ومن خلفهم سداً فأغشيناهم فهم لا يبصرون.\n' +
-                        'بالله أستفتح وبالله أستنجح وبرسول الله صلّى الله عليه وآله أتوسل وبأمير المؤمنين عليه الصلاة والسلام أتشفع وبالحسن والحسين عليهما السلام أتقرب، اللهم ليّن لي صعوبته وسهل لي حزونته ووجّه سمعه وبصره، وجميع جوارحه، إليَّ بالرأفة والرحمة وأذْهِب عني غيظه وبأسه ومكره وجنوده وأحزابه وانصرني عليه بحق كل ملك سائح في رياض قدسك وفضاء نورك وشرب من حيوان مائك وأنقذني بنصرك العام المحيط جبرئيل عن يميني، وميكائيل عن يساري، ومحمد صلّى الله عليه وآله أمامي والله وليّي وحافظي وناصري وأماني، فإن حزب الله هم الغالبون، استترت واحتجبت وامتنعت وتعززت بكلمة الله الوحدانية الأزلية الإلهية التي امتنع بها كان محفوظاً، إن وليّي الله الذي نزّل الكتاب وهو يتولّى الصالحين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'دعاء لدفع كيد العدو وشره',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثاره',
+          thirdTitle: 'الدعاء:',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzMostakhrajMenKitabAllahPage.screenRoute,
           pushBack: DouaaIkhdaaRikabAljababiraPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لدفع كيد العدو وشره.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لدفع كيد العدو وشره.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

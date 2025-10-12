@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'ayat_lkorsi_page.dart';
@@ -82,7 +83,7 @@ class _DouaaNadiAalyanMozhiraAlaajaibPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -104,101 +105,22 @@ class _DouaaNadiAalyanMozhiraAlaajaibPageState
               },
             ),
           ],
-          title: Text(
-            'دعاء ناد علياً مظهر العجائب',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء ناد علياً مظهر العجائب'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        '_ عندما يتعرَّض المؤمن إلى معضلات كبيرة يقرأ هذا الدعاء (7 مرات) بنيّة خالصة ليخلصه الله منها.\n'
-                        '_ عندما يدخل على ظالم يقرأ هذا الدعاء (3 مرات) ثم ينفخ ويمسح على بدنه فيأمن من شرّه بإذن الله.\n'
-                        '_ لطلب الذريّة: يداوم على قراءته فيدخل في عناية الله.\n'
-                        '_ لكسب محبة شخص ما: يقرأ ليلة الجمعة (14 مرة) على اسم الشخص ويصلي على محمد وآله (100 مرة).\n'
-                        '_ لجلب الرزق والمال: يقرأ الدعاء (9 مرات) بعد صلاة الصبح.\n'
-                        '_ لسداد الديون: يقرأ كل يوم (22 مرة) لمدة 15 يوم.\n'
-                        '_ لتسهيل الولادة: يقرأ الدعاء (5 مرات) على كأس من الماء ثم يشرب بعد ذلك.\n'
-                        '_ حفظ هذا الدعاء في الجَيْب يحمي منشر الحيوانات والجن والإنس.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20),
-                      Container(
-                        child: Center(
-                          child: Text(
-                            'بسم الله الرحمن الرحيم',
-                            style: TextStyle(
-                              fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      ListOfNineVerses(
-                        title: '',
-                        subtitle:
-                            'اللهم انت الذي استجبت لآدم وحواء اذ قالا ربنا ظلمنا انفسنا فان لم تغفر لنا وترحمنا لنكونن من الخاسرين. وناداك نوح فاستجبت له ونجيته واهله من الكرب العظيم. واطفات نار نمرود عن خليلك ابراهيم، فجعلتها برداً وسلاماً.\n'
-                            'وانت الذي استجبت لأيوب اذ نادى: ربي مسني الضر وانت ارحم الراحمين، فكشفت ما به من ضر وآتيته اهله ومن معه رحمةً من عندك وذكرى لأولي الألباب. وانت الذي استجبت لذي النون اذ ناداك في الظلمات ان لا اله الا انت سبحانك اني كنت من الظالمين، فنجيته من الغم. وانت الذي استجبت لموسى وهرون حين قلت: قد اجيبت دعوتكما فاستقيما، واغرقت فرعون وقومه. وغفرت لداود ذنبه وتبت عليه رحمةً منك وذكرى. وفديت اسماعيل بذبح بعدما اسلم وتله للجبين فناديته بالفرج والروح. وانت الذي ناداك زكريا نداء خفياً فقال: ربي اني وهن العظم مني واشتعل الرأس شيباً ولم اكن بدعائك ربي شقياً. وقلت: يدعوننا رغباً ورهباً وكانوا لنا خاشعين. وانت الذي استجبت للذين آمنوا وعملوا الصالحات، لتزيدهم من فضلك فلا تجعلني من اهون الداعين لك والراغبين اليك واستجب لي كما استجبت لهم بحقهم عليك، وطهرني بتطهيرك، وتقبل صلاتي ودعائي بقبول حسن، وطيب بقية حياتي، وطيب وفاتي، واخلفني فيمن اخلف، واحفظني يا ربي بدعائي واجعل ذريتي ذرية طيبةً تحوطها بحياطتك بكل ما حطت به ذرية احد من اوليائك واهل طاعتك، برحمتك يا ارحم الراحمين، يا من هو على كلِّ شيءٍ رقيبٌ، ولكلِّ داعٍ من خلقك مجيب، ومن كل سائل قريب، أسألك يا لا إله إلا أنت الحيُّ القيُّوم الأحد الصَّمد، الذي لم يلد ولم يولد ولم يكن له كفواً أحد، وبكل اسم رفعْت به أسمائك وفرشت به أرضك وأرسيت به الجبال، وأجريت به الماء، وسخَّرت به السحاب والشمس والقمر والنجوم والليل والنهار، وخلقتوالخلائق كلَّها، أسألك بعظمة وجهك العظيم الذي أشرقت له السماوات والأرض فأضاءت به الظلمات، إلا صلَّيت على محمد وآل محمد وكفيتني أمر معاشي ومعادي، وأصلحت لي شأني كلُّه، ولم تكلني إلى نفسي طرفة عين، وأصلحت أمري وأمر عيالي، وكفيتني همهم وأغنيتني  وإياهم من كنزك زخزائنك، وسعة فضلك الذي لا ينفذ أبداً، وأثبت في قلبي ينابيع الحكمة التي تنفعني بها وتنفع بها من ارتضيت من عبادك، واجعل لي من المتَّقين في آخر الزمان إماماً، كما جعلت إبراهيم الخليل إماماً، فإنَّ بتوفيقك يفوز الفائزون ويتوب التائبون ويعبدك العابدون، وبتسديدك يصلح الصَّالحون، المحسنون المخبتون، العابد لك، الهائفون منك، وبإرشادك نجا الناجون من نارك، وأشفق منها المشفقون من خلقك، وبخذلانك خسر المبطلون وهلك الظالمون وغفل الغافلون، اللهم وآت نفسي تقواها فأنت وليُّها ومولاها، وأنت خير من زكَّاها. اللهم بيِّن لها هداها، وألهمها تقواها، وبشرّها برحمتك حين تتوفاها، ونزِّلها من الجنان عُلياها، وطيِّب وفاتها ومحياها، وأكرم منقلبها ومثواها، ومستقرها ومأواها، فأنت وليُّها ومولاها.\n\n'
-                            'ثم يقول: لا إله إلا الله (١٠٠ مرة) _ الصلاة على محمد وآله (١٠٠ مرة) _ يا مفرِّج الهم (١٠٠ مرة) _ يا شافي كل مريض (١٠٠ مرة) _ يا قاضي الحاجات (١٠٠ مرة).',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: '',
-                        subtitle: 'ثم يقرأ الدعاء الآتي:',
-                        weight: FontWeight.w400,
-                        size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                      ),
-                      Container(
-                        child: Center(
-                          child: Text(
-                            'بسم الله الرحمن الرحيم',
-                            style: TextStyle(
-                              fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      ListOfNineVerses(
-                        title: '',
-                        subtitle:
-                            'ناد علياً مظهر العجائب تجده عوناً لك في النوائب لي إلى الله حاجتي وعليه معوَّلي كلَّما أمرته ورميت منقضي في ظلِّ الله ويظلل الله لي أدعوك كلَّ همِّ وغمِّ سينجلي بعظمتك يا الله بنبوَّتك يا محمد بولايتك يا عليُّ يا عليُّ يا عليُّ أدركني بحق لطفك الخفيِّ الله أكبر أنا من شر أعدائك بريء الله صمدي من عندك مددي وعليك معتمدي بحقِّ إياك نعبد وإياك نستعين يا أبا الغيث أغثني يا أبا الحسنين أدركني يا سيف الله أدركني يا باب الله أدركني بحقِّ لطفك الخفيِّ يا قهَّار يا قاهر العدوِّ يا والي الولي يا مظهر العجائب يا مرتضى عليٌّ رميت من بغى عليَّ بسهم الله وسيف الله القاتل أفوِّض أمري إلى الله إن الله بصير بالعباد وإلهكم إله واحد لا إله إلا هو الرحمن الرحيم أدركني يا غياث المستغيثين يا دليل المتحيرين يا أمان الخائفين يا معين المتوكلين يا راحم المساكين يا إله العالمين برحمتك وصلَّى الله على سيدنا محمد وآله أجمعين والحمد لله ربِّ العالمين.',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'دعاء ناد علياً مظهر العجائب',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AyatLkorsiPage.screenRoute,
           pushBack: HerzAltajPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء ناد علياً مظهر العجائب.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء ناد علياً مظهر العجائب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

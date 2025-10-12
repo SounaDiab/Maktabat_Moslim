@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'aawza_yataawaz_biha_aala_alaadaa_page.dart';
@@ -81,7 +82,7 @@ class _DouaaLilkhalasMenAlkatlPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,61 +104,25 @@ class _DouaaLilkhalasMenAlkatlPageState
               },
             ),
           ],
-          title: Text(
-            'دعاء للخلاص من القتل',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 22,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء للخلاص من القتل'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle:
-                        'مروي عن النبي (ص)، ذكره السيد ابن طاوس في مهج الدعوات.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثاره:',
-                    subtitle:
-                        'روي أن النبي (ص) علَّمه لبعض أصحابه فأراد الحجَّاج قتله، فلمّا قرأه لم يستطع صاحب السيف أن يقتله.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'الدعاء:',
-                    subtitle:
-                        'يا سامع كل صوت يا محيي النفوس بعد الموت يا من لا يجعل لأنه لا يخاف الفَوت، يا دتئم الثبات يا مخرج النبات يا محيي العظام الرَّميم الدَّارسات، بسم الله اعتصمت يالله، وتوكَّلت على الحيِّ الذي لا يموت ورميت كل من يؤْذيني بلا حول ولا قوَّة إلا بالله العليِّ العظيم.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'دعاء للخلاص من القتل',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثاره',
+          thirdTitle: 'الدعاء:',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzLietikaaSilahAlaadowPage.screenRoute,
           pushBack: AawzaYataawazBihaAalaAlaadaaPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للخلاص من القتل.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للخلاص من القتل.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

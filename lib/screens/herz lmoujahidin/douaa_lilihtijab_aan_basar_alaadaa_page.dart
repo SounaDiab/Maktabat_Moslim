@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import '../mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_alrabi3a_3ashar_ramadan.dart';
@@ -62,7 +63,6 @@ class _DouaaLilihtijabAanBasarAlaadaaPageState
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -84,7 +84,7 @@ class _DouaaLilihtijabAanBasarAlaadaaPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -106,65 +106,25 @@ class _DouaaLilihtijabAanBasarAlaadaaPageState
               },
             ),
           ],
-          title: Text(
-            'دعاء للإحتجاب عن بصر الأعداء',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1
-                      ? 17
-                      : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء للإحتجاب عن بصر الأعداء'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle:
-                        'ذكره السيِّد ابن طاوس في كتاب المجتنى عن كتاب دفع الهموم والأحزان لأحمد بن داود النعماني.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثاره:',
-                    subtitle: 'قال في المجتنى عن دفع الهموم:\n'
-                        'إذا أردت أن يحجب الله عنك بصر من تخافهةوتتقي جانبه فقل.. الدُّعاء...',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'الدعاء:',
-                    subtitle:
-                        'يا رب العالمين إيّاك نعبد وإيّاك نستعين، أسألك باسمك العظيم الذي تجليت به لموسى على الجبل فجعلته دكاً وخرَّ موسى صعقاً أن تطمس عنّي بصر من أخشاه وتشلَّ لسانَهُ وتخْتم على قلبه وتحبس يده وتقعده من رِجلِهِ إنَّك على كلِّ شيءٍ قديرٌ.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'دعاء للاحتجاب عن بصر الاعداء',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثاره',
+          thirdTitle: 'الدعاء',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaLilihtijabPage.screenRoute,
           pushBack: AyatAlikhtifaaMenAlaadowPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للإحتجاب عن بصر الأعداء.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للإحتجاب عن بصر الأعداء.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

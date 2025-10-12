@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // import '../../widgets/audio.dart';
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'alnas_page.dart';
@@ -79,7 +80,7 @@ class _AyatListekfaaPageState extends State<AyatListekfaaPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -101,134 +102,33 @@ class _AyatListekfaaPageState extends State<AyatListekfaaPage> {
               },
             ),
           ],
-          title: Text(
-            'آيات الاستكفاء التسع',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 25,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'آيات الاستكفاء التسع'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle:
-                        'في تسع آيات مرويات عن النبي ص, ذكرها المصباح للكفعمي',
-                    weight: FontWeight.w100,
-                    size: isTablet ? _fontSizeTablet - 2 : _fontSize - 2,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثاره:',
-                    subtitle:
-                        'قال: إنها تكفي حاملها وقارئها كل آفة وعاهة, ولو كانت الدنيا, مملوءة سيوفاً لم يصب حاملها وقارئها سوء',
-                    weight: FontWeight.w100,
-                    size: isTablet ? _fontSizeTablet - 2 : _fontSize - 2,
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    textDirection: TextDirection.rtl,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListOfNineVerses(
-                        title: 'الآية الأولى:',
-                        subtitle:
-                            'قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا هُوَ مَوْلَانَآ وَعَلَى اللَّهِ فَلْيَتَوَكَّلِ الْمُؤْمِنُونَ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية الثانية:',
-                        subtitle:
-                            ' وَإِن يَمْسَسْكَ اللَّهُ بِضُرٍّ فَلَا كَاشِفَ لَهُ إِلَّا هُوَ ۖ وَإِن يُرِدْكَ بِخَيْرٍ فَلَا رَادَّ لِفَضْلِهِ ۚ يُصِيبُ بِهِ مَن يَشَاءُ مِنْ عِبَادِهِ ۚ وَهُوَ الْغَفُورُ الرَّحِيمُ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية الثالثة:',
-                        subtitle:
-                            'وَمَا مِن دَابَّةٍ فِي الْأَرْضِ إِلَّا عَلَى اللَّهِ رِزْقُهَا وَيَعْلَمُ مُسْتَقَرَّهَا وَمُسْتَوْدَعَهَا ۚ كُلٌّ فِي كِتَابٍ مُّبِينٍ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية الرابعة:',
-                        subtitle:
-                            ' وَكَأَيِّن مِّن دَابَّةٍ لَّا تَحْمِلُ رِزْقَهَا اللَّهُ يَرْزُقُهَا وَإِيَّاكُمْ ۚ وَهُوَ السَّمِيعُ الْعَلِيمُ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية الخامسة:',
-                        subtitle:
-                            'مَّا يَفْتَحِ اللَّهُ لِلنَّاسِ مِن رَّحْمَةٍ فَلَا مُمْسِكَ لَهَا ۖ وَمَا يُمْسِكْ فَلَا مُرْسِلَ لَهُ مِن بَعْدِهِ ۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية السادسة:',
-                        subtitle:
-                            'وَلَئِن سَأَلْتَهُم مَّنْ خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ لَيَقُولُنَّ اللَّهُ ۚ قُلْ أَفَرَأَيْتُم مَّا تَدْعُونَ مِن دُونِ اللَّهِ إِنْ أَرَادَنِيَ اللَّهُ بِضُرٍّ هَلْ هُنَّ كَاشِفَاتُ ضُرِّهِ أَوْ أَرَادَنِي بِرَحْمَةٍ هَلْ هُنَّ مُمْسِكَاتُ رَحْمَتِهِ ۚ قُلْ حَسْبِيَ اللَّهُ ۖ عَلَيْهِ يَتَوَكَّلُ الْمُتَوَكِّلُونَ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية السابعة:',
-                        subtitle:
-                            'فَإِن تَوَلَّوْا فَقُلْ حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 14),
-                        child: Text(
-                          'وأمتنع بحول الله وقوته من حولهم وقوتهم وأستشفع برب الفلق من شر ما خلق وأعوذ بما شاء الله لا حول ولا قوة إلا بالله',
-                          style: TextStyle(
-                            fontSize:
-                                isTablet ? _fontSizeTablet + 2 : _fontSize + 2,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'UthmanicHafs',
-                          ),
-                        ),
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية الثامنة:',
-                        subtitle:
-                            'الَّذِينَ قَالَ لَهُمُ النَّاسُ إِنَّ النَّاسَ قَدْ جَمَعُوا لَكُمْ فَاخْشَوْهُمْ فَزَادَهُمْ إِيمَانًا وَقَالُوا حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: 'الآية التاسعة:',
-                        subtitle:
-                            'إِنِّي تَوَكَّلْتُ عَلَى اللَّهِ رَبِّي وَرَبِّكُم ۚ مَّا مِن دَابَّةٍ إِلَّا هُوَ آخِذٌ بِنَاصِيَتِهَا ۚ إِنَّ رَبِّي عَلَىٰ صِرَاطٍ مُّسْتَقِيمٍ',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'ايات الاستكفاء التسع',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثاره',
+          thirdTitle: 'الآية الاولى:',
+          fourthTitle: 'الآية الثانية:',
+          fifthTitle: 'الآية الثالثة:',
+          sixthTitle: 'الآية الرابعة:',
+          seventhTitle: 'الآية الخامسة:',
+          eighthTitle: 'الآية السادسة:',
+          ninthTitle: 'الآية السابعة:',
+          eleventhTitle: 'الآية الثامنة:',
+          twelfthTitle: 'الآية التاسعة:',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaIkhdaaRikabAljababiraPage.screenRoute,
           pushBack: AlnasPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الاستكفاء التسع.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الاستكفاء التسع.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

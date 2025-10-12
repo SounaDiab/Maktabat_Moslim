@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import '../herz_almoujahidin_home_screen.dart';
@@ -60,7 +61,6 @@ class _DouaaIkhdaaRikabAljababiraPageState
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +82,7 @@ class _DouaaIkhdaaRikabAljababiraPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -104,64 +104,25 @@ class _DouaaIkhdaaRikabAljababiraPageState
               },
             ),
           ],
-          title: Text(
-            'دعاء إخضاع رقاب الجبابرة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء إخضاع رقاب الجبابرة'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle:
-                        'أورده السيد علي خان قدِّس سرُّه في كتابه الكلم الطيِّب والغيث الصيِّب',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثاره:',
-                    subtitle:
-                        'قال في الكلم الطيِّب:\nمن أراد أن تظهر له العجائب وتخضع له رقاب الجبابرة فليكتب هذا الدعاء ويعلِّقه على نفسه, ثم قال بعد ذكر الدعاء: وليداوم على قراءته بعد كل صلاة فإنه مجرَّب',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'الدعاء:',
-                    subtitle:
-                        'اللّهم انه ليس في السماوات دورات ولا في الأرض غمرات ولا في الشجر ورقات ولا في الاجسام حركات ولا في العيون لحظات ولا في النفوس خطرات, الا وهي بك عارفات ولك شاهدات وعليك دالات وفي ملكك متحيرات، فبالقدرة التي سخرت بها اهل السماوات والأرض سخر لي قلوب المخلوقات إنك على كل شيء قدير وبالإجابة جدير, وصلَّى الله على محمد وآله أجمعين',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'دعاء اخضاع رقاب الجبابرة',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثاره',
+          thirdTitle: 'الدعاء:',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaLidafeaKaidAladowWsharohPage.screenRoute,
           pushBack: AyatListekfaaPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء إخضاع رقاب الجبابرة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء إخضاع رقاب الجبابرة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

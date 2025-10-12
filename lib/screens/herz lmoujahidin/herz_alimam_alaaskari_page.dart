@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_alhadi_page.dart';
@@ -58,7 +59,6 @@ class _HerzAlimamAlaaskariPageState extends State<HerzAlimamAlaaskariPage> {
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,7 +80,7 @@ class _HerzAlimamAlaaskariPageState extends State<HerzAlimamAlaaskariPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -102,58 +102,22 @@ class _HerzAlimamAlaaskariPageState extends State<HerzAlimamAlaaskariPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام الحسن العسكري (ع)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1
-                      ? 17
-                      : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام الحسن العسكري (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'احتجت بحجاب الله النّور الذي احتجب به عن العيون واحتطت على نفسي وأهلي وولدي ومالي وما اشتملت عليه عنايتي ببسم الله الرحمن الرحيم وأحرزت نفسي وذلك كلُّه من كلِّ ما أخاف وأحذر بـ"الله لآ إله إلا هو الحي القيوم لا تأخذه سنةٌ ولا نومٌ له ما في السمٰوات وما في الأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يحيطون بشيءٍ من علمه إلا بما شآء وسع كرسيُّه السمٰوات والأرض ولا يـٔوده حفظهما وهو العلي العظيم"، "ومن أظلم ممن ذُكِّر بـٔايٰت ربه فأعرض عنها ونسِىَ ما قدَّمت يداه إنا جعلنا على قلوبهم أكنةً أن يفقهوه وفيٓ ءاذانهم وقراً وإن تدعهم إلى الهدى فلن يهتدوٓا إذاً أبداً"، "أفرأيت من اتخذ إلٰهه هواه وأضله الله على علمٍ وختم على سمعه وقلبه وجعل على بصره غشٰوة فمن يهديه من بعد الله أفلا تذكَّرون"، "أولـٰٓئك الذين طبع الله على قلوبهم وسمعهم وأبصارهم وألـٰٓئك هم الغـٰفلون"، "وإذا قرأت القرءان جعلنا بينك وبين الذين لا يؤمنون بالأخرة حجاباً مستوراً"، "وجعلنا على قلوبهم أكنةً أن يفقهوه وفيٓ ءاذانهم وقراً"، "وإذا ذكرت ربك في القرءان وحده ولَّوا علىٓ أدبارهم نفوراً" وصلّى الله على محمدٍ وآله الطَّاهرين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام الحسن بن علي العسكري (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlmahdiPage.screenRoute,
           pushBack: HerzAlimamAlhadiPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسن العسكري.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسن العسكري.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

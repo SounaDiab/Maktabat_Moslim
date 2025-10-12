@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'aawzat_alnabi_yawm_wadi_alkora_page.dart';
@@ -81,7 +82,7 @@ class _AyatAlikhtifaaMenAlaadowPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,70 +104,25 @@ class _AyatAlikhtifaaMenAlaadowPageState
               },
             ),
           ],
-          title: Text(
-            'آيات الإختفاء من العدو',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'آيات الإختفاء من العدو'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle:
-                        'ذكرها السيِّد علي خان في الكلم الطيِّب، وفي المصباح قال: هءه الآيات ذكرها صاحب العدّة وصاحب معجم الأدب عن الإمام الصادق (ع).',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثاره:',
-                    subtitle:
-                        'ذكر في المصباح عن كتاب العدة وكتاب معجم الأدب أنَّ هشام بن السائب الكلبي دخل على الإمام الصادق (ع)، فقال له الإمام (ع):\n'
-                        'أنت الذي تفسر القرآن؟\n'
-                        'قال: فأخبرني عن قوله: "وإذا قرأت القرآن جعلنا بينك وبين الذين لا يؤمنون بالأخرة حجاباً مستوراً" [الإسراء: ٤٥]، ما ذلك القرآن الذي كان رسول الله (ص) إذا قرأه حجب عن عدوِّه؟\n'
-                        'قال: لا أدري، فعلِّمني يابن رسول الله.\n'
-                        'فقال: هي ثلاث آيات: آية من الكهف وآية من النحل وآية من الجاثية ثم قال في المصباح:\n'
-                        'قال بعضهم خرجت من الكوفة إلى بغداد وخرجت معنا ست سفن فكانت سفينتي السابعة وكنت سمعت هذا الحديث وقرأت هذه الآيات في سفينتي فنجوت وغرق الباقون.\n'
-                        'قال: وأسر الروم رجلاً عشر سنين وكان يحفظ هءه الآيات فلمّا ذكرها قرأها ونجّاه الله تعالى بمنِّه.\n'
-                        'وقال السيد علي خان في الكلم الطيب: هي ممّا جربته عند خروجي من بلاد العدو سنة ١٠٠٩ه‍.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'الآيات:',
-                    subtitle:
-                        'بسم الله الرحمن الرحيم "أفرأيت من اتخذ إلهه هوىٰه وأضله الله على علمٍ وختم على سمعه وقلبه وجعل على بصره غشٰوةً فمن يهديه من بعد الله أفلا تذكرون" [الجاثية: ٢٣].\n\n'
-                        '"أولئك الذين طبع الله على قلوبهم وسمعهم وأبصارهم وأولٰٓئك هم الغافلون" [النحل: ١٠٨].\n\n'
-                        '"ومن أظلم ممن ذكِّر بئايٰت ربه فأعرض عنها ونسي ما قدمت يداه إنَّا جعلنا على قلوبهم أكنَّةً أن يفقهوه وفي ءاذانهم وقراً وإن تَدْعُهُم إلى الهدى فلن يهتدوٓا إذاً أبداً" [الكهف: ٥٧].',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'ايات الاختفاء من العدو',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثاره',
+          thirdTitle: 'الآيات',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
           pushBack: AawzatAlnabiYawmWadiAlkoraPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الإختفاء من العدو.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الإختفاء من العدو.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

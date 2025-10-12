@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_alkazem_page.dart';
@@ -78,7 +79,7 @@ class _HerzAlimamAlridaPageState extends State<HerzAlimamAlridaPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,57 +101,22 @@ class _HerzAlimamAlridaPageState extends State<HerzAlimamAlridaPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام الرضا (ع)',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام الرضا (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'اللهم  أعطني الهدى وثبتني عليه، واحشرني عليه آمناً، أمن من لا خوف عليه، ولا حزن ولا جزع، إنك أهل التَّقوى وأهل المغغرة، برحمتك يا أرحم الراحمين وصاَّى الله على محمد وآله الطّاهرين.\n\n'
-                        'باسم الله "اخسئوا فيها ولا تكلّمون" "إنّيٓ أعوذ بالرحمٰن منك إن كنت تقيّاً" أخذت بسمع الله وبصره على أسماعكم وأبصاركم وبقوَّة الله على قوَّتكم لا سلطان لكم على (فلان ابن فلانة) ولا على ذرِّيَّته ولا على أهله ولا على أهل بيته سترت بيني وبينكم بستر النُّبوَّة الذي استتروا به من سطوات الجبابرة والفراعنة، جبرائيل عن أيمانكم، وميكائيل عن يساركم، ومحمد صلى الله عليه وآله أمامكم والله يطَّلع عليكم بمنعه نبيَّ الله وبمنع ذرّيّته وأهل بيته منكم ومن الشياطين، ما شاء الله لا حول ولا قوة إلا بالله العليّ العظيم، اللهم إنه لا يبلغ جهله أناتك ولا يبتليه ولا يبلغ مجهود نفسه، عليك توكلت وأنت نعم المولى ونعم النصير، حرسك الله يا فلان ابن فلانة وذرِّيتك ممّا تخاف على أحدٍ من خلقه وصلّى الله على محمدٍ وآله.\n\n'
-                        '"الله لآ إلٰه إلا هو الحيُّ القيّوم لا تأخذه سِنةٌ ولا نوم له ما في السماوات والأرض من ذا الذي يشفع عنده إلا بإذنه يعلم ما بين أيديهم وما خلفهم ولا يُحيطون بشيءٍ من علمه إلا بما شآء وسع كرسيُّه السماوات والأرض ولا يـٔوده حفظهما وهو العلي العظيم".\n\n'
-                        'لا حول ولا قوَّة إلا بالله العليِّ العظيم لا ملجأ من الله إلا إليه وحسبي الله ونعم الوكيل وأسلم في رأس الشهباء فيها لما لسلسبيلا وصلّى الله على محمدٍ وآله الطَّيِّبين الطاهرين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام الرضا (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamMohamadAljawadPage.screenRoute,
           pushBack: HerzAlimamAlkazemPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الرضا.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الرضا.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

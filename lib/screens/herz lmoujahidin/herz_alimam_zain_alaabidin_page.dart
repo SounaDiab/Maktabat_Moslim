@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_albaker_page.dart';
@@ -81,7 +82,7 @@ class _HerzAlimamZainAlaabidinPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,55 +104,22 @@ class _HerzAlimamZainAlaabidinPageState
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام زين العابدين (ع)',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام زين العابدين (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'يا أسمع السامعين، يا أبصر الناظرين، يا أسرع الحاسبين، يا أحكم الحاكمين، يا خالق المخلوقين، يا رازق المرزوقين يا ناصر المنصورين، يا أرحم الراحمين، يا دليل المتحيِّرين، يا غياث المستغيثين، أغثني يا مالك يو الدين إياك نعبد وإياك نستعين، يا صريخ المكروبين يا مجيب دعوة المضطرِّين، أنت الله ربُّ العالمين أنت الله لا إله إلا أنت الملك الحقُّ المبين، الكبرياء رداؤك، اللهم صلِّ على محمد المصطفى وعلى عليٍّ المرتضى وفاطمة الزهراء وخديجة الكبرى والحسن المجتبى والحسين الشهيد بكربلاء وعلِّ بن الحسين زين العابدين ومحمد بن علي للباقر وجعفر بن محمد الصادق وموسى بن جعفر الكاظم وعليًِ بن موسى الرضا ومحمد بن عليٍّ التقيِّ وعلي بن محمد النقيِّ والحسن بن علي العسكري والحُجة القائم المهديّ الإمام المنتظر صلوات الله عليهم أجمعين، اللهم والِ من والاهم وعاد من عاداهم وانصر من نصرهم واخذل من خذلهم والعن من ظلمهم وعجِّل فرج آل محمدٍ وارزقني رؤية قائم آل محمدٍ واجعلني من أتباعه والراضين بفعله برحمتك يا أرحم الراحمين.\n\n'
-                        'بسم الله وبالله وإلى الله، وفي سبيل الله وعلى ملَّة رسول الله (ص)، اللهم إليك أسلمت نفسي وإليك وجَّهت وجهي، وإليك فوَّضت أمري، فاحفظني بحفظ الإيمان من بين يديَّ، ومن خلفي، وعن يميني، وعن شمالي، ومن فوقي، ومن تحتي، وادفع عنِّي بحَوْلك وقوَّتك فإنه لا حول ولا قوَّة إلا بالله العلي العظيم وصلَّى الله على محمدٍ وآله الطيِّبين الطَّاهرين المعصومين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام زين العابدين (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlbakerPage.screenRoute,
           pushBack: HerzAlimamAlhusseinPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام زين العابدين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام زين العابدين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

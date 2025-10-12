@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'aawza_yataawaz_biha_aala_alaadaa_page.dart';
@@ -60,7 +61,6 @@ class _RokaatAljaybLilimamAlridaAalaihAlsalamPageState
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +82,7 @@ class _RokaatAljaybLilimamAlridaAalaihAlsalamPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -108,66 +108,19 @@ class _RokaatAljaybLilimamAlridaAalaihAlsalamPageState
               },
             ),
           ],
-          title: Text(
-            'رقعة الجيب للإمام الرضا (ع)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1
-                      ? 19
-                      : 22,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'رقعة الجيب للإمام الرضا (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle:
-                        'ذكرها السيد ابن طاوس في مهج الدعوات مسندة عن ياسر خادم المأمون, ونقلها عنه الشيخ القمّي في الباقيات الصالحات.\n'
-                        'قال ياسر:\n'
-                        'لما نزل أبو الحسن علي ابن موسى الرضا (ع) قصر حميد بن قحطبة نزع ثيابه وناولها حميداً, فاحتملها وناوها جارية لتغسلها, فما لبثت أن جاءت ومعها رقعة, فناولتها حميداً, وقالت: وجدتها في جيب قميس أبي الحسن (ع), فسأل حميد عنها أبو الحسن, فقال (ع): يا حميد هذه عوذة لا أعزلها عن نفسي.\n'
-                        'وقد ذكر في المهج لرقعة الجيب رواية أخرى تختلف بعض الشيء عن هذه, فراجع.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثاره:',
-                    subtitle:
-                        'قال (ع): هذه عوذة من أمسكها في جيبه كانالباء مدفوعاً عنه, وكانت له حرزاً من الشيطان الرجيم.\n'
-                        'ولهذا الحرز حكاية عجيبة رواها أبو الصلت الهروي, قال:\n'
-                        'كان مولاي علي ابن موسى الرضا (ع), ذات يوم جالساً في منزله إذ دخل عليه رسول المأمون فقال: أجب دعوة الأمير, فقام علي ابن موسى الرضا (ع) فقال لي: يا أبا الصلت, إنه لا يدعوني في هذا الوقت إلا لداهية والله لا يمكنه أن يعمل بي شيئاًأكرهه بكلمات وقعت إليّ من جدي رسول الله (ص), '
-                        'قال أبوالصلت فخرجت معه إلى المأمون فلما بصرهالرضا (ع) قرا هذا الحرز إلى آخره, فلما وقفبين يديه نظر إليه المأمون وقال:'
-                        'يا أبا الحسن قد أمرنا لك بمئةألف درهم واكتب حوائجك, فلمّا ولّى الإمام عنه نظر المأمون إليه في قفاه فقال: أردت وما أراد الله, وما أراد الله خير.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'العوذة:',
-                    subtitle:
-                        'بسم الله الرحمن الرحيم بسم الله إني أعوذ بالرحمن منك إن كنت تقياً، أو غير تقيّ، أخذت بالله السميع البصير على سمعك وبصرك، لا سلطان لك عليّ ولا على سمْعي، ولا على بصري ولا على شعري، ولا على بشري، ولا لحمي، ولا على دمي، ولا على مخّي، ولا على عصبي، ولا على عظامي ولا على مالي ولا على أهلي ولا على ما رزقني ربي سترت على بيني وبينك بستر النبوة الذي استتر أنبياء الله به من سطوات الجبابرة والفراعنة، جبرئيلعن يميني، وميكائيل عن يساري، وإسرافيل من ورائي، ومحمد صلّى الله عليه وآله أمامي، والله مطَّلعٌ عليَّ، يمنعك منّي ويمنع الشيطان منّي، اللهم لا يغلب جهله أناتك أن يستفزَّني ويستخفَّني؛ اللهم إليك التجأت، اللهم إليك التجأت، اللهم إليك التجأت.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'رقعة الجيب للامام الرضا عليه السلام',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثاره',
+          thirdTitle: 'العوذة:',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AawzaYataawazBihaAalaAlaadaaPage.screenRoute,

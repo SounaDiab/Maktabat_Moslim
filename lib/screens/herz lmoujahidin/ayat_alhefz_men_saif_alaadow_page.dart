@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_aljawad_page.dart';
@@ -60,7 +61,6 @@ class _AyatAlhefzMenSaifAlaadowPageState
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +82,7 @@ class _AyatAlhefzMenSaifAlaadowPageState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -104,66 +104,25 @@ class _AyatAlhefzMenSaifAlaadowPageState
               },
             ),
           ],
-          title: Text(
-            'آيات الحفظ من سيف العدو',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1
-                      ? 20
-                      : 22,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'آيات الحفظ من سيف العدو'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle: 'ذكرها الشيخ الكفعمي في المصباخ.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'آثارها:',
-                    subtitle:
-                        'قال في المصباح: من تلاها أو حملها كان في حفظ الله وملئه وقال في الحاشية نقلاً عن حياو الحيوان للدميري:\n'
-                        'روي أن أناساً ضربوا أبا الهيثم بالسيوف فلم يقطع منه شيئاً فسئل عن ذلك فقال: كنت أقرؤها، ثم قال:\n'
-                        'خرجت يوماً مع جماعة فرأينا ذئباً يلاعب شاة عجفاء ولا يضرّها شيئاً فلما دنونا منه نفر الذئب فوجدنا في عنقها كتاباً فيه الآيات المذكورة.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'الآيات:',
-                    subtitle:
-                        'لا يؤوده حفظهما وهو العلي العظيم، فالله خيرٌ حافظاً وهو أرحم الراحمين، له معقِّبات من بين يديه ومن خلفه يحفظونه من أمر الله، إن -الله -ربي على كل شيءٍ حفيظ إنّا نحن نزّلنا الذكر وإنا له لحافظون وحفظناها من كل شيطان رجيم وحِفظاً من كل شيطان ماردٍ إنّ كل نفسٍ لما عليها حافظٌ إنّ بطش ربك لشديد إنّه هو يبدئ ويعيد وهو الغفور الودود ذو العرش المجيد فعّالٌ لما يريد هل أتاك حديث الحنود فرعون وثمود بل الذين كفروا في تكذيبٍ واله من ورائهم محيطٌ بل هو قرآن مجيد في لوحٍ محفوظ.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'ايات الحفظ من سيف العدو',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'آثارها',
+          thirdTitle: 'الآيات',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAljawadPage.screenRoute,
           pushBack: HerzLietikaaSilahAlaadowPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الحفظ من سيف العدو.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الحفظ من سيف العدو.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

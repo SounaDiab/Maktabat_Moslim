@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/Util/items.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
-import 'package:maktabat_almoslim/widgets/search_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../Util/items.dart';
+import '../../business logic/cubit/herz_almoujahidin_cubit.dart';
+import '../herz_almoujahidin_home_screen.dart';
+import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/line_from_index.dart';
 import '../search_provider.dart';
+import 'herz_alimam_alaaskari_page.dart';
+import 'herz_alimam_albaker_page.dart';
+import 'herz_alimam_alhadi_page.dart';
+import 'herz_alimam_alhassan_almojtaba_page.dart';
+import 'herz_alimam_alhussein_page.dart';
+import 'herz_alimam_ali_page.dart';
+import 'herz_alimam_alkazem_page.dart';
+import 'herz_alimam_almahdi_page.dart';
+import 'herz_alimam_alrida_page.dart';
+import 'herz_alimam_alsadek_page.dart';
+import 'herz_alimam_mohamad_aljawad_page.dart';
+import 'herz_alimam_zain_alaabidin_page.dart';
+import 'herz_fatimat_alzahraa_page.dart';
+import 'herz_rasoul_allah_page.dart';
 
 class HerzAlrasoulWalAimmaPage extends StatefulWidget {
   static String screenRoute = 'herzalrasoulwalaimma_screen';
@@ -36,8 +52,6 @@ class _HerzAlrasoulWalAimmaPageState extends State<HerzAlrasoulWalAimmaPage> {
         .pushReplacementNamed(HerzAlmoujahidinHomeScreen.screenRoute);
     return false;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -78,26 +92,67 @@ class _HerzAlrasoulWalAimmaPageState extends State<HerzAlrasoulWalAimmaPage> {
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return ListTile(
-                    title: LineFromIndex(
-                      text: item['title']!,
-                      route: item['route']!,
-                    ),
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<HerzAlmoujahidinCubit, HerzAlmoujahidinState>(
+          builder: (context, state) {
+            if (state is HerzAlmoujahidinLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is HerzAlmoujahidinLoaded) {
+              final herzAlmoujahidin = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                HerzRasoulAllahPage.screenRoute,
+                HerzAlimamAliPage.screenRoute,
+                HerzFatimatAlzahraaPage.screenRoute,
+                HerzAlimamAlhassanAlmojtabaPage.screenRoute,
+                HerzAlimamAlhusseinPage.screenRoute,
+                HerzAlimamZainAlaabidinPage.screenRoute,
+                HerzAlimamAlbakerPage.screenRoute,
+                HerzAlimamAlsadekPage.screenRoute,
+                HerzAlimamAlkazemPage.screenRoute,
+                HerzAlimamAlridaPage.screenRoute,
+                HerzAlimamMohamadAljawadPage.screenRoute,
+                HerzAlimamAlhadiPage.screenRoute,
+                HerzAlimamAlaaskariPage.screenRoute,
+                HerzAlimamAlmahdiPage.screenRoute,
+              ];
+              for (var item in herzAlmoujahidin) {
+                for (var subItem in item.index) {
+                  allTitles.add({
+                    'title': subItem.title,
+                    'route': allRoutes
+                        .map((e) => e)
+                        .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
+                  });
+                }
+              }
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: allTitles.length,
+                      itemBuilder: (context, i) {
+                        final title = allTitles[i]['title'];
+                        final route = allTitles[i]['route'];
+
+                        return ListTile(
+                          title: LineFromIndex(
+                            text: title,
+                            route: route,
+                          ),
+                        );
+                      }),
+                ),
+              );
+            } else if (state is HerzAlmoujahidinError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }

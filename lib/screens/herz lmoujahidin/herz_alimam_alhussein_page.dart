@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_alhassan_almojtaba_page.dart';
@@ -58,7 +59,6 @@ class _HerzAlimamAlhusseinPageState extends State<HerzAlimamAlhusseinPage> {
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -80,7 +80,7 @@ class _HerzAlimamAlhusseinPageState extends State<HerzAlimamAlhusseinPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -102,58 +102,22 @@ class _HerzAlimamAlhusseinPageState extends State<HerzAlimamAlhusseinPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام الحسين بن علي (ع)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1
-                      ? 17
-                      : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام الحسين بن علي (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'يا مَن شأنه الكفاية وسُرادقُهُ الرعاية يا من هو الغاية والنهاية يا صارف السوء والسوّاية والضرُّ اصرف عني أذيَّة العالمين من الجن والإنس أجمعين بالأشباح النّورامية وبالأسماء السُريانية وبالأقلام اليونانية وبالكلمات العبرانية وبما نزل في الألواح من يقين الإيضاح اجعلني اللهم في حزبك وفي حرزك وفي عياذِك وفي سترك وفي حفظك وفي كنفك من شرِّ كلِّ شيطانٍ ماردٍ وعدوٍ راصدٍ ولئيمٍ معاندٍ وضدٍّ كيودٍ ومن كلِّ حاسدٍ ببسم الله استشفيت وبسم الله استكفيت وعلى الله توكلت وبه استعنت وإليه استدعيت على كلِّ ظالمٍ ظلم وغاشمٍ غشم  طارقٍ طرق وزاجرٍ زجر فالله خير حافظاً وهو أرحم الراحمين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام الحسين بن علي (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamZainAlaabidinPage.screenRoute,
           pushBack: HerzAlimamAlhassanAlmojtabaPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسين بن علي.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسين بن علي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

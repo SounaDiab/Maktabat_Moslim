@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../widgets/sowar_koraan.dart';
+import '../../widgets/add_custom_bottom_navigation_bar.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import '../herz_almoujahidin_home_screen.dart';
@@ -52,10 +54,11 @@ class _AyatLkorsiPageState extends State<AyatLkorsiPage> {
     }
   }
 
+  double _fontSize = 18;
+  double _fontSizeTablet = 30;
+
   @override
   Widget build(BuildContext context) {
-    String name = 'آية الكرسي';
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -77,7 +80,7 @@ class _AyatLkorsiPageState extends State<AyatLkorsiPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -87,36 +90,67 @@ class _AyatLkorsiPageState extends State<AyatLkorsiPage> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(name, AyatLkorsiPage.screenRoute);
+                      .addFavorite('آية الكرسي', AyatLkorsiPage.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite(name, AyatLkorsiPage.screenRoute,
+                      .removeFavorite('آية الكرسي', AyatLkorsiPage.screenRoute,
                           AyatLkorsiPage.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            name,
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 16
-                      : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'آية الكرسي'),
           ),
         ),
-        body: SowarKoraan(
-          title: name,
-          basmala: 'بسم الله الرحمن الرحيم',
-          koraan:
-              'اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ يَعْلَمُ ما بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ',
-          music:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/$name.mp3',
-          next: AlkafirounPage.screenRoute,
-          back: DouaaNadiAalyanMozhiraAlaajaibPage.screenRoute,
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'اية الكرسي',
+          isKoraan: true,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
+        ),
+        bottomNavigationBar: AddCustomBottomNavigationBar(
+          pushNext: AlkafirounPage.screenRoute,
+          pushBack: DouaaNadiAalyanMozhiraAlaajaibPage.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آية الكرسي.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
         ),
       ),
     );

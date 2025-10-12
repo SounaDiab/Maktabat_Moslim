@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_alaaskari_page.dart';
@@ -78,7 +79,7 @@ class _HerzAlimamAlmahdiPageState extends State<HerzAlimamAlmahdiPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,54 +101,22 @@ class _HerzAlimamAlmahdiPageState extends State<HerzAlimamAlmahdiPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام المهدي (ع)',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام المهدي (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'اللَّهمَّ احجبني عن عيون أعدائي، واجمع بيني وبين أوليائي، وأنجز لي ما وعدتني واحفظني في غيبتي إلى أن تأذن لي في ظهوري، وأحي بي ما دُرس من فروضم وسننك وعجِّل فرجي وسهِّل مخرجي، واجعل لي من لدُنك سلطاناً نصيراً وافتح لي فتحاً مبيناً، واهدني صراطاً مستقيماً وقني شرَّ ما أُحاذره من من الظالمين واحجبني عو أعين الباغضين الناصبين العداوة لأهل بيت نبيِّك، ولا يصل منهم إليَّ أحد بسوءٍ فإذا أذنْت في ظهوري فأيِّدني بجنودك، واجعل من يتَّبعني لنصرة دينك مريدين، وفي سبيلك مجاهدين وعلى من أرادني وأرادهم بسوءٍ منصورين، ووفِّقني لإقامة حدودك، وانصرني على من تعدَّى حدودك، وانصر الحقَّ، وأزهق الباطل إن الباطل كان زَهوقاً، وأورِد عليَّ من شيعتي وأنصاري من تَقَرُّ بهم العين، ويُشَدُّ بهم الأرز، واجعلهم في حرزك وأمنك وكنفك وحفظك وعياذك وسترك برحمتك يا أرحم الرّاحمين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز مولانا صاحب الزمان (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzRasoulAllahPage.screenRoute,
           pushBack: HerzAlimamAlaaskariPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام المهدي.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام المهدي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

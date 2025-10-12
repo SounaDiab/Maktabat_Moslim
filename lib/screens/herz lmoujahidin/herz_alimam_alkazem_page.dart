@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_alrida_page.dart';
@@ -78,7 +79,7 @@ class _HerzAlimamAlkazemPageState extends State<HerzAlimamAlkazemPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,55 +101,22 @@ class _HerzAlimamAlkazemPageState extends State<HerzAlimamAlkazemPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام الكاظم (ع)',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام الكاظم (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'يا الله يا حافظ، يا حفيظ، يا قريب، يا حيّ، يا قيّوم، برحمتك أغثني، ولا تكلني إلى نفسي طرفة عينٍ أبداً وأصلح لي شأني كلّه.\n\n'
-                        'إلهي من عدوٍّ شحذ لي ظُبَةَ مدينته، وأرهف لي شبا حدِّه وداف لي قواتل سمومه ولم تنم عنِّي عين حراسته، فلمّا رأيت ضعفي عن احتمال الفوادح، وعجزي عن مُالِمّات الجوائح، صرفت ذلك عنِّي بحولك وقوَّتك، لا بحولٍ منِّي ولا قوَّةٍ، فألقيته في الحفير الذي احتفره لي خائباً ممّا أمَّله في الدنيا، متباعداً ممّا رجاه في الآخرة، فلك الحمد على ذلك قدر استحقاقك سيّدي، اللَّهمَّ فخُذْهُ بعزَّتك، وافلل حدَّه عنِّي بقُدرتك، واجعل له شُغلاً فيما يليه، وعجزاً عمّا يناوبه، اللهم وأعدني عليه عدوى حاضرةً تكون من غيظي شفاءً، ومن حنقي عليه وقاءً، وصل اللهم دعائي بالإجابة، وانظم شكايتي بالتغيير وعرّفه عمّا قليلٍ، ما أوعدت الظالمين، وعرِّفني ما وعدت في إجابة المضطرّين، إنك ذو الفضل العظيم، والمنِّ الكريم.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام الكاضم (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlridaPage.screenRoute,
           pushBack: HerzAlimamAlsadekPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الكاظم.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الكاظم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_ali_page.dart';
@@ -78,7 +79,7 @@ class _HerzRasoulAllahPageState extends State<HerzRasoulAllahPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,55 +101,22 @@ class _HerzRasoulAllahPageState extends State<HerzRasoulAllahPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز رسول الله (ص)',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز رسول الله (ص)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'اللهم إني أعوذ باسمك وكلمتك التّامّة من شر السّامّة والهامّة، وأعوذ باسمك وكلمتك التّامّة من شرِّ عذابك ومن شرِّ عبادك، وأعوذ باسمك وكلمتك التّامّة من شرِّ الشيطان الرجيم.\n\n'
-                        'اللهم إني أسألك باسمك وكلمتك التامّة من خير ما تعطي وما تسأل، وخير ما تخفي وما تبدي، اللهم إني أعوذ باسمك وكلمتك التامة من شرِّ ما يجري به الليل والنهار، إن ربّي الله الذي لا إله إلا هو، عليه توكلت وهو ربُّ العرش العظيم، ما شاء الله كان وما لم يشأ لم يكن، أعلم أن الله على كلِّ شيءٍ قديرٌ، وأن الله قد أحاط بكلِّ شيءٍ علماً وأحصى كلَّ شيءٍ عدداً، اللهم إني أعوذ بك من شرِّ نفسي، ومن شرِّ كلِّ دابةٍ أنت آخذ بناصيتها، إنَّ ربّي على صراطٍ مستقيمٍ، فإن تولَّوا فقل حسبي الله لا إله إلا هو عليه توكَّلت وهو ربُّ العرش العظيم.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز رسول الله (ص)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAliPage.screenRoute,
           pushBack: HerzAlimamAlmahdiPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز رسول الله.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز رسول الله.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

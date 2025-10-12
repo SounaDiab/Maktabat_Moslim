@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_alsadek_page.dart';
@@ -78,7 +79,7 @@ class _HerzAlimamAlbakerPageState extends State<HerzAlimamAlbakerPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,56 +101,22 @@ class _HerzAlimamAlbakerPageState extends State<HerzAlimamAlbakerPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام محمد الباقر (ع)',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام محمد الباقر (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'أُعيذ نفسي بربّيَ الأكبر، ممّا يخفى وما يظهر، ومن شرِّ كلِّ أنثى وذكر، ومن شرِّ ما رأت الشمس والقمر، سُبّوحٌ قُدّوسٌ قُدّوسٌ ربُّ الملائكة والروح أدعوكم أيها الجنُّ إنْ كُنتم سامعين مطيعين وأدعوكم أيُّها الإنس والجنُّ إلى اللَّطيف الخبير وأدعوكم أيُّها والجنَّ والإنس إلى الذي ختمته بخاتم ربِّ العالمين وخاتم جبرائيل وميكائيل وإسرافيل وخاتم سليمان بن داود عليهم السلام وخاتم محمد سيد المرسلين والنَّبيِّين صلَّى الله عليه وآله وعليهم أجمعين اخسؤوا فيها ولا تكلِّمون واخسؤوا عن فلان ابن فلان كلَّما يغدو ويروح من ذي حيَّةٍ أو عقربٍ أو ساحرٍ أو شيطان رجيم أو سلطان عنيد أخذت عنه ما يُرى وما لا يُرى وما رأت عَيْنُ نائمٍ أو يَقْظان بإذنِ الله اللَّطيف الخبير لا سلطان لكم على الله لا شريك له وصلَّى الله على رسوله سيِّدنا محمَّدٍ النَّبيِّ وآله الطّاهرين وسلَّم تسليماً كثيراً. بسم الله الرحمن الرحيم "ومن قوم موسىٓ أمَّةٌ يهدون بالحقِّ وبه يعدلون".\n\n'
-                        'يا حيُّ يا قيّوم يا ديّان يا ديّان يا أهيا أشراهيا آذونا أصباوثَ آل شداي.\n\n'
-                        'أسألك بحقِّ هذه الأسماء الطاهرة المطهَّرة، أن تدفع عن صاحب هذا الكتاب جميع البلايا وتقضي حوائجه، إنك أنت أرحم الراحمين وصلوات الله على محمدٍ وآله الطّاهرين. اللهم كهكهيج بعسط مهحما مسلع وروره مهفتام وبعونك إلا ما أخذت لسان جميع بني آدم وبنات حوّا على فلان بن فلان إلّا بالخير يا أرحم الراحمين "فسيكفيكهم الله وهو السميع العليم". وصلّى اللّه على محمد وآله الطّاهرين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام محمد بن علي الباقر (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlsadekPage.screenRoute,
           pushBack: HerzAlimamZainAlaabidinPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام محمد الباقر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام محمد الباقر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

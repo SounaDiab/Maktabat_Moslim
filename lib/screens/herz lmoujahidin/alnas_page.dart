@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/add_custom_bottom_navigation_bar.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../widgets/sowar_koraan.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'alfalak_page.dart';
@@ -16,6 +18,9 @@ class AlnasPage extends StatefulWidget {
   @override
   State<AlnasPage> createState() => _AlnasPageState();
 }
+
+double _fontSize = 18;
+double _fontSizeTablet = 30;
 
 class _AlnasPageState extends State<AlnasPage> {
   bool isIcon = true;
@@ -54,8 +59,6 @@ class _AlnasPageState extends State<AlnasPage> {
 
   @override
   Widget build(BuildContext context) {
-    String name = 'سورة الناس';
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -77,7 +80,7 @@ class _AlnasPageState extends State<AlnasPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -87,36 +90,67 @@ class _AlnasPageState extends State<AlnasPage> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(name, AlnasPage.screenRoute);
+                      .addFavorite('سورة الناس', AlnasPage.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite(
-                          name, AlnasPage.screenRoute, AlnasPage.screenRoute);
+                      .removeFavorite('سورة الناس', AlnasPage.screenRoute,
+                          AlnasPage.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            name,
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 16
-                      : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'سورة الناس'),
           ),
         ),
-        body: SowarKoraan(
-          title: name,
-          basmala: 'بسم الله الرحمن الرحيم',
-          koraan:
-              'قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ (1) مَلِكِ ٱلنَّاسِ (2) إِلَٰهِ ٱلنَّاسِ (3) مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ (4) ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ (5) مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ (6)',
-          music:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/$name.mp3',
-          next: AyatListekfaaPage.screenRoute,
-          back: AlfalakPage.screenRoute,
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'الناس',
+          isKoraan: true,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
+        ),
+        bottomNavigationBar: AddCustomBottomNavigationBar(
+          pushNext: AyatListekfaaPage.screenRoute,
+          pushBack: AlfalakPage.screenRoute,
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/سورة الناس.mp3',
+          onTap: (double fontSize) {
+            // تحديث حجم الخط
+            setState(() {
+              isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;
+            });
+            print('fontSize: $fontSize');
+            // إغلاق Dialog
+            Navigator.of(context).pop();
+          },
+          onLongPress: () {
+            final snackBar = SnackBar(
+              content: Center(
+                child: Text(
+                  '${isTablet ? _fontSizeTablet.toInt() : _fontSize.toInt()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              width: 60,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.blue,
+              duration: Duration(seconds: 2),
+              shape: ShapeBorder.lerp(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                1,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
         ),
       ),
     );

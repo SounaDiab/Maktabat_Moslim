@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_alimam_alaaskari_page.dart';
@@ -78,7 +79,7 @@ class _HerzAlimamAlhadiPageState extends State<HerzAlimamAlhadiPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,54 +101,22 @@ class _HerzAlimamAlhadiPageState extends State<HerzAlimamAlhadiPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام الهادي (ع)',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام الهادي (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        'لا حول ولا قوَّة إلا بالله العليِّ العظيم، اللهم ربَّ الملائكة والروح والنَّبيّين والمرسلين وقاهر من في السماوات والأرضين، وخالق كلِّ شيءٍ ومالكه، كفَّ عنّا بأس أعدائنا ومن أراد بنا سوءاً من الجنِّ والإنس واعم ابصارهم وقلوبهم، واجعل بيننا وبينهم حجاباً وحرساً ومدفعاً إنَّك ربُّنا لا حول ولا قوَّة لنا إلا بالله، عليه توكَّلنا وإليه أنبنا وإليه المصير، ربَّنا لا تجعلنا فتنةً للذين كفروا، واغفر لنا ربَّنا، إنك أنت العزيز الحكيم، ربّنا عافنا من كلِّ سوءٍ، ومن شرِّ كلِّ دابةٍ أنت آخذ بناصيتها، ومن شرِّ ما يسكن في الليل والنهار، ومن شرِّ كاِّ سوءٍ، ومن شرِّ كلِّ ذي شرٍّ، ربَّ العالمين وإله المرسلين صلِّ على محمدٍ وآله أجمعين بأتمِّ ذلك، ولا حول ولا قوَّة إلا بالله العليِّ العظيم، باسم الله وبالله أؤمن وبالله أعوذ وبالله أعتصم وبالله أستجير وبعزَّة الله ومنعته أمتنع من شياطين الإنس والجنِّ، ومن رجلهم وخيلهم وركضهم وعطفهم ورجعتهم وكيدهم وشرِّهم وشرِّ ما يأتون به تحت الليل وتحت النهار من البعد والقرب، ومن شرِّ الغائب والحاضر والشاهد والزائر أخياءً وأمواتاً أعمىً وبصيراً، ومن شرِّ العامَّة والخاصَّة، ومن شرِّ نفسٍ ووسوستها، ومن شرِّ الدَّناهش والحسِّ واللمس واللبس، ومن عين الجن والإنس، وبالاسم الذي اهتزَّ به عرش بلقيس. وأُعيذ ديني ونفسي وجميع ما تحوطه عنايتي من شرِّ كل صورةٍ وخيالٍ أو بياضٍ أو سوادٍ أو تمثالٍ أو مُعاهدٍ أو غير مُعاهدٍ ممن يسكن الهواء والسّحاب والظُّلمات والنّور والظِّلَّ والحَرور والبرَّ والبحور والسهل والوعور والخراب والعمران والآكام والآجام والغياض والكنائس والنَّواويس والفلوات والجبّانات، ومن شرِّ الصيادين والواردين ممن يبدو بالليل وينتشر بالنهار وبالعشيِّ والإبكار والغُدُوِّ والآصال والمريبين والأسامرة والأفاثرة (ترة) والفراعنة والأبالسة ومن جنودهم وأزواجهم وعشائرهم وقبائلهم ومن هزمهم ولمزهم ونفْثهم ووِقاعهم وأخذهم وسحرهم وضربهم وعبثهم ولمحهم واحتيالهم واختلافهم، ومن شرِّ كلِّ ذي شرٍّ من السحرة والغيلان وادأمِّ الصِّبيان وما ولدوا وما وردوا، ومن شرِّ كلِّ ذب شرٍّ داخل وخارج وعارضٍ ومتعرِّضٍ وساكن ومتخركٍ وضربان عرقٍ وصداعٍ وشقيقةٍ وأمِّ ملدمٍ والحمّى والمثلّثة والرِّبع والغبِّ والنافضة والصالية والداخلة والخارجة، ومن شرِّ كلِّ دابةٍ أنت آخذٌ بناصيتها إنك على صراطٍ مستقيمٍ، وصلّى الله على بدنبيِّه محمدٍ وآله الطاهرين.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام الهادي (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAlimamAlaaskariPage.screenRoute,
           pushBack: HerzAlimamMohamadAljawadPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الهادي.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الهادي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

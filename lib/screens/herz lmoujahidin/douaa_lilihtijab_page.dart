@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz_almoujahidin_home_screen.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz_almoujahidin_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'douaa_lilihtijab_aan_basar_alaadaa_page.dart';
@@ -78,7 +79,7 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,70 +101,24 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
               },
             ),
           ],
-          title: Text(
-            'دعاء للإحتجاب',
-            style: TextStyle(
-              fontSize: isTablet ? 40 : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء للإحتجاب'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: ListOfNineVerses(
-                    title: 'تعريف:',
-                    subtitle: 'ذكره السيِّد علي خان في الكلم الطيب.',
-                    weight: FontWeight.w400,
-                    size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    children: [
-                      ListOfNineVerses(
-                        title: 'الدعاء:',
-                        subtitle:
-                            'بسم الله الرحمن الرحيم، احتجبت بنور وجه الله القديم الكامل، وتحصَّنت بحصن الله القويِّ الشامل ورميت من بغى عليَّ بسهم الله وسيفه القاتل، اللهم يا غالباً على أمره ويا قائماً فوق خلقه ويا حائلاً بين المرء وقلبه حل بيني وبين الشيطان ونزغه وبين ما لا طاقة لي به من أحد من عبادك، كفَّ عنِّي ألسنتهم واغلل أيديهم وأرجلهم واجعل بيني وبينهم سداً من نور عظمتك وحجاباً من قُدْرتك وجنداً من سلطانك إنك حيٌّ قادرٌ.\n'
-                            'اللهم اغش عنّي أبصار النّاظرين حتّى أرُدَّ الموارد واغش عنّي أبصار النور وأبصار الظُّلمة حتَّى لا أبالي عن أبصارهم يكاد سنا برقه يذهب بالأبصار، يُقَلِّب الله الليل والنهار إن في ذلك لعبرةً لأولي الأبصار.\n'
-                            'بسم الله الرحمن الرحيم كهيعص، بسم الله الرحمن الرحيم حمعسق، كماءٍ أنزلناه من السماء فاختلط به نبات الأرض فأصبح هشيماً تذروه الرياح، ح ه‍ هو الله الذي لا إله إلا هو عالم الغيب والشهادة هو الرحمن الرحيم، م ي يوم الآزفة إذِ القلوب لدى الحناجر كاظمين ما للظالمين من حميم ولا شفيعٍ يُطاع ع ع علمتْ نفسٌ ما أحضرت فلا أقسم بالخنَّس الجوار الكنَّس والليل إذا عسعس والصبح إذا تنفَّس، س ص ص والقرآن ذي الذكر بل الذين كفروا في عِزَّةٍ وشقاقٍ.',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                      ListOfNineVerses(
-                        title: '',
-                        subtitle: 'وتقول ثلاث مرّات:',
-                        weight: FontWeight.w400,
-                        size: isTablet ? _fontSizeTablet - 4 : _fontSize - 4,
-                      ),
-                      ListOfNineVerses(
-                        title: '',
-                        subtitle:
-                            'شاه‍ت الوجوه شاهت الوجوه شاهت الوجوه وعميت الأبصار وكلَّت الألسن اللهم اجعلْ خيرهم بين عينيهم وشرَّهم وتحت قدميهم وخاتم سليمان بين أكتافهم. سُيْحان القادر القاهر الكافي، فسيكفيكهم الله وهو السميع العليم، صبغة الله ومن أحسن من الله صبغةً، كهيعص اكفنا، حمعسق احمنا وارحمنا، هو الله القادر القاهر الكافي، وجعلنا من بين أيديهم سداً فأغشيناهم فهم لا يبصرون، أولئك الذين طبع الله على قلوبهم وسمعهم وأبصارهم وأولئك هم الغافلون، وصلَّى الله على محمد وآله أجمعين الطَّيِّبين الطّاهرين، إنه من سليمان وإنه بسم الله الرحمن الرحيم ألا تعلوا عليَّ وأتوني مسلمين، اللهم إني أسألك أن تقضي حاجتي وتغفر ذنوبي فإنه لا يغفر الذنوب إلا أنت برحمتك يا أرحم الراحمين، وعنت الوجوه للحيّ القيّوم يا ذا الجلال والإكرام.',
-                        weight: FontWeight.w600,
-                        size: isTablet ? _fontSizeTablet : _fontSize,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidin(
+          text: 'دعاء الاحتجاب',
+          isKoraan: false,
+          firstTitle: 'تعريف',
+          secondTitle: 'الدعاء',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzAltajPage.screenRoute,
           pushBack: DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للإحتجاب.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للإحتجاب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

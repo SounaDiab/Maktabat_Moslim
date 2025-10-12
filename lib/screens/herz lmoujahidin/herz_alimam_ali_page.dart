@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
+import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
+import '../../widgets/scroll_title.dart';
+import '../herz%20lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/list_of_nine_verses.dart';
 import '../favorites_provider.dart';
 import '../favorites_screen.dart';
 import 'herz_fatimat_alzahraa_page.dart';
@@ -57,7 +58,6 @@ class _HerzAlimamAliPageState extends State<HerzAlimamAliPage> {
   double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -79,7 +79,7 @@ class _HerzAlimamAliPageState extends State<HerzAlimamAliPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -101,59 +101,22 @@ class _HerzAlimamAliPageState extends State<HerzAlimamAliPage> {
               },
             ),
           ],
-          title: Text(
-            'حرز الإمام علي بن أبي طالب (ع)',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1
-                      ? 16
-                      : 19,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'حرز الإمام علي بن أبي طالب (ع)'),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(
-              top: 10,
-              right: 30,
-              left: 30,
-              bottom: 10,
-            ),
-            alignment: Alignment.topRight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Center(
-                    child: Text(
-                      'بسم الله الرحمن الرحيم',
-                      style: TextStyle(
-                        fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: ListOfNineVerses(
-                    title: '',
-                    subtitle:
-                        '"قل اللهم مٰلك الملك تؤتي الملك من تشآء وتنزع الملك ممن تشآء وتعزُّ من تشآء وتذلُّ من تشآء بيدك الخير  إنك على كل شيءٍ قدير تولج الليل في النهار وتولج النهار في الليل وتخرج الحي من الميت وتخرج الميت من الحي وترزق من تشآء بغير حساب" الله أكبر الله أكبر الله أكبر، خضعت البريَّة  لعظمة جلاله أجمعون، وذلَّ لعظمة عزِّه كلُّ متعاظم منهم، ولا يجد أحدٌ منهم إليَّ مخلصاً، بلِّ يجعلهم الله شاردين متمزِّقين في عزِّ طعيانهم هالكين.\n'
-                        '"قل أعوذ برب الناس ملك الناس إله الناس من شرِّ الوسواس الخناس الذي يوسوس في صدور الناس من الجنة والناس" انغلق عنّي باب المستأخرين منكم والمستقدمين، فهم ضالون مطرودون بالصّافّات، بالذّاريات، بالمرسلات، بالنّازعات أزجركم عن الحركات، كونوا رماداً لا تبسطوا إلي ولا إلى مؤمنٍ يداً، اليوم نختم على أفواههم وتكلمنا أيديهم وتشهد أرجلهم بما كانوا يكسبون، هذا يوم لا ينطقون ولا يؤذن لهم فيعتذرون، عميت الأعين، وخرست الألسن، وخضعت الأعناق للملك الخلّاق. اللهم بالميم والعين والفاء والحاءين، بنور الأشباح وبتلألؤ ضياء الإصباح، وبتقديرك لي، يا قدير في الغدوِّ والرَّواح، اكفني شرَّ من دبَّ ومشى وتجبَّر وعتى، الله الغالب ولا ملجأ منه لهاربٍ، "نصرٌ من الله وفتحٌ قريبٌ" "إن ينصركم الله فلا غالب لكم"، كتب الله لأغلبنَّ أنا ورسلي إن الله قويٌ عزيزٌ، أمن من استجار بالله، لا حول ولا قوة إلا بالله العليِّ العظيم.',
-                    weight: FontWeight.w600,
-                    size: isTablet ? _fontSizeTablet : _fontSize,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: BlocBuilderHerzAlmoujahidinHerzAlrasoulWal2a2ima(
+          text: 'حرز الامام علي بن ابي طالب (ع)',
+          isKoraan: false,
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: HerzFatimatAlzahraaPage.screenRoute,
           pushBack: HerzRasoulAllahPage.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام علي بن أبي طالب.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام علي بن أبي طالب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
