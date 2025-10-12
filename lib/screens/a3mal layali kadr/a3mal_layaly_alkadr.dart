@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/a3mal_layali_kadr_home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../a3mal_layali_kadr_home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../Util/items.dart';
+import '../../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
 import '../../widgets/line_from_index.dart';
 import '../../widgets/search_widget.dart';
 import '../search_provider.dart';
+import 'a3mal layaly alkadr/al2iste3dad.dart';
+import 'a3mal layaly alkadr/mawane3_alkoboul.dart';
+import 'a3mal layaly alkadr/sawab_al2i7ya2.dart';
 
 class A3malLayalyAlkadr extends StatefulWidget {
   static String screenRoute = 'a3mal_layaly_alkadr_screen';
@@ -25,6 +30,7 @@ class _A3malLayalyAlkadrState extends State<A3malLayalyAlkadr> {
         searchProvider.setItems(LayaliKadr.A3malLayalyAlkadrList);
       },
     );
+    context.read<A3malLaylatAlkaderCubit>().getA3malLaylatAlkader();
   }
 
   Future<bool> _onWillPop() async {
@@ -73,24 +79,58 @@ class _A3malLayalyAlkadrState extends State<A3malLayalyAlkadr> {
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return LineFromIndex(
-                    text: item['title']!,
-                    route: item['route']!,
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<A3malLaylatAlkaderCubit, A3malLaylatAlkaderState>(
+          builder: (context, state) {
+            if (state is A3malLaylatAlkaderLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is A3malLaylatAlkaderLoaded) {
+              final a3malLaylatAlkader = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                Mawane3Alkoboul.screenRoute,
+                SawabAl2i7ya2.screenRoute,
+                Al2iste3dad.screenRoute
+              ];
+              for (var item in a3malLaylatAlkader) {
+                if (item.title == "اعمال ليلة القدر") {
+                  for (var subItem in item.index) {
+                    allTitles.add({
+                      'title': subItem.title,
+                      'route': allRoutes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
+                    });
+                  }
+                }
+              }
+
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      // final item = searchProvider.filteredItems[index];
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return LineFromIndex(
+                        text: title,
+                        route: route,
+                      );
+                    },
+                  ),
+                ),
+              );
+            } else if (state is A3malLaylatAlkaderError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
