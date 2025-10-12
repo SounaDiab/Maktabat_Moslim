@@ -117,7 +117,7 @@ class _AlmasjedAlsharifState extends State<AlmasjedAlsharif> {
           pushNext: ZiyaratAlnowabAl2arba3a.screenRoute,
           pushBack: Ziyarat2o5raLmohamadAltakiAlsaniya.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المسجد الشريف.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

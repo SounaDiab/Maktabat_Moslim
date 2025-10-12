@@ -116,7 +116,7 @@ class _Ziyarat3ashoraaState extends State<Ziyarat3ashoraa> {
           pushNext: FiFadlZiyaratAlhussein.screenRoute,
           pushBack: FadlTorbatAlhussein.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة عاشوراء.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

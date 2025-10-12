@@ -116,7 +116,7 @@ class _AlziyaratAl2o5raState extends State<AlziyaratAl2o5ra> {
           pushNext: FadlTorbatAlhussein.screenRoute,
           pushBack: AlsaminaAlmo5asasa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة الاخرى.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

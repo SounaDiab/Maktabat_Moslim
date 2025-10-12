@@ -122,7 +122,7 @@ class _AlziyaratAlmotlakaAlsalisaState
           pushNext: AlziyaratAlmotlakaAlrabi3a.screenRoute,
           pushBack: AlziyaratAlmotlakaAlsaniya.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة المطلقة الثالثة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

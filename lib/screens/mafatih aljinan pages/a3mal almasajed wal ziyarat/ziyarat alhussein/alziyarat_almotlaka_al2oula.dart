@@ -120,7 +120,7 @@ class _AlziyaratAlmotlakaAl2oulaState extends State<AlziyaratAlmotlakaAl2oula> {
           pushNext: AlziyaratAlmotlakaAlsaniya.screenRoute,
           pushBack: Fima3alaAlza2irMora3atoh.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الزيارة الطلقة الاولى.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

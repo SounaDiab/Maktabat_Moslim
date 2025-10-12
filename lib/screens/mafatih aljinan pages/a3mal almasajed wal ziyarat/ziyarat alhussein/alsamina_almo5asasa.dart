@@ -119,7 +119,7 @@ class _AlsaminaAlmo5asasaState extends State<AlsaminaAlmo5asasa> {
           pushNext: AlziyaratAl2o5ra.screenRoute,
           pushBack: Alsadbi3aAlmo5asasaAlsania.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الثامن المخصصة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

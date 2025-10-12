@@ -121,7 +121,7 @@ class _Ziyarat2o5raLmohamadAltakiState
           pushNext: Ziyarat2o5raLmohamadAltakiAlsaniya.screenRoute,
           pushBack: Ziyarat2o5raLmousa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة اخرى لمحمد التقي.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -116,7 +116,7 @@ class _FiFadlZiyaratihiState extends State<FiFadlZiyaratihi> {
           pushNext: FiKaifiyatZiyaratihi.screenRoute,
           pushBack: AlsalisaMenAlziyarat.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل زيارته.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

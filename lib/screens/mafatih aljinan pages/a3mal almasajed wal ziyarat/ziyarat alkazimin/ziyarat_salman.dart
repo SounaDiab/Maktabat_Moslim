@@ -113,7 +113,7 @@ class _ZiyaratSalmanState extends State<ZiyaratSalman> {
           pushNext: FiFadlZiyaratLkazimin.screenRoute,
           pushBack: ZiyaratAlnowabAl2arba3a.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة سلمان.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

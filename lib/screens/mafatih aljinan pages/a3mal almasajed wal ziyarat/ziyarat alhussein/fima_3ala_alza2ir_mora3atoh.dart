@@ -102,7 +102,7 @@ class _Fima3alaAlza2irMora3atohState extends State<Fima3alaAlza2irMora3atoh> {
         pushNext: AlziyaratAlmotlakaAl2oula.screenRoute,
         pushBack: FiFadlZiyaratAlhussein.screenRoute,
         soud:
-            'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ماعلى الزائر مراعاته.mp3',
+            '',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -119,7 +119,7 @@ class _ZiyaratAlimamAlridaAlsaniyaState
           pushNext: ZiyaratAlimamAlridaAl2oula.screenRoute,
           pushBack: ZiyaratAlimamAlridaAl2oula.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الامام الرضا الثانية.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

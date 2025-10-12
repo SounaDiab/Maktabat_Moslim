@@ -117,7 +117,7 @@ class _FiFadlZiyaratAlhusseinState extends State<FiFadlZiyaratAlhussein> {
           pushNext: Fima3alaAlza2irMora3atoh.screenRoute,
           pushBack: Ziyarat3ashoraa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل زيارة الحسين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

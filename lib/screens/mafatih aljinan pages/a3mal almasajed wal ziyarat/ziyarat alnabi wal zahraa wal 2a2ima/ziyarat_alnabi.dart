@@ -114,7 +114,7 @@ class _ZiyaratAlnabiState extends State<ZiyaratAlnabi> {
           pushNext: Ziyarat2a2imatBelbaki3.screenRoute,
           pushBack: ZiyaratAlnabiWalzahraaWal2a2imaBelbaki3.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة النبي.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

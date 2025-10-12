@@ -125,7 +125,7 @@ class _ZiyaratAlnabiWalzahraaWal2a2imaBelbaki3State
           pushNext: ZiyaratAlnabi.screenRoute,
           pushBack: Alwada3.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة النبي والزهراء والأئمة بالبقيع.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

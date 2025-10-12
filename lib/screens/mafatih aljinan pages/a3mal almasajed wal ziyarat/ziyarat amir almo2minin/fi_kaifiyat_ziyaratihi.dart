@@ -117,7 +117,7 @@ class _FiKaifiyatZiyaratihiState extends State<FiKaifiyatZiyaratihi> {
           pushNext: Wada3Al2amir.screenRoute,
           pushBack: FiFadlZiyaratihi.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في كيفية زيارته.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

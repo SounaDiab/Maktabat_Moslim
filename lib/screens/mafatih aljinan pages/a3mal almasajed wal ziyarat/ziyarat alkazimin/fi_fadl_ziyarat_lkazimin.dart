@@ -118,7 +118,7 @@ class _FiFadlZiyaratLkaziminState extends State<FiFadlZiyaratLkazimin> {
           pushNext: Ziyarat2o5raLmousa.screenRoute,
           pushBack: ZiyaratSalman.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل زيارة الكاظم.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -122,7 +122,7 @@ class _Alsadbi3aAlmo5asasaAlsaniaState
           pushNext: AlsaminaAlmo5asasa.screenRoute,
           pushBack: Alsadbi3aAlmo5asasa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/السابعة المخصصة الثانية.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

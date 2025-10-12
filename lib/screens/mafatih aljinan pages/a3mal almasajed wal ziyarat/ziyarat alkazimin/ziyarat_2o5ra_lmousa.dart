@@ -115,7 +115,7 @@ class _Ziyarat2o5raLmousaState extends State<Ziyarat2o5raLmousa> {
           pushNext: Ziyarat2o5raLmohamadAltaki.screenRoute,
           pushBack: FiFadlZiyaratLkazimin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة اخرى لموسى.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
