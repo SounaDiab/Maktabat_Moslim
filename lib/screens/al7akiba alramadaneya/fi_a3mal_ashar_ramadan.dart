@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/al7akiba_alramadaneya_home_screen.dart';
-import 'package:maktabat_almoslim/widgets/search_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
+import '../al7akiba_alramadaneya_home_screen.dart';
+import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 import '../../Util/items.dart';
 import '../../widgets/line_from_index.dart';
 import '../search_provider.dart';
+import 'fi a3mal ashar ramadan/dou3a2_abi_7amza_alsamali.dart';
+import 'fi a3mal ashar ramadan/dou3a2_alsa7ar.dart';
+import 'fi a3mal ashar ramadan/fi_2a3mal_2as7ar_ramadan.dart';
 
 class FiA3malAsharRamadan extends StatefulWidget {
   static String screenRoute = 'fi_a3mal_ashar_ramadan_screen';
@@ -25,6 +30,7 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
         searchProvider.setItems(Al7akibaAlramadaneya.fiA3malAsharRamadanList);
       },
     );
+    context.read<AlhakibaAlramadaneyaCubit>().getAlhakibaAlramadaneya();
   }
 
   Future<bool> _onWillPop() async {
@@ -73,24 +79,58 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return LineFromIndex(
-                    text: item['title']!,
-                    route: item['route']!,
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<AlhakibaAlramadaneyaCubit, AlhakibaAlramadaneyaState>(
+          builder: (context, state) {
+            if (state is AlhakibaAlramadaneyaLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is AlhakibaAlramadaneyaLoaded) {
+              final alhakibaAlramadaneya = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                Fi2a3mal2as7arRamadan.screenRoute,
+                Dou3a2Abi7amzaAlsamali.screenRoute,
+                Dou3a2Alsa7ar.screenRoute,
+              ];
+              for (var item in alhakibaAlramadaneya) {
+                if (item.title == 'في اعمال اسحار رمضان') {
+                  for (var subItem in item.index) {
+                    allTitles.add({
+                      'title': subItem.title,
+                      'route': allRoutes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
+                    });
+                  }
+                }
+              }
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: allTitles.length,
+                      itemBuilder: (context, i) {
+                        final title = allTitles[i]['title'];
+                        final route = allTitles[i]['route'];
+
+                        return ListTile(
+                          title: LineFromIndex(
+                            text: title,
+                            route: route,
+                          ),
+                        );
+                      }),
+                ),
+              );
+            } else if (state is AlhakibaAlramadaneyaError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }

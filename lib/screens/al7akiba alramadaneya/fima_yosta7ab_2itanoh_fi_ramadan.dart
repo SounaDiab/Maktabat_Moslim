@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/screens/al7akiba_alramadaneya_home_screen.dart';
-import 'package:maktabat_almoslim/widgets/search_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
+import '../al7akiba_alramadaneya_home_screen.dart';
+import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 import '../../Util/items.dart';
 import '../../widgets/line_from_index.dart';
 import '../search_provider.dart';
+import 'fi ma yosta7ab 2itanoh fi ramadan/dou3a2_al2iftita7.dart';
+import 'fi ma yosta7ab 2itanoh fi ramadan/ma_yosta7ab_2itanoh_fi_layali_ramadan.dart';
 
 class FimaYosta7ab2itanohFiRamadan extends StatefulWidget {
   static String screenRoute = 'fima_yosta7ab_2itanoh_fi_ramadan_screen';
@@ -15,7 +19,8 @@ class FimaYosta7ab2itanohFiRamadan extends StatefulWidget {
       _FimaYosta7ab2itanohFiRamadanState();
 }
 
-class _FimaYosta7ab2itanohFiRamadanState extends State<FimaYosta7ab2itanohFiRamadan> {
+class _FimaYosta7ab2itanohFiRamadanState
+    extends State<FimaYosta7ab2itanohFiRamadan> {
   @override
   void initState() {
     super.initState();
@@ -27,6 +32,7 @@ class _FimaYosta7ab2itanohFiRamadanState extends State<FimaYosta7ab2itanohFiRama
             .setItems(Al7akibaAlramadaneya.fimaYosta7ab2itanohFiRamadanList);
       },
     );
+    context.read<AlhakibaAlramadaneyaCubit>().getAlhakibaAlramadaneya();
   }
 
   Future<bool> _onWillPop() async {
@@ -75,24 +81,57 @@ class _FimaYosta7ab2itanohFiRamadanState extends State<FimaYosta7ab2itanohFiRama
             ),
           ],
         ),
-        body:
-            Consumer<SearchProvider>(builder: (context, searchProvider, child) {
-          return SafeArea(
-            child: Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchProvider.filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = searchProvider.filteredItems[index];
-                  return LineFromIndex(
-                    text: item['title']!,
-                    route: item['route']!,
-                  );
-                },
-              ),
-            ),
-          );
-        }),
+        body: BlocBuilder<AlhakibaAlramadaneyaCubit, AlhakibaAlramadaneyaState>(
+          builder: (context, state) {
+            if (state is AlhakibaAlramadaneyaLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is AlhakibaAlramadaneyaLoaded) {
+              final alhakibaAlramadaneya = state.items;
+              final allTitles = <Map<String, dynamic>>[];
+              final allRoutes = [
+                MaYosta7ab2itanohFiLayaliRamadan.screenRoute,
+                Dou3a2Al2iftita7.screenRoute,
+              ];
+              for (var item in alhakibaAlramadaneya) {
+                if (item.title == 'فيما يستحب ايتانه في رمضان') {
+                  for (var subItem in item.index) {
+                    allTitles.add({
+                      'title': subItem.title,
+                      'route': allRoutes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
+                    });
+                  }
+                }
+              }
+              return SafeArea(
+                child: Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: allTitles.length,
+                      itemBuilder: (context, i) {
+                        final title = allTitles[i]['title'];
+                        final route = allTitles[i]['route'];
+
+                        return ListTile(
+                          title: LineFromIndex(
+                            text: title,
+                            route: route,
+                          ),
+                        );
+                      }),
+                ),
+              );
+            } else if (state is AlhakibaAlramadaneyaError) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
