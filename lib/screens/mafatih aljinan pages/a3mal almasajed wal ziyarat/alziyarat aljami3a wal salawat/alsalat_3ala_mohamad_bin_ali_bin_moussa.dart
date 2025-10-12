@@ -122,7 +122,7 @@ class _Alsalat3alaMohamadBinAliBinMoussaState
           pushNext: Alsalat3alaAliBinMohamad.screenRoute,
           pushBack: Alsalat3alaAliBinMoussa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على محمد بن علي بن موسى.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

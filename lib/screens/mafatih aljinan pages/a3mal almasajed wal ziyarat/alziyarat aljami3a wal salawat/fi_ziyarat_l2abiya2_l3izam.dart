@@ -119,7 +119,7 @@ class _FiZiyaratL2abiya2L3izamState extends State<FiZiyaratL2abiya2L3izam> {
           pushNext: MaYozarKol2imam.screenRoute,
           pushBack: FiZiyaratKobourLmo2minin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على في زيارة الانبياء العظيمة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -116,7 +116,7 @@ class _A3malBaitAltastState extends State<A3malBaitAltast> {
           pushNext: ZikrAlsalatWaldou3aaFiWasatAlmasjid.screenRoute,
           pushBack: A3malDikatAlkada2WbaitAltast.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال بيت الطست.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

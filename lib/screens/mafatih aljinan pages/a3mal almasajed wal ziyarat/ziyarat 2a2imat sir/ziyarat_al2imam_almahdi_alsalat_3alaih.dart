@@ -121,7 +121,7 @@ class _ZiyaratAl2imamAlmahdiAlsalat3alaihState
           pushNext: ZiyaratAl2imamAlmahdiAl2o5raAlsalisa.screenRoute,
           pushBack: ZiyaratAl2imamAlmahdiAl2o5raAlsaniya.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الامام المهدي - الصلاة عليها.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -118,7 +118,7 @@ class _A3malBabAlfarajState extends State<A3malBabAlfaraj> {
           pushNext: SifatSalat.screenRoute,
           pushBack: AamalAl2ostwanaAlsalisa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال باب الفرج.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

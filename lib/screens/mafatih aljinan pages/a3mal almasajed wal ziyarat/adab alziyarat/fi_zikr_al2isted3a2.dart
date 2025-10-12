@@ -117,7 +117,7 @@ class _FiZikrAl2isted3a2State extends State<FiZikrAl2isted3a2> {
           pushNext: FiAdabAlziyarat.screenRoute,
           pushBack: FiAdabAlziyarat.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ذكر الاستدعاء.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

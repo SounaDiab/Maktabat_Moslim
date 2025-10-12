@@ -116,7 +116,7 @@ class _SalatJa3farAltayarState extends State<SalatJa3farAltayar> {
           pushNext: ZiyaratAlsayidaZainab.screenRoute,
           pushBack: ZiyaratAlna7iyaAlmokadasa.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على جعفر الطيار.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

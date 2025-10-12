@@ -116,7 +116,7 @@ class _SifatSalatLil7ajaState extends State<SifatSalatLil7aja> {
           pushNext: A3malMi7rabAmirAlmo2minin.screenRoute,
           pushBack: SifatSalat.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صفة صلاة للحاجة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

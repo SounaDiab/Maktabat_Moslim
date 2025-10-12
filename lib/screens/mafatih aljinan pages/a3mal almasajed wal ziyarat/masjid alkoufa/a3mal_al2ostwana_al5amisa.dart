@@ -118,7 +118,7 @@ class _A3malAl2ostwanaAl5amisaState extends State<A3malAl2ostwanaAl5amisa> {
           pushNext: AamalAl2ostwanaAlsalisa.screenRoute,
           pushBack: A3malAl2ostwanaAlsabi3a.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال الاسطوانة الخامسة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -117,7 +117,7 @@ class _MounajatAmirAlmo2mininState extends State<MounajatAmirAlmo2minin> {
           pushNext: ZiyaratMouslimBen3akil.screenRoute,
           pushBack: A3malMi7rabAmirAlmo2minin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/مناجاة امير المؤمنين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

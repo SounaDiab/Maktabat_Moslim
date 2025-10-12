@@ -118,7 +118,7 @@ class _AlmakamAl2awalState extends State<AlmakamAl2awal> {
         pushNext: ZiyaratAlimamAl3askari.screenRoute,
         pushBack: ZiyaratAl2imamAlmahdiAl2o5raAlsalisa.screenRoute,
         soud:
-            'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/المقام الاول.mp3',
+            '',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

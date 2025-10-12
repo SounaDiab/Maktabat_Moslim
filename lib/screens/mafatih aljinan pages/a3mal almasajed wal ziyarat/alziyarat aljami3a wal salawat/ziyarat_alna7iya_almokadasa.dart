@@ -118,7 +118,7 @@ class _ZiyaratAlna7iyaAlmokadasaState extends State<ZiyaratAlna7iyaAlmokadasa> {
           pushNext: SalatJa3farAltayar.screenRoute,
           pushBack: Ziyarat2alYasin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الناحية المقدسة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

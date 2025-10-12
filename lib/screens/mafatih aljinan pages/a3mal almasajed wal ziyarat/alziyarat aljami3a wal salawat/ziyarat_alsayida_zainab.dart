@@ -118,7 +118,7 @@ class _ZiyaratAlsayidaZainabState extends State<ZiyaratAlsayidaZainab> {
           pushNext: HadisAlkisa2.screenRoute,
           pushBack: SalatJa3farAltayar.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة السيدة زينب.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

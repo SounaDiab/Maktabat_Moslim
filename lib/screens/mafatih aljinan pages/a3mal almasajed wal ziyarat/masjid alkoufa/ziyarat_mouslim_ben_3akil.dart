@@ -119,7 +119,7 @@ class _ZiyaratMouslimBen3akilState extends State<ZiyaratMouslimBen3akil> {
           pushNext: ZiyaratHaniBen3orwa.screenRoute,
           pushBack: MounajatAmirAlmo2minin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة مسلم بن عقيل.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

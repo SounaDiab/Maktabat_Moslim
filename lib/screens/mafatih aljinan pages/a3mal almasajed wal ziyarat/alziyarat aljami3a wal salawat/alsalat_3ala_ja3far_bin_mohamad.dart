@@ -121,7 +121,7 @@ class _Alsalat3alaJa3farBinMohamadState
           pushNext: Alsalat3alaMoussaBinJa3far.screenRoute,
           pushBack: Alsalat3alaMohamadBinAli.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على جعفر بن محمد.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

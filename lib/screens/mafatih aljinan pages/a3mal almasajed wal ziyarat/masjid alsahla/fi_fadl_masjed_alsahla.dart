@@ -120,7 +120,7 @@ class _FiFadlMasjedAlsahlaState extends State<FiFadlMasjedAlsahla> {
           pushNext: AlsalatWaldouaaFiMasjedZaid.screenRoute,
           pushBack: A3malMasjedAlsahla.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في فضل مسجد السهلة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

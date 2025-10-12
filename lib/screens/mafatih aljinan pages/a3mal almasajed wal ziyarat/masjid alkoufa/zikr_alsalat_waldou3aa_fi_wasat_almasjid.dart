@@ -120,7 +120,7 @@ class _ZikrAlsalatWaldou3aaFiWasatAlmasjidState
           pushNext: A3malAl2ostwanaAlsabi3a.screenRoute,
           pushBack: A3malBaitAltast.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ذكر الصلاة والدعاء في وسط المسجد.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

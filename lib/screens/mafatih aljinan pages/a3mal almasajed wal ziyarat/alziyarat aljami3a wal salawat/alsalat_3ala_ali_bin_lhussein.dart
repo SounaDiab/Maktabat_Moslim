@@ -120,7 +120,7 @@ class _Alsalat3alaAliBinLhusseinState extends State<Alsalat3alaAliBinLhussein> {
           pushNext: Alsalat3alaMohamadBinAli.screenRoute,
           pushBack: Alsalat3alaLhassanWalhussein.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على علي بن الحسين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

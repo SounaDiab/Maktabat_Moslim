@@ -119,7 +119,7 @@ class _Alsalat3alaWaleyL2amerState extends State<Alsalat3alaWaleyL2amer> {
           pushNext: Ziyarat2alYasin.screenRoute,
           pushBack: Alsalat3alaLhassanAl3askari.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على ولي الامر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

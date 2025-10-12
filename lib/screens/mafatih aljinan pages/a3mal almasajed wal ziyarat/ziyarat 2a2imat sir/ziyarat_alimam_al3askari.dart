@@ -117,7 +117,7 @@ class _ZiyaratAlimamAl3askariState extends State<ZiyaratAlimamAl3askari> {
           pushNext: AlmakamAlsani.screenRoute,
           pushBack: AlmakamAl2awal.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الامام العسكري.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

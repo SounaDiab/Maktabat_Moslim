@@ -116,7 +116,7 @@ class _A3malJami3AlkoufaState extends State<A3malJami3Alkoufa> {
           pushNext: A3malDikatAlkada2WbaitAltast.screenRoute,
           pushBack: FiFadlAlkoufaWamasjidouha.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال جامع الكوفة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

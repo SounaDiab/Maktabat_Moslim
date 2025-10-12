@@ -116,7 +116,7 @@ class _Ziyarat2alYasinState extends State<Ziyarat2alYasin> {
           pushNext: ZiyaratAlna7iyaAlmokadasa.screenRoute,
           pushBack: Alsalat3alaWaleyL2amer.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة آل ياسين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

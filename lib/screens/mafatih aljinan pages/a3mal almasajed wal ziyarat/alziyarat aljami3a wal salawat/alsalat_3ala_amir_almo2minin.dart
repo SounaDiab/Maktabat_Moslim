@@ -119,7 +119,7 @@ class _Alsalat3alaAmirAlmo2mininState extends State<Alsalat3alaAmirAlmo2minin> {
           pushNext: Alsalat3alaAlsayidaFatima.screenRoute,
           pushBack: Alsalat3alaAlnabi.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة على أمير المؤمنين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

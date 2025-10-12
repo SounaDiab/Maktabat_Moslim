@@ -119,7 +119,7 @@ class _AakibZiyaratAl2a2imaState extends State<AakibZiyaratAl2a2ima> {
           pushNext: Alsalat3alaAlnabi.screenRoute,
           pushBack: MaYozarKol2imam.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/في ما يدعى به عقيب زيارة الأئمة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

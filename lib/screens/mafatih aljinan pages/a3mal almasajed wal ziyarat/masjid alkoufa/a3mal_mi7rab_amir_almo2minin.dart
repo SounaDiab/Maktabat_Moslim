@@ -120,7 +120,7 @@ class _A3malMi7rabAmirAlmo2mininState extends State<A3malMi7rabAmirAlmo2minin> {
           pushNext: MounajatAmirAlmo2minin.screenRoute,
           pushBack: SifatSalatLil7aja.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال محراب امير المؤمنين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
