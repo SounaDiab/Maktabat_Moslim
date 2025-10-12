@@ -120,9 +120,9 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
       "تموز",
       "آب",
       "أيلول",
-      "تشرين الأول",
+      "تشرين الاول",
       "تشرين الثاني",
-      "كانون الأول"
+      "كانون الاول"
     ];
     String weekday = DateFormat('EEEE', 'ar').format(date);
     int day = date.day;
@@ -355,6 +355,7 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
                               style: TextStyle(
                                 fontSize: isTablet ? 30 : 16,
                                 fontFamily: 'Tajawal',
+                                color: Colors.black,
                               ),
                             ),
                             trailing: Text(
@@ -363,6 +364,7 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
                                 fontSize: isTablet ? 30 : 16,
                                 fontFamily: 'Tajawal',
                                 fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
                           ),

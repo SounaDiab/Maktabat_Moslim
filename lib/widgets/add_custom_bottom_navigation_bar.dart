@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
+import 'cache_manager_widget.dart';
 import 'custom_bottom_navigation_bar.dart';
 
 class AddCustomBottomNavigationBar extends StatefulWidget {
@@ -57,9 +58,15 @@ class _AddCustomBottomNavigationBarState
     if (isPlaying) {
       await player.pause();
     } else {
-      await player.setSource(UrlSource('${widget.soud}'));
-      await player.resume();
-      print('audio downloaded');
+      try {
+        final file =
+            await CacheManagerWidget.instance.getSingleFile(widget.soud);
+        await player.setSource(DeviceFileSource(file.path));
+        await player.resume();
+        print('Audio Downloaded');
+      } catch (e) {
+        print(e);
+      }
     }
     setState(() {
       isPlaying = !isPlaying;
@@ -70,6 +77,32 @@ class _AddCustomBottomNavigationBarState
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final phoneFontSize = [
+      10.0,
+      12.0,
+      14.0,
+      16.0,
+      18.0,
+      20.0,
+      22.0,
+      24.0,
+      26.0,
+      28.0,
+      30.0
+    ];
+    final tabletFontSize = [
+      30.0,
+      32.0,
+      34.0,
+      36.0,
+      38.0,
+      40.0,
+      42.0,
+      44.0,
+      46.0,
+      48.0,
+      50.0
+    ];
 
     void _handleFontSizeChange(double fontSize) {
       setState(() {
@@ -89,33 +122,7 @@ class _AddCustomBottomNavigationBarState
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // قائمة أحجام الخط
-                    ...(isTablet
-                            ? [
-                                30.0,
-                                32.0,
-                                34.0,
-                                36.0,
-                                38.0,
-                                40.0,
-                                42.0,
-                                44.0,
-                                46.0,
-                                48.0,
-                                50.0,
-                              ]
-                            : [
-                                10.0,
-                                12.0,
-                                14.0,
-                                16.0,
-                                18.0,
-                                20.0,
-                                22.0,
-                                24.0,
-                                26.0,
-                                28.0,
-                                30.0,
-                              ])
+                    ...(isTablet ? tabletFontSize : phoneFontSize)
                         .map((fontSize) => ListTile(
                               title: Text(
                                 '${fontSize.toInt()}',

@@ -16,12 +16,13 @@ class She3er extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 40),
       child: Center(
-        child: Text(
+        child: SelectableText(
           textAlign: TextAlign.center,
           subtitle,
           style: TextStyle(
             fontSize: size,
             fontWeight: weight,
+            fontFamily: 'UthmanicHafs',
           ),
         ),
       ),
