@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ba3d_alsalawat_almandouba.dart';
@@ -59,7 +59,6 @@ class _SalatLi7adisAlnafsState extends State<SalatLi7adisAlnafs> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _SalatLi7adisAlnafsState extends State<SalatLi7adisAlnafs> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,66 +102,21 @@ class _SalatLi7adisAlnafsState extends State<SalatLi7adisAlnafs> {
               },
             ),
           ],
-          title: Text(
-            'صلاة لحديث النفس',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة لحديث النفس'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'عن الصادق (عليه السلام) قال: ليس من مؤمن يمر عليه أربعون صباحا إِلاّ حدّث نفسه فإذا عرض له ذلك فليصلّ ركعتين وليستعذ بالله من ذلك. وعنه (عليه السلام) قال: شكا اَّدم (عليه السلام) إلى الله عزَّ وجلَّ حديث النفس فهبط عليه جبرائيل وقال: قل: لا حَوْلَ وَلا قوَةَ إِلاّ بِاللّهِ. فقاله آدم (عليه السلام) فزال عنه ذلك ثم قال (عليه السلام) الاصل هو: لا حَوْلَ وَلا قوَةَ إِلاّ بِاللّهِ. وعن الباقر (عليه السلام) أنّ رجلاً شكا إلى رسول الله (صلّى الله عليه وآله وسلم) الوسوسة وحديث النفس ودينا قد أثقله، فقال له النبي (صلّى الله عليه وآله وسلم) قل: تَوَكَّلْتُ عَلى الحَيِّ الَّذِي لايَموتُ وَالحَمْدُ لله الَّذِي لَمْ يَتَّخِذْ وَلَداً وَلَمْ يَكُنْ لَهُ شَريكٌ في المُلْكِ وَلَمْ يَكُنْ لَهُ وَليُّ مِنَ الذُّلِّ وَكَبِّرْهُ تَكْبيراً. فعاد إليه بعد مدّة فقال: يارسول الله (صلّى الله عليه وآله وسلم) إن الله قد أزال الوسوسة عنّي وأدّى ديني وأغناني من الفقر.\n\n'
-                      'وروي أيضا: قل لدفع وساوس الشيطان إذا عرض لك شك: هوَ الأول وَالاخِرُ وَالظّاهِرُ وَالباطِنُ وَهوَ بِكُلِّ شَيٍ عَليمٌ.\n\n'
-                      'ولوساوس الشيطان أيضاً عن الصادق (عليه السلام) قال: إمسح بيدك صدرك وقل: بِسْمِ الله وَبِالله مُحَمَّدٌ رَسولِ الله ، وَلا حَوْلَ وَلا قوَةَ إِلاّ بِالله العَليّ العَظيمِ، اللَّهُمَّ امْسَحْ عَنِّي ماأحْذَرُ. ثم امسح بطنك وقله ثلاث مرات فتزول إن شاء اللّه.\n\n'
-                      'وينفع لدفع الوساوس أيضاً غسل الرأس بالسدر وينفع السواك وأكل الرمان والشرب من الماء الماطر في نيسان.\n\n'
-                      'وصوم ثلاثة أيام من كل شهر: الخميس الأول والاخير من الشهر ويوم الاربعاء وسط الشهر. ويقول أيضا: أعوذُ بِالله القَوي مِنَ الشَّيْطانِ الغَويّ، وَأعوذُ بِمُحَمَّدٍ الرَّضي مِنْ شرِّ ما قَدَّرَ وَقَضى وَأعوذُ بِإلهِ النّاسَ مِنْ شَرِّ الجِنَّةِ وَالنّاسِ أجْمَعينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة لحديث النفس',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAl2isti5araZatAlrka3.screenRoute,
           pushBack: SalatAlja2i3.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة لحديث النفس.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة لحديث النفس.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ba3d_alsalawat_almandouba.dart';
@@ -60,7 +60,6 @@ class _SalatLi8ofranAlzounoubState extends State<SalatLi8ofranAlzounoub> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +81,7 @@ class _SalatLi8ofranAlzounoubState extends State<SalatLi8ofranAlzounoub> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -92,84 +91,33 @@ class _SalatLi8ofranAlzounoubState extends State<SalatLi8ofranAlzounoub> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الصلاة لغفران الذنوب',
+                      .addFavorite('صلاة لغفران الذنوب',
                           SalatLi8ofranAlzounoub.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الصلاة لغفران الذنوب',
+                          'صلاة لغفران الذنوب',
                           SalatLi8ofranAlzounoub.screenRoute,
                           SalatLi8ofranAlzounoub.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الصلاة لغفران الذنوب',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة لغفران الذنوب'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'يصلي ركعتين يقرأ في كل ركعة منهما قل هو الله أحد ستين مرة فاذا فرغ من الصلاة غفرت ذنوبه.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'صلاة أخرى',
-                  subtitle:
-                      'قال الطوسي في (المصباح) في خلال أعمال يوم الجمعة: روي عن عبد الله بن مسعود قال: قال النبي (صلّى الله عليه وآله وسلم) من صلى يوم الجمعة بعد العصر ركعتين يقرأ في الأولى الفاتحة وآية الكرسي وقل أعوذ برب الفلق خمسا وعشرين مرة وفي الثانية الفاتحة وقل هو الله أحد وقل أعوذ برب الناس خمسا وعشرين مرة فإذا فرغ من الصلاة قال خمساً وعشرين مرة: لاحَوْلَ وَلاقوَةَ إِلاّ بِالله العَليّ العَظيمِ لم يخرج من الدنيا إِلاّ وقد أراه الله تعالى الجنّة في منامه وأراه مكانه فيها.\n\n'
-                      'أقول: روى السيد ابن طاووس في الفصل الثالث والثلاثين من (جمال الاسبوع) صلاة لغفران الذنوب وقال في شأنها إن هذه صلاة جليلة القدر عظيمة الشأن يعرفها حملة الاسرار الربوبية فإيّاك أن تتهاون فيها فمن رغب فيها فليطلبها من الكتاب المذكور.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة لغفران الذنوب',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAlwasiya.screenRoute,
           pushBack: SalatLilzaka2WjoudatAlhofez.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة لغفران الذنوب.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة لغفران الذنوب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

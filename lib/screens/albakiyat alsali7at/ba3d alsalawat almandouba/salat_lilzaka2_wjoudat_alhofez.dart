@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ba3d_alsalawat_almandouba.dart';
@@ -16,13 +16,15 @@ class SalatLilzaka2WjoudatAlhofez extends StatefulWidget {
   const SalatLilzaka2WjoudatAlhofez({super.key});
 
   @override
-  State<SalatLilzaka2WjoudatAlhofez> createState() => _SalatLilzaka2WjoudatAlhofezState();
+  State<SalatLilzaka2WjoudatAlhofez> createState() =>
+      _SalatLilzaka2WjoudatAlhofezState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _SalatLilzaka2WjoudatAlhofezState extends State<SalatLilzaka2WjoudatAlhofez> {
+class _SalatLilzaka2WjoudatAlhofezState
+    extends State<SalatLilzaka2WjoudatAlhofez> {
   bool isIcon = true;
   @override
   void initState() {
@@ -41,7 +43,8 @@ class _SalatLilzaka2WjoudatAlhofezState extends State<SalatLilzaka2WjoudatAlhofe
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isFavorite_salat_lilzaka2_wjoudat_alhofez_screen', value);
+    await prefs.setBool(
+        'isFavorite_salat_lilzaka2_wjoudat_alhofez_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -60,7 +63,6 @@ class _SalatLilzaka2WjoudatAlhofezState extends State<SalatLilzaka2WjoudatAlhofe
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,7 +84,7 @@ class _SalatLilzaka2WjoudatAlhofezState extends State<SalatLilzaka2WjoudatAlhofe
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -92,74 +94,33 @@ class _SalatLilzaka2WjoudatAlhofezState extends State<SalatLilzaka2WjoudatAlhofe
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الصلاة للذكاء وجودة الحفظ‍',
+                      .addFavorite('صلاة للذكاء وجودة الحفظ',
                           SalatLilzaka2WjoudatAlhofez.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'الصلاة للذكاء وجودة الحفظ‍',
+                          'صلاة للذكاء وجودة الحفظ',
                           SalatLilzaka2WjoudatAlhofez.screenRoute,
                           SalatLilzaka2WjoudatAlhofez.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'الصلاة للذكاء وجودة الحفظ‍',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة للذكاء وجودة الحفظ'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي في كتاب (مكارم الاخلاق) عن الصادقين (عليهما السلام) تكتب بالزعفران في إناء نظيف الحمد وآية الكرسي وإنّا أنزلناه ويَّس والواقعة وسورة الحشر وتبارك وقل هو الله أحد والمعوذتين ثم تغسل ذلك بماء زمزم أو بماء المطر أو بماء نظيف ثم تلقي عليه مثقالين لبانا وعشرة مثاقيل سكراً وعشرة عسلاً ثم يوضع تحت السماء وتوضع على رأسه حديدة ثم تصلّي آخر الليل ركعتين تقرأ في كل منهما الحمد مرّة وقل هو الله أحد خمسين مرة فإذا فرغت من صلاتك شربت الماء فإنّه جيد مجرّب للحفظ إن شاء اللّه. وسيأتي في أواخر الباب السادس مايورث قوة الذاكرة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة للذكاء وجودة الحفظ',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatLi8ofranAlzounoub.screenRoute,
           pushBack: SalatAl5awfMenAlzalim.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة للذكاء وجودة الحفظ.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة للذكاء وجودة الحفظ.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

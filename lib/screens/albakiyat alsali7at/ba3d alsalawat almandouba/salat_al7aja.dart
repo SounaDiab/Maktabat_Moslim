@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ba3d_alsalawat_almandouba.dart';
@@ -59,7 +59,6 @@ class _SalatAl7ajaState extends State<SalatAl7aja> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _SalatAl7ajaState extends State<SalatAl7aja> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,64 +99,21 @@ class _SalatAl7ajaState extends State<SalatAl7aja> {
               },
             ),
           ],
-          title: Text(
-            'صلاة الحاجة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة الحاجة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'عن دعوات الراوندي أنّ زين العابدين (عليه السلام) مرّ برجل وهو قاعد على باب رجل فقال له مايقعدك على باب هذا المترف الجبار ؟ فقال : البلا.\n\n'
-                      'فقال : قم فأرشدك إلى باب خير من بابه وإلى ربٍّ خير منه فأخذ بيده حتى انتهى إلى المسجد، مسجد النبي (صلّى الله عليه وآله وسلم) ثم قال: استقبل القبلة فصلّ ركعتين ثم ارفع يديك إلى الله عزَّ وجلَّ فأثن عليه وصلِّ على رسوله ثم ادع باَّخر الحشر وست آيات من أول الحديد وبالايتين اللتين في اَّل عمران ثم سل الله فإنّك لاتسأل شَيْئاً إِلاّ أعطاك. قال الراوندي: لعل المراد بالايتين هما: قُلْ اللَّهُمَّ مالَكَ المُلْكِ أي إلى بِغَيْرِ حِسابٍ.\n\n'
-                      'وقال المجلسي لعلّهما آية : قل اللهم، وآية : شهد اللّه. واعلم أنّه قد روي عن أمير المؤمنين (عليه السلام) قال : إذا أراد أحدكم الحاجة فليبكر في طلبها يوم الخميس وليقرأ إذا خرج من منزله اَّخر سورة اَّل عمران وآية الكرسي وإنا أنزلناه في ليلة القدر وسورة الحمد ، فان فيها قضاء حوائج الدنيا والاخرة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة الحاجة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatLilmohemat.screenRoute,
           pushBack: SalatLiddainWlkifayatZolmAlsoltan.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الحاجة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الحاجة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

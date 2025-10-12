@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ba3d_alsalawat_almandouba.dart';
@@ -59,7 +59,6 @@ class _SalatLilmohematState extends State<SalatLilmohemat> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _SalatLilmohematState extends State<SalatLilmohemat> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -94,68 +93,29 @@ class _SalatLilmohematState extends State<SalatLilmohemat> {
                       .addFavorite('صلاة للمهمات', SalatLilmohemat.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('صلاة للمهمات', SalatLilmohemat.screenRoute,
+                      .removeFavorite(
+                          'صلاة للمهمات',
+                          SalatLilmohemat.screenRoute,
                           SalatLilmohemat.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'صلاة للمهمات',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة للمهمات'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'تصلي أربع ركعات تحسن قنوتها وأركانها تقرأ في الأولى الحمد مرة، وحسبنا الله ونعم الوكيل) سبعاً. وفي الثانية الحمد مرة وآية : ماشاءَ الله لا قوَةَ إِلاّ بِالله إنْ تَرَنِ أنا أقَلُّ مِنْكَ مالاً وَوَلَداً ) سبعاً، وفي الثالثة الحمد مرة وقوله تعالى : لا إلهَ إِلاّ أنْتَ سُبْحانَكَ إِنِّي كُنْتُ مِنَ الظّالِمينَ ) سبعاً. وفي الرابعة الحمد مرّة : وأفَوِّضُ أمري إِلى الله إنَّ الله بَصيرٌ بِالعِبادِ سبعا. ثم سل حاجتك.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة للمهمات',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAl3asra.screenRoute,
           pushBack: SalatAl7aja.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة للمهمات.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة للمهمات.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

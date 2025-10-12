@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ba3d_alsalawat_almandouba.dart';
@@ -59,7 +59,6 @@ class _SalatAlhadiyaState extends State<SalatAlhadiya> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _SalatAlhadiyaState extends State<SalatAlhadiya> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -91,75 +90,30 @@ class _SalatAlhadiyaState extends State<SalatAlhadiya> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite(
-                          'صلاة الهدية', SalatAlhadiya.screenRoute);
+                      .addFavorite('صلاة الهدية', SalatAlhadiya.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite(
-                          'صلاة الهدية',
-                          SalatAlhadiya.screenRoute,
+                      .removeFavorite('صلاة الهدية', SalatAlhadiya.screenRoute,
                           SalatAlhadiya.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'صلاة الهدية',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة الهدية'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي عن المعصومين (عليهم السلام) أنه يصلي العبد في يوم الجمعة ثماني ركعات، أى يسلم بين كل ركعتين: أربعا منها تهدى إلى رسول الله (صلّى الله عليه وآله وسلم) وأربعا تهدى إلى فاطمة (عليها السلام)، ويصلي يوم السبت أربع ركعات تهدى إلى أمير المؤمنين (صلوات الله وسلامه عليه)، ثم كذلك كل يوم تهدى إلى واحد من الأئمة المعصومين (عليهم السلام)، إلى يوم الخميس أربع ركعات تهدى إلى جعفر بن محمد الصادق (عليه السلام) ثم يوم الجمعة أيضاً ثماني ركعات: أربعا تهدى إلى رسول الله (صلّى الله عليه وآله وسلم)، وأربع ركعات تهدى إلى فاطمة (عليها السلام). ثم يوم السبت أربع ركعات تهدى إلى موسى بن جعفر (عليه السلام) ثمّ كذلك إلى يوم الخميس أربع ركعات تهدى إلى صاحب الزمان (صلوات الله وسلامه عليه).\n\n'
-                      'الدعاء بين كل ركعتين منها هو: اللَّهُمَّ أنْتَ السَّلامُ وَمِنْكَ السَّلامُ وإلَيْكَ يَعودُ السَّلامُ حَيِّنا رَبَّنا مِنْكَ بِالسَّلامِ، اللَّهُمَّ إنَّ هذِهِ الرَّكَعاتِ هَديَّةٌ مَنّا إِلى وَليّكَ (فُلان)، فصَلِّ عَلى مُحَمَّدٍ وَآل مُحَمَّدٍ وَبَلِّغْهُ إيّاها، وَأعْطِني أفْضَلَ أمَلي وَرَجائي فيكَ وَفي رَسولِكَ صَلَواتُ الله وَسَلامُهُ عَلَيْهِ. وفيه وتدعو بما أحببت وسم الإمام الذي تهدي إليه الصلاة عوضا عن كلمة فلان.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة الهدية',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatLailatAldafn.screenRoute,
           pushBack: SalatAl2a3rabi.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الهدية.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الهدية.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../ba3d_alsalawat_almandouba.dart';
@@ -59,7 +59,6 @@ class _SalatAl7ajaAl2oulaState extends State<SalatAl7ajaAl2oula> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _SalatAl7ajaAl2oulaState extends State<SalatAl7ajaAl2oula> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,68 +102,21 @@ class _SalatAl7ajaAl2oulaState extends State<SalatAl7ajaAl2oula> {
               },
             ),
           ],
-          title: Text(
-            'صلاة الحاجة الاولى',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'صلاة الحاجة الاولى'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'نقلاً عن (المكارم) : إذا انتصف الليل فاغتسل وصلِّ ركعتين واقرأ في كلتا الركعتين الحمد وخمسمائة مرة سورة التوحيد، وفي الثانية إذا فرغت من التوحيد فاقرأ اَّخر سورة الحشر وهو : لو أنزلنا هذا القرآن على جبل… إلى اَّخر السورة، وست اَّيات من أوّل سورة الحديد، وقل بعدها وأنت قائم كما كنت : إياك نعبد وإياك نستعين ألف مرة، ثم أتم الصلاة وأثن على الله تعالى فإن قضيت حاجتك فهي وإِلاّ فكررها ثانية، فإن لم تقض فأت بها ثالثة فإنّها تقضى إن شاء الله تعالى.\n\n'
-                      'صلاة أخرى روى ثقة الاسلام الكليني رض في الكافي بسند معتبر عن عبد الرحيم القصير قال: دخلت على الصادق (عليه السلام) فقلت : جعلت فداك إنّي اخترعت دعاء.\n\n'
-                      'قال : دعني من اختراعك إذا نزل بك أمر فافزع إلى رسول الله (صلّى الله عليه وآله وسلم) وصلِّ ركعتين تهديهما إلى رسول الله (صلّى الله عليه وآله وسلم) قلت كيف أصنع ؟ قال: تغتسل وتصلّي ركعتين تستفتح بهما افتتاح الفريضة وتشهد تشهُّد الفريضة فإذا فرغت من التشهد وسلّمت قلت: اللَّهُمَّ أنْتَ السَّلامُ وَمِنْكَ السَّلامُ وإلَيْكَ يَرجِعُ السَّلامُ، اللَّهُمَّ صَلِّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ وَبَلِّغْ روحَ مُحَمَّدٍ منِي السَّلامُ وَأرْواحِ الأَئِمَّةِ الصّادِقينَ سَلامي وَأرْدُدْ عَليّ مِنْهُمْ السَّلامُ وَالسَّلامُ عَلَيْهِمْ وَرَحْمَةُ الله وَبَرَكاتُهُ، اللَّهُمَّ إنَّ هاتَيْنِ الرِّكْعَتينِ هَدِّيةٌ مِني إِلى رِسولِ الله صَلّى الله عَلَيْهِ وَآلِهِ فَأثِبْني عَلَيْهِما ماأمَّلْتُ وَرَجَوْتُ فيكَ وَفي رَسولِكَ يأوليّ المؤمِنينَ ثم تخر ساجداً.\n\n'
-                      'وتقول أربعين مرة : ياحي ياقَيومُ ياحَيا لايَموتُ ياحَيا لا إلهَ إِلاّ أنْتَ ياذا الجَلالِ وَالاكْرامِ ياأرْحَمَ الرّاحِمينَ.\n\n'
-                      'ثم ضع خدّك الايمن فتقولها أربعين مرة ثم ضع خدّك الايسر فتقولها أربعين مرة ثم ترفع رأسك وتمدّ يدك وتقول أربعين مرة ثم تردّ يدك إلى رقبتك وتلوذ بسبابتك وتقول ذلك أربعين مرة ثم خذ لحيتك بيدك اليسرى وابك أو تباك وقل: يامُحَمَّدُ يارَسولَ الله أشْكو إِلى الله وَإلَيْكَ حاجَتي وإِلى أهْلِ بَيْتِكَ الرّاشِدينَ حاجَتي وَبِكُمْ أتَوَجَّهُ إِلى الله في حاجَتي.\n\n'
-                      'ثم تسجد وتقول: ياالله ياالله حتى ينقطع النفس ثم قل: صَلِّ عَلى مُحَمَّدٍ وَآل مُحَمَّدٍ وَافْعَلْ بي كَذا وَكَذا. قال الصادق (عليه السلام) فأنا الضامن على الله عزَّ وجلَّ أن لايبرح حتى تقضى حاجته.\n\n'
-                      'أقول : سنذكر في الباب الرابع دعوات كثيرة لقضاء حوائج الدنيا والاخرة. وقال الكفعمي في (البلد الامين): تكتب للحوائج الهامّة هذه الكلمات في رقعة فترمي بها في الماء: بِسْمِ الله الرَّحْمنِ الرَّحيمِ مِنَ العَبْدِ الذَّليلِ إِلى المَوْلى الجَليلِ: رَبِّ إِنِّي مَسَّني الضُّرُّ وَأنْتَ أرْحَمُ الرّاحِمينَ بِحَقِّ مُحَمَّدٍ وَآلِهِ صَلِّ عَلى مُحَمَّدٍ وَآلِهِ وَاكْشِفْ هَمّي وَفَرِّجْ عَنِّي غَمِّي بِرَحْمَتِكَ ياأرْحَمْ الرّاحِمينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'صلاة الحاجة الاولى',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatAl7ajaAlsaniya.screenRoute,
           pushBack: SalatLziyadatAlrizk.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الحاجة الاولى.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الحاجة الاولى.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
