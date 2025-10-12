@@ -116,7 +116,7 @@ class _HerzAlimamAliPageState extends State<HerzAlimamAliPage> {
           pushNext: HerzFatimatAlzahraaPage.screenRoute,
           pushBack: HerzRasoulAllahPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام علي بن أبي طالب.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

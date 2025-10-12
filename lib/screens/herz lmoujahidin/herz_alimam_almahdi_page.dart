@@ -116,7 +116,7 @@ class _HerzAlimamAlmahdiPageState extends State<HerzAlimamAlmahdiPage> {
           pushNext: HerzRasoulAllahPage.screenRoute,
           pushBack: HerzAlimamAlaaskariPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام المهدي.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

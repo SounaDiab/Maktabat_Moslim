@@ -123,7 +123,7 @@ class _DouaaLidafeaKaidAladowWsharohPageState
           pushNext: HerzMostakhrajMenKitabAllahPage.screenRoute,
           pushBack: DouaaIkhdaaRikabAljababiraPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لدفع كيد العدو وشره.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -124,7 +124,7 @@ class _DouaaLilihtijabAanBasarAlaadaaPageState
           pushNext: DouaaLilihtijabPage.screenRoute,
           pushBack: AyatAlikhtifaaMenAlaadowPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للإحتجاب عن بصر الأعداء.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

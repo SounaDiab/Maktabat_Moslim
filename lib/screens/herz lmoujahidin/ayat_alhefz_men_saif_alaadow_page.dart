@@ -122,7 +122,7 @@ class _AyatAlhefzMenSaifAlaadowPageState
           pushNext: HerzAlimamAljawadPage.screenRoute,
           pushBack: HerzLietikaaSilahAlaadowPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الحفظ من سيف العدو.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

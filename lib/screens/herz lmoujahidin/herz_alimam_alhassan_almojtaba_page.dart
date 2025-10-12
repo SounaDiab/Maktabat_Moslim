@@ -119,7 +119,7 @@ class _HerzAlimamAlhassanAlmojtabaPageState
           pushNext: HerzAlimamAlhusseinPage.screenRoute,
           pushBack: HerzFatimatAlzahraaPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام الحسن بن علي.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

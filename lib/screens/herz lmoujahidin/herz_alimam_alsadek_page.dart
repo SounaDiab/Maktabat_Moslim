@@ -116,7 +116,7 @@ class _HerzAlimamAlsadekPageState extends State<HerzAlimamAlsadekPage> {
           pushNext: HerzAlimamAlkazemPage.screenRoute,
           pushBack: HerzAlimamAlbakerPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام جعفر الصادق.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

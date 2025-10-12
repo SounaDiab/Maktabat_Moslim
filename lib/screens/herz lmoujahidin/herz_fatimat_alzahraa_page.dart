@@ -117,7 +117,7 @@ class _HerzFatimatAlzahraaPageState extends State<HerzFatimatAlzahraaPage> {
           pushNext: HerzAlimamAlhassanAlmojtabaPage.screenRoute,
           pushBack: HerzAlimamAliPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز فاطمة الزهراء.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

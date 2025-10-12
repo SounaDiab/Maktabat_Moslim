@@ -126,7 +126,7 @@ class _RokaatAljaybLilimamAlridaAalaihAlsalamPageState
           pushNext: AawzaYataawazBihaAalaAlaadaaPage.screenRoute,
           pushBack: AlhayakelSabeaPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/رقعة الجيب للإمام الرضا.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

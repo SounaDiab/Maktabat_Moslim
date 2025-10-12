@@ -121,7 +121,7 @@ class _AawzatAlnabiYawmWadiAlkoraPageState
           pushNext: AyatAlikhtifaaMenAlaadowPage.screenRoute,
           pushBack: HerzAlimamAljawadPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة النبي يوم وادي القرى.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

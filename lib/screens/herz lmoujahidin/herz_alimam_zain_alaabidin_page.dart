@@ -119,7 +119,7 @@ class _HerzAlimamZainAlaabidinPageState
           pushNext: HerzAlimamAlbakerPage.screenRoute,
           pushBack: HerzAlimamAlhusseinPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام زين العابدين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

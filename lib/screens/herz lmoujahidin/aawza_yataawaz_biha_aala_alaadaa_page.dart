@@ -136,7 +136,7 @@ class _AawzaYataawazBihaAalaAlaadaaPageState
           pushNext: DouaaLilkhalasMenAlkatlPage.screenRoute,
           pushBack: RokaatAljaybLilimamAlridaAalaihAlsalamPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة يتعوذ بها على الأعداء.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

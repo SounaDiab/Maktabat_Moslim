@@ -116,7 +116,7 @@ class _HerzAlimamAlbakerPageState extends State<HerzAlimamAlbakerPage> {
           pushNext: HerzAlimamAlsadekPage.screenRoute,
           pushBack: HerzAlimamZainAlaabidinPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز الإمام محمد الباقر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

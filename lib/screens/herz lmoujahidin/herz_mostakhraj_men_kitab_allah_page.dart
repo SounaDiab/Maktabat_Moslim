@@ -122,7 +122,7 @@ class _HerzMostakhrajMenKitabAllahPageState
           pushNext: AlhayakelSabeaPage.screenRoute,
           pushBack: DouaaLidafeaKaidAladowWsharohPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز مستخرج من كتاب الله.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

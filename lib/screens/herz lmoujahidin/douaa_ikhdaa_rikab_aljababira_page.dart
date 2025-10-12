@@ -122,7 +122,7 @@ class _DouaaIkhdaaRikabAljababiraPageState
           pushNext: DouaaLidafeaKaidAladowWsharohPage.screenRoute,
           pushBack: AyatListekfaaPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء إخضاع رقاب الجبابرة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

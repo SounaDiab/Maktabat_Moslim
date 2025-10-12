@@ -120,7 +120,7 @@ class _DouaaNadiAalyanMozhiraAlaajaibPageState
           pushNext: AyatLkorsiPage.screenRoute,
           pushBack: HerzAltajPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء ناد علياً مظهر العجائب.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

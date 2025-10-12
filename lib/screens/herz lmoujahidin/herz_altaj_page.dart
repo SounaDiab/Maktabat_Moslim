@@ -113,7 +113,7 @@ class _HerzAltajPageState extends State<HerzAltajPage> {
           pushNext: DouaaNadiAalyanMozhiraAlaajaibPage.screenRoute,
           pushBack: DouaaLilihtijabPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز التاج.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

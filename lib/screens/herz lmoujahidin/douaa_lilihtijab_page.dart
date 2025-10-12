@@ -118,7 +118,7 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
           pushNext: HerzAltajPage.screenRoute,
           pushBack: DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للإحتجاب.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

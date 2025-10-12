@@ -122,7 +122,7 @@ class _HerzLietikaaSilahAlaadowPageState
           pushNext: AyatAlhefzMenSaifAlaadowPage.screenRoute,
           pushBack: DouaaLilkhalasMenAlkatlPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حرز لاتقاء سلاح العدوّ.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

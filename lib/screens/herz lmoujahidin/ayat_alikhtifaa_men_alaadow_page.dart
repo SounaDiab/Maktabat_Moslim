@@ -122,7 +122,7 @@ class _AyatAlikhtifaaMenAlaadowPageState
           pushNext: DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
           pushBack: AawzatAlnabiYawmWadiAlkoraPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آيات الإختفاء من العدو.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
