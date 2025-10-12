@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:maktabat_almoslim/screens/kor2an/screens/index_screen.dart';
-import 'package:maktabat_almoslim/screens/kor2an/screens/juz_index_screen.dart';
+import '../../screens/index_screen.dart';
+import '../../screens/juz_index_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/index.dart';

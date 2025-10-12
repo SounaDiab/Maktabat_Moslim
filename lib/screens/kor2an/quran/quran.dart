@@ -107,7 +107,8 @@ int getHizbPage(int hizb) {
 
 String pageDir(int number) {
   // return 'assets/quran-images-$index/page${formattedPageNumber(number)}.${index == 2 ? 'jpg' : 'png'}';
-  return 'assets/quran-images-1/page${formattedPageNumber(number)}.png';
+  // return 'assets/quran-images-1/page${formattedPageNumber(number)}.png';
+  return 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/quran_images/page${formattedPageNumber(number)}.png';
 }
 
 String formattedPageNumber(int number) {
