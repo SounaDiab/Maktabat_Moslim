@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -63,7 +63,6 @@ class _AwzaLidaf3WasawisAlshaitanState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _AwzaLidaf3WasawisAlshaitanState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,75 +94,33 @@ class _AwzaLidaf3WasawisAlshaitanState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('عوذة لدفع وساوس الشيطان',
+                      .addFavorite('عوذة لدفع وسواس الشيطان',
                           AwzaLidaf3WasawisAlshaitan.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'عوذة لدفع وساوس الشيطان',
+                          'عوذة لدفع وسواس الشيطان',
                           AwzaLidaf3WasawisAlshaitan.screenRoute,
                           AwzaLidaf3WasawisAlshaitan.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'عوذة لدفع وساوس الشيطان',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'عوذة لدفع وسواس الشيطان'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي أنّه يتعوّذ بالله وليقل : اَّمَنْتُ بِالله وَرَسولِهِ مُخْلِصا لَهُ الدِّينِ. وروى الشيخ الشهيد عن النبي (صلّى الله عليه وآله وسلم) : أن الشيطان اثنان، شيطان الجن ويبعد ب‍‍: لاحَوْلَ وَلا قوَّةَ إِلاّ بِالله العَلي العَظيمِ، وَشيطان الانس ويبعد بالصلاة على النبي واَّله.\n\n'
-                      'أقول : قد مضى في باب الصلوات، الصلاة لحديث النفس وبعض العوذات لدفع وساوس الشيطان.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'عوذة لدفع وسواس الشيطان',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLil2amnMenAlsarik.screenRoute,
           pushBack: Al7erzMenAl3ain.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لدفع وساوس الشيطان.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لدفع وساوس الشيطان.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -16,15 +16,13 @@ class AwzaLiwaja3Alrokba extends StatefulWidget {
   const AwzaLiwaja3Alrokba({super.key});
 
   @override
-  State<AwzaLiwaja3Alrokba> createState() =>
-      _AwzaLiwaja3AlrokbaState();
+  State<AwzaLiwaja3Alrokba> createState() => _AwzaLiwaja3AlrokbaState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AwzaLiwaja3AlrokbaState
-    extends State<AwzaLiwaja3Alrokba> {
+class _AwzaLiwaja3AlrokbaState extends State<AwzaLiwaja3Alrokba> {
   bool isIcon = true;
   @override
   void initState() {
@@ -34,8 +32,7 @@ class _AwzaLiwaja3AlrokbaState
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState =
-        prefs.getBool('isFavorite_awza_liwaja3_alrokba_screen');
+    bool? savedState = prefs.getBool('isFavorite_awza_liwaja3_alrokba_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -43,8 +40,7 @@ class _AwzaLiwaja3AlrokbaState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_awza_liwaja3_alrokba_screen', value);
+    await prefs.setBool('isFavorite_awza_liwaja3_alrokba_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +59,6 @@ class _AwzaLiwaja3AlrokbaState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +80,7 @@ class _AwzaLiwaja3AlrokbaState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +90,8 @@ class _AwzaLiwaja3AlrokbaState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('عوذة لوجع الركبة',
-                          AwzaLiwaja3Alrokba.screenRoute);
+                      .addFavorite(
+                          'عوذة لوجع الركبة', AwzaLiwaja3Alrokba.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -107,63 +102,21 @@ class _AwzaLiwaja3AlrokbaState
               },
             ),
           ],
-          title: Text(
-            'عوذة لوجع الركبة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'عوذة لوجع الركبة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'عن كتاب (طب الأئمة) عن جابر الجعفي، عن الإمام الباقر (عليه السلام) قال :\n\n'
-                      'كنت عند الحسين بن علي (عليهما السلام) إذ أتاه رجل من بني أميّة من شيعتنا فقال له : يابن رسول الله ماقدرت أن أمشي إليك من وجع رجلي. قال : فأين أنت من عوذة الحسن بن علي (عليه السلام). قال : ياابن رسول الله وما ذاك قال: إنّا فَتَحْنا لَكَ فَتْحاً مُبيناً إلى وَكان الله عَزيزاً حَكيماً. قال ففعلت ما أمرني به، فما أحسست بعد ذلك بشي. وروي أيضاً لوجع الركبة أنّه إذا صليت فقل : ياأجْوَدَ مَنْ أعْطى ياخَيْرَ مَنْ سُئِلْ وَياأرْحَمَ مَنْ أُسْتُرْحِمْ، إرْحَمْ ضَعْفي وَقِلَّةَ حيلَتي وَاعْفِني مِنْ وَجَعي. وروي لوجع الساقين أن عوذهما بهذه الآية سبع مرات : وَأُتْلُ ما أوْحي إلَيْكَ مِنْ كِتاب رَبِّكَ لامُبَدِّلَ لِكَلِماتِهِ وَلَنْ تَجِدَ مِنْ دونِهِ مُلْتَحَداً.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'عوذة لوجع الركبة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLiwaja3Al3ain.screenRoute,
           pushBack: AwzaLiwaja3Al3awra.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لوجع الركبة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لوجع الركبة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

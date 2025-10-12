@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -63,7 +63,6 @@ class _Dou3a2Liwaja3Alra2sWalisoda3WalisommState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _Dou3a2Liwaja3Alra2sWalisoda3WalisommState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,93 +94,33 @@ class _Dou3a2Liwaja3Alra2sWalisoda3WalisommState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء لوجع الرأس وللصداع وللصّمم',
+                      .addFavorite('دعاء لوجع الرأس وللصداع وللصمم',
                           Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'دعاء لوجع الرأس وللصداع وللصّمم',
+                          'دعاء لوجع الرأس وللصداع وللصمم',
                           Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute,
                           Dou3a2Liwaja3Alra2sWalisoda3Walisomm.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء لوجع الرأس وللصداع وللصّمم',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء لوجع الرأس وللصداع وللصمم'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'لوجع الرأس',
-                  subtitle:
-                      'يقرأ على قدح فيه ماء : أوَلَمْ يَرَ الَّذينَ كَفَروا أنَّ السَّماواتِ وَالارضِ كانَتا رَتْقا فَفَتَقْناهُما وَجَعَلْنا مِنَ الماءِ كُلَّ شَيٍ حيٍّ أفلا يؤمِنونَ ثم يشربه. وروي ان النبي (صلّى الله عليه وآله وسلم) كان إذا أصيب بمرض أو صداع بسط يديه، فقرأ الفاتحة والمعوّذتين فمسح بهما وجهه فذهب عنه الوجع.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'وللصداع أيضاً',
-                  subtitle:
-                      'امسح على رأس المريض وقل : إنَّ الله يُمْسِكُ السَّماواتِ وَالارضَ أنْ تَزولا وَلَئِنْ زالَتا أنْ أمْسَكَهُما مِنْ أحَدٍ مِنْ بَعْدِهِ إنَّهُ كانَ حَلِيماً غَفوراً. وعن كتاب (ربيع الابرار) أن المأمون أصابه في طرطوس صداع لم يعالج فبعث إليه قيصر الروم بقلنسوة وكتب إليه أنبئت بصداعك فبعثت إليك بهذه القلنسوة تضعها على رأسك، ليسكن الالم، فخشي المأمون أن تكون قد دُس فيها السمّ، فأمر أن توضع على رأس حامله فلم تضره فأمر أن توضع على رأس من به صداع فسكن فاستعملها المأمون لرأسه فسكن صداعه، فتعجب من ذلك فحلّها فوجد فيها مكتوبا : بِسْمِ اللهِ الرَّحْمنِ الرَّحيمِ كَمْ مِنْ نِعْمَةٍ لله في عِرْقٍ ساكِنٍ حَّمَّ عَّسَّقَّ لايُصَدَّعونَ عَنها وَلا يُنْزِفونَ مِنْ كَنْزِ الرَّحْمنِ خَمَدَتْ النّيرانُ وَلاحَوْلَ وَلاقوَةَ إِلاّ بِالله وَجالَ نَفْعُ الدَواءِ فِيكَ كَما يَجُولُ ماءُ الرّبِيعِ في الغُصْنِ.\n\n'
-                      'عوذة للشقيقة ضع يدك على الشق الذي يعتريك ألمه وقل ثلاثا : ياظاهِراً مَوجوداً وَياباطِنا غَيْرَ مَفْقُودٍ أرْدُدْ عَلى عَبْدِكَ الضَعيفِ أياديكَ الجَّميلَةُ عِنْدَهُ وَأذْهِبْ عَنْهُ مابِهِ مِنْ أذى إنَّكَ رَحيمٌ قَديرٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'للصّمم',
-                  subtitle:
-                      'عن باقر العلوم (عليه السلام) ضع يدك عليه واقرأ: لو أنْزَلْنا هذا القُرآنَ عَلى جَبَلٍ… الى آخر السورة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'دعاء لوجع الرأس وللصداع وللصمم',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Liwaja3Alfam.screenRoute,
           pushBack: AwzatWadou3a2Lilamrad.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع الرأس والصداع وللصمم.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع الرأس والصداع وللصمم.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

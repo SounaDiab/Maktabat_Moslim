@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -16,15 +16,13 @@ class AwzaLiwaja3Al3awra extends StatefulWidget {
   const AwzaLiwaja3Al3awra({super.key});
 
   @override
-  State<AwzaLiwaja3Al3awra> createState() =>
-      _AwzaLiwaja3Al3awraState();
+  State<AwzaLiwaja3Al3awra> createState() => _AwzaLiwaja3Al3awraState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _AwzaLiwaja3Al3awraState
-    extends State<AwzaLiwaja3Al3awra> {
+class _AwzaLiwaja3Al3awraState extends State<AwzaLiwaja3Al3awra> {
   bool isIcon = true;
   @override
   void initState() {
@@ -34,8 +32,7 @@ class _AwzaLiwaja3Al3awraState
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState =
-        prefs.getBool('isFavorite_awza_liwaja3_al3awra_screen');
+    bool? savedState = prefs.getBool('isFavorite_awza_liwaja3_al3awra_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -43,8 +40,7 @@ class _AwzaLiwaja3Al3awraState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_awza_liwaja3_al3awra_screen', value);
+    await prefs.setBool('isFavorite_awza_liwaja3_al3awra_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +59,6 @@ class _AwzaLiwaja3Al3awraState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +80,7 @@ class _AwzaLiwaja3Al3awraState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +90,8 @@ class _AwzaLiwaja3Al3awraState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('عوذة لوجع العورة',
-                          AwzaLiwaja3Al3awra.screenRoute);
+                      .addFavorite(
+                          'عوذة لوجع العورة', AwzaLiwaja3Al3awra.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -107,62 +102,21 @@ class _AwzaLiwaja3Al3awraState
               },
             ),
           ],
-          title: Text(
-            'عوذة لوجع العورة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'عوذة لوجع العورة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي أن بعض أصحاب الأئمة (عليهم السلام) كان قد كشف عورته في موضع لاينبغي الكشف فيه فابتلي بوجع فيها، فشكاه الى الصادق (عليه السلام) فعلمه هذه العوذة: قل بعد ان تضع يدك اليسرى عليها : بِسْمِ الله وَبِالله بَلى مَنْ أسْلَمَ وَجْهَهُ لله وَهوَ مُحْسِنٌ فَلَهُ أجْرُهُ عِنْدَ رَبِّهِ وَلاخَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنونَ، اللّهُمَّ إِنِّي أسْلَمْتُ وَجْهي إلَيكَ وَفَوَّضْتُ أمْري إلَيْكَ لامَلْجَأ وَلا مَنْجا إِلاّ إلَيْكَ قلها ثلاث مرات فإنك تعافى إن شاء الله تعالى.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'عوذة لوجع العورة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLiwaja3Alrokba.screenRoute,
           pushBack: Aldou3a2Lilbaras.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة موجع العورة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة موجع العورة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

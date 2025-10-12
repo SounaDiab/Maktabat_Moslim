@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -23,8 +23,7 @@ class Aldou3a2LikarakirAlbatn extends StatefulWidget {
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _Aldou3a2LikarakirAlbatnState
-    extends State<Aldou3a2LikarakirAlbatn> {
+class _Aldou3a2LikarakirAlbatnState extends State<Aldou3a2LikarakirAlbatn> {
   bool isIcon = true;
   @override
   void initState() {
@@ -43,8 +42,7 @@ class _Aldou3a2LikarakirAlbatnState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_aldou3a2_likarakir_albatn_screen', value);
+    await prefs.setBool('isFavorite_aldou3a2_likarakir_albatn_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +61,6 @@ class _Aldou3a2LikarakirAlbatnState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +82,7 @@ class _Aldou3a2LikarakirAlbatnState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -107,62 +104,21 @@ class _Aldou3a2LikarakirAlbatnState
               },
             ),
           ],
-          title: Text(
-            'الدعاء لقراقر البطن',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الدعاء لقراقر البطن'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي أيضاً أنّه شكا إليه رجل فقال : إنّ بي قرقرة لاتسكن وإنّي لاستحي أن أكلّم الناس فيسمع من صوت تلك القرقرة فادع لي بالشفاء منها. فقال : إذا فرغت من صلاة الليل فقل : اللّهُمَّ ماعَمِلْتُ مِنْ خَيْرٍ فَمِنْكَ لاحَمْدَ لي … إلى آخر مامر من الدعاء. وروي عن الإمام الصادق (عليه السلام) أيضاً لقراقر البطن يؤكل الحبة السوداء مع العسل.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'الدعاء لقراقر البطن',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Aldou3a2Lilbaras.screenRoute,
           pushBack: Dou3a2Lilza7ir.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء لكراكر البطن.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء لكراكر البطن.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

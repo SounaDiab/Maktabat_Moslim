@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -23,8 +23,7 @@ class Dou3a2Lilso2lolWlilawram extends StatefulWidget {
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _Dou3a2Lilso2lolWlilawramState
-    extends State<Dou3a2Lilso2lolWlilawram> {
+class _Dou3a2Lilso2lolWlilawramState extends State<Dou3a2Lilso2lolWlilawram> {
   bool isIcon = true;
   @override
   void initState() {
@@ -43,8 +42,7 @@ class _Dou3a2Lilso2lolWlilawramState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_dou3a2_lilso2lol_wlilawram_screen', value);
+    await prefs.setBool('isFavorite_dou3a2_lilso2lol_wlilawram_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +61,6 @@ class _Dou3a2Lilso2lolWlilawramState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +82,7 @@ class _Dou3a2Lilso2lolWlilawramState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,84 +92,33 @@ class _Dou3a2Lilso2lolWlilawramState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء للثؤلول و للاورام',
+                      .addFavorite('دعاء للثؤلول والاورام',
                           Dou3a2Lilso2lolWlilawram.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'دعاء للثؤلول و للاورام',
+                          'دعاء للثؤلول والاورام',
                           Dou3a2Lilso2lolWlilawram.screenRoute,
                           Dou3a2Lilso2lolWlilawram.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء للثؤلول و للاورام',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء للثؤلول والاورام'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'للثؤلول',
-                  subtitle:
-                      'وهو خراج ناتي يظهر في اليد غالبا خذ لكل ثؤلول سبع شعيرات وأقرأ على كل شعيرة من أول سورة الواقعة إلى قوله : هَباءً مُنْبَثا. وَيَسْأَلونَكَ عِنِ الجِبّالِ فَقُلْ يَنْسِفُها رَبّي نَسْفا فَيَذَرُها قاعا صَفْصَفا لاتَرى فيها عِوجا وَلا أمْتا. سبعا ثم خذ شعيرة شعيرة وامسح بها على الثؤلول ثم صيرها في خرقة واربط على الخرقة حجراً وألقها في البئر.\n\n'
-                      'قيل : وينبغي أن تعمل ذلك في محاق الشهر. ونقل أيضاً أنه ياخذ المصاب بالثؤلول قطعة من الملح فيمسح بها الثؤلول ويتلو عليه ثلاثا : لَوْ أنْزَلْنا هذا القُرآنَ عَلى جَبَلٍ إلى آخر سورة الحشر، فيلقيها في تنور ويمر عنه مسرعا فيزول إن شاء اللّه. وفي (الخزائن) ان طلي الثؤلول بالنورة يزيله.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'للاورام',
-                  subtitle:
-                      'روي أنك تقرأ عليها وانت طاهر قد أعددت وضؤك لصلاة الفريضة ؛ قبل الصلاة وبعدها : لَوْ أنْزَلْنا هذا القُرآنَ عَلى جَبَلٍ… إلى آخر السورة، وتدبرها وأنت تتلوها فتسكن إن شاء اللّه.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'دعاء للثؤلول والاورام',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Lita3asorAlwilada.screenRoute,
           pushBack: Dou3a2Liwaja3AlbatenWalcolon.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للثؤلول وللاورام.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء للثؤلول وللاورام.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

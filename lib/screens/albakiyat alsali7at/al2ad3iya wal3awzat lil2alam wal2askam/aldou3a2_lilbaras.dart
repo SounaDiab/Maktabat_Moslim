@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -16,15 +16,13 @@ class Aldou3a2Lilbaras extends StatefulWidget {
   const Aldou3a2Lilbaras({super.key});
 
   @override
-  State<Aldou3a2Lilbaras> createState() =>
-      _Aldou3a2LilbarasState();
+  State<Aldou3a2Lilbaras> createState() => _Aldou3a2LilbarasState();
 }
 
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _Aldou3a2LilbarasState
-    extends State<Aldou3a2Lilbaras> {
+class _Aldou3a2LilbarasState extends State<Aldou3a2Lilbaras> {
   bool isIcon = true;
   @override
   void initState() {
@@ -34,8 +32,7 @@ class _Aldou3a2LilbarasState
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState =
-        prefs.getBool('isFavorite_aldou3a2_lilbaras_screen');
+    bool? savedState = prefs.getBool('isFavorite_aldou3a2_lilbaras_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -43,8 +40,7 @@ class _Aldou3a2LilbarasState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_aldou3a2_lilbaras_screen', value);
+    await prefs.setBool('isFavorite_aldou3a2_lilbaras_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +59,6 @@ class _Aldou3a2LilbarasState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +80,7 @@ class _Aldou3a2LilbarasState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,8 +90,8 @@ class _Aldou3a2LilbarasState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('الدعاء للبرص',
-                          Aldou3a2Lilbaras.screenRoute);
+                      .addFavorite(
+                          'الدعاء للبرص', Aldou3a2Lilbaras.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
@@ -107,64 +102,21 @@ class _Aldou3a2LilbarasState
               },
             ),
           ],
-          title: Text(
-            'الدعاء للبرص',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الدعاء للبرص'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'عن يونس قال : أصابني بياض بين عيني فدخلت على الصادق (عليه السلام) فشكوت ذلك إليه فقال : تطهر وصلّ ركعتين وقل : ياالله يارَحْمنُ يارَحيمُ ياسَميعَ الدَّعَواتِ يامُعْطي الخَيْراتِ، أعْطِني خَيْرَ الدُّنيا وَخَيْرَ الاخِرَةِ وَقِني شَرَّ الدُّنيا وشَرَّ الاخِرَةِ وَأَذْهِبْ عَنّي ماأجِدُ فَقَدْ غاضَني الأمْرُ وَأخْوَفَني. قال يونس : ففعلت ما أمرني به فأذهب الله عني ذلك وله الحمد.\n\n'
-                      'وفي رواية (عدة الداعي) انه قال (عليه السلام) : إذا كان الثلث الاخير من الليل في أوله فتوضّأ وقم الى صلاتك التي تصلّيها فإذا كنت في‌السجدة الاخيرة من الركعتين الأوليين فقل وأنت ساجد : ياعَليُّ ياعَظيمُ يارَحْمنُ يارَحيمُ ياسامِعَ الدَّعَواتِ يامُعْطي الخَيراتِ صَلِّ عَلى مُحَمَّدٍ وَآلِهِ، وَأَعْطِنِي مِنْ خَيْرِ الدُّنْيا وَالاخِرَةِ ماأنْتَ أهْلَهُ، وَاصْرِفْ عَنِّي مِنْ شَرِّ الدُّنْيا وَالاخِرَةِ ماأنْتَ أهْلَهُ، وَأَذْهِبْ عَنّي هذا الوَجَعْ فَإنَّهُ قَدْ غاضَنى وَأحْزَنَني وألح في الدعاء. قال يونس : فما وصلت الى الكوفة حتى ذهب الله به عني كله.\n\n'
-                      'وقد ورد لذلك أيضا: أن اكتب يَّس بالعسل في جامٍ واغسله واشربه، كما ورد هذا للبواسير أيضاً وورد أيضاً أن يأخذ طين قبر الحسين (عليه السلام) بماء السماء. وروي أيضا: أن يطلي بمزيج من الحناء والنورة للجرب والدّمل والقوباء وهي التهاب في الجسد او حكة شديدة ـ ويقال لها بالفارسية (داد) ـ روي أنّه يقرأ عليه ويكتب ويعلق عليه: بِسْمِ الله الرَّحْمنِ الرَّحيمِ وَمَثَلُ كَلِمَةٍ خَبيثَةٍ كَشَجَرَةٍ خَبيثَةٍ أُجْتُثَّتْ مِنْ فَوقِ الارضِ مالَها مِنْ قَرارٍ… الى آخر الآية: مِنْها خَلَقْناكُمْ وَفيها نُعيدَكُمْ وَمنها نُخْرِجَكُمْ تارَةً أخْرى الله أكْبَرُ وَأنْتَ لاتَكْبَرُ، وَالله يَبْقى وَأنْتَ لا تَبْقى، وَالله عَلى كُلِّ شَيٍ قَديرٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'الدعاء للبرص',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLiwaja3Al3awra.screenRoute,
           pushBack: Aldou3a2LikarakirAlbatn.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء للبرص.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الدعاء للبرص.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

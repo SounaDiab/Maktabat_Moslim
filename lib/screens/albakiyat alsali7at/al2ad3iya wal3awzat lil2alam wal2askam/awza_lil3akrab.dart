@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -59,7 +59,6 @@ class _AwzaLil3akrabState extends State<AwzaLil3akrab> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _AwzaLil3akrabState extends State<AwzaLil3akrab> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -100,72 +99,21 @@ class _AwzaLil3akrabState extends State<AwzaLil3akrab> {
               },
             ),
           ],
-          title: Text(
-            'عوذة للعقرب',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'عوذة للعقرب'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي أنه يحدّ النظر إلى السُّهى، وهو نجم صغير بجانب النجم الاوسط من نجوم بنات النعش ويقول ثلاثا:\n\n'
-                      'اللّهُمَّ رَبَّ أَسْلَمَ صَلِّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ وَعَجِّلْ فَرَجَهُمْ وَسَلِّمْنا مِنْ شَرِّ كُلِّ ذي شَرِّ. وروي أيضاً أنه ينظر إليه ويقول ثلاث مرّات: اللّهُمَّ رَبَّ هودٍ ابْنِ آسِيَةَ آمِنّي شَرَّ كُلِّ عَقْرَبٍ وَحَيَّةَ. وروي أيضاً عن الصادق (عليه السلام) لدفع العقارب والحيّات يقرأ عند المساء: بِسْمِ الله وَبِالله وصَلّى الله عَلى مُحَمَّدٍ وَآلِهِ أَخَذْتُ العَقارِبَ وَالحَيّاتِ كُلَّها بِإذْنِ الله تَبارَكَ وَتَعالى بِأفْواهِها وَأذْنابِها وأسْماعِها وَأَبْصارِها وَقُواها عَنّي وَعَمَّنْ أحْبَبْتُ إِلى ضَحْوَةِ النَّهارِ إنْ شاءَ الله تَعالى.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'وللعقرب أيضاً :',
-                  subtitle:
-                      'يقول: سَلامٌ عَلى نُوحٍ في العالَمينَ إنَّا كَذلِكَ نُجْزي الُمحْسنينَ إنَّهُ مِنْ عِبادِنا المؤمِنينَ. وروي أنه لما ركب نوح (عليه السلام) في السفينة أبى أن يحمل العقرب معه، فقال: عاهدتك أن لا ألسع أحداً يقول: سَلامٌ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ وَعَلى نوحٍ في العالَمينَ. وفي عدة أحاديث أن مسح موضع لسع العقرب وغيره بالملح يذهب السم.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'عوذة للعقرب',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Al3afiya.screenRoute,
           pushBack: AwzaLil2amnMenAlsarik.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة للعقرب.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة للعقرب.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

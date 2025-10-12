@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -23,8 +23,7 @@ class Dou3a2Lita3asorAlwilada extends StatefulWidget {
 double _fontSize = 18;
 double _fontSizeTablet = 30;
 
-class _Dou3a2Lita3asorAlwiladaState
-    extends State<Dou3a2Lita3asorAlwilada> {
+class _Dou3a2Lita3asorAlwiladaState extends State<Dou3a2Lita3asorAlwilada> {
   bool isIcon = true;
   @override
   void initState() {
@@ -43,8 +42,7 @@ class _Dou3a2Lita3asorAlwiladaState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
-        'isFavorite_dou3a2_lita3asor_alwilada_screen', value);
+    await prefs.setBool('isFavorite_dou3a2_lita3asor_alwilada_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -63,7 +61,6 @@ class _Dou3a2Lita3asorAlwiladaState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +82,7 @@ class _Dou3a2Lita3asorAlwiladaState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -107,62 +104,21 @@ class _Dou3a2Lita3asorAlwiladaState
               },
             ),
           ],
-          title: Text(
-            'دعاء لتعسر الولادة',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء لتعسر الولادة'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'تكتب لها في رق : بِسْمِ اللّهِ الرَّحْمنِ الرَّحيمِ كَأَنَّهُمْ يَوْمَ يَرَوْنَ مايوعَدونَ لَمْ يَلْبثُوا إِلاّ ساعَةً مِنْ نَهارٍ كَأَنَّهُمْ يَوْمَ يَرَوْنَها لَمْ يَلْبثُوا إِلاّ عَشيَّةٍ أوْ ضُحاها. إذْ قالَتْ إمْرأةَ عِمْرانٍ رَبِّ إِنِّي نَذَرْتُ لَكَ مافي بَطْني مُحَرَراً فَتَقَبَّلْ مِنِّي إنَّكَ أنْتَ السَّمِيعُ العَلِيمُ ثم تربطه على فخذها الايمن فإذا وضعت فانزعه. وروي أيضا: يقرأ عليها : فَأجائَها الَمخاضُ إِلى جِذْعِ النَّخْلَةِ الى قوله رَطَبا جَنيا. ثم يعلي صوته بهذه الآية : وَالله أخْرَجَكُمْ مِنْ بِطونِ أمَّهاتِكُمْ لاتَعْلَمونَ شَيْئاً وَجَعَلَ لَكُمْ السَّمْعَ وَالابْصارَ وَالافْئِدَةَ لَعَلَّكُمْ تَشْكُرونَ كَذلِكَ أخْرُجْ أيُّها الطَّلقُ اُخْرُجُ بِإذْنِ اللّهِ. وروي أيضاً عن الصادق (صلوات الله وسلامه عليه) لتيسير الولادة : يكتب على ورق أو رق: اللّهُمَّ فارِجَ الهَمِّ وَكاشِفَ الغَمِّ وَرَحْمنَ الدُّنْيا وَالاخِرَة وَرَحيمَهُما إرْحَمْ فُلانَةَ بِنْتَ فُلانَةَ رَحْمَةً تُغْنيها بِها عَنْ رَحْمَةِ جَميعِ خَلْقِكَ، تُفَرِّجُ بِها كُرْبَتها وَتَكْشُفُ بِها غَمَّها وَتُيَسِّرُ وَلادَتَها، وَقُضيَ بَيْنَهُمْ بِالحَقِّ وَهُمْ لايُظْلَمونَ وَقيلَ الحَمْدُ لله ربِّ العالَمينَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'دعاء لتعسر الولادة',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Li7alAlmarbout.screenRoute,
           pushBack: Dou3a2Lilso2lolWlilawram.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لتعسر الولادة.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لتعسر الولادة.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

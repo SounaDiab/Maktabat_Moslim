@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -63,7 +63,6 @@ class _Dou3a2Liwaja3AlbatenWalcolonState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,7 +84,7 @@ class _Dou3a2Liwaja3AlbatenWalcolonState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -95,101 +94,33 @@ class _Dou3a2Liwaja3AlbatenWalcolonState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('دعاء لوجع البطن والقولنج',
+                      .addFavorite('دعاء لوجع البطن والكولنج',
                           Dou3a2Liwaja3AlbatenWalcolon.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'دعاء لوجع البطن والقولنج',
+                          'دعاء لوجع البطن والكولنج',
                           Dou3a2Liwaja3AlbatenWalcolon.screenRoute,
                           Dou3a2Liwaja3AlbatenWalcolon.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'دعاء لوجع البطن والقولنج',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء لوجع البطن والكولنج'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'عن النبي (صلّى الله عليه وآله وسلم) يشرب شربة عسل بماء حار ويعوذه بفاتحة الكتاب سبع مرات أيضا، عن أمير المؤمنين (صلوات الله وسلامه عليه) يشرب ماءً حاراً ويقول : ياالله ياالله ياالله يارَحْمنُ يارَحيمُ يارّبَّ الاٌرْبابِ، ياإلهَ الالَهَةِ يامَلِكَ المُلوكِ ياسَيّدَ السّادَةِ إشْفِني بِشِفائِكَ مِنْ كُلِّ داً وَسَقْمٍ فَإنّي عَبْدُكَ وَابْنُ عَبْدِكَ أتَقَلَّبُ في قَبْضَتِكَ .',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'أيضاً لوجع البطن وغيره',
-                  subtitle:
-                      'يضع يده عليه ويقول سبعا: أعوذُ بِعِزَّةِ الله وَجَلالِهِ مِنْ شَرِّ ما أجِدُ. ويضع اليد اليمنى على الوجع ويقول ثلاثا : بِسْمِ اللّهِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'للقولنج',
-                  subtitle:
-                      'يكتب على لوح أو كتف: الحمد والتوحيد والمعوذتين، يكتب تحتها : أعوذُ بِوَجْهِ الله العَظيمُ وبِعِزَّتِهِ التي لاتُرامُ وَبِقُدْرَتِهِ الَّتي لايَمْتَنِعُ مِنْها شَيٌ مِنْ شَرِّ هذا الوَجَعِ وَمِنْ شَرِّ مافِيهِ وَمِنْ شَرِّ ماأجِدُ مِنْهُ، ثم يغسله بماء السماء، فيشربه على الريق وعند النوم، فذلك مبارك نافع.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'لوجع البطن والقولنج',
-                  subtitle:
-                      'روي أن رجلاً شكى إلى رسول الله (صلّى الله عليه وآله وسلم) ماأصاب أخاه من وجع البطن، فقال له النبي (صلّى الله عليه وآله وسلم) : مر أخاك أن يشرب شرابا من العسل الممزوج بالماء الحار، فانطلق الرجل وعاد إليه بكرة فقال: قد أشربته الشراب فلم ينجع فقال (صلّى الله عليه وآله وسلم): صدق الله وكذب بطن أخيك. انطلق وأعطه الشراب، وعوذه بسورة الحمد سبع مرات، فلما مضى الرجل قال (صلّى الله عليه وآله وسلم) لعلي (عليه السلام) ياعلي إنّ أخاه رجل منافق ولاجل ذلك لم ينجع فيه الشراب.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'دعاء لوجع البطن والكولنج',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Lilso2lolWlilawram.screenRoute,
           pushBack: AwzaLiwaja3Alasnan.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع البطن والقولون.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء لوجع البطن والقولون.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

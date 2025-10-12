@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -59,7 +59,6 @@ class _Al7erzMenAl3ainState extends State<Al7erzMenAl3ain> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _Al7erzMenAl3ainState extends State<Al7erzMenAl3ain> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,99 +102,21 @@ class _Al7erzMenAl3ainState extends State<Al7erzMenAl3ain> {
               },
             ),
           ],
-          title: Text(
-            'الحرز من العين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الحرز من العين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روي لذلك قرأة اَّية: وإن يكاد. وأيضاً عن الصادق (عليه السلام) قال: إذا خفت أن تصاب بالعين، أو تصيب بها أحداً فقل ثلاثا : ما شاءَ الله وَلا قوَّةَ إِلاّ بِالله العَلي العَظيمِ.\n\n'
-                      'وروي أنّه إذا تهيّأ أحدكم بهيئة تعجبُهُ فليقرأ حين يخرج من بيته المعوّذتين فإنّه لايضرّه شي بإذن الله تعالى.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'أيضاً لدفع العين',
-                  subtitle:
-                      'ارفع يدك إلى حذاء وجهك واقرأ الحمد والتوحيد والمعوّذتين ؛ وامسحهما على نواصيك.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'أيضاً عوذه لدفع العين',
-                  subtitle:
-                      'اللّهُمَّ رَبَّ مَطَرٍ حابِسٍ وَحَجَرٍ يابِسٍ وَلَيْلٍ دامِسٍ وَرَطْبٍ ويابِسْ رُدَّ عَينَ العاينِ عَلَيهِ في كَبِدِهِ وَنَحْرِهِ وَمالِهِ فَارْجِعَ البَصَرَ هَلْ تَرى مِنْ فُطور ثُمَّ ارْجع البَصَرَ كَرَّتينِ يَنْقَلِبْ إلَيْكَ البَّصَرُ خاسِئا وَهُوَ حَسيرٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'عوذة أخرى',
-                  subtitle:
-                      'يقول: اللّهُمَّ ذا السُّلْطانِ العَظيمِ وَالمَنِّ القَّديمِ وَالوَجْهِ الكَريمِ ذا الكَلِماتِ التّاماتِ وَالدَّعواتِ المُسْتَجاباتِ عافِ فُلانا مِنْ أنْفُسِ الجِنِّ وَأعْيُنَ الانْسِ. وهي عوذة عوّذ بها النبي (صلّى الله عليه وآله وسلم) الحسنين (عليهما السلام) وقال لاصحابه: عليكم ان تعوّذوا بها أولادكم.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'عوذة لصيانة الحيوان وغيره من الاصابة بالعين',
-                  subtitle:
-                      'مروية عن أمير المؤمنين (عليه السلام): بِسْمِ الله الرَّحْمنِ الرَّحيمِ بِسْمِ الله العَظيمِ عَبَسَ عابِسٌ وَشَهاب قابِس وَحَجَرٍ يابِس رُدَّتْ عَينُ العاينِ عَلَيهِ مِنْ رأسِهِ الى قَدَميهِ، أخَذَ عَيْناهُ قابِضْ بِكلاهُ وَعَلى جارِهِ وَأقارِبِهِ جِلْدَهُ دَقيقٌ وَدَمُهُ رَقيقٌ وَبابُ المَكروهِ تَليقُ فَارْجِعَ البَصَرَ كَرَّتينِ يَنْقَلِبْ إلَيْكَ البَّصَرُ خاسِئا وَهُوَ حَسيرٌ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'الحرز من العين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzaLidaf3WasawisAlshaitan.screenRoute,
           pushBack: Al3awzaLibtalAlsi7r.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الحرز من العين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الحرز من العين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

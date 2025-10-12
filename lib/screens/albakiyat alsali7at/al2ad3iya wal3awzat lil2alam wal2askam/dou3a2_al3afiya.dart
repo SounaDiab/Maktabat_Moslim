@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -59,7 +59,6 @@ class _Dou3a2Al3afiyaState extends State<Dou3a2Al3afiya> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _Dou3a2Al3afiyaState extends State<Dou3a2Al3afiya> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -102,63 +101,21 @@ class _Dou3a2Al3afiyaState extends State<Dou3a2Al3afiya> {
               },
             ),
           ],
-          title: Text(
-            'دعاء العافية',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء العافية'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'روى الكفعمي في (مصباح المتهجد) أن من طلب العافية من وجع به فليقل في السجدة الثانية من الركعتين الأوليين من صلاة الليل : ياعَليُّ ياعَظيمُ يارَحْمنُ يارَحيمُ ياسَميعَ الدَّعَواتِ يامُعْطي الخَيراتِ، صَلِّ عَلى مُحَمَّدٍ وَآلِهِ وَاعْطِني مِنْ خَيْرِ الدُّنْيا وَالاخِرَةِ ماأنْتَ أهْلَهُ، وَإصْرِفْ عَنِّي مِنْ شَرِّ الدُّنْيا وَالاخِرَةِ ماأنْتَ أهْلَهُ، وَأَذْهِبْ عَنّي هذا الوَجَعْ، وليسم الوجع: فَإنَّهُ قَدْ غاظَنِي وَأَحْزَنَنِي، وليلح في الدعاء فان العافية تعجل إن شاء الله تعالى.\n\n'
-                      'وعن كتاب (عدة الداعي) عن الصادق (عليه السلام) : قل عند العلة وأنت بارز تحت السماء رافع يديك : اللّهُمَّ إنَّكَ عَيَّرْتَ أقْواما في كِتابِكَ فَقُلْتَ : قُلْ ادْعوا الَّذينَ زَعَمْتُمْ مِنْ دونِهِ فَلا يَمْلِكونَ كَشْفَ الضُرِّ عَنْكُمْ وَلاتَحْويلاً فَيامَنْ لا يَمْلِكُ كَشْفَ ضُرِّي وَلا تَحْويلِهِ عَنِّي أحَدْ غَيْرُهُ صَلِّ عَلى مُحَمَّدٍ وَآلِهِ واكْشِفْ ضُرِّي وَحَوِّلْهُ إِلى مَنْ يَدْعو مَعَكَ إلها آخَرَ فَإنّي أشْهَدُ أنْ لا إلهَ غَيْرُكَ. وروي أن أيّما مؤمن كان به مرض أو علة فليمسح بيده موضع الوجع ويقول مخلصا : ونُنَزِّلُ مِنَ القُرْآنِ ماهوَ شِفاءٌ وَرَحْمَةٌ لِلمؤمِنينَ وَلا يَزيدُ الظّالِمينَ إِلاّ خَساراً. فإنّه يعافى مهما كانت العلة. وتصديق ذلك في الآية نفسها : شفاءٌ ورحمة للمؤمنين.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'دعاء العافية',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AwzatWadou3a2Lilamrad.screenRoute,
           pushBack: AwzaLil3akrab.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء العافية.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء العافية.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
@@ -59,7 +59,6 @@ class _AwzaLiwaja3AlasnanState extends State<AwzaLiwaja3Alasnan> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,7 +80,7 @@ class _AwzaLiwaja3AlasnanState extends State<AwzaLiwaja3Alasnan> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -92,85 +91,32 @@ class _AwzaLiwaja3AlasnanState extends State<AwzaLiwaja3Alasnan> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'عوذة لوجع الاسنان', AwzaLiwaja3Alasnan.screenRoute);
+                          'دعاء لوجع الاسنان', AwzaLiwaja3Alasnan.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'عوذة لوجع الاسنان',
+                          'دعاء لوجع الاسنان',
                           AwzaLiwaja3Alasnan.screenRoute,
                           AwzaLiwaja3Alasnan.screenRoute);
                 }
               },
             ),
           ],
-          title: Text(
-            'عوذة لوجع الاسنان',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء لوجع الاسنان'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'عن الصادق (عليه السلام) يقرأ عليه بعد وضع اليد : الحمد، والتوحيد، والقدر، وقوله تبارك وتعالى : وتَرى الجِبالَ تَحْسَبُها ساكِنَةً وَهي تَمُرُّ مَرَّ السَّحابِ صُنْعَ الله الَّذي أتْقَنَ كُلَّ شَيٍ إنَّهُ خَبيرٌ بِما تَفْعَلونَ.\n\n'
-                      'أيضا : عن أمير المؤمنين (صلوات الله وسلامه عليه) : إمسح موضع سجودك ثم امسح السِّنّ الموجع وقل : بِسْمِ الله والشّافي الله ، وَلا حَولَ وَلاقوَةَ إِلاّ بِالله العَليّ العَظيمِ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'عوذة مجربة لوجع الاسنان',
-                  subtitle:
-                      'تقرأ الحمد والمعوذتين والتوحيد وتقرأ مع كل من السور: بِسْمِ الله الرَّحْمنِ الرَّحيمِ وتقول بعد التوحيد: بِسْمِ اللّهِ الرَّحْمنِ الرَّحيمِ وَلَهُ ماسَكَنَ في اللَّيْلِ وَالنَّهارِ وَهوَ السَّميعُ العَليمُ، قُلْنا يانارُ كوني بَرداً وَسَلاما عَلى إبْراهيمَ وَأرادوا بِهِ كَيْداً فَجَعَلناهُمُ الاخْسَرينَ، نُوديَ أنْ بورِكَ مَنْ في النّارِ وَمَنْ حَوْلَها وَسُبْحانَ اللّهِ ربِّ العالَمينَ. ثم تقول: اللّهُمَّ ياكافِياً مِنْ كُلِّ شَيٍ وَلا يَكْفي مِنْكَ شَيٌ إكْفِ عَبْدَكَ وَإبْنَ أمَتِكَ مِنْ شَرِّ ما يَخافُ وَيَحْذَرُ وَمِنْ شَرِّ الوَجَعِ الَّذي يَشْكُوهُ إليكَ. وروي أيضاً أنّه يأخذ مدية أو ورقا من النخل ويمسح على الشق الذي به الالم ويقول سبعاً : بِسْمِ اللّهِ الرَّحْمنِ الرَّحيمِ، بِسْمِ الله وَبِالله مُحَمَّدٌ رَسولُ الله وَإبْراهيمُ خَليلُ الله ، اسْكُنْ بِالَّذي سَكَنَ لَهُ مافي اللَّيلِ وَالنَّهارِ بِإذْنِهِ وَهوَ عَلى كُلِّ شَيٍ قَديرٌ. وروي أيضاً أنّه يضع عوداً أو حديدة على السن ويرقيه من جانبه سبع مرات: بِسْمِ اللّهِ الرَّحْمنِ الرَّحيمِ العَجَبٌ كُلُّ العَجَبِ دودَةٌ تَكُونُ في الفَمِ تَأكُلُ العَظْمَ وَتُنْزِلُ الدَّمَ، أنا الرّاقي وَالله الشّافي وَالكافي، لا إلهَ إِلاّ الله والحَمْدُ لله ربِّ العالَمينَ. وَإذْ قَتَلْتُمْ نَفْسا فَادْارَأتُمْ فيها… يقرأ إلى لَعَلَّكُمْ تَعْقِلونَ سبع مرات يفعل ما قدمناه.\n\n'
-                      'وروي لوجع الصدر الآية : وَإذْ قَتَلْتُمْ نَفْسا فَادْارَأتُمْ إلى لَعَلَّكُمْ تَعْقِلونَ. وفي الحديث استشف بالقرآن فإنّه تعالى يقول: فيه شفاءٌ لِما في الصُدورِ.\n\n'
-                      'وقد روي للسعال دعاء جامع وهو : اللّهُمَّ أنْتَ رَجائي وَأنْتَ ثِقَتي وعِمادي. وهو دعاء طويل فيطلب من المأخذ وهو كتاب الدعاء من (البحار).',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlbakiyatAlsalihat(
+          text: 'دعاء لوجع الاسنان',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2Liwaja3AlbatenWalcolon.screenRoute,
           pushBack: Dou3a2Liwaja3Alfam.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لوجع الاسنان.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/عوذة لوجع الاسنان.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
