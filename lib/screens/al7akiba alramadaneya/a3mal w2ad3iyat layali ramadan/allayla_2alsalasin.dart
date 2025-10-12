@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_alhakiba_alramadaneya.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../a3mal_w2ad3iyat_layali_ramadan.dart';
@@ -43,7 +43,7 @@ class _Allayla2alsalasinState extends State<Allayla2alsalasin> {
     await prefs.setBool('isFavorite_allayla_2alsalasin_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -59,7 +59,6 @@ class _Allayla2alsalasinState extends State<Allayla2alsalasin> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -81,14 +80,14 @@ class _Allayla2alsalasinState extends State<Allayla2alsalasin> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
@@ -103,62 +102,21 @@ class _Allayla2alsalasinState extends State<Allayla2alsalasin> {
               },
             ),
           ],
-          title: Text(
-            'الليلة الثلاثين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الليلة الثلاثين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'دُعاء اللّيلةِ الثّلاثينَ :',
-                  subtitle:
-                      'الْحَمْدُ للهِ لا شَريكَ لَهُ، الْحَمْدُ للهِ كَما يَنْبَغي لِكَرَمِ وَجْهِهِ وَعِزِّ جَلالِهِ وَكَما هُوَ اَهْلُهُ، يا قُدُّوسُ يا نُورُ يا نُورَ الْقُدْسِ، يا سُبُّوحُ يا مُنْتَهى التَّسْبيحِ، يا رَحْمـنُ يا فاعِلَ الرَّحْمَةِ، يا اللهُ يا عَليمُ يا كَبيرُ، يا اَللهُ يا لَطيفُ يا جَليلُ، يا اَللهُ يا سَميعُ يا بَصيرُ، يا اَللهُ يا اَللهُ يا اَللهُ، لَكَ الاَْسْماءُ الْحُسْنى، وَالاَْمْثالُ الْعُلْيا، وَالْكِبْرِياءُ وَالالاءُ، اَسْاَلُكَ اَنْ تُصَلِّيَ عَلى مُحَمَّد وَآلِ مُحَمَّد وَاَهْلِ بَيْتِهِ، وَاَنْ تَجْعَلَ اسْمي في هذِهِ اللَّيْلَةِ فِي السُّعَداءِ، وَرُوحي مَعَ الشُّهَداءِ، وَاِحْساني في عِلِّيّينَ، وَاِساءَتي مَغْفُورةً، وَاَنْ تَهَبَ لي يَقيناً تُباشِرُ بِهِ قَلْبي، وَايماناً يُذْهِبُ الشَّكَّ عَنّي، وَتُرِْضيَني بِما قَسَمْتَ لي، وَآتِنا فِي الدُّنْيا حَسَنَةً وَفِى الاخِرَةِ حَسَنَةً، وَقِنا عَذابَ النّارِ الْحَريقِ، وَارْزُقْني فيها ذِكْرَكَ وَشُكْرَكَ وَالرَّغْبَةَ اِلَيْكَ وَالاِْنابَةَ وَالتَّوْبَةَ والتَّوْفيقَ لِما وَفَّقْتَ لَهُ مَحَمَّداً وَآلَ مُحَمَّد صَلّى اللهُ عَلَيْهِ وَعَلَيْهِمْ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlhakibaAlramadaneya(
+          text: 'الليلة الثلاثين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Allayla2al2oula.screenRoute,
           pushBack: Allayla2altasi3aWal3ishrin.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الثلاثين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الثلاثين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

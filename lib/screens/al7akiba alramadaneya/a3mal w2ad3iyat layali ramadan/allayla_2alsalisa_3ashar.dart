@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_alhakiba_alramadaneya.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../a3mal_w2ad3iyat_layali_ramadan.dart';
@@ -44,7 +44,7 @@ class _Allayla2alsalisa3asharState extends State<Allayla2alsalisa3ashar> {
     await prefs.setBool('isFavorite_allayla_2alsalisa_3ashar_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -60,7 +60,6 @@ class _Allayla2alsalisa3asharState extends State<Allayla2alsalisa3ashar> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -82,14 +81,14 @@ class _Allayla2alsalisa3asharState extends State<Allayla2alsalisa3ashar> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('الليلة الثالثة عشر',
@@ -104,80 +103,21 @@ class _Allayla2alsalisa3asharState extends State<Allayla2alsalisa3ashar> {
               },
             ),
           ],
-          title: Text(
-            'الليلة الثالثة عشر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الليلة الثالثة عشر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'هي أولى اللّيالي البيض وفيها ثلاثة أعمال :\n'
-                      'الاوّل :',
-                  subtitle: 'الغسل.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثاني :',
-                  subtitle:
-                      'الصّلاة أربع ركعات في كلّ ركعة الحمد مرّة والتّوحيد خمساً وعشرين مرّة.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'الثالث :',
-                  subtitle:
-                      'صلاة ركعتين قد مرّ مثلها في اللّيلة الثّالثة عشرة من شهري رجب وشعبان تقرأ في كلّ ركعة منها بعد الفاتحة سورة يس وتبارك الملك والتّوحيد.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlhakibaAlramadaneya(
+          text: 'الليلة الثالثة عشر',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Allayla2alrabi3a3ashar.screenRoute,
           pushBack: Allayla2al2oula.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الثالثة عشر.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الثالثة عشر.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

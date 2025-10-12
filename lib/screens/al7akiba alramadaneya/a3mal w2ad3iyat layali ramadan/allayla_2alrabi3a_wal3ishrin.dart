@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maktabat_almoslim/widgets/container_scrollview.dart';
+import '../../../widgets/bloc_builder_alhakiba_alramadaneya.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
+import '../../../widgets/scroll_title.dart';
 import '../../favorites_provider.dart';
 import '../../favorites_screen.dart';
 import '../a3mal_w2ad3iyat_layali_ramadan.dart';
@@ -47,7 +47,7 @@ class _Allayla2alrabi3aWal3ishrinState
         'isFavorite_allayla_2alrabi3a_wal3ishrin_screen', value);
   }
 
-    Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop() async {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
@@ -63,7 +63,6 @@ class _Allayla2alrabi3aWal3ishrinState
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
@@ -85,14 +84,14 @@ class _Allayla2alrabi3aWal3ishrinState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Colors.black : Colors.red,
+                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
                   isIcon = !isIcon;
                 });
                 await _saveFavoriteState(isIcon);
-      
+
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite('الليلة الرابعة والعشرين',
@@ -107,62 +106,21 @@ class _Allayla2alrabi3aWal3ishrinState
               },
             ),
           ],
-          title: Text(
-            'الليلة الرابعة والعشرين',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'الليلة الرابعة والعشرين'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: 'دُعاءُ اللَّيلَةِ الرّابعةِ وَالْعِشْرين :',
-                  subtitle:
-                      'يا فالِقَ الاِْصْباحِ، وَجاعِلَ اللَّيْلِ سَكَناً، وَالشَّمْسِ وَالْقَمَرِ حُسْباناً، يا عَزيزُ يا عَليمُ، يا ذَا المَنِّ وَالطَّوْلِ، وَالْقُوَّةِ وَالْحَوْلِ، وَالْفَضْلِ والاِْنْعامِ، وَالْجَلالِ وَالاِْكْرامِ، يا اَللهُ يا رَحْمـنُ، يا اَللهُ يا فَرْدُ يا وِتْرُ، يا اَللهُ يا ظاهِرُ يا باطِنُ، يا حَيُّ لا اِلـهَ إلاّ اَنْتَ، لَكَ الاَْسْماءُ الْحُسْنى، وَالاَْمْثالُ الْعُلْيا، وَالْكِبْرِياءُ وَالالاءُ، اَسْاَلُكَ اَنْ تُصَلِّيَ عَلى مُحَمَّد وَآلِ مُحَمَّد، وَاَنْ تَجْعَلَ اسْمي في هذِهِ اللَّيْلَةِ فِي السُّعَداءِ، وَرُوحي مَعَ الشُّهَداءِ، وَاِحْساني في عِلِّيّينَ، وَاِساءَتي مَغْفُورَةً، وَاَنْ تَهَبَ لي يَقيناً تُباشِرُ بِهِ قَلْبي، وَايماناً يَذْهَبُ بِالشَّكِّ عَنّي، وَرِضىً بِما قَسَمْتَ لي، وَآتِنا فِي الدُّنْيا حَسَنَةً وَفِي الاخِرَةِ حَسَنَهً، وَقِنا عَذابَ النّارِ الْحَريقِ، وَارْزُقْني فيها ذِكْرَكَ وَشُكْرَكَ وَالرَّغْبَةَ اِلَيْكَ، وَالانابَةَ وَالتَّوْبَهَ وَالتَّوْفيقَ لِما وَفَّقْتَ لَهُ مُحَمَّداً وَآلَ مُحَمَّد صَلَواتُكَ عَلَيْهِ وَعَلَيْهِمْ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderAlhakibaAlramadaneya(
+          text: 'الليلة الرابعة والعشرين',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Allayla2al5amisaWal3ishrin.screenRoute,
           pushBack: Allayla2alsalisaWal3ishrin.screenRoute,
-          soud: 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الرابعة والعشرين.mp3',
+          soud:
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الليلة الرابعة والعشرين.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
