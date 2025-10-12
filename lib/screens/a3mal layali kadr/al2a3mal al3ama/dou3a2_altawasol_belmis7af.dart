@@ -117,7 +117,7 @@ class _Dou3a2AltawasolBelmis7afState extends State<Dou3a2AltawasolBelmis7af> {
           pushNext: ZiyaratAl2imamAlhussein.screenRoute,
           pushBack: SalatRok3atain.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء التوسل بالمصحف.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

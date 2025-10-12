@@ -115,7 +115,7 @@ class _A3malAsharRamdanState extends State<A3malAsharRamdan> {
           pushNext: Dou3aAlbaha2.screenRoute,
           pushBack: Dou3a2Altawba.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/اعمال اسحار شهر رمضان المبارك.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -118,7 +118,7 @@ class _Dou3a2Allahoma2iniAmsaytState extends State<Dou3a2Allahoma2iniAmsayt> {
           pushNext: Dou3a2AljawshanAlkabir.screenRoute,
           pushBack: SalatMi2atRok3a.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء اللهم اني امسيت.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

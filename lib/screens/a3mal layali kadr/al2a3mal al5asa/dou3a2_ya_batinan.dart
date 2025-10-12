@@ -116,7 +116,7 @@ class _Dou3a2YaBatinanState extends State<Dou3a2YaBatinan> {
           pushNext: SalatLayl.screenRoute,
           pushBack: ZyaratSa7ibAlzaman.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا باطناً.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -116,7 +116,7 @@ class _SalatMi2atRok3aState extends State<SalatMi2atRok3a> {
           pushNext: Dou3a2Allahoma2iniAmsayt.screenRoute,
           pushBack: ZiyaratAbiAlfadl.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الصلاة مئة ركعة.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

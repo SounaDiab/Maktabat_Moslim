@@ -115,7 +115,7 @@ class _Dou3a2AlsalihinState extends State<Dou3a2Alsalihin> {
           pushNext: Dou3a2Al2imamAlsadek.screenRoute,
           pushBack: Dou3a2L2iftitah.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الصالحين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -119,7 +119,7 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
           pushNext: Dou3a2YaBatinan.screenRoute,
           pushBack: A3malAllaylaAlsalisaWal3ishrin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة آل ياسين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

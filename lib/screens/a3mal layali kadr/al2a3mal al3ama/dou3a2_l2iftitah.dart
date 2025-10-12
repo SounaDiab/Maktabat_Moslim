@@ -116,7 +116,7 @@ class _Dou3a2L2iftitahState extends State<Dou3a2L2iftitah> {
           pushNext: Dou3a2Alsalihin.screenRoute,
           pushBack: Dou3a2MakarimAl2a5lak.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الافتتاح.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -115,7 +115,7 @@ class _Dou3a2Ya3odatiState extends State<Dou3a2Ya3odati> {
           pushNext: Dou3a2Idris.screenRoute,
           pushBack: Dou3a2AbiHamzaAlsamali.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا عدتي.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

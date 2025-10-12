@@ -117,7 +117,7 @@ class _Dou3a2Al2imamAlsadekState extends State<Dou3a2Al2imamAlsadek> {
           pushNext: SalatRok3atain.screenRoute,
           pushBack: Dou3a2Alsalihin.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الامام الصادق عليه السلام.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

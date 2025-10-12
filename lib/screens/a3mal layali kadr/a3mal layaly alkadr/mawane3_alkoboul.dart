@@ -118,7 +118,7 @@ class _Mawane3AlkoboulState extends State<Mawane3Alkoboul> {
           pushNext: SawabAl2i7ya2.screenRoute,
           pushBack: Al2iste3dad.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/موانع القبول في ليلة القدر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

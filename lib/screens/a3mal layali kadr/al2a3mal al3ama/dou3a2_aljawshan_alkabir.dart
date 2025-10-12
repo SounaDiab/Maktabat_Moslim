@@ -117,7 +117,7 @@ class _Dou3a2AljawshanAlkabirState extends State<Dou3a2AljawshanAlkabir> {
           pushNext: Dou3a2Altawba.screenRoute,
           pushBack: Dou3a2Allahoma2iniAmsayt.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الجوشن الكبير.mp3',
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3a2_aljawshan_alkabir.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

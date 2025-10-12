@@ -113,7 +113,7 @@ class _SalatLaylState extends State<SalatLayl> {
           pushNext: Dou3a2Ba3dSalatAlwater.screenRoute,
           pushBack: Dou3a2YaBatinan.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة الليل.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

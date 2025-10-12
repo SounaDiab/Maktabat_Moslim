@@ -114,7 +114,7 @@ class _Dou3a2IdrisState extends State<Dou3a2Idris> {
           pushNext: Dou3a2YaMafza3i.screenRoute,
           pushBack: Dou3a2Ya3odati.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء ادريس عليه السلام.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

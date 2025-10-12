@@ -116,7 +116,7 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
           pushNext: ZiyaratAbiAlfadl.screenRoute,
           pushBack: Ziyarat3aliBinAlhussein.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة الشهداء.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

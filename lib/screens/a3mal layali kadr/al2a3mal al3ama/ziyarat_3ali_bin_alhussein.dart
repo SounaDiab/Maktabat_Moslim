@@ -118,7 +118,7 @@ class _Ziyarat3aliBinAlhusseinState extends State<Ziyarat3aliBinAlhussein> {
           pushNext: ZiyaratAlshohada.screenRoute,
           pushBack: ZiyaratAl2imamAlhussein.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة علي بن الحسين عليه السلام.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

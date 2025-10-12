@@ -114,7 +114,7 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
           pushNext: Mawane3Alkoboul.screenRoute,
           pushBack: SawabAl2i7ya2.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/الاستعداد لليلة القدر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -120,7 +120,7 @@ class _Dou3a2AllaylaAlwahidaWal3ishrinState
           pushNext: ZyaratAmirMo2minin.screenRoute,
           pushBack: Dou3a2AlimamAlsadek.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الليلة الواحدة والعشرين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

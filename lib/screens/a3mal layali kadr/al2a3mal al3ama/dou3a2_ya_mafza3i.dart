@@ -116,7 +116,7 @@ class _Dou3a2YaMafza3iState extends State<Dou3a2YaMafza3i> {
           pushNext: Altasbihat.screenRoute,
           pushBack: Dou3a2Idris.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء يا مفزعي.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

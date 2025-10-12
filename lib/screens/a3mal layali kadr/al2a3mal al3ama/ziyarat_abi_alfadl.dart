@@ -116,7 +116,7 @@ class _ZiyaratAbiAlfadlState extends State<ZiyaratAbiAlfadl> {
           pushNext: SalatMi2atRok3a.screenRoute,
           pushBack: ZiyaratAlshohada.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/زيارة ابي الفضل العباس عليه السلام.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -117,7 +117,7 @@ class _Dou3a2Ba3dSalatAlwaterState extends State<Dou3a2Ba3dSalatAlwater> {
           pushNext: Dou3a22alhazin.screenRoute,
           pushBack: SalatLayl.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء بعد صلاة الوتر.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -113,7 +113,7 @@ class _SalatRok3atainState extends State<SalatRok3atain> {
           pushNext: Dou3a2AltawasolBelmis7af.screenRoute,
           pushBack: Dou3a2Al2imamAlsadek.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/صلاة ركعتين.mp3',
+              '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

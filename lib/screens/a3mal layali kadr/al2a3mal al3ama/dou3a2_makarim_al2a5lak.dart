@@ -117,7 +117,7 @@ class _Dou3a2MakarimAl2a5lakState extends State<Dou3a2MakarimAl2a5lak> {
           pushNext: Dou3a2L2iftitah.screenRoute,
           pushBack: Altasbihat.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء مكارم الاخلاق.mp3',
+              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3a2_makarim_ala5lak.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
