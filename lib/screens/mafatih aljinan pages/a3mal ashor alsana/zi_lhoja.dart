@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../api/web service/json_service.dart';
 import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
 import '../../mafatih%20aljinan%20pages/a3mal_ashhor_alsana.dart';
 import '../../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../Util/items.dart';
 import '../../../widgets/line_from_index.dart';
 import '../../search_provider.dart';
 import 'zi lhoja/allayla_al3ashira_zilhoja.dart';
@@ -37,11 +37,41 @@ class _ZiLhojaState extends State<ZiLhoja> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+       WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(Items.zilHojaList);
+        final jsonService = JsonService();
+
+        final mafatihList = await jsonService.getMafatihAljinan();
+
+        final mafatihSection = mafatihList.firstWhere(
+          (item) => item.title.contains('اعمال اشهر السنة'),
+          orElse: () =>
+              throw Exception('لم يتم العثور على اعمال اشهر السنة'),
+        );
+
+        // قائمة المستوى الثالث
+        final List<Map<String, dynamic>> mappedList = [];
+
+        if (mafatihSection.index.isNotEmpty) {
+          for (var sub in mafatihSection.index) {
+            // الآن نتحقق من وجود index داخلي (المستوى الثالث)
+            if (sub.index.isNotEmpty) {
+              if (sub.title == "شهر ذي الحجة واعماله") {
+                for (var subSub in sub.index) {
+                  mappedList.add({
+                    'id': subSub.id,
+                    'title': subSub.title,
+                  });
+                }
+              }
+            }
+          }
+        }
+
+        // تمرير بيانات المستوى الثالث إلى SearchProvider
+        searchProvider.setItems(mappedList);
       },
     );
   }
@@ -57,6 +87,8 @@ class _ZiLhojaState extends State<ZiLhoja> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider =
+            Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -64,13 +96,7 @@ class _ZiLhojaState extends State<ZiLhoja> {
           toolbarHeight: isTablet ? 100 : 50,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
-              searchProvider.clearSearch();
-              Navigator.of(context)
-                  .pushReplacementNamed(A3malAshhorAlsana.screenRoute);
-            },
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -81,7 +107,7 @@ class _ZiLhojaState extends State<ZiLhoja> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(Items.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(
