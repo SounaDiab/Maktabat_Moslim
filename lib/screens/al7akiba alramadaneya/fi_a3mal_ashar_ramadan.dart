@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../api/web service/json_service.dart';
 import '../../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
 import '../al7akiba_alramadaneya_home_screen.dart';
 import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
-import '../../Util/items.dart';
 import '../../widgets/line_from_index.dart';
 import '../search_provider.dart';
 import 'fi a3mal ashar ramadan/dou3a2_abi_7amza_alsamali.dart';
@@ -24,10 +24,32 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(Al7akibaAlramadaneya.fiA3malAsharRamadanList);
+        final jsonService = JsonService();
+
+        final hakibaList = await jsonService.getAlhakibaAlramadaneya();
+
+        final hakibaSection = hakibaList.firstWhere(
+          (item) => item.title.contains('في اعمال اسحار رمضان'),
+          orElse: () =>
+              throw Exception('لم يتم العثور على في اعمال اسحار رمضان'),
+        );
+
+        // نتأكد أن فيه فهرس داخلي (index أو subSections)
+        final List<Map<String, dynamic>> mappedList = [];
+
+        if (hakibaSection.index.isNotEmpty) {
+          for (var sub in hakibaSection.index) {
+            mappedList.add({
+              'id': sub.id,
+              'title': sub.title,
+            });
+          }
+        }
+        // تمرير الفهرس إلى SearchProvider
+        searchProvider.setItems(mappedList);
       },
     );
     context.read<AlhakibaAlramadaneyaCubit>().getAlhakibaAlramadaneya();
@@ -45,6 +67,8 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider =
+                  Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -52,13 +76,7 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
           toolbarHeight: isTablet ? 100 : 50,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
-              searchProvider.clearSearch();
-              Navigator.of(context).pushReplacementNamed(
-                  Al7akibaAlramadaneyaHomeScreen.screenRoute);
-            },
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -69,7 +87,7 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(Al7akibaAlramadaneya.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(
