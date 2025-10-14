@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../api/web service/json_service.dart';
 import '../../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
 import '../a3mal_layali_kadr_home_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../../Util/items.dart';
 import '../../widgets/line_from_index.dart';
 import '../../widgets/search_widget.dart';
 import '../search_provider.dart';
@@ -33,10 +33,32 @@ class _Al2a3malAl5asaState extends State<Al2a3malAl5asa> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(LayaliKadr.Al2a3malAl5asaList);
+        final jsonService = JsonService();
+
+        final kaderList = await jsonService.getA3malLaylatAlkader();
+
+        final kaderSection = kaderList.firstWhere(
+          (item) => item.title.contains('الاعمال الخاصة بليالي القدر'),
+          orElse: () =>
+              throw Exception('لم يتم العثور على الاعمال الخاصة بليالي القدر'),
+        );
+
+        // نتأكد أن فيه فهرس داخلي (index أو subSections)
+        final List<Map<String, dynamic>> mappedList = [];
+
+        if (kaderSection.index.isNotEmpty) {
+          for (var sub in kaderSection.index) {
+            mappedList.add({
+              'id': sub.id,
+              'title': sub.title,
+            });
+          }
+        }
+        // تمرير الفهرس إلى SearchProvider
+        searchProvider.setItems(mappedList);
       },
     );
     context.read<A3malLaylatAlkaderCubit>().getA3malLaylatAlkader();
@@ -54,6 +76,7 @@ class _Al2a3malAl5asaState extends State<Al2a3malAl5asa> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -61,13 +84,7 @@ class _Al2a3malAl5asaState extends State<Al2a3malAl5asa> {
           toolbarHeight: isTablet ? 100 : 50,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
-              searchProvider.clearSearch();
-              Navigator.of(context)
-                  .pushReplacementNamed(A3malLayaliKadrHomeScreen.screenRoute);
-            },
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -78,7 +95,7 @@ class _Al2a3malAl5asaState extends State<Al2a3malAl5asa> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(LayaliKadr.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(
