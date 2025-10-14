@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Util/items.dart';
+import '../../api/web service/json_service.dart';
 import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
 import '../mafatih_aljinan_home_screen.dart';
 import '../../widgets/search_widget.dart';
@@ -27,10 +27,32 @@ class _Ta3kibatState extends State<Ta3kibat> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(Items.ta3kibatList);
+        final jsonService = JsonService();
+
+        final mafatihList = await jsonService.getMafatihAljinan();
+
+        final mafatihSection = mafatihList.firstWhere(
+          (item) => item.title.contains('التعقيبات'),
+          orElse: () =>
+              throw Exception('لم يتم العثور على التعقيبات'),
+        );
+
+        // نتأكد أن فيه فهرس داخلي (index أو subSections)
+        final List<Map<String, dynamic>> mappedList = [];
+
+        if (mafatihSection.index.isNotEmpty) {
+          for (var sub in mafatihSection.index) {
+            mappedList.add({
+              'id': sub.id,
+              'title': sub.title,
+            });
+          }
+        }
+        // تمرير الفهرس إلى SearchProvider
+        searchProvider.setItems(mappedList);
       },
     );
   }
@@ -47,6 +69,8 @@ class _Ta3kibatState extends State<Ta3kibat> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider =
+            Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -54,13 +78,7 @@ class _Ta3kibatState extends State<Ta3kibat> {
           toolbarHeight: isTablet ? 100 : 50,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
-              searchProvider.clearSearch();
-              Navigator.of(context)
-                  .pushReplacementNamed(MafatihAljinanHomeScreen.screenRoute);
-            },
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -71,7 +89,7 @@ class _Ta3kibatState extends State<Ta3kibat> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(Items.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(

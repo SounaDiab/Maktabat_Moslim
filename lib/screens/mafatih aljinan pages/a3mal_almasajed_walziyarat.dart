@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../api/web service/json_service.dart';
 import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
 import '../mafatih_aljinan_home_screen.dart';
 import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/line_from_index.dart';
-import '../../Util/items.dart';
 import '../search_provider.dart';
 import 'a3mal almasajed wal ziyarat/a3mal_masjid_alsahla.dart';
 import 'a3mal almasajed wal ziyarat/adab_alziyarat.dart';
@@ -33,10 +33,32 @@ class _A3malAlmasajedWalziyaratState extends State<A3malAlmasajedWalziyarat> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(Items.a3malAlmasajedWalziyaratList);
+        final jsonService = JsonService();
+
+        final mafatihList = await jsonService.getMafatihAljinan();
+
+        final mafatihSection = mafatihList.firstWhere(
+          (item) => item.title.contains('اعمال المساجد والزيارات'),
+          orElse: () =>
+              throw Exception('لم يتم العثور على اعمال المساجد والزيارات'),
+        );
+
+        // نتأكد أن فيه فهرس داخلي (index أو subSections)
+        final List<Map<String, dynamic>> mappedList = [];
+
+        if (mafatihSection.index.isNotEmpty) {
+          for (var sub in mafatihSection.index) {
+            mappedList.add({
+              'id': sub.id,
+              'title': sub.title,
+            });
+          }
+        }
+        // تمرير الفهرس إلى SearchProvider
+        searchProvider.setItems(mappedList);
       },
     );
   }
@@ -53,6 +75,8 @@ class _A3malAlmasajedWalziyaratState extends State<A3malAlmasajedWalziyarat> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider =
+            Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -60,13 +84,7 @@ class _A3malAlmasajedWalziyaratState extends State<A3malAlmasajedWalziyarat> {
           toolbarHeight: isTablet ? 100 : 50,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
-              searchProvider.clearSearch();
-              Navigator.of(context)
-                  .pushReplacementNamed(MafatihAljinanHomeScreen.screenRoute);
-            },
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -77,7 +95,7 @@ class _A3malAlmasajedWalziyaratState extends State<A3malAlmasajedWalziyarat> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(Items.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(

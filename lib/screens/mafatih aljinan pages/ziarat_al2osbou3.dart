@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Util/items.dart';
+import '../../api/web service/json_service.dart';
 import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
 import '../mafatih_aljinan_home_screen.dart';
 import '../../widgets/search_widget.dart';
@@ -28,10 +28,32 @@ class _ZiaratAl2osbou3State extends State<ZiaratAl2osbou3> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(Items.ziyaratAl2ousbou3List);
+        final jsonService = JsonService();
+
+        final mafatihList = await jsonService.getMafatihAljinan();
+
+        final mafatihSection = mafatihList.firstWhere(
+          (item) => item.title.contains('زيارات ايام الاسبوع'),
+          orElse: () =>
+              throw Exception('لم يتم العثور على زيارات ايام الاسبوع'),
+        );
+
+        // نتأكد أن فيه فهرس داخلي (index أو subSections)
+        final List<Map<String, dynamic>> mappedList = [];
+
+        if (mafatihSection.index.isNotEmpty) {
+          for (var sub in mafatihSection.index) {
+            mappedList.add({
+              'id': sub.id,
+              'title': sub.title,
+            });
+          }
+        }
+        // تمرير الفهرس إلى SearchProvider
+        searchProvider.setItems(mappedList);
       },
     );
   }
@@ -48,6 +70,8 @@ class _ZiaratAl2osbou3State extends State<ZiaratAl2osbou3> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider =
+            Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -55,13 +79,7 @@ class _ZiaratAl2osbou3State extends State<ZiaratAl2osbou3> {
           toolbarHeight: isTablet ? 100 : 50,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
-              searchProvider.clearSearch();
-              Navigator.of(context)
-                  .pushReplacementNamed(MafatihAljinanHomeScreen.screenRoute);
-            },
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -72,7 +90,7 @@ class _ZiaratAl2osbou3State extends State<ZiaratAl2osbou3> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(Items.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(
