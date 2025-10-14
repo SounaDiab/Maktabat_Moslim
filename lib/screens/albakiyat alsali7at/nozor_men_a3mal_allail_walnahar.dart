@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../api/web service/json_service.dart';
 import '../../business logic/cubit/albakiyat_alsalihat_cubit.dart';
 import '../../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
-import '../../Util/items.dart';
 import '../../widgets/line_from_index.dart';
 import '../albakiyat_alsali7at_home_screen.dart';
 import '../search_provider.dart';
@@ -30,14 +30,33 @@ class _NozorMenA3malAllailWalnaharState
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
-        searchProvider
-            .setItems(AlBaqiyatAlSalehat.nozorMenA3malAllailWalnaharList);
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final searchProvider =
+          Provider.of<SearchProvider>(context, listen: false);
+      final jsonService = JsonService();
+
+      final albakiyatList = await jsonService.getAlbakiyatAlsalihat();
+
+      final albakiyatSection = albakiyatList.firstWhere(
+        (item) => item.title.contains('نزر من اعمال الليل والنهار'),
+        orElse: () =>
+            throw Exception('لم يتم العثور على نزر من اعمال الليل والنهار'),
+      );
+
+      // نتأكد أن فيه فهرس داخلي (index أو subSections)
+      final List<Map<String, dynamic>> mappedList = [];
+
+      if (albakiyatSection.index.isNotEmpty) {
+        for (var sub in albakiyatSection.index) {
+          mappedList.add({
+            'id': sub.id,
+            'title': sub.title,
+          });
+        }
+      }
+      // تمرير الفهرس إلى SearchProvider
+      searchProvider.setItems(mappedList);
+    });
   }
 
   Future<bool> _onWillPop() async {
@@ -52,6 +71,7 @@ class _NozorMenA3malAllailWalnaharState
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -70,8 +90,7 @@ class _NozorMenA3malAllailWalnaharState
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(
-                      AlBaqiyatAlSalehat.nozorMenA3malAllailWalnaharList),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(
