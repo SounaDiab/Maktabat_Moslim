@@ -7,6 +7,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
   final Function(bool) onSoundToggle;
   final VoidCallback onLongPress;
   double fontSize;
+  final bool isSoundAvailable;
 
   CustomBottomNavigationBar({
     Key? key,
@@ -16,6 +17,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
     required this.onSoundToggle,
     required this.fontSize,
     required this.onLongPress,
+    this.isSoundAvailable = true,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   bool _isSoundPlaying = false;
+  // bool _isSoundNotEmpty = false;
 
   void _handleSoundToggle() {
     setState(() {
@@ -67,13 +70,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           ),
 
           // زر التحكم في الصوت
-          _buildNavigationItem(
-            icon: _isSoundPlaying ? Icons.volume_up : Icons.volume_off,
-            label: _isSoundPlaying ? 'صوت' : 'كتم',
-            onTap: _handleSoundToggle,
-            isActive: _isSoundPlaying,
-            onLongPress: () {},
-          ),
+          if (widget.isSoundAvailable)
+            _buildNavigationItem(
+              icon: _isSoundPlaying ? Icons.volume_up : Icons.volume_off,
+              label: _isSoundPlaying ? 'صوت' : 'كتم',
+              onTap: _handleSoundToggle,
+              isActive: _isSoundPlaying,
+              onLongPress: () {},
+            ),
 
           // زر التالي
           _buildNavigationItem(

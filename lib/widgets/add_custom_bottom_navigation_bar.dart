@@ -142,6 +142,9 @@ class _AddCustomBottomNavigationBarState
       );
     }
 
+    final bool isSoundAvailable =
+        widget.soud.isNotEmpty && widget.soud.trim().isNotEmpty;
+
     return CustomBottomNavigationBar(
       onBack: _handleBack,
       onNext: _handleNext,
@@ -149,6 +152,7 @@ class _AddCustomBottomNavigationBarState
       onSoundToggle: _handleSoundToggle,
       fontSize: isTablet ? _fontSizeTablet : _fontSize,
       onLongPress: widget.onLongPress,
+      isSoundAvailable: isSoundAvailable,
     );
   }
 }

@@ -57,7 +57,7 @@ class _SearchWidgetState extends State<SearchWidget> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final List<Map<String, String>> items;
+  final List<Map<String, dynamic>> items;
 
   DataSearch(this.items);
 
@@ -95,7 +95,7 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<Map<String, String>> results = items
+    List<Map<String, dynamic>> results = items
         .where((item) =>
             item['title']!.toLowerCase().contains(query.toLowerCase()))
         .toList();
@@ -121,7 +121,7 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<Map<String, String>> suggestions = items
+    List<Map<String, dynamic>> suggestions = items
         .where((item) =>
             item['title']!.toLowerCase().contains(query.toLowerCase()))
         .toList();
