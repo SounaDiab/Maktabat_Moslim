@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maktabat_almoslim/business%20logic/cubit/herz_almoujahidin_cubit.dart';
+import '../api/web service/json_service.dart';
 import 'books.dart';
 import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
-import '../Util/items.dart';
 
 import '../widgets/line_from_index.dart';
 import '../widgets/search_widget.dart';
@@ -48,11 +48,20 @@ class _HerzAlmoujahidinHomeScreenState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider
-            .setItems(HerzAlmoujahidin.herzAlmoujahidinHomeScreenList);
+        final jsonService = JsonService();
+        final herzList = await jsonService.getHerzAlmoujahidin();
+        final mappedList = herzList
+            .map((e) => {
+                  'id': e.id,
+                  'title': e.title,
+                })
+            .toList();
+
+        // تمرير البيانات إلى مزود البحث
+        searchProvider.setItems(mappedList);
       },
     );
     context.read<HerzAlmoujahidinCubit>().getHerzAlmoujahidin();
@@ -85,9 +94,11 @@ class _HerzAlmoujahidinHomeScreenState
           actions: [
             IconButton(
               onPressed: () {
+                final searchProvider =
+                    Provider.of<SearchProvider>(context, listen: false);
                 showSearch(
                   context: context,
-                  delegate: DataSearch(HerzAlmoujahidin.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(

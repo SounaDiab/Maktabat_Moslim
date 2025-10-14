@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../api/web service/json_service.dart';
 import '../business logic/cubit/mafatih_aljinan_cubit.dart';
 import '../widgets/search_widget.dart';
 import 'package:provider/provider.dart';
-import '../Util/items.dart';
 import 'books.dart';
 import '../widgets/line_from_index.dart';
 import 'mafatih aljinan pages/a3mal_almasajed_walziyarat.dart';
@@ -30,10 +30,20 @@ class _MafatihAljinanHomeScreenState extends State<MafatihAljinanHomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(Items.mafatihAljinanHomeScreenList);
+        final jsonService = JsonService();
+        final mafatihList = await jsonService.getMafatihAljinan();
+        final mappedList = mafatihList
+            .map((e) => {
+                  'id': e.id,
+                  'title': e.title,
+                })
+            .toList();
+
+        // تمرير البيانات إلى مزود البحث
+        searchProvider.setItems(mappedList);
       },
     );
     context.read<MafatihAljinanCubit>().getMafatihAljinan();
@@ -50,6 +60,8 @@ class _MafatihAljinanHomeScreenState extends State<MafatihAljinanHomeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider =
+            Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -68,7 +80,7 @@ class _MafatihAljinanHomeScreenState extends State<MafatihAljinanHomeScreen> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(Items.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(

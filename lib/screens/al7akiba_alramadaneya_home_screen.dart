@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../api/web service/json_service.dart';
 import '../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
 import 'al7akiba alramadaneya/a3mal_w2ad3iyat_layali_ramadan.dart';
 import 'al7akiba alramadaneya/a3mal_wa2ad3iyat_ayam_ramadan.dart';
@@ -8,8 +9,6 @@ import 'al7akiba alramadaneya/fima_ya3om_allayali_wal2ayam.dart';
 import 'al7akiba alramadaneya/fima_yosta7ab_2itanoh_fi_ramadan.dart';
 import 'books.dart';
 import 'package:provider/provider.dart';
-// import 'package:provider/provider.dart';
-import '../Util/items.dart';
 
 import '../widgets/line_from_index.dart';
 import '../widgets/search_widget.dart';
@@ -30,10 +29,20 @@ class _Al7akibaAlramadaneyaHomeScreenState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(Al7akibaAlramadaneya.al7akibaAlramadaneyaList);
+        final jsonService = JsonService();
+        final hakibaList = await jsonService.getAlhakibaAlramadaneya();
+        final mappedList = hakibaList
+            .map((e) => {
+                  'id': e.id,
+                  'title': e.title,
+                })
+            .toList();
+
+        // تمرير البيانات إلى مزود البحث
+        searchProvider.setItems(mappedList);
       },
     );
     context.read<AlhakibaAlramadaneyaCubit>().getAlhakibaAlramadaneya();
@@ -50,6 +59,7 @@ class _Al7akibaAlramadaneyaHomeScreenState
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -68,7 +78,7 @@ class _Al7akibaAlramadaneyaHomeScreenState
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(Al7akibaAlramadaneya.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(

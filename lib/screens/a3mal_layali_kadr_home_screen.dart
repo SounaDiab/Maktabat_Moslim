@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../Util/items.dart';
+import '../api/web service/json_service.dart';
 import '../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
 import '../widgets/line_from_index.dart';
 import '../widgets/search_widget.dart';
@@ -30,11 +30,21 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        final searchProviders =
+   WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProviders.setItems(LayaliKadr.a3malLayaliKadrList);
+        final jsonService = JsonService();
+        final kaderList = await jsonService.getA3malLaylatAlkader();
+        final mappedList = kaderList
+            .map((e) => {
+                  'id': e.id,
+                  'title': e.title,
+                })
+            .toList();
+
+        // تمرير البيانات إلى مزود البحث
+        searchProvider.setItems(mappedList);
       },
     );
     context.read<A3malLaylatAlkaderCubit>().getA3malLaylatAlkader();
@@ -51,6 +61,7 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProviders = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -69,7 +80,7 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(LayaliKadr.allItems),
+                  delegate: DataSearch(searchProviders.filteredItems),
                 );
               },
               icon: Icon(

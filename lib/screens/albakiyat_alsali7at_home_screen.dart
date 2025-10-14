@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import '../Util/items.dart';
+import '../api/web service/json_service.dart';
 import '../business logic/cubit/albakiyat_alsalihat_cubit.dart';
 import '../widgets/line_from_index.dart';
 import '../widgets/search_widget.dart';
@@ -30,10 +30,20 @@ class _AlbakiyatAlsali7atHomeScreenState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        searchProvider.setItems(AlBaqiyatAlSalehat.alBaqiyatAlSalehatList);
+        final jsonService = JsonService();
+        final albakiyatList = await jsonService.getAlbakiyatAlsalihat();
+        final mappedList = albakiyatList
+            .map((e) => {
+                  'id': e.id,
+                  'title': e.title,
+                })
+            .toList();
+
+        // تمرير البيانات إلى مزود البحث
+        searchProvider.setItems(mappedList);
       },
     );
   }
@@ -49,6 +59,7 @@ class _AlbakiyatAlsali7atHomeScreenState
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -67,7 +78,7 @@ class _AlbakiyatAlsali7atHomeScreenState
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: DataSearch(AlBaqiyatAlSalehat.allItems),
+                  delegate: DataSearch(searchProvider.filteredItems),
                 );
               },
               icon: Icon(
