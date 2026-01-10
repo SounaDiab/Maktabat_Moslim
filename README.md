@@ -75,7 +75,7 @@
   <li>استنسخ المشروع:</li>
 </ol>
 
-<pre><code>git clone https://github.com/your-username/muslim-library.git</code></pre>
+<pre><code>git clone https://github.com/SounaDiab/Maktabat_Moslim.git</code></pre>
 
 <p>انتقل إلى مجلد المشروع:</p>
 <pre><code>cd muslim-library</code></pre>
@@ -99,3 +99,4 @@
   <strong>Hassan Diab</strong><br>
   <small>تطبيق يهدف لخدمة المسلمين حول العالم 🤍</small>
 </p>
+
