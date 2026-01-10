@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import '../../../widgets/bloc_builder_alhakiba_alramadaneya.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../a3mal_w2ad3iyat_layali_ramadan.dart';
-import 'allayla_2alrabi3a_3ashar.dart';
-import 'allayla_2alsabi3a_3ashar.dart';
 
 class Allayla2al5amisa3ashar extends StatefulWidget {
   static String screenRoute = 'allayla_2al5amisa_3ashar_screen';
@@ -66,7 +56,7 @@ class _Allayla2al5amisa3asharState extends State<Allayla2al5amisa3ashar> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -81,7 +71,7 @@ class _Allayla2al5amisa3asharState extends State<Allayla2al5amisa3ashar> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -116,8 +106,7 @@ class _Allayla2al5amisa3asharState extends State<Allayla2al5amisa3ashar> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Allayla2alsabi3a3ashar.screenRoute,
           pushBack: Allayla2alrabi3a3ashar.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

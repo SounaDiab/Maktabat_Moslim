@@ -1,14 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
-import '../al7akiba_alramadaneya_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'fima ya3om allayali wal2ayam/fi_fadl_shaher_ramadan.dart';
-import 'fima ya3om allayali wal2ayam/ma_ya3om_allayali_walayam.dart';
+import '../../Util/app_imports.dart';
 
 class FimaYa3omAllayaliWal2ayam extends StatefulWidget {
   static String screenRoute = 'fima_ya3om_allayali_wal2ayam_screen';
@@ -45,6 +35,8 @@ class _FimaYa3omAllayaliWal2ayamState extends State<FimaYa3omAllayaliWal2ayam> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': alhakibaAlramadaneyaAllRoutes
+                  .fimaYa3omAllayaliWal2ayamRoutes[sub.id - 1],
             });
           }
         }
@@ -72,8 +64,16 @@ class _FimaYa3omAllayaliWal2ayamState extends State<FimaYa3omAllayaliWal2ayam> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'فيما يعم الليالي والايام',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -105,16 +105,13 @@ class _FimaYa3omAllayaliWal2ayamState extends State<FimaYa3omAllayaliWal2ayam> {
             } else if (state is AlhakibaAlramadaneyaLoaded) {
               final alhakibaAlramadaneya = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                FiFadlShaherRamadan.screenRoute,
-                MaYa3omAllayaliWalayam.screenRoute,
-              ];
               for (var item in alhakibaAlramadaneya) {
                 if (item.title == 'فيما يعم الليالي والايام') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes
+                      'route': alhakibaAlramadaneyaAllRoutes
+                          .fimaYa3omAllayaliWal2ayamRoutes
                           .map((e) => e)
                           .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                     });
@@ -123,20 +120,25 @@ class _FimaYa3omAllayaliWal2ayamState extends State<FimaYa3omAllayaliWal2ayam> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is AlhakibaAlramadaneyaError) {

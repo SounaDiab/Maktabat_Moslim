@@ -1,42 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
-import '../al7akiba_alramadaneya_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al2awal.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al3asher.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al3ishroun.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al5amis.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al5amis_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al5amis_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al7adi_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2al7adi_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alrabi3.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alrabi3_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alrabi3_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsabi3.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsabi3_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsabi3_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsadis.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsadis_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsadis_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsalasin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsalis.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsalis_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsalis_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsamen.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsamin_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsamin_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsani.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsani_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2alsani_wal3ishrin.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2altase3.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2altasi3_3ashar.dart';
-import 'a3mal w2ad3iyat ayam ramadan/alyawm_2altasi3_wal3ishrin.dart';
+import '../../Util/app_imports.dart';
 
 class A3malWa2ad3iyatAyamRamadan extends StatefulWidget {
   static String screenRoute = 'a3mal_wa2ad3iyat_ayam_ramadan_screen';
@@ -74,6 +36,8 @@ class _A3malWa2ad3iyatAyamRamadanState
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': alhakibaAlramadaneyaAllRoutes
+                  .a3malW2ad3yat2ayamRamadanRoutes[sub.id - 1],
             });
           }
         }
@@ -96,14 +60,21 @@ class _A3malWa2ad3iyatAyamRamadanState
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'اعمال وادعية ايام رمضان',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -135,44 +106,13 @@ class _A3malWa2ad3iyatAyamRamadanState
             } else if (state is AlhakibaAlramadaneyaLoaded) {
               final alhakibaAlramadaneya = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Alyawm2al2awal.screenRoute,
-                Alyawm2alsani.screenRoute,
-                Alyawm2alsalis.screenRoute,
-                Alyawm2alrabi3.screenRoute,
-                Alyawm2al5amis.screenRoute,
-                Alyawm2alsadis.screenRoute,
-                Alyawm2alsabi3.screenRoute,
-                Alyawm2alsamen.screenRoute,
-                Alyawm2altase3.screenRoute,
-                Alyawm2al3asher.screenRoute,
-                Alyawm2al7adi3ashar.screenRoute,
-                Alyawm2alsani3ashar.screenRoute,
-                Alyawm2alsalis3ashar.screenRoute,
-                Alyawm2alrabi33ashar.screenRoute,
-                Alyawm2al5amis3ashar.screenRoute,
-                Alyawm2alsadis3ashar.screenRoute,
-                Alyawm2alsabi33ashar.screenRoute,
-                Alyawm2alsamin3ashar.screenRoute,
-                Alyawm2altasi33ashar.screenRoute,
-                Alyawm2al3ishroun.screenRoute,
-                Alyawm2al7adiWal3ishrin.screenRoute,
-                Alyawm2alsaniWal3ishrin.screenRoute,
-                Alyawm2alsalisWal3ishrin.screenRoute,
-                Alyawm2alrabi3Wal3ishrin.screenRoute,
-                Alyawm2al5amisWal3ishrin.screenRoute,
-                Alyawm2alsadisWal3ishrin.screenRoute,
-                Alyawm2alsabi3Wal3ishrin.screenRoute,
-                Alyawm2alsaminWal3ishrin.screenRoute,
-                Alyawm2altasi3Wal3ishrin.screenRoute,
-                Alyawm2alsalasin.screenRoute,
-              ];
               for (var item in alhakibaAlramadaneya) {
                 if (item.title == 'اعمال وادعية ايام رمضان') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes
+                      'route': alhakibaAlramadaneyaAllRoutes
+                          .a3malW2ad3yat2ayamRamadanRoutes
                           .map((e) => e)
                           .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                     });
@@ -181,20 +121,25 @@ class _A3malWa2ad3iyatAyamRamadanState
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is AlhakibaAlramadaneyaError) {

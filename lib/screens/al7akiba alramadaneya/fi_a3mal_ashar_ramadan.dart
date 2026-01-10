@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
-import '../al7akiba_alramadaneya_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'fi a3mal ashar ramadan/dou3a2_abi_7amza_alsamali.dart';
-import 'fi a3mal ashar ramadan/dou3a2_alsa7ar.dart';
-import 'fi a3mal ashar ramadan/fi_2a3mal_2as7ar_ramadan.dart';
+import '../../Util/app_imports.dart';
 
 class FiA3malAsharRamadan extends StatefulWidget {
   static String screenRoute = 'fi_a3mal_ashar_ramadan_screen';
@@ -45,6 +34,8 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route':
+                  alhakibaAlramadaneyaAllRoutes.fiA3malAs7arRoutes[sub.id - 1],
             });
           }
         }
@@ -67,14 +58,21 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-                  Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'في اعمال اسحار رمضان',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -106,17 +104,12 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
             } else if (state is AlhakibaAlramadaneyaLoaded) {
               final alhakibaAlramadaneya = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Fi2a3mal2as7arRamadan.screenRoute,
-                Dou3a2Abi7amzaAlsamali.screenRoute,
-                Dou3a2Alsa7ar.screenRoute,
-              ];
               for (var item in alhakibaAlramadaneya) {
                 if (item.title == 'في اعمال اسحار رمضان') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes
+                      'route': alhakibaAlramadaneyaAllRoutes.fiA3malAs7arRoutes
                           .map((e) => e)
                           .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                     });
@@ -125,20 +118,25 @@ class _FiA3malAsharRamadanState extends State<FiA3malAsharRamadan> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is AlhakibaAlramadaneyaError) {

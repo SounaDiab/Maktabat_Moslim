@@ -1,14 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
-import '../al7akiba_alramadaneya_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'fi ma yosta7ab 2itanoh fi ramadan/dou3a2_al2iftita7.dart';
-import 'fi ma yosta7ab 2itanoh fi ramadan/ma_yosta7ab_2itanoh_fi_layali_ramadan.dart';
+import '../../Util/app_imports.dart';
 
 class FimaYosta7ab2itanohFiRamadan extends StatefulWidget {
   static String screenRoute = 'fima_yosta7ab_2itanoh_fi_ramadan_screen';
@@ -46,6 +36,8 @@ class _FimaYosta7ab2itanohFiRamadanState
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': alhakibaAlramadaneyaAllRoutes
+                  .fimaYostahab2itanohoRoutes[sub.id - 1],
             });
           }
         }
@@ -73,8 +65,16 @@ class _FimaYosta7ab2itanohFiRamadanState
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'فيما يستحب ايتانه في رمضان',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 15,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -106,16 +106,13 @@ class _FimaYosta7ab2itanohFiRamadanState
             } else if (state is AlhakibaAlramadaneyaLoaded) {
               final alhakibaAlramadaneya = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                MaYosta7ab2itanohFiLayaliRamadan.screenRoute,
-                Dou3a2Al2iftita7.screenRoute,
-              ];
               for (var item in alhakibaAlramadaneya) {
                 if (item.title == 'فيما يستحب ايتانه في رمضان') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes
+                      'route': alhakibaAlramadaneyaAllRoutes
+                          .fimaYostahab2itanohoRoutes
                           .map((e) => e)
                           .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                     });
@@ -124,20 +121,25 @@ class _FimaYosta7ab2itanohFiRamadanState
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is AlhakibaAlramadaneyaError) {
