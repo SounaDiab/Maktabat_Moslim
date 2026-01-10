@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
+import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/scroll_title.dart';
-import '../../../favorites_provider.dart';
-import 'alziyarat_almotlaka_al2oula.dart';
-import 'fi_fadl_ziyarat_alhussein.dart';
 
 class Fima3alaAlza2irMora3atoh extends StatefulWidget {
   static String screenRoute = 'fima_3ala_alza2ir_mora3atoh_screen';
@@ -49,7 +42,7 @@ class _Fima3alaAlza2irMora3atohState extends State<Fima3alaAlza2irMora3atoh> {
     final isTablet = screenWidth >= 600;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: isTablet ? 100 : 50,
+        toolbarHeight: isTablet ? 100 : 70,
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -101,8 +94,7 @@ class _Fima3alaAlza2irMora3atohState extends State<Fima3alaAlza2irMora3atoh> {
       bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: AlziyaratAlmotlakaAl2oula.screenRoute,
         pushBack: FiFadlZiyaratAlhussein.screenRoute,
-        soud:
-            '',
+        soud: '',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
+import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/scroll_title.dart';
-import '../../../favorites_provider.dart';
-import '../../../favorites_screen.dart';
-import '../alziyarat_aljami3a_walsalawat.dart';
-import 'alsalat_3ala_ali_bin_lhussein.dart';
-import 'alsalat_3ala_alsayida_fatima.dart';
 
 class Alsalat3alaLhassanWalhussein extends StatefulWidget {
   static String screenRoute = 'alsalat_3ala_lhassan_walhussein_screen';
@@ -67,7 +58,7 @@ class _Alsalat3alaLhassanWalhusseinState
     final isTablet = screenWidth >= 600;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: isTablet ? 100 : 50,
+        toolbarHeight: isTablet ? 100 : 70,
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -119,8 +110,7 @@ class _Alsalat3alaLhassanWalhusseinState
       bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: Alsalat3alaAliBinLhussein.screenRoute,
         pushBack: Alsalat3alaAlsayidaFatima.screenRoute,
-        soud:
-            '',
+        soud: '',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {

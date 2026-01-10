@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
+import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/scroll_title.dart';
-import '../../../favorites_provider.dart';
-import '../../../favorites_screen.dart';
-import '../ziyarat_2a2imat_sir.dart';
-import 'ziyarat_al2imam_almahdi_al2o5ra_alsalisa.dart';
-import 'ziyarat_alimam_al3askari.dart';
 
 class AlmakamAl2awal extends StatefulWidget {
   static String screenRoute = 'almakam_al2awal_screen';
@@ -62,7 +53,7 @@ class _AlmakamAl2awalState extends State<AlmakamAl2awal> {
     final isTablet = screenWidth >= 600;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: isTablet ? 100 : 50,
+        toolbarHeight: isTablet ? 100 : 70,
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -111,14 +102,13 @@ class _AlmakamAl2awalState extends State<AlmakamAl2awal> {
       body: BlocBuilderMafatihAljinan(
         text:
             'المقام الاول: في زيارة أئمة سر من رأى (عليه السلام) واعمال السرداب',
-            fontSize: _fontSize,
-          fontSizeTablet: _fontSizeTablet,
+        fontSize: _fontSize,
+        fontSizeTablet: _fontSizeTablet,
       ),
       bottomNavigationBar: AddCustomBottomNavigationBar(
         pushNext: ZiyaratAlimamAl3askari.screenRoute,
         pushBack: ZiyaratAl2imamAlmahdiAl2o5raAlsalisa.screenRoute,
-        soud:
-            '',
+        soud: '',
         onTap: (double fontSize) {
           // تحديث حجم الخط
           setState(() {
