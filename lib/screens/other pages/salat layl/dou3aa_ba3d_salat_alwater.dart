@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/container_scrollview.dart';
-import '../../../widgets/list_of_nine_verses.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../salat_allayl.dart';
-import 'dou3aa_7azin.dart';
-import 'waktaha_wakaifyatiha.dart';
+import '../../../widgets/bloc_builder_salat_lail.dart';
 
 class Dou3aaBa3dSalatAlwater extends StatefulWidget {
   static String screenRoute = 'dou3aa_ba3d_salat_alwater_screen';
@@ -59,14 +50,13 @@ class _Dou3aaBa3dSalatAlwaterState extends State<Dou3aaBa3dSalatAlwater> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -81,7 +71,7 @@ class _Dou3aaBa3dSalatAlwaterState extends State<Dou3aaBa3dSalatAlwater> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -103,63 +93,20 @@ class _Dou3aaBa3dSalatAlwaterState extends State<Dou3aaBa3dSalatAlwater> {
               },
             ),
           ],
-          title: Text(
-            'دعاء بعد صلاة الوتر',
-            style: TextStyle(
-              fontSize: isTablet
-                  ? 40
-                  : size > 1.0
-                      ? 20
-                      : 23,
-              fontWeight: FontWeight.bold,
-            ),
+          title: SizedBox(
+            height: isTablet ? 60 : 30,
+            child: ScrollTitle(title: 'دعاء بعد صلاة الوتر'),
           ),
         ),
-        body: ContainerScrollview(
-          widget: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: ListOfNineVerses(
-                  title: '',
-                  subtitle:
-                      'إِلهِي، تَعَرَّضَ لَكَ فِي هذَا اللَّيْلِ الْمُتَعَرِّضُونَ، وَقَصَدَكَ الْقاصِدُونَ، وَأَمَّلَ فَضْلَكَ وَمَعْرُوفَكَ الطَّالِبُونَ. وَلَكَ فِي هذَا اللَّيْلِ نَفَحاتٌ وَجَوائِزُ، وَعَطايا وَمَواهِبُ، تَمُنُّ بِها عَلَى مَنْ تَشَاءُ مِنْ عِبادِكَ، وَتَمْنَعُها مَنْ لَمْ تَسْبِقْ لَهُ الْعِنايَةُ مِنْكَ، وَها أَنَا ذَا عُبَيْدُكَ الْفَقِيرُ إِلَيْكَ، الْمُؤَمِّلُ فَضْلَكَ وَمَعْرُوفَكَ، فَإِنْ كُنْتَ، يا مَوْلايَ، تَفَضَّلْتَ فِي هـذِهِ اللَّيْلَةِ عَلَى أَحَدٍ مِنْ خَلْقِكَ، وَعُدْتَ عَلَيْهِ بِعائِدَةٍ مِنْ عَطْفِكَ، فَصَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، الطَّيِّبينَ الطَّاهِرِينَ، الْخَيِّرِينَ الْفاضِلِينَ، وَجُدْ عَلَيَّ بِطَوْلِكَ وَمَعْرُوفِكَ، يا رَبَّ الْعالَمِينَ، وَصَلَّى اللهُ عَلَى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَآلِهِ الطَّاهِرِينَ وَسَلَّمَ تَسْلِيماً، إِنَّ اللهَ حَمِيدٌ مَجِيدٌ. اللّهُمَّ، إِنّي أَدْعُوكَ كَما أَمَرْتَ، فَاسْتَجِبْ لِي كَما وَعَدْتَ، إِنَّكَ لا تُخْلِفُ الْمِيعادَ.',
-                  weight: FontWeight.w600,
-                  size: isTablet ? _fontSizeTablet : _fontSize,
-                ),
-              ),
-            ],
-          ),
+        body: BlocBuilderSalatLail(
+          text: 'دعاء بعد صلاة الوتر',
+          fontSize: _fontSize,
+          fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3aa7azin.screenRoute,
           pushBack: WaktahaWakaifyatiha.screenRoute,
-          soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء بعد صلاة الوتر.mp3',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

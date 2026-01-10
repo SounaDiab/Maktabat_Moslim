@@ -1,17 +1,5 @@
-import 'package:flutter/material.dart';
-import '../../../widgets/container_scrollview.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/list_of_nine_verses.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../counter page/tesbiha_page.dart';
-import '../salat_allayl.dart';
-import 'dou3aa_ba3d_salat_alwater.dart';
-import 'name_list_page.dart';
-import 'sawabaha_wa_fawa2idaha.dart';
+import '../../../Util/app_imports.dart';
+import '../../../widgets/bloc_builder_salat_lail.dart';
 
 class WaktahaWakaifyatiha extends StatefulWidget {
   static String screenRoute = 'waktaha_wakaifyatiha_screen';
@@ -71,7 +59,6 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
 
   @override
   Widget build(BuildContext context) {
-    double size = MediaQuery.of(context).textScaleFactor;
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
 
@@ -86,7 +73,7 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
         },
         child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: isTablet ? 100 : 50,
+            toolbarHeight: isTablet ? 100 : 70,
             centerTitle: true,
             leading: IconButton(
               onPressed: _onWillPop,
@@ -123,61 +110,17 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
                 },
               ),
             ],
-            title: Text(
-              'وقتها وكيفيتها',
-              style: TextStyle(
-                fontSize: isTablet
-                    ? 40
-                    : size > 1.0
-                        ? 20
-                        : 23,
-                fontWeight: FontWeight.bold,
-              ),
+            title: SizedBox(
+              height: isTablet ? 60 : 30,
+              child: ScrollTitle(title: 'وقتها وكيفيتها'),
             ),
           ),
           body: Stack(
             children: [
-              ContainerScrollview(
-                widget: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        'بسم الله الرحمن الرحيم',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'اللهم صلِّ على محمد وآل محمد',
-                        style: TextStyle(
-                          fontSize: isTablet ? _fontSizeTablet : _fontSize,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                    ListOfNineVerses(
-                      title: '',
-                      subtitle:
-                          'وقتها من إنتصاف الليل إلى طلوع الفجر، وأفضله السحر وهو الثلث الأخير من الليل. وهي إحدى عشر ركعة، "نافلة الليل": ( ثمان ركعات + ركعتا الشفع + ركعة الوتر )\n\n'
-                          'ثمان ركعات كل إثنتين على حدة تقرأ فيها ما شئت من السور، وإن كان يستحب في أول ركعتين أن تقرأ الحمد والتوحيد في الاولى، والحمد والكافرون في الثانية.\n\n'
-                          'ثم ركعتا الشفع تقرأ فيها ما شئت ويستحب أن تقرأ في الاولى الحمد والفلق وفي الثانية الحمد والناس بدون قنوت.\n\n'
-                          'ثم ركعة الوتر ويستحب أن تقرأ فيها الحمد مرة واحدة والتوحيد ثلاث مرات والمعوذتين مرة واحدة وتقنت فيها بالقنوت التالي، تقرأ دعاء الفرج:\n\n'
-                          '- لا إله إلا الله الحليم الكريم لا إله إلا الله العلي العظيم، سبحان الله رب السماوات السبع ورب الأراضين السبع وما فيهن وما بينهن رب العرش العظيم، والحمد لله رب العالمين وسلام على المرسلين.\n'
-                          '- تستغفر لأربعين مؤمناً ومؤمنةً أحياءً وأمواتاً: "اللهم إغفر لفلان.......\n'
-                          '- تستغفر لنفسك سبعين مرة: "أستغفر الله ربي وأتوب إليه".\n'
-                          '- تقول: "العفو" ثلاثمائة مرة، وتقول بعدها: "ربّ اغفر لي وارحمني وتُب عليّ إنك أنت التوّاب الرحيم".\n'
-                          '- وتقول: "هذا مقام العائذ بك من النار، أسـتغفر الله الذي لا إله إلا هـو الحي القيوم ذو الجـلال والإكرام لجميع ظلمي وجرمي وإسرافي على نفسي وأتوب إليك" سبع مرات، وتنهي الصلاة.\n\n'
-                          'فإن فرغت من الصلاة فسبّح تسبيحة الزهراء سلام الله عليها، ثم تقرأ هذا الدعاء: "الحمد لله لرب الصباح لفالق الإصباح، سبحان ربي الملك القدّوس العزيز الحكيم، يا حي يا قيوم يا بَرّ يا رحيم يا غني يا كريم أرزقني من التجارة أعظمها فضلاً وأوسعها رزقاً وخيرها عافية فإنه لا خير فيما لا عافية له".\n\n'
-                          'ثم تسجد وتقول: "سُبّوحْ قُدّوسْ رب الملائكة والروح"، ثم تجلس وتقرأ آية الكرسي خمس مرات. وتسجد سجدتي الشكر لله سبحانه وتعالى...',
-                      weight: FontWeight.w600,
-                      size: isTablet ? _fontSizeTablet : _fontSize,
-                    ),
-                  ],
-                ),
+              BlocBuilderSalatLail(
+                text: 'وقتها وكيفيتها',
+                fontSize: _fontSize,
+                fontSizeTablet: _fontSizeTablet,
               ),
               Positioned.fill(
                 child: GestureDetector(
@@ -230,8 +173,7 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
           bottomNavigationBar: AddCustomBottomNavigationBar(
             pushNext: Dou3aaBa3dSalatAlwater.screenRoute,
             pushBack: SawabahaWaFawa2idaha.screenRoute,
-            soud:
-                'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/وقتها وكيفيتها.mp3',
+            soud: '',
             onTap: (double fontSize) {
               setState(() {
                 isTablet ? _fontSizeTablet = fontSize : _fontSize = fontSize;

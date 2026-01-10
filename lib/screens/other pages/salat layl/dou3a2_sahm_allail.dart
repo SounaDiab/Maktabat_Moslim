@@ -1,17 +1,19 @@
-import '../../Util/app_imports.dart';
+import '../../../Util/app_imports.dart';
+import '../../../widgets/bloc_builder_salat_lail.dart';
 
 
-class AyatAlikhtifaaMenAlaadowPage extends StatefulWidget {
-  static String screenRoute = 'ayatalikhtifa2menalaadow_screen';
-  AyatAlikhtifaaMenAlaadowPage({super.key});
+class Dou3a2SahmAllail extends StatefulWidget {
+  static String screenRoute = 'dou3a2_sahm_lail_screen';
+  const Dou3a2SahmAllail({super.key});
 
   @override
-  State<AyatAlikhtifaaMenAlaadowPage> createState() =>
-      _AyatAlikhtifaaMenAlaadowPageState();
+  State<Dou3a2SahmAllail> createState() => _Dou3a2SahmAllailState();
 }
 
-class _AyatAlikhtifaaMenAlaadowPageState
-    extends State<AyatAlikhtifaaMenAlaadowPage> {
+double _fontSize = 18;
+double _fontSizeTablet = 30;
+
+class _Dou3a2SahmAllailState extends State<Dou3a2SahmAllail> {
   bool isIcon = true;
   @override
   void initState() {
@@ -21,8 +23,7 @@ class _AyatAlikhtifaaMenAlaadowPageState
 
   Future<void> _loadFavoriteState() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? savedState =
-        prefs.getBool('isFavorite_ayatalikhtifa2menalaadow_screen');
+    bool? savedState = prefs.getBool('isFavorite_dou3a2_sahm_lail_screen');
     setState(() {
       isIcon = savedState ?? true;
     });
@@ -30,7 +31,7 @@ class _AyatAlikhtifaaMenAlaadowPageState
 
   Future<void> _saveFavoriteState(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isFavorite_ayatalikhtifa2menalaadow_screen', value);
+    await prefs.setBool('isFavorite_dou3a2_sahm_lail_screen', value);
   }
 
   Future<bool> _onWillPop() async {
@@ -41,14 +42,11 @@ class _AyatAlikhtifaaMenAlaadowPageState
       Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(HerzAlmoujahidinHomeScreen.screenRoute);
+      Navigator.of(context).pushReplacementNamed(SalatAllayl.screenRoute);
       return false;
     }
   }
 
-  double _fontSize = 18;
-  double _fontSizeTablet = 30;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -82,35 +80,31 @@ class _AyatAlikhtifaaMenAlaadowPageState
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('آيات الإختفاء من العدو',
-                          AyatAlikhtifaaMenAlaadowPage.screenRoute);
+                      .addFavorite('دعاء سهم الليل للامام الحجة',
+                          Dou3a2SahmAllail.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
-                          'آيات الإختفاء من العدو',
-                          AyatAlikhtifaaMenAlaadowPage.screenRoute,
-                          AyatAlikhtifaaMenAlaadowPage.screenRoute);
+                          'دعاء سهم الليل للامام الحجة',
+                          Dou3a2SahmAllail.screenRoute,
+                          Dou3a2SahmAllail.screenRoute);
                 }
               },
             ),
           ],
           title: SizedBox(
             height: isTablet ? 60 : 30,
-            child: ScrollTitle(title: 'آيات الإختفاء من العدو'),
+            child: ScrollTitle(title: 'دعاء سهم الليل للامام الحجة'),
           ),
         ),
-        body: BlocBuilderHerzAlmoujahidin(
-          text: 'ايات الاختفاء من العدو',
-          isKoraan: false,
-          firstTitle: 'تعريف',
-          secondTitle: 'آثاره',
-          thirdTitle: 'الآيات',
+        body: BlocBuilderSalatLail(
+          text: 'دعاء سهم الليل للامام الحجة',
           fontSize: _fontSize,
           fontSizeTablet: _fontSizeTablet,
         ),
         bottomNavigationBar: AddCustomBottomNavigationBar(
-          pushNext: DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
-          pushBack: AawzatAlnabiYawmWadiAlkoraPage.screenRoute,
+          pushNext: WaktahaWakaifyatiha.screenRoute,
+          pushBack: Dou3aa7azin.screenRoute,
           soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط

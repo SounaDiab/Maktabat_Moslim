@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../Util/app_imports.dart';
 
 class ImsakiyaScreen extends StatelessWidget {
   static String screenRoute = 'imsakiya_screen';
@@ -23,7 +23,10 @@ class ImsakiyaScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         child: Center(
-          child: Text('Imsakiya Screen'),
+          child: Text(
+            'قريباً...',
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
         ),
       ),
     );

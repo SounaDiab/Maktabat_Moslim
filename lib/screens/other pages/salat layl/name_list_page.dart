@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
 class NameListPage extends StatefulWidget {
   static String screenRoute = 'name_list_page_screen';
@@ -205,7 +204,7 @@ class _NameListPageState extends State<NameListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: isTablet ? 100 : 50,
+        toolbarHeight: isTablet ? 100 : 70,
         centerTitle: true,
         title: Text(
           'قائمة الأربعين مؤمن',

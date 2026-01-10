@@ -1,27 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/herz_almoujahidin_cubit.dart';
-import '../herz_almoujahidin_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../Util/app_imports.dart';
 
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'herz_alimam_alaaskari_page.dart';
-import 'herz_alimam_albaker_page.dart';
-import 'herz_alimam_alhadi_page.dart';
-import 'herz_alimam_alhassan_almojtaba_page.dart';
-import 'herz_alimam_alhussein_page.dart';
-import 'herz_alimam_ali_page.dart';
-import 'herz_alimam_alkazem_page.dart';
-import 'herz_alimam_almahdi_page.dart';
-import 'herz_alimam_alrida_page.dart';
-import 'herz_alimam_alsadek_page.dart';
-import 'herz_alimam_mohamad_aljawad_page.dart';
-import 'herz_alimam_zain_alaabidin_page.dart';
-import 'herz_fatimat_alzahraa_page.dart';
-import 'herz_rasoul_allah_page.dart';
 
 class HerzAlrasoulWalAimmaPage extends StatefulWidget {
   static String screenRoute = 'herzalrasoulwalaimma_screen';
@@ -59,6 +37,8 @@ class _HerzAlrasoulWalAimmaPageState extends State<HerzAlrasoulWalAimmaPage> {
           mappedList.add({
             'id': sub.id,
             'title': sub.title,
+            'route': herzAlmoujahidinAllRoutes
+                .herzAlrasoulWal2a2imaRoutes[sub.id - 1],
           });
         }
       }
@@ -86,8 +66,16 @@ class _HerzAlrasoulWalAimmaPageState extends State<HerzAlrasoulWalAimmaPage> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'حرز الرسول ص والائمة (ع)',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -119,27 +107,12 @@ class _HerzAlrasoulWalAimmaPageState extends State<HerzAlrasoulWalAimmaPage> {
             } else if (state is HerzAlmoujahidinLoaded) {
               final herzAlmoujahidin = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                HerzRasoulAllahPage.screenRoute,
-                HerzAlimamAliPage.screenRoute,
-                HerzFatimatAlzahraaPage.screenRoute,
-                HerzAlimamAlhassanAlmojtabaPage.screenRoute,
-                HerzAlimamAlhusseinPage.screenRoute,
-                HerzAlimamZainAlaabidinPage.screenRoute,
-                HerzAlimamAlbakerPage.screenRoute,
-                HerzAlimamAlsadekPage.screenRoute,
-                HerzAlimamAlkazemPage.screenRoute,
-                HerzAlimamAlridaPage.screenRoute,
-                HerzAlimamMohamadAljawadPage.screenRoute,
-                HerzAlimamAlhadiPage.screenRoute,
-                HerzAlimamAlaaskariPage.screenRoute,
-                HerzAlimamAlmahdiPage.screenRoute,
-              ];
               for (var item in herzAlmoujahidin) {
                 for (var subItem in item.index) {
                   allTitles.add({
                     'title': subItem.title,
-                    'route': allRoutes
+                    'route': herzAlmoujahidinAllRoutes
+                        .herzAlrasoulWal2a2imaRoutes
                         .map((e) => e)
                         .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                   });
@@ -147,20 +120,25 @@ class _HerzAlrasoulWalAimmaPageState extends State<HerzAlrasoulWalAimmaPage> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is HerzAlmoujahidinError) {

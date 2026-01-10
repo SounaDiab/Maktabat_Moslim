@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-
-import '../../widgets/about_link.dart';
+import '../../Util/app_imports.dart';
 
 class AboutUs extends StatefulWidget {
   static String screenRoute = 'aboutus_screen';
@@ -50,8 +47,16 @@ class _AboutUsState extends State<AboutUs> {
     final Uri policyUrl = Uri.parse(policyUrlString);
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: isTablet ? 120 : 60,
+        toolbarHeight: isTablet ? 120 : 70,
         centerTitle: true,
+        title: Text(
+          'حول التطبيق',
+          style: TextStyle(
+            fontSize: isTablet ? 40 : 19,
+            fontFamily: 'Tajawal',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
@@ -65,108 +70,100 @@ class _AboutUsState extends State<AboutUs> {
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: isTablet ? 60 : 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
+          margin: EdgeInsets.symmetric(horizontal: isTablet ? 60 : 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage('images/logo.png'),
+                fit: BoxFit.cover,
+                width: isTablet ? 300 : 150,
+                height: isTablet ? 300 : 150,
+              ),
+              Text(
+                'مكتبة المسلم',
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+              Text(
+                'الإصدار: ${_packageInfoVersion}',
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.only(bottom: 20),
+                child: Text(
+                  textAlign: TextAlign.justify,
+                  'تطبيق ديني متكامل يوفّر القرآن الكريم، والأدعية والأحراز، ومواقيت الصلاة مع الإمساكية والتنبيهات، إضافة إلى المسبحة والتقويم الديني والصلوات، ليكون رفيقك اليومي في العبادة والذكر وتنظيم الوقت..',
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
+              ),
+              Divider(
+                color: Theme.of(context).dividerColor,
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(
-                      'images/logo.png',
-                      width: isTablet ? 280 : 140,
-                      height: isTablet ? 280 : 140,
-                    ),
-                    Text(
-                      'مكتبة المسلم',
-                      style: TextStyle(
-                        fontSize: isTablet ? 60 : 30,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Tajawal',
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: AboutLink(
+                        israting: false,
+                        url: rateUrl,
+                        text: 'يسعدنا تقييمك للتطبيق',
+                        icon: Icons.star_outline,
+                        fontSize: isTablet ? 30 : 16,
                       ),
                     ),
-                    Text(
-                      'الإصدار: ${_packageInfoVersion}',
-                      style: TextStyle(
-                        fontSize: isTablet ? 40 : 20,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'UthmanicHafs',
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: isTablet ? 20 : 15),
+                      child: AboutLink(
+                        israting: true,
+                        url: updateUrl,
+                        text: 'تحديث التطبيق',
+                        icon: Icons.update,
+                        fontSize: isTablet ? 30 : 16,
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Text(
-                        textAlign: TextAlign.justify,
-                        'هذا التطبيق يحتوي على كتب اسلامية تحتوي على الأدعية والأحراز والصلاة وغيره.\n'
-                        'المطور: حسن دياب',
-                        style: TextStyle(
-                          fontSize: isTablet ? 38 : 18,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Tajawal',
-                        ),
+                    AboutLink(
+                      israting: true,
+                      url: messageUrl,
+                      text: 'للتواصل معنا',
+                      icon: Icons.message,
+                      fontSize: isTablet ? 30 : 16,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: isTablet ? 20 : 15),
+                      child: AboutLink(
+                        israting: true,
+                        url: shareUrl,
+                        text: 'مشاركة التطبيق',
+                        icon: Icons.share,
+                        fontSize: isTablet ? 30 : 16,
                       ),
                     ),
-                    Divider(),
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: AboutLink(
-                              israting: false,
-                              url: rateUrl,
-                              text: 'يسعدنا تقييمك للتطبيق',
-                              icon: Icons.star_outline,
-                              fontSize: isTablet ? 30 : 16,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: isTablet ? 20 : 15),
-                            child: AboutLink(
-                              israting: true,
-                              url: updateUrl,
-                              text: 'تحديث التطبيق',
-                              icon: Icons.update,
-                              fontSize: isTablet ? 30 : 16,
-                            ),
-                          ),
-                          AboutLink(
-                            israting: true,
-                            url: messageUrl,
-                            text: 'للتواصل معنا',
-                            icon: Icons.message,
-                            fontSize: isTablet ? 30 : 16,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: isTablet ? 20 : 15),
-                            child: AboutLink(
-                              israting: true,
-                              url: shareUrl,
-                              text: 'مشاركة التطبيق',
-                              icon: Icons.share,
-                              fontSize: isTablet ? 30 : 16,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: isTablet ? 20 : 15),
-                            child: AboutLink(
-                              israting: true,
-                              url: policyUrl,
-                              text: 'سياسة الخصوصية',
-                              icon: Icons.privacy_tip,
-                              fontSize: isTablet ? 30 : 16,
-                            ),
-                          ),
-                        ],
+                    Padding(
+                      padding: EdgeInsets.only(top: isTablet ? 20 : 15),
+                      child: AboutLink(
+                        israting: true,
+                        url: policyUrl,
+                        text: 'سياسة الخصوصية',
+                        icon: Icons.privacy_tip,
+                        fontSize: isTablet ? 30 : 16,
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: isTablet ? 140 : 70,
+              ),
+              Text(
+                'تطوير وبرمجة: حسن دياب\n'
+                '© جميع الحقوق محفوظة',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+            ],
           ),
         ),
       ),

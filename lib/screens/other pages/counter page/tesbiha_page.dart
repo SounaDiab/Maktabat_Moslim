@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
+
 
 class TesbihPage extends StatefulWidget {
-  static String screenRoute = 'tesbih_screen';
+  static String screenRoute = 'tesbiha_screen';
   const TesbihPage({super.key});
 
   @override
@@ -9,170 +10,230 @@ class TesbihPage extends StatefulWidget {
 }
 
 class _TesbihPageState extends State<TesbihPage> {
-  int count = 0;
-  TextEditingController counterText = TextEditingController();
-  String title = 'صل على محمد وآل محمد';
+  int current = 0;
+  int total = 100;
+  bool showDoneCard = false;
+
+  final tasbeehController = TextEditingController(text: "سبحان الله");
+  final totalController = TextEditingController(text: "100");
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        toolbarHeight: isTablet ? 100 : 50,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            size: isTablet ? 50 : 25,
+      resizeToAvoidBottomInset: false, // ✅ شرطك الثاني
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Stack(
+        children: [
+          /// الخلفية
+          ClipPath(
+            clipper: TopCurveClipper(),
+            child: Container(
+              height: 550,
+              color: Theme.of(context).dividerColor,
+            ),
           ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: isTablet ? 150 : 20),
-          padding: EdgeInsets.only(top: 120),
-          width: screenWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 50),
-                padding: EdgeInsets.only(bottom: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+          ClipPath(
+            clipper: TopCurveClipper(),
+            child: Container(
+              height: 540,
+              color: Theme.of(context).cardColor,
+            ),
+          ),
+
+          SafeArea(
+            child: Column(
+              children: [
+                SizedBox(height: 16),
+                ListTile(
+                  titleAlignment: ListTileTitleAlignment.center,
+                  title: Center(
+                    child: Text(
+                      "مسبحة",
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontSize: isTablet ? 40 : 24,
+                          ),
+                    ),
+                  ),
+                  leading: IconButton(
+                    padding: EdgeInsets.only(bottom: 10),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: isTablet ? 70 : 35,
+                      color: Theme.of(context).indicatorColor,
+                    ),
+                  ),
+                  trailing: IconButton(
+                    padding: EdgeInsets.only(bottom: 10),
+                    onPressed: () {
+                      Navigator.pushNamed(
+                                context, TesbihatAlzahra2Page.screenRoute);
+                    },
+                    icon: Icon(
+                      Icons.change_circle,
+                      size: isTablet ? 70 : 35,
+                      color: Theme.of(context).indicatorColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 60),
+
+                _textField(tasbeehController, "اكتب التسبيحة"),
+                const SizedBox(height: 20),
+
+                _textField(
+                  totalController,
+                  "العدد المطلوب",
+                  isNumber: true,
+                  onChanged: (v) {
+                    total = int.tryParse(v) ?? 0;
+                    setState(() => current = 0); // ✅ شرطك الثالث
+                  },
+                ),
+
+                const SizedBox(height: 100),
+
+                /// العداد
+                Stack(
+                  alignment: Alignment.center,
                   children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          labelText: 'أدخل العدد',
-                          labelStyle: TextStyle(
-                            fontSize: isTablet ? 40 : 20,
-                            fontFamily: 'Tajawal',
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1,
-                                color: title == 'اكتملت التسبيحة'
-                                    ? Colors.red
-                                    : Colors.blue),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1,
-                                color: title == 'اكتملت التسبيحة'
-                                    ? Colors.red
-                                    : Colors.blue),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
+                    /// الحلقة نفسها
+                    CustomPaint(
+                      size: Size(260, 260),
+                      painter: TasbeehRingPainter(
+                        progress: current / (total == 0 ? 1 : total),
+                        color: Theme.of(context).cardColor,
+                        secColor: Theme.of(context).canvasColor,
+                        thirdColor: Theme.of(context).dividerColor,
+                      ),
+                    ),
+
+                    /// الأرقام فوق الحلقة
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "$total ",
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontSize: isTablet ? 40 : 24,
+                                  ),
                         ),
-                        controller: counterText,
-                        keyboardType: TextInputType.numberWithOptions(),
-                        style: TextStyle(
-                          fontSize: isTablet ? 60 : 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          fontFamily: 'Tajawal',
+                        Text(
+                          "/ $current",
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontSize: isTablet ? 40 : 24,
+                                  ),
+                        ),
+                        SizedBox(width: 8),
+                      ],
+                    ),
+                  ],
+                ),
+
+                const Spacer(),
+
+                /// زر التسبيح
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: GestureDetector(
+                          onTap: _onTasbeeh,
+                          child: Container(
+                            height: 58,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "تسبيح",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      fontSize: isTablet ? 40 : 24,
+                                    ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: isTablet ? 40 : 16,
-                        fontWeight: FontWeight.bold,
-                        color: title == 'اكتملت التسبيحة'
-                            ? Colors.red
-                            : Colors.blue,
-                        fontFamily: 'Tajawal',
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: FloatingActionButton(
+                        backgroundColor: Theme.of(context).dividerColor,
+                        onPressed: () => setState(() => current = 0),
+                        child: Icon(
+                          Icons.refresh,
+                          color: Theme.of(context).indicatorColor,
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Text(
-                  '$count',
-                  style: TextStyle(
-                    fontSize: isTablet ? 50 : 30,
-                    fontWeight: FontWeight.bold,
-                    color:
-                        title == 'اكتملت التسبيحة' ? Colors.red : Colors.blue,
-                    fontFamily: 'Tajawal',
-                  ),
-                ),
-              ),
-              Container(
-                width: isTablet ? 300 : 100,
-                height: isTablet ? 300 : 100,
-                margin: EdgeInsets.only(bottom: 20),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(isTablet ? 150 : 50),
-                        side: BorderSide(color: Colors.blue),
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      count++;
-                      if (count == int.parse(counterText.text)) {
-                        title = 'اكتملت التسبيحة';
-                      }
-                      if (title == 'اكتملت التسبيحة') {
-                        count = int.parse(counterText.text);
-                      }
-                    });
-                    print('counterText = ${counterText.value}');
-                  },
-                  child: Icon(
-                    Icons.add,
-                    size: isTablet ? 150 : 50,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-              Container(
-                width: isTablet ? 300 : 100,
-                height: isTablet ? 300 : 100,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(isTablet ? 150 : 50),
-                        side: BorderSide(color: Colors.red),
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      count = 0;
-                      title = 'صل على محمد وآل محمد';
-                      counterText.text = '';
-                    });
-                  },
-                  child: Icon(
-                    Icons.clear,
-                    size: isTablet ? 150 : 50,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ],
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+
+          /// بطاقة الانتهاء
+          if (showDoneCard)
+            doneCard("انتهى التسبيح!", Theme.of(context).primaryColor,
+                Theme.of(context).indicatorColor),
+        ],
+      ),
+    );
+  }
+
+  void _onTasbeeh() {
+    if (current < total) {
+      setState(() => current++);
+    }
+    if (current == total && total != 0) {
+      setState(() => showDoneCard = true);
+      Future.delayed(
+        const Duration(seconds: 3),
+        () => setState(() => showDoneCard = false),
+      );
+    }
+  }
+
+  Widget _textField(
+    TextEditingController controller,
+    String hint, {
+    bool isNumber = false,
+    Function(String)? onChanged,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Container(
+        height: 48,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          color: Theme.of(context).indicatorColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Theme.of(context).dividerColor, width: 3),
+        ),
+        child: TextField(
+          controller: controller,
+          keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+          onChanged: onChanged,
+          style: TextStyle(
+            fontSize: 18,
+            color: Theme.of(context).cardColor,
+          ),
+          decoration: InputDecoration(
+            hintText: hint,
+            border: InputBorder.none,
           ),
         ),
       ),

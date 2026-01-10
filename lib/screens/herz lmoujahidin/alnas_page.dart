@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
-import '../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../widgets/bloc_builder_herz_almoujahidin.dart';
-import '../../widgets/scroll_title.dart';
-import '../herz_almoujahidin_home_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../favorites_provider.dart';
-import '../favorites_screen.dart';
-import 'alfalak_page.dart';
-import 'ayat_listekfaa_page.dart';
+import '../../Util/app_imports.dart';
 
 class AlnasPage extends StatefulWidget {
   static String screenRoute = 'alnas_screen';
@@ -65,7 +54,7 @@ class _AlnasPageState extends State<AlnasPage> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -80,7 +69,7 @@ class _AlnasPageState extends State<AlnasPage> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
