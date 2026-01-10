@@ -94,11 +94,12 @@
 
 <hr>
 
-<h2>👨‍💻 المطور</h2>
+<h2>👨‍💻 Developper</h2>
 <p>
-  <strong style="color:red;">Hassan Diab</strong><br>
+  <strong>Hassan Diab</strong><br>
   <small>تطبيق يهدف لخدمة المسلمين حول العالم 🤍</small>
 </p>
+
 
 
 
