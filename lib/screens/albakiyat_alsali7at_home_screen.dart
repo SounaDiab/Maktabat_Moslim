@@ -1,19 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-
-import '../api/web service/json_service.dart';
-import '../business logic/cubit/albakiyat_alsalihat_cubit.dart';
-import '../widgets/line_from_index.dart';
-import '../widgets/search_widget.dart';
-import 'albakiyat alsali7at/al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
-import 'albakiyat alsali7at/ala7raz_walad3iya_almoujaza.dart';
-import 'albakiyat alsali7at/ba3d_alsalawat_almandouba.dart';
-import 'albakiyat alsali7at/da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
-import 'albakiyat alsali7at/nozor_men_a3mal_allail_walnahar.dart';
-import 'albakiyat alsali7at/zikr_salawat_ayam_al2osbou3.dart';
-import 'books.dart';
-import 'search_provider.dart';
+import '../Util/app_imports.dart';
 
 class AlbakiyatAlsali7atHomeScreen extends StatefulWidget {
   static String screenRoute = 'albakiyat_alsali7at_home_screen';
@@ -39,6 +24,8 @@ class _AlbakiyatAlsali7atHomeScreenState
             .map((e) => {
                   'id': e.id,
                   'title': e.title,
+                  'route': albakyatAlsali7atAllRoutes
+                      .albakyatAlsali7atRoutes[e.id - 1],
                 })
             .toList();
 
@@ -64,8 +51,16 @@ class _AlbakiyatAlsali7atHomeScreenState
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'الباقيات الصالحات',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 19,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -97,36 +92,34 @@ class _AlbakiyatAlsali7atHomeScreenState
             } else if (state is AlbakiyatAlsalihatLoaded) {
               final albakiyatAlsalihat = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                NozorMenA3malAllailWalnahar.screenRoute,
-                ZikrSalawatAyamAl2osbou3.screenRoute,
-                Ba3dAlsalawatAlmandouba.screenRoute,
-                Al2ad3iyaWal3awzatLil2alamWal2askam.screenRoute,
-                Da3awatMonta5abaMenKitabAlkafiAlsharif.screenRoute,
-                Ala7razWalad3iyaAlmoujaza.screenRoute,
-              ];
               for (var item in albakiyatAlsalihat) {
                 allTitles.add({
                   'title': item.title,
-                  'route': allRoutes.map((e) => e).toList()[item.id - 1],
+                  'route': albakyatAlsali7atAllRoutes
+                      .albakyatAlsali7atRoutes.map((e) => e).toList()[item.id - 1],
                 });
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is AlbakiyatAlsalihatError) {

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'welcome_screen.dart';
-import '../Util/books_item.dart';
+import '../Util/app_imports.dart';
+
 
 class Books extends StatefulWidget {
   static String screenRoute = 'books_screen';
@@ -15,6 +14,7 @@ class _BooksState extends State<Books> {
     Navigator.of(context).pushReplacementNamed(WelcomeScreen.screenRoute);
     return false;
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _BooksState extends State<Books> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
@@ -37,7 +37,7 @@ class _BooksState extends State<Books> {
             ),
           ),
           title: Text(
-            'الكتاب',
+            'القرآن والأدعية',
             style: TextStyle(
               fontSize: isTablet ? 40 : 19,
               fontFamily: 'Tajawal',
@@ -71,10 +71,18 @@ class _BooksState extends State<Books> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(
                               Radius.circular(isTablet ? 30 : 15)),
+                          border: Border.all(
+                            color: Theme.of(context).iconTheme.color!,
+                            width: isTablet ? 6 : 3,
+                          ),
                         ),
-                        child: Image(
-                          image: AssetImage('${BooksItem.booksSrc[index]}'),
-                          fit: BoxFit.fill,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(isTablet ? 24 : 12)),
+                          child: Image(
+                            image: AssetImage('${BooksItem.booksSrc[index]}'),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -93,6 +101,9 @@ class _BooksState extends State<Books> {
                   ),
                 );
               }),
+        ),
+        bottomNavigationBar: AdBanner(
+          adUnitId: 'ca-app-pub-9302649846832207/7118789062',
         ),
       ),
     );

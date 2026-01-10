@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../Util/app_imports.dart';
 
 class SearchProvider with ChangeNotifier {
   List<Map<String, dynamic>> _allItems = [];

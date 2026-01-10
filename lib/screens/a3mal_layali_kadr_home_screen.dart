@@ -1,19 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-
-import '../api/web service/json_service.dart';
-import '../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
-import '../widgets/line_from_index.dart';
-import '../widgets/search_widget.dart';
-import 'a3mal layali kadr/a3mal_layaly_alkadr.dart';
-import 'a3mal layali kadr/al2a3mal_al3ama.dart';
-import 'a3mal layali kadr/al2a3mal_al5asa.dart';
-import 'a3mal layali kadr/alsowar_alkor2aneya.dart';
-import 'books.dart';
-import 'search_provider.dart';
+import '../Util/app_imports.dart';
 
 class A3malLayaliKadrHomeScreen extends StatefulWidget {
   static String screenRoute = 'a3mal_layali_kadr_home_screen';
@@ -30,7 +16,7 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
   @override
   void initState() {
     super.initState();
-   WidgetsBinding.instance.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
@@ -40,6 +26,8 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
             .map((e) => {
                   'id': e.id,
                   'title': e.title,
+                  'route': a3malLayaliKaderAllRoutes
+                      .a3malLayaliKaderRoutes[e.id - 1],
                 })
             .toList();
 
@@ -66,8 +54,16 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'اعمال ليالي القدر',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 19,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -99,34 +95,34 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
             } else if (state is A3malLaylatAlkaderLoaded) {
               final a3malLaylatAlkader = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                AlsowarAlkor2aneya.screenRoute,
-                A3malLayalyAlkadr.screenRoute,
-                Al2a3malAl3ama.screenRoute,
-                Al2a3malAl5asa.screenRoute
-              ];
               for (var item in a3malLaylatAlkader) {
                 allTitles.add({
                   'title': item.title,
-                  'route': allRoutes.map((e) => e).toList()[item.id - 1],
+                  'route': a3malLayaliKaderAllRoutes
+                      .a3malLayaliKaderRoutes.map((e) => e).toList()[item.id - 1],
                 });
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is A3malLaylatAlkaderError) {

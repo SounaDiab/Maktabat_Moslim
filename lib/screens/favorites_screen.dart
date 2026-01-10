@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'welcome_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'favorites_provider.dart';
+import '../Util/app_imports.dart';
 
 class FavoritesScreen extends StatefulWidget {
   static String screenRoute = 'favorite_screen';
@@ -34,7 +30,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -65,50 +61,75 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     ),
                   )
                 : ListView.builder(
+                    padding: EdgeInsets.all(20),
                     itemCount: favorites.length,
                     itemBuilder: (context, index) {
                       // ابحث عن اسم الصفحة والمسار في الـ favorites
                       final favorite = favorites[index];
-                      return Column(
-                        children: [
-                          ListTile(
-                            title: Text(
-                              favorite['title']!,
-                              style: TextStyle(
-                                fontFamily: 'UthmanicHafs',
-                                fontWeight: FontWeight.bold,
-                              ),
+                      // /////////////
+                      return InkWell(
+                        onTap: () => Navigator.pushNamed(
+                            context, favorite['route']!,
+                            arguments: {'previousPage': 'favorite_screen'}),
+                        child: Card(
+                          elevation: 3,
+                          shadowColor: Theme.of(context).shadowColor,
+                          color: Theme.of(context).cardColor,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
                             ),
-                            onTap: () {
-                              Navigator.pushNamed(context, favorite['route']!,
-                                  arguments: {
-                                    'previousPage': 'favorite_screen'
-                                  });
-                            },
-                            trailing: IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red,
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: SvgPicture.asset(
+                                      'assets/icons/douaa.svg',
+                                      // width: 25,
+                                      height: 25,
+                                      color: Theme.of(context).iconTheme.color,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      favorite[
+                                          'title']!, // استخدام قيمة افتراضية إذا كان text null
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () async {
+                                      Provider.of<FavoritesProvider>(context,
+                                              listen: false)
+                                          .removeFavorite(
+                                              favorite['title']!,
+                                              favorite['route']!,
+                                              favorite['route']!);
+                                      if (favorite['route']! ==
+                                          favorite['route']!) {
+                                        final prefs = await SharedPreferences
+                                            .getInstance();
+                                        await prefs.setBool(
+                                            'isFavorite_${favorite['route']}',
+                                            true);
+                                      }
+                                    },
+                                  ),
+                                ],
                               ),
-                              onPressed: () async {
-                                Provider.of<FavoritesProvider>(context,
-                                        listen: false)
-                                    .removeFavorite(favorite['title']!,
-                                        favorite['route']!, favorite['route']!);
-                                if (favorite['route']! == favorite['route']!) {
-                                  final prefs =
-                                      await SharedPreferences.getInstance();
-                                  await prefs.setBool(
-                                      'isFavorite_${favorite['route']}', true);
-                                }
-                              },
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                            child: Divider(),
-                          )
-                        ],
+                        ),
                       );
                     },
                   );

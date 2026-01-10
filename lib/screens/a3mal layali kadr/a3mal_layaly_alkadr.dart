@@ -1,16 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../a3mal_layali_kadr_home_screen.dart';
-import 'package:provider/provider.dart';
-
-import '../../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
-import '../../widgets/line_from_index.dart';
-import '../../widgets/search_widget.dart';
-import '../search_provider.dart';
-import 'a3mal layaly alkadr/al2iste3dad.dart';
-import 'a3mal layaly alkadr/mawane3_alkoboul.dart';
-import 'a3mal layaly alkadr/sawab_al2i7ya2.dart';
+import '../../Util/app_imports.dart';
 
 class A3malLayalyAlkadr extends StatefulWidget {
   static String screenRoute = 'a3mal_layaly_alkadr_screen';
@@ -44,6 +32,8 @@ class _A3malLayalyAlkadrState extends State<A3malLayalyAlkadr> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': a3malLayaliKaderAllRoutes
+                      .a3malLaylatKaderRoutes[sub.id - 1],
             });
           }
         }
@@ -71,8 +61,16 @@ class _A3malLayalyAlkadrState extends State<A3malLayalyAlkadr> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'اعمال ليلة القدر',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 19,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -104,17 +102,13 @@ class _A3malLayalyAlkadrState extends State<A3malLayalyAlkadr> {
             } else if (state is A3malLaylatAlkaderLoaded) {
               final a3malLaylatAlkader = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Mawane3Alkoboul.screenRoute,
-                SawabAl2i7ya2.screenRoute,
-                Al2iste3dad.screenRoute
-              ];
               for (var item in a3malLaylatAlkader) {
                 if (item.title == "اعمال ليلة القدر") {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes
+                      'route': a3malLayaliKaderAllRoutes
+                      .a3malLaylatKaderRoutes
                           .map((e) => e)
                           .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                     });
@@ -124,16 +118,22 @@ class _A3malLayalyAlkadrState extends State<A3malLayalyAlkadr> {
 
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: allTitles.length,
                     itemBuilder: (context, i) {
-                      // final item = searchProvider.filteredItems[index];
                       final title = allTitles[i]['title'];
                       final route = allTitles[i]['route'];
-                      return LineFromIndex(
-                        text: title,
-                        route: route,
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
                       );
                     },
                   ),

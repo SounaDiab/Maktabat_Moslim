@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
-import '../../../widgets/bloc_builder_widget.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/mawane3_alkoboul.dart';
-import '../../a3mal%20layali%20kadr/a3mal%20layaly%20alkadr/sawab_al2i7ya2.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../a3mal_layaly_alkadr.dart';
+import '../../../Util/app_imports.dart';
 
 class Al2iste3dad extends StatefulWidget {
   static String screenRoute = 'al2istedad_screen';
@@ -64,7 +53,7 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -79,7 +68,7 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -113,8 +102,7 @@ class _Al2iste3dadState extends State<Al2iste3dad> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Mawane3Alkoboul.screenRoute,
           pushBack: SawabAl2i7ya2.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+import '../Util/app_imports.dart';
 
 class FavoritesProvider with ChangeNotifier {
   final List<Map<String, String>> _favorites = [];

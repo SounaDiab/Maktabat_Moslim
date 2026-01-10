@@ -1,20 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../api/web service/json_service.dart';
-import '../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import 'books.dart';
-import '../widgets/line_from_index.dart';
-import 'mafatih aljinan pages/a3mal_almasajed_walziyarat.dart';
-import 'mafatih aljinan pages/a3mal_ashhor_alsana.dart';
-import 'mafatih aljinan pages/ad3iya_mashhoura.dart';
-import 'mafatih aljinan pages/ad3iyat_al2osbo3.dart';
-import 'mafatih aljinan pages/almonajat.dart';
-import 'mafatih aljinan pages/lailat_aljom3a_wnaharaha_w2a3malaha.dart';
-import 'mafatih aljinan pages/ta3kibat.dart';
-import 'mafatih aljinan pages/ziarat_al2osbou3.dart';
-import 'search_provider.dart';
+import '../Util/app_imports.dart';
 
 class MafatihAljinanHomeScreen extends StatefulWidget {
   static String screenRoute = 'mafatih_aljinan_home_screen';
@@ -39,6 +23,8 @@ class _MafatihAljinanHomeScreenState extends State<MafatihAljinanHomeScreen> {
             .map((e) => {
                   'id': e.id,
                   'title': e.title,
+                  'route': mafati7AljinanAllRoutes
+                      .mafati7AljinanRoutes[e.id - 1],
                 })
             .toList();
 
@@ -60,14 +46,21 @@ class _MafatihAljinanHomeScreenState extends State<MafatihAljinanHomeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
           centerTitle: true,
+          toolbarHeight: isTablet ? 100 : 70,
+          title: Text(
+            'مفاتيح الجنان',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 19,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -99,38 +92,34 @@ class _MafatihAljinanHomeScreenState extends State<MafatihAljinanHomeScreen> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Ta3kibat.screenRoute,
-                ZiaratAl2osbou3.screenRoute,
-                Ad3iyatAl2osbo3.screenRoute,
-                LailatAljom3aWnaharahaW2a3malaha.screenRoute,
-                Ad3iyaMashhoura.screenRoute,
-                Almonajat.screenRoute,
-                A3malAshhorAlsana.screenRoute,
-                A3malAlmasajedWalziyarat.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 allTitles.add({
                   'title': item.title,
-                  'route': allRoutes.map((e) => e).toList()[item.id - 1],
+                  'route': mafati7AljinanAllRoutes
+                      .mafati7AljinanRoutes.map((e) => e).toList()[item.id - 1],
                 });
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

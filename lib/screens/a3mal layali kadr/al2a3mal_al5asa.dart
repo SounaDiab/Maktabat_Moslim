@@ -1,25 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
-import '../a3mal_layali_kadr_home_screen.dart';
-import 'package:provider/provider.dart';
-
-import '../../widgets/line_from_index.dart';
-import '../../widgets/search_widget.dart';
-import '../search_provider.dart';
-import 'al2a3mal al5asa/a3mal_allayla_alsalisa_wal3ishrin.dart';
-import 'al2a3mal al5asa/a3mal_allayla_alwahida_wal3eshrin.dart';
-import 'al2a3mal al5asa/a3mal_allayla_latasi3a_3ashar.dart';
-import 'al2a3mal al5asa/dou3a2_2alhazin.dart';
-import 'al2a3mal al5asa/dou3a2_alimam_alsadek.dart';
-import 'al2a3mal al5asa/dou3a2_allayla_alwahida_wal3ishrin.dart';
-import 'al2a3mal al5asa/dou3a2_ba3d_salat_alwater.dart';
-import 'al2a3mal al5asa/dou3a2_ya_batinan.dart';
-import 'al2a3mal al5asa/hadis_2alkisa2.dart';
-import 'al2a3mal al5asa/salat_layl.dart';
-import 'al2a3mal al5asa/zyarat_amir_mo2minin.dart';
-import 'al2a3mal al5asa/zyarat_sa7ib_alzaman.dart';
+import '../../Util/app_imports.dart';
 
 class Al2a3malAl5asa extends StatefulWidget {
   static String screenRoute = 'al2a3mal_al5asa_screen';
@@ -54,6 +33,8 @@ class _Al2a3malAl5asaState extends State<Al2a3malAl5asa> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': a3malLayaliKaderAllRoutes
+                      .al2a3malAl5asaRoutes[sub.id - 1],
             });
           }
         }
@@ -81,8 +62,16 @@ class _Al2a3malAl5asaState extends State<Al2a3malAl5asa> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'الاعمال الخاصة',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 19,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -114,26 +103,13 @@ class _Al2a3malAl5asaState extends State<Al2a3malAl5asa> {
             } else if (state is A3malLaylatAlkaderLoaded) {
               final a3malLaylatAlkader = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                A3malAllaylaLatasi3a3ashar.screenRoute,
-                A3malAllaylaAlwahidaWal3eshrin.screenRoute,
-                Dou3a2AlimamAlsadek.screenRoute,
-                Dou3a2AllaylaAlwahidaWal3ishrin.screenRoute,
-                ZyaratAmirMo2minin.screenRoute,
-                A3malAllaylaAlsalisaWal3ishrin.screenRoute,
-                ZyaratSa7ibAlzaman.screenRoute,
-                Dou3a2YaBatinan.screenRoute,
-                SalatLayl.screenRoute,
-                Dou3a2Ba3dSalatAlwater.screenRoute,
-                Hadis2alkisa2.screenRoute,
-                Dou3a22alhazin.screenRoute,
-              ];
               for (var item in a3malLaylatAlkader) {
                 if (item.title == "الاعمال الخاصة بليالي القدر") {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes
+                      'route': a3malLayaliKaderAllRoutes
+                      .al2a3malAl5asaRoutes
                           .map((e) => e)
                           .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                     });

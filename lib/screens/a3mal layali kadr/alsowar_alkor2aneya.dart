@@ -1,16 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../a3mal_layali_kadr_home_screen.dart';
-import 'package:provider/provider.dart';
-
-import '../../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
-import '../../widgets/line_from_index.dart';
-import '../../widgets/search_widget.dart';
-import '../search_provider.dart';
-import 'sowar kor2aneya/sourat_al3ankabout.dart';
-import 'sowar kor2aneya/sourat_aldo5an.dart';
-import 'sowar kor2aneya/sourat_alroum.dart';
+import '../../Util/app_imports.dart';
 
 class AlsowarAlkor2aneya extends StatefulWidget {
   static String screenRoute = 'alsowar_alkor2aneya_screen';
@@ -46,6 +34,8 @@ class _AlsowarAlkor2aneyaState extends State<AlsowarAlkor2aneya> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': a3malLayaliKaderAllRoutes
+                      .alSowarAlKor2aneyaRoutes[sub.id - 1],
             });
           }
         }
@@ -73,8 +63,16 @@ class _AlsowarAlkor2aneyaState extends State<AlsowarAlkor2aneya> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'السور القرآنية',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 19,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -106,18 +104,14 @@ class _AlsowarAlkor2aneyaState extends State<AlsowarAlkor2aneya> {
             } else if (state is A3malLaylatAlkaderLoaded) {
               final a3malLaylatAlkader = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                SouratAl3ankabout.screenRoute,
-                SouratAlroum.screenRoute,
-                SouratAldo5an.screenRoute
-              ];
               for (var item in a3malLaylatAlkader) {
                 if (item.title ==
                     "السور القرآنية المباركة التي تستحب قرائتها في ليلة القدر") {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes
+                      'route': a3malLayaliKaderAllRoutes
+                      .alSowarAlKor2aneyaRoutes
                           .map((e) => e)
                           .toList()[subItem.id - 1], // أو أي قيمة route مناسبة
                     });
@@ -127,16 +121,22 @@ class _AlsowarAlkor2aneyaState extends State<AlsowarAlkor2aneya> {
 
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: allTitles.length,
                     itemBuilder: (context, i) {
-                      // final item = searchProvider.filteredItems[index];
                       final title = allTitles[i]['title'];
                       final route = allTitles[i]['route'];
-                      return LineFromIndex(
-                        text: title,
-                        route: route,
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
                       );
                     },
                   ),

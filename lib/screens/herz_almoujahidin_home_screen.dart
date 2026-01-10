@@ -1,37 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maktabat_almoslim/business%20logic/cubit/herz_almoujahidin_cubit.dart';
-import '../api/web service/json_service.dart';
-import 'books.dart';
-import 'package:provider/provider.dart';
-// import 'package:provider/provider.dart';
-
-import '../widgets/line_from_index.dart';
-import '../widgets/search_widget.dart';
-import 'herz lmoujahidin/aawza_yataawaz_biha_aala_alaadaa_page.dart';
-import 'herz lmoujahidin/aawzat_alnabi_yawm_wadi_alkora_page.dart';
-import 'herz lmoujahidin/alfalak_page.dart';
-import 'herz lmoujahidin/alhayakel_sabea_page.dart';
-import 'herz lmoujahidin/alikhlas_page.dart';
-import 'herz lmoujahidin/alkafiroun_page.dart';
-import 'herz lmoujahidin/alnas_page.dart';
-import 'herz lmoujahidin/ayat_alhefz_men_saif_alaadow_page.dart';
-import 'herz lmoujahidin/ayat_alikhtifaa_men_alaadow_page.dart';
-import 'herz lmoujahidin/ayat_listekfaa_page.dart';
-import 'herz lmoujahidin/ayat_lkorsi_page.dart';
-import 'herz lmoujahidin/douaa_ikhdaa_rikab_aljababira_page.dart';
-import 'herz lmoujahidin/douaa_lidafea_kaid_aladow_wsharoh_page.dart';
-import 'herz lmoujahidin/douaa_lilihtijab_aan_basar_alaadaa_page.dart';
-import 'herz lmoujahidin/douaa_lilihtijab_page.dart';
-import 'herz lmoujahidin/douaa_lilkhalas_men_alkatl_page.dart';
-import 'herz lmoujahidin/douaa_nadi_aalyan_mozhira_alaajaib_page.dart';
-import 'herz lmoujahidin/herz_alimam_aljawad_page.dart';
-import 'herz lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
-import 'herz lmoujahidin/herz_altaj_page.dart';
-import 'herz lmoujahidin/herz_lietikaa_silah_alaadow_page.dart';
-import 'herz lmoujahidin/herz_mostakhraj_men_kitab_allah_page.dart';
-import 'herz lmoujahidin/rokaat_aljayb_lilimam_alrida_aalaih_alsalam_page.dart';
-import 'search_provider.dart';
+import '../Util/app_imports.dart';
 
 class HerzAlmoujahidinHomeScreen extends StatefulWidget {
   static String screenRoute = 'home_screen';
@@ -57,6 +24,8 @@ class _HerzAlmoujahidinHomeScreenState
             .map((e) => {
                   'id': e.id,
                   'title': e.title,
+                  'route': herzAlmoujahidinAllRoutes
+                      .herzAlmoujahidinRoutes[e.id - 1],
                 })
             .toList();
 
@@ -82,8 +51,16 @@ class _HerzAlmoujahidinHomeScreenState
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'حرز المجاهدين',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 19,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -117,53 +94,39 @@ class _HerzAlmoujahidinHomeScreenState
             } else if (state is HerzAlmoujahidinLoaded) {
               final herzAlmoujahidin = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                AyatLkorsiPage.screenRoute,
-                AlkafirounPage.screenRoute,
-                AlikhlasPage.screenRoute,
-                AlfalakPage.screenRoute,
-                AlnasPage.screenRoute,
-                AyatListekfaaPage.screenRoute,
-                DouaaIkhdaaRikabAljababiraPage.screenRoute,
-                DouaaLidafeaKaidAladowWsharohPage.screenRoute,
-                HerzMostakhrajMenKitabAllahPage.screenRoute,
-                AlhayakelSabeaPage.screenRoute,
-                RokaatAljaybLilimamAlridaAalaihAlsalamPage.screenRoute,
-                AawzaYataawazBihaAalaAlaadaaPage.screenRoute,
-                DouaaLilkhalasMenAlkatlPage.screenRoute,
-                HerzLietikaaSilahAlaadowPage.screenRoute,
-                AyatAlhefzMenSaifAlaadowPage.screenRoute,
-                HerzAlimamAljawadPage.screenRoute,
-                AawzatAlnabiYawmWadiAlkoraPage.screenRoute,
-                AyatAlikhtifaaMenAlaadowPage.screenRoute,
-                DouaaLilihtijabAanBasarAlaadaaPage.screenRoute,
-                DouaaLilihtijabPage.screenRoute,
-                HerzAltajPage.screenRoute,
-                HerzAlrasoulWalAimmaPage.screenRoute,
-                DouaaNadiAalyanMozhiraAlaajaibPage.screenRoute,
-              ];
+
               for (var item in herzAlmoujahidin) {
                 allTitles.add({
                   'title': item.title,
-                  'route': allRoutes.map((e) => e).toList()[item.id - 1],
+                  'route': herzAlmoujahidinAllRoutes.herzAlmoujahidinRoutes
+                      .map((e) => e)
+                      .toList()[item.id - 1],
                 });
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                          showIcon: title == 'حرز الرسول ص والائمة (ع)'
+                              ? true
+                              : false,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is HerzAlmoujahidinError) {

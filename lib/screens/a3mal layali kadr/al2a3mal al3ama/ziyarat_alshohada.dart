@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/bloc_builder_widget.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../al2a3mal_al3ama.dart';
-import 'ziyarat_3ali_bin_alhussein.dart';
-import 'ziyarat_abi_alfadl.dart';
 
 class ZiyaratAlshohada extends StatefulWidget {
   static String screenRoute = 'ziyarat_alshohada_screen';
@@ -64,7 +54,7 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -79,7 +69,7 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -115,8 +105,7 @@ class _ZiyaratAlshohadaState extends State<ZiyaratAlshohada> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAbiAlfadl.screenRoute,
           pushBack: Ziyarat3aliBinAlhussein.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
