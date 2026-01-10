@@ -1,22 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import '../a3mal_almasajed_walziyarat.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/alwada3.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/zikr_almasajed_almo3azama.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/zikr_sa2ir_alziyarat.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_2a2imat_belbaki3.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_alnabi.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_alnabi_walzahraa_wal2a2ima_belbaki3.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_fatima_bent_2asad.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_hamza.dart';
-import 'ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_kobour_alshohada2.dart';
 
 class ZiyaratAlnabiWalzahraaWal2a2ima extends StatefulWidget {
   static String screenRoute = 'ziyarat_alnabi_walzahraa_wal2a2ima_screen';
@@ -58,6 +41,8 @@ class _ZiyaratAlnabiWalzahraaWal2a2imaState
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route': mafati7AljinanAllRoutes
+                        .ziyaratAlnabiWakzahraaRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -88,8 +73,16 @@ class _ZiyaratAlnabiWalzahraaWal2a2imaState
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'زيارة النبي والزهراء والأئمة (ع)',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 15,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -121,17 +114,6 @@ class _ZiyaratAlnabiWalzahraaWal2a2imaState
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                ZiyaratAlnabiWalzahraaWal2a2imaBelbaki3.screenRoute,
-                ZiyaratAlnabi.screenRoute,
-                Ziyarat2a2imatBelbaki3.screenRoute,
-                ZikrSa2irAlziyarat.screenRoute,
-                ZiyaratFatimaBent2asad.screenRoute,
-                ZiyaratHamza.screenRoute,
-                ZiyaratKobourAlshohada2.screenRoute,
-                ZikrAlmasajedAlmo3azama.screenRoute,
-                Alwada3.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال المساجد والزيارات') {
                   for (var subItem in item.index) {
@@ -139,7 +121,8 @@ class _ZiyaratAlnabiWalzahraaWal2a2imaState
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes
+                              .ziyaratAlnabiWakzahraaRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -150,20 +133,25 @@ class _ZiyaratAlnabiWalzahraaWal2a2imaState
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

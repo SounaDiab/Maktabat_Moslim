@@ -1,16 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import '../a3mal_almasajed_walziyarat.dart';
-import 'masjid alsahla/a3mal_masjed_alsahla.dart';
-import 'masjid alsahla/alsalat_waldouaa_fi_masjed_zaid.dart';
-import 'masjid alsahla/fi_fadl_masjed_alsahla.dart';
 
 class A3malMasjidAlsahla extends StatefulWidget {
   static String screenRoute = 'a3mal_masjid_alsahla_screen';
@@ -50,6 +39,8 @@ class _A3malMasjidAlsahlaState extends State<A3malMasjidAlsahla> {
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route': mafati7AljinanAllRoutes
+                        .masjedAlsahlaRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -75,14 +66,21 @@ class _A3malMasjidAlsahlaState extends State<A3malMasjidAlsahla> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'اعمال مسجد السهلة',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -114,11 +112,6 @@ class _A3malMasjidAlsahlaState extends State<A3malMasjidAlsahla> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                A3malMasjedAlsahla.screenRoute,
-                FiFadlMasjedAlsahla.screenRoute,
-                AlsalatWaldouaaFiMasjedZaid.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال المساجد والزيارات') {
                   for (var subItem in item.index) {
@@ -126,7 +119,7 @@ class _A3malMasjidAlsahlaState extends State<A3malMasjidAlsahla> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes.masjedAlsahlaRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -137,20 +130,25 @@ class _A3malMasjidAlsahlaState extends State<A3malMasjidAlsahla> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

@@ -1,28 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import '../a3mal_almasajed_walziyarat.dart';
-import 'masjid alkoufa/a3mal_al2ostwana_al5amisa.dart';
-import 'masjid alkoufa/a3mal_al2ostwana_alsabi3a.dart';
-import 'masjid alkoufa/a3mal_bab_alfaraj.dart';
-import 'masjid alkoufa/a3mal_bait_altast.dart';
-import 'masjid alkoufa/a3mal_dikat_alkada2_wbait_altast.dart';
-import 'masjid alkoufa/a3mal_jami3_alkoufa.dart';
-import 'masjid alkoufa/a3mal_mi7rab_amir_almo2minin.dart';
-import 'masjid alkoufa/aamal_al2ostwana_alsalisa.dart';
-import 'masjid alkoufa/fi_fadl_alkoufa_wamasjidouha.dart';
-import 'masjid alkoufa/mounajat_amir_almo2minin.dart';
-import 'masjid alkoufa/sifat_salat.dart';
-import 'masjid alkoufa/sifat_salat_lil7aja.dart';
-import 'masjid alkoufa/zikr_alsalat_waldou3aa_fi_wasat_almasjid.dart';
-import 'masjid alkoufa/ziyarat_hani_ben_3orwa.dart';
-import 'masjid alkoufa/ziyarat_mouslim_ben_3akil.dart';
 
 class FadlLakoufaWmasjidoha extends StatefulWidget {
   static String screenRoute = 'fadl_alkoufa_wmasjidoha_screen';
@@ -62,6 +39,8 @@ class _FadlLakoufaWmasjidohaState extends State<FadlLakoufaWmasjidoha> {
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route': mafati7AljinanAllRoutes
+                        .masjedAlkoufaRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -87,14 +66,21 @@ class _FadlLakoufaWmasjidohaState extends State<FadlLakoufaWmasjidoha> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'فضل الكوفة ومسجدها واعماله',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 14,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -126,23 +112,6 @@ class _FadlLakoufaWmasjidohaState extends State<FadlLakoufaWmasjidoha> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                FiFadlAlkoufaWamasjidouha.screenRoute,
-                A3malJami3Alkoufa.screenRoute,
-                A3malDikatAlkada2WbaitAltast.screenRoute,
-                A3malBaitAltast.screenRoute,
-                ZikrAlsalatWaldou3aaFiWasatAlmasjid.screenRoute,
-                A3malAl2ostwanaAlsabi3a.screenRoute,
-                A3malAl2ostwanaAl5amisa.screenRoute,
-                AamalAl2ostwanaAlsalisa.screenRoute,
-                A3malBabAlfaraj.screenRoute,
-                SifatSalat.screenRoute,
-                SifatSalatLil7aja.screenRoute,
-                A3malMi7rabAmirAlmo2minin.screenRoute,
-                MounajatAmirAlmo2minin.screenRoute,
-                ZiyaratMouslimBen3akil.screenRoute,
-                ZiyaratHaniBen3orwa.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال المساجد والزيارات') {
                   for (var subItem in item.index) {
@@ -150,7 +119,7 @@ class _FadlLakoufaWmasjidohaState extends State<FadlLakoufaWmasjidoha> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes.masjedAlkoufaRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -161,20 +130,25 @@ class _FadlLakoufaWmasjidohaState extends State<FadlLakoufaWmasjidoha> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

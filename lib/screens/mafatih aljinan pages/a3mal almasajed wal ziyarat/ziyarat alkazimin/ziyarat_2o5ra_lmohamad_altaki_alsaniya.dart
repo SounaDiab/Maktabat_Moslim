@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
+import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../../widgets/scroll_title.dart';
-import '../../../favorites_provider.dart';
-import '../../../favorites_screen.dart';
-import '../ziyarat_alkazimin.dart';
-import 'almasjed_alsharif.dart';
-import 'ziyarat_2o5ra_lmohamad_altaki.dart';
 
 class Ziyarat2o5raLmohamadAltakiAlsaniya extends StatefulWidget {
   static String screenRoute = 'ziyarat_2o5ra_lmohamad_altaki_alsaniya_screen';
@@ -68,7 +58,7 @@ class _Ziyarat2o5raLmohamadAltakiAlsaniyaState
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -83,7 +73,7 @@ class _Ziyarat2o5raLmohamadAltakiAlsaniyaState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -121,8 +111,7 @@ class _Ziyarat2o5raLmohamadAltakiAlsaniyaState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: AlmasjedAlsharif.screenRoute,
           pushBack: Ziyarat2o5raLmohamadAltaki.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

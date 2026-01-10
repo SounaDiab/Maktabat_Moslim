@@ -1,20 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import '../a3mal_almasajed_walziyarat.dart';
-import 'ziyarat alkazimin/almasjed_alsharif.dart';
-import 'ziyarat alkazimin/fi_fadl_ziyarat_lkazimin.dart';
-import 'ziyarat alkazimin/ziyarat_2o5ra_lmohamad_altaki.dart';
-import 'ziyarat alkazimin/ziyarat_2o5ra_lmohamad_altaki_alsaniya.dart';
-import 'ziyarat alkazimin/ziyarat_2o5ra_lmousa.dart';
-import 'ziyarat alkazimin/ziyarat_alnowab_al2arba3a.dart';
-import 'ziyarat alkazimin/ziyarat_salman.dart';
 
 class ZiyaratAlkazimin extends StatefulWidget {
   static String screenRoute = 'ziyarat_alkazimin_screen';
@@ -54,6 +39,8 @@ class _ZiyaratAlkaziminState extends State<ZiyaratAlkazimin> {
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route': mafati7AljinanAllRoutes
+                        .ziyaratAlkaziminRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -79,14 +66,21 @@ class _ZiyaratAlkaziminState extends State<ZiyaratAlkazimin> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'زيارة الكاظمين',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -118,15 +112,6 @@ class _ZiyaratAlkaziminState extends State<ZiyaratAlkazimin> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                FiFadlZiyaratLkazimin.screenRoute,
-                Ziyarat2o5raLmousa.screenRoute,
-                Ziyarat2o5raLmohamadAltaki.screenRoute,
-                Ziyarat2o5raLmohamadAltakiAlsaniya.screenRoute,
-                AlmasjedAlsharif.screenRoute,
-                ZiyaratAlnowabAl2arba3a.screenRoute,
-                ZiyaratSalman.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال المساجد والزيارات') {
                   for (var subItem in item.index) {
@@ -134,7 +119,8 @@ class _ZiyaratAlkaziminState extends State<ZiyaratAlkazimin> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes
+                              .ziyaratAlkaziminRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -145,20 +131,25 @@ class _ZiyaratAlkaziminState extends State<ZiyaratAlkazimin> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {
