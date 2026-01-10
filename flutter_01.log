@@ -1,0 +1,104 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter --quiet assemble --no-version-check --depfile C:\developpement\flutter-app2\herz_lmoujahidin\build\app\intermediates\flutter\debug/flutter_build.d --output C:\developpement\flutter-app2\herz_lmoujahidin\build\app\intermediates\flutter\debug -dTargetFile=C:\developpement\flutter-app2\herz_lmoujahidin\lib\main.dart -dTargetPlatform=android -dBuildMode=debug -dTrackWidgetCreation=true -dFlavor= -dAndroidArchs=android-arm64 -dMinSdkVersion=21 debug_android_application
+
+## exception
+
+PathAccessException: PathAccessException: Cannot delete file, path = 'C:\developpement\flutter-app2\herz_lmoujahidin\.dart_tool\flutter_build\fb555d46d192fd84256ade25e268adc3\kernel_snapshot.stamp' (OS Error: The process cannot access the file because it is being used by another process.
+, errno = 32)
+
+```
+#0      _File.throwIfError (dart:io/file_impl.dart:675:7)
+#1      _File._deleteSync (dart:io/file_impl.dart:329:5)
+#2      FileSystemEntity.deleteSync (dart:io/file_system_entity.dart:407:7)
+#3      ForwardingFileSystemEntity.deleteSync (package:file/src/forwarding/forwarding_file_system_entity.dart:70:16)
+#4      ForwardingFileSystemEntity.deleteSync (package:file/src/forwarding/forwarding_file_system_entity.dart:70:16)
+#5      ErrorHandlingFileSystem.deleteIfExists (package:flutter_tools/src/base/error_handling_io.dart:84:14)
+#6      Target.clearStamp (package:flutter_tools/src/build_system/build_system.dart:178:29)
+#7      _BuildInstance._invokeInternal (package:flutter_tools/src/build_system/build_system.dart:918:19)
+<asynchronous suspension>
+#8      Future.wait.<anonymous closure> (dart:async/future.dart:520:21)
+<asynchronous suspension>
+#9      _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:829:32)
+<asynchronous suspension>
+#10     FlutterBuildSystem.build (package:flutter_tools/src/build_system/build_system.dart:651:16)
+<asynchronous suspension>
+#11     AssembleCommand.runCommand (package:flutter_tools/src/commands/assemble.dart:329:32)
+<asynchronous suspension>
+#12     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1450:27)
+<asynchronous suspension>
+#13     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+<asynchronous suspension>
+#14     CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+<asynchronous suspension>
+#15     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:421:9)
+<asynchronous suspension>
+#16     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+<asynchronous suspension>
+#17     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:364:5)
+<asynchronous suspension>
+#18     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:131:9)
+<asynchronous suspension>
+#19     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+<asynchronous suspension>
+#20     main (package:flutter_tools/executable.dart:94:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 3.27.0, on Microsoft Windows [Version 10.0.22621.4317], locale ar-LB)
+    • Flutter version 3.27.0 on channel stable at C:\developpement\flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 8495dee1fd (1 year, 1 month ago), 2024-12-10 14:23:39 -0800
+    • Engine revision 83bacfc525
+    • Dart version 3.6.0
+    • DevTools version 2.40.2
+
+[✓] Windows Version (Installed version of Windows is version 10 or higher)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 35.0.0)
+    • Android SDK at C:\Users\amirz\AppData\Local\Android\Sdk
+    • Platform android-35, build-tools 35.0.0
+    • ANDROID_HOME = C:\Users\amirz\AppData\Local\Android\Sdk
+    • Java binary at: C:\Program Files\Android\Android Studio1\jbr\bin\java
+    • Java version OpenJDK Runtime Environment (build 21.0.6+-13355223-b631.42)
+    • All Android licenses accepted.
+
+[✓] Chrome - develop for the web
+    • Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[✓] Visual Studio - develop Windows apps (Visual Studio Community 2022 17.14.0 Preview 2.0)
+    • Visual Studio at C:\Program Files\Microsoft Visual Studio\2022\Preview
+    • Visual Studio Community 2022 version 17.14.35906.104
+    • The current Visual Studio installation is a pre-release version. It may not be supported by Flutter yet.
+    • Windows 10 SDK version 10.0.26100.0
+
+[✓] Android Studio (version 2024.3.2)
+    • Android Studio at C:\Program Files\Android\Android Studio1
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • android-studio-dir = C:\Program Files\Android\Android Studio1
+    • Java version OpenJDK Runtime Environment (build 21.0.6+-13355223-b631.42)
+
+[✓] VS Code (version 1.107.1)
+    • VS Code at C:\Users\amirz\AppData\Local\Programs\Microsoft VS Code
+    • Flutter extension version 3.126.0
+
+[✓] Connected device (4 available)
+    • TECNO CI8n (mobile) • 0855625269007912 • android-arm64  • Android 13 (API 33)
+    • Windows (desktop)   • windows          • windows-x64    • Microsoft Windows [Version 10.0.22621.4317]
+    • Chrome (web)        • chrome           • web-javascript • Google Chrome 142.0.7444.176
+    • Edge (web)          • edge             • web-javascript • Microsoft Edge 143.0.3650.96
+
+[✓] Network resources
+    • All expected network resources are available.
+
+• No issues found!
+```
