@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../nozor_men_a3mal_allail_walnahar.dart';
-import 'fi_azkar_wda3awat_tokra2_saba7an_wamasa2an.dart';
-import 'fima_yo3mal_men_7in_al8ouroub_2ela_7in_alnawm.dart';
 
 class FiL2intibahMenAlnawmWsalatAllayl extends StatefulWidget {
   static String screenRoute = 'fi_l2intibah_men_alnawm_wsalat_allayl_screen';
@@ -69,7 +59,7 @@ class _FiL2intibahMenAlnawmWsalatAllaylState
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -84,7 +74,7 @@ class _FiL2intibahMenAlnawmWsalatAllaylState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -119,8 +109,7 @@ class _FiL2intibahMenAlnawmWsalatAllaylState
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiAzkarWda3awatTokra2Saba7anWamasa2an.screenRoute,
           pushBack: FimaYo3malMen7inAl8ouroub2ela7inAlnawm.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

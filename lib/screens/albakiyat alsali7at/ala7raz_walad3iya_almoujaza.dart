@@ -1,26 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/albakiyat_alsalihat_cubit.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../albakiyat_alsali7at_home_screen.dart';
-import '../search_provider.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_belisti5araa.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_belistikala.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_belsafaar.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_bilisti3aza.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_bishokr_allah.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_bitalab_al7aj.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_bitalab_al7awa2ij.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_bitalab_alrizk.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_bitalab_altawba.dart';
-import 'ala7raz walad3iya almoujaza/almonajat_likashf_alzolm.dart';
-import 'ala7raz walad3iya almoujaza/dou3a2_alsajad_fi_zikr_altawba.dart';
-import 'ala7raz walad3iya almoujaza/fi_asar_ba3d_sowar_walayat.dart';
-import 'ala7raz walad3iya almoujaza/fi_ba3d_ala7raz_walad3iya_almoujaza.dart';
-import 'ala7raz walad3iya almoujaza/fi_ba3d_ma_yata3alak_belmawt.dart';
+import '../../Util/app_imports.dart';
 
 class Ala7razWalad3iyaAlmoujaza extends StatefulWidget {
   static String screenRoute = 'ala7raz_walad3iya_almoujaza_screen';
@@ -57,6 +35,8 @@ class _Ala7razWalad3iyaAlmoujazaState extends State<Ala7razWalad3iyaAlmoujaza> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route':
+                  albakyatAlsali7atAllRoutes.ala7razWalad3iyaRoutes[sub.id - 1],
             });
           }
         }
@@ -83,8 +63,16 @@ class _Ala7razWalad3iyaAlmoujazaState extends State<Ala7razWalad3iyaAlmoujaza> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'الاحراز والادعية الموجزة',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -116,48 +104,39 @@ class _Ala7razWalad3iyaAlmoujazaState extends State<Ala7razWalad3iyaAlmoujaza> {
             } else if (state is AlbakiyatAlsalihatLoaded) {
               final albakiyatAlsalihat = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Dou3a2AlsajadFiZikrAltawba.screenRoute,
-                FiBa3dAla7razWalad3iyaAlmoujaza.screenRoute,
-                AlmonajatBelisti5araa.screenRoute,
-                AlmonajatBelistikala.screenRoute,
-                AlmonajatBelsafaar.screenRoute,
-                AlmonajatBitalabAlrizk.screenRoute,
-                AlmonajatBilisti3aza.screenRoute,
-                AlmonajatBitalabAltawba.screenRoute,
-                AlmonajatBitalabAl7aj.screenRoute,
-                AlmonajatLikashfAlzolm.screenRoute,
-                AlmonajatBishokrAllah.screenRoute,
-                AlmonajatBitalabAl7awa2ij.screenRoute,
-                FiAsarBa3dSowarWalayat.screenRoute,
-                FiBa3dMaYata3alakBelmawt.screenRoute,
-              ];
               for (var item in albakiyatAlsalihat) {
                 if (item.title == 'الاحراز والادعية الموجزة') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                      'route': albakyatAlsali7atAllRoutes.ala7razWalad3iyaRoutes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1],
                     });
                   }
                 }
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is AlbakiyatAlsalihatError) {

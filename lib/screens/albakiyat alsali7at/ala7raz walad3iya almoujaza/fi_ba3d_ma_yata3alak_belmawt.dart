@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../ala7raz_walad3iya_almoujaza.dart';
-import 'dou3a2_alsajad_fi_zikr_altawba.dart';
-import 'fi_asar_ba3d_sowar_walayat.dart';
 
 class FiBa3dMaYata3alakBelmawt extends StatefulWidget {
   static String screenRoute = 'fi_ba3d_ma_yata3alak_belmawt_screen';
@@ -68,7 +58,7 @@ class _FiBa3dMaYata3alakBelmawtState extends State<FiBa3dMaYata3alakBelmawt> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -83,7 +73,7 @@ class _FiBa3dMaYata3alakBelmawtState extends State<FiBa3dMaYata3alakBelmawt> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -119,8 +109,7 @@ class _FiBa3dMaYata3alakBelmawtState extends State<FiBa3dMaYata3alakBelmawt> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: Dou3a2AlsajadFiZikrAltawba.screenRoute,
           pushBack: FiAsarBa3dSowarWalayat.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

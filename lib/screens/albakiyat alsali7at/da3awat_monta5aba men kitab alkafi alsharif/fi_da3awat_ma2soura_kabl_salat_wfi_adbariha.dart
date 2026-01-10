@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
-import 'fi_ad3iya_ma2soura_lilrizk.dart';
-import 'fi_zikr_3idat_da3awat_yod3a_bha_2iza_5araj_l2insan_men_manzlhi.dart';
 
 class FiDa3awatMa2souraKablSalatWfiAdbariha extends StatefulWidget {
   static String screenRoute =
@@ -70,7 +60,7 @@ class _FiDa3awatMa2souraKablSalatWfiAdbarihaState
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -85,7 +75,7 @@ class _FiDa3awatMa2souraKablSalatWfiAdbarihaState
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -121,8 +111,7 @@ class _FiDa3awatMa2souraKablSalatWfiAdbarihaState
           pushNext: FiAd3iyaMa2souraLilrizk.screenRoute,
           pushBack:
               FiZikr3idatDa3awatYod3aBha2iza5arajL2insanMenManzlhi.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,19 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/albakiyat_alsalihat_cubit.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../albakiyat_alsali7at_home_screen.dart';
-import '../search_provider.dart';
-import 'zikr salawat ayam al2ousbou3/salat_yawm_al2a7add.dart';
-import 'zikr salawat ayam al2ousbou3/salat_yawm_alsabtt.dart';
-import 'zikr salawat ayam al2ousbou3/salat_yawm_al2isnainn.dart';
-import 'zikr salawat ayam al2ousbou3/salat_yawm_alsoulasaa2.dart';
-import 'zikr salawat ayam al2ousbou3/salat_yawm_al2arbi3aa2.dart';
-import 'zikr salawat ayam al2ousbou3/salat_yawm_al5amiss.dart';
-import 'zikr salawat ayam al2ousbou3/salat_yawm_aljom3aa.dart';
+import '../../Util/app_imports.dart';
 
 class ZikrSalawatAyamAl2osbou3 extends StatefulWidget {
   static String screenRoute = 'zikr_salawat_ayam_al2osbou3_screen';
@@ -49,6 +34,8 @@ class _ZikrSalawatAyamAl2osbou3State extends State<ZikrSalawatAyamAl2osbou3> {
           mappedList.add({
             'id': sub.id,
             'title': sub.title,
+            'route': albakyatAlsali7atAllRoutes
+                .zikrSalawatAyamAl2ousbou3Routes[sub.id - 1],
           });
         }
       }
@@ -74,8 +61,16 @@ class _ZikrSalawatAyamAl2osbou3State extends State<ZikrSalawatAyamAl2osbou3> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'ذكر صلوات ايام الاسبوع',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -107,41 +102,40 @@ class _ZikrSalawatAyamAl2osbou3State extends State<ZikrSalawatAyamAl2osbou3> {
             } else if (state is AlbakiyatAlsalihatLoaded) {
               final albakiyatAlsalihat = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                SalatYawmAlsabtt.screenRoute,
-                SalatYawmAl2a7add.screenRoute,
-                SalatYawmAl2isnainn.screenRoute,
-                SalatYawmAlsoulasaa2.screenRoute,
-                SalatYawmAl2arbi3aa2.screenRoute,
-                SalatYawmAl5amiss.screenRoute,
-                SalatYawmAljom3aa.screenRoute,
-              ];
               for (var item in albakiyatAlsalihat) {
                 if (item.title == 'ذكر صلوات ايام الاسبوع') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                      'route': albakyatAlsali7atAllRoutes
+                          .zikrSalawatAyamAl2ousbou3Routes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1],
                     });
                   }
                 }
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is AlbakiyatAlsalihatError) {

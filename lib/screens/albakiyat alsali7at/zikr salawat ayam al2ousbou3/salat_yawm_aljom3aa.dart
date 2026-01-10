@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import '../../../widgets/bloc_builder_albakiyat_alsalihat.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../zikr_salawat_ayam_al2osbou3.dart';
-import 'salat_yawm_al5amiss.dart';
-import 'salat_yawm_alsabtt.dart';
 
 class SalatYawmAljom3aa extends StatefulWidget {
   static String screenRoute = 'salat_yawm_aljom3aa_screen';
@@ -65,7 +55,7 @@ class _SalatYawmAljom3aaState extends State<SalatYawmAljom3aa> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: _onWillPop,
@@ -80,7 +70,7 @@ class _SalatYawmAljom3aaState extends State<SalatYawmAljom3aa> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -115,8 +105,7 @@ class _SalatYawmAljom3aaState extends State<SalatYawmAljom3aa> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: SalatYawmAlsabtt.screenRoute,
           pushBack: SalatYawmAl5amiss.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
