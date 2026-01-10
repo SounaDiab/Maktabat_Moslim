@@ -1,32 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../mafatih_aljinan_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'ad3iya mashhoura/Douaa_alsabah.dart';
-import 'ad3iya mashhoura/douaa_3alkama.dart';
-import 'ad3iya mashhoura/douaa_al3adila.dart';
-import 'ad3iya mashhoura/douaa_al3asharat.dart';
-import 'ad3iya mashhoura/douaa_alaahd.dart';
-import 'ad3iya mashhoura/douaa_alfaraj.dart';
-import 'ad3iya mashhoura/douaa_alhazin.dart';
-import 'ad3iya mashhoura/douaa_alihtijab.dart';
-import 'ad3iya mashhoura/douaa_aljawshan_alkabir.dart';
-import 'ad3iya mashhoura/douaa_aljawshan_alsa8ir.dart';
-import 'ad3iya mashhoura/douaa_alkamous.dart';
-import 'ad3iya mashhoura/douaa_almashlol.dart';
-import 'ad3iya mashhoura/douaa_almojir.dart';
-import 'ad3iya mashhoura/douaa_alsimat.dart';
-import 'ad3iya mashhoura/douaa_altawasol.dart';
-import 'ad3iya mashhoura/douaa_komail.dart';
-import 'ad3iya mashhoura/douaa_makarim_alakhlak.dart';
-import 'ad3iya mashhoura/douaa_nodba.dart';
-import 'ad3iya mashhoura/douaa_yastashir.dart';
-import 'ad3iya mashhoura/douaa_zaman_alghaiba.dart';
+import '../../Util/app_imports.dart';
 
 class Ad3iyaMashhoura extends StatefulWidget {
   static String screenRoute = 'ad3iya_mashhoura_screen';
@@ -50,8 +22,7 @@ class _Ad3iyaMashhouraState extends State<Ad3iyaMashhoura> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('الادعية المشهورة'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على الادعية المشهورة'),
+          orElse: () => throw Exception('لم يتم العثور على الادعية المشهورة'),
         );
 
         // نتأكد أن فيه فهرس داخلي (index أو subSections)
@@ -62,6 +33,8 @@ class _Ad3iyaMashhouraState extends State<Ad3iyaMashhoura> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route':
+                  mafati7AljinanAllRoutes.ad3iyaMashhouraRoutes[sub.id - 1],
             });
           }
         }
@@ -83,14 +56,21 @@ class _Ad3iyaMashhouraState extends State<Ad3iyaMashhoura> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'الادعية المشهورة',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -122,54 +102,39 @@ class _Ad3iyaMashhouraState extends State<Ad3iyaMashhoura> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                DouaaAlihtijab.screenRoute,
-                DouaaZamanAlghaiba.screenRoute,
-                DouaaNodba.screenRoute,
-                DouaaMakarimAlakhlak.screenRoute,
-                DouaaAlfaraj.screenRoute,
-                DouaaAlaahd.screenRoute,
-                Douaa3alkama.screenRoute,
-                DouaaAlsabah.screenRoute,
-                DouaaAltawasol.screenRoute,
-                DouaaKomail.screenRoute,
-                DouaaAl3asharat.screenRoute,
-                DouaaAlsimat.screenRoute,
-                DouaaAlmashlol.screenRoute,
-                DouaaYastashir.screenRoute,
-                DouaaAlmojir.screenRoute,
-                DouaaAl3adila.screenRoute,
-                DouaaAljawshanAlkabir.screenRoute,
-                DouaaAljawshanAlsa8ir.screenRoute,
-                DouaaAlhazin.screenRoute,
-                DouaaAlkamous.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'الادعية المشهورة') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                      'route': mafati7AljinanAllRoutes.ad3iyaMashhouraRoutes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1],
                     });
                   }
                 }
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

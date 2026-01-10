@@ -1,19 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../mafatih_aljinan_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'a3mal ashor alsana/baki_alsana.dart';
-import 'a3mal ashor alsana/moharam.dart';
-import 'a3mal ashor alsana/rajab.dart';
-import 'a3mal ashor alsana/ramadan.dart';
-import 'a3mal ashor alsana/sha3ban.dart';
-import 'a3mal ashor alsana/shawal.dart';
-import 'a3mal ashor alsana/zi_lhoja.dart';
+import '../../Util/app_imports.dart';
 
 class A3malAshhorAlsana extends StatefulWidget {
   static String screenRoute = 'a3mal_ashhor_alsana_screen';
@@ -37,8 +22,7 @@ class _A3malAshhorAlsanaState extends State<A3malAshhorAlsana> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('اعمال اشهر السنة'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على اعمال اشهر السنة'),
+          orElse: () => throw Exception('لم يتم العثور على اعمال اشهر السنة'),
         );
 
         // نتأكد أن فيه فهرس داخلي (index أو subSections)
@@ -49,6 +33,8 @@ class _A3malAshhorAlsanaState extends State<A3malAshhorAlsana> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route':
+                  mafati7AljinanAllRoutes.a3malAshhorAlsanaRoutes[sub.id - 1],
             });
           }
         }
@@ -70,14 +56,21 @@ class _A3malAshhorAlsanaState extends State<A3malAshhorAlsana> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'اعمال اشهر السنة',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -109,41 +102,39 @@ class _A3malAshhorAlsanaState extends State<A3malAshhorAlsana> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Moharam.screenRoute,
-                Rajab.screenRoute,
-                Sha3ban.screenRoute,
-                Ramadan.screenRoute,
-                Shawal.screenRoute,
-                ZiLhoja.screenRoute,
-                BakiAlsana.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال اشهر السنة') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                      'route': mafati7AljinanAllRoutes.a3malAshhorAlsanaRoutes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1],
                     });
                   }
                 }
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

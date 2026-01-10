@@ -1,19 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../mafatih_aljinan_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'ad3iyat al2osbo3/dou3a2_al2a7ad.dart';
-import 'ad3iyat al2osbo3/dou3a2_al2arbi3a2.dart';
-import 'ad3iyat al2osbo3/dou3a2_al2isnain.dart';
-import 'ad3iyat al2osbo3/dou3a2_al5amis.dart';
-import 'ad3iyat al2osbo3/dou3a2_aljom3a.dart';
-import 'ad3iyat al2osbo3/dou3a2_alsabt.dart';
-import 'ad3iyat al2osbo3/dou3a2_alsoulasa2.dart';
+import '../../Util/app_imports.dart';
 
 class Ad3iyatAl2osbo3 extends StatefulWidget {
   static String screenRoute = 'ad3iyat_al2osbou3_screen';
@@ -37,8 +22,7 @@ class _Ad3iyatAl2osbo3State extends State<Ad3iyatAl2osbo3> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('ادعية ايام الاسبوع'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على ادعية ايام الاسبوع'),
+          orElse: () => throw Exception('لم يتم العثور على ادعية ايام الاسبوع'),
         );
 
         // نتأكد أن فيه فهرس داخلي (index أو subSections)
@@ -49,6 +33,8 @@ class _Ad3iyatAl2osbo3State extends State<Ad3iyatAl2osbo3> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': mafati7AljinanAllRoutes
+                  .ad3iyatAyamAl2ousnbou3Routes[sub.id - 1],
             });
           }
         }
@@ -70,14 +56,21 @@ class _Ad3iyatAl2osbo3State extends State<Ad3iyatAl2osbo3> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'ادعية ايام الاسبوع',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -109,41 +102,40 @@ class _Ad3iyatAl2osbo3State extends State<Ad3iyatAl2osbo3> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Dou3a2Al2a7ad.screenRoute,
-                Dou3a2Al2isnain.screenRoute,
-                Dou3a2Alsoulasa2.screenRoute,
-                Dou3a2Al2arbi3a2.screenRoute,
-                Dou3a2Al5amis.screenRoute,
-                Dou3a2Aljom3a.screenRoute,
-                Dou3a2Alsabt.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'ادعية ايام الاسبوع') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                      'route': mafati7AljinanAllRoutes
+                          .ad3iyatAyamAl2ousnbou3Routes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1],
                     });
                   }
                 }
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

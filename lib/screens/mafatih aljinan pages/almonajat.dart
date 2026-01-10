@@ -1,32 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../api/web service/json_service.dart';
-import '../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../mafatih_aljinan_home_screen.dart';
-import '../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
-import '../../widgets/line_from_index.dart';
-import '../search_provider.dart';
-import 'almonajat/almonajat_alsha3baneya.dart';
-import 'almonajat/almonajat_belsafar.dart';
-import 'almonajat/almonajat_bikashf_alzolm.dart';
-import 'almonajat/monajat_al3arifin.dart';
-import 'almonajat/monajat_al5a2ifin.dart';
-import 'almonajat/monajat_almo3tasimin.dart';
-import 'almonajat/monajat_almo7ebin.dart';
-import 'almonajat/monajat_almoftakirin.dart';
-import 'almonajat/monajat_almoridin.dart';
-import 'almonajat/monajat_almotawasilin.dart';
-import 'almonajat/monajat_almoti3in_lillah.dart';
-import 'almonajat/monajat_alra8ibin.dart';
-import 'almonajat/monajat_alrajin.dart';
-import 'almonajat/monajat_alshakin.dart';
-import 'almonajat/monajat_alshakirin.dart';
-import 'almonajat/monajat_alta2ibin.dart';
-import 'almonajat/monajat_alzahidin.dart';
-import 'almonajat/monajat_alzakirin.dart';
-import 'almonajat/monajat_l2amir_almo2minin.dart';
-import 'almonajat/salas_kalimat_3an_amir_almo2minin.dart';
+import '../../Util/app_imports.dart';
 
 class Almonajat extends StatefulWidget {
   static String screenRoute = 'almonajat_screen';
@@ -50,8 +22,7 @@ class _AlmonajatState extends State<Almonajat> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('المناجاة'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على المناجاة'),
+          orElse: () => throw Exception('لم يتم العثور على المناجاة'),
         );
 
         // نتأكد أن فيه فهرس داخلي (index أو subSections)
@@ -62,6 +33,7 @@ class _AlmonajatState extends State<Almonajat> {
             mappedList.add({
               'id': sub.id,
               'title': sub.title,
+              'route': mafati7AljinanAllRoutes.almonajatRoutes[sub.id - 1],
             });
           }
         }
@@ -83,14 +55,21 @@ class _AlmonajatState extends State<Almonajat> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'المناجاة',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -122,54 +101,39 @@ class _AlmonajatState extends State<Almonajat> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                AlmonajatBelsafar.screenRoute,
-                AlmonajatBikashfAlzolm.screenRoute,
-                AlmonajatAlsha3baneya.screenRoute,
-                MonajatAlta2ibin.screenRoute,
-                MonajatAlshakin.screenRoute,
-                MonajatAl5a2ifin.screenRoute,
-                MonajatAlrajin.screenRoute,
-                MonajatAlra8ibin.screenRoute,
-                MonajatAlshakirin.screenRoute,
-                MonajatAlmoti3inLillah.screenRoute,
-                MonajatAlmoridin.screenRoute,
-                MonajatAlmo7ebin.screenRoute,
-                MonajatAlmotawasilin.screenRoute,
-                MonajatAlmoftakirin.screenRoute,
-                MonajatAl3arifin.screenRoute,
-                MonajatAlzakirin.screenRoute,
-                MonajatAlmo3tasimin.screenRoute,
-                MonajatAlzahidin.screenRoute,
-                MonajatL2amirAlmo2minin.screenRoute,
-                SalasKalimat3anAmirAlmo2minin.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'المناجاة') {
                   for (var subItem in item.index) {
                     allTitles.add({
                       'title': subItem.title,
-                      'route': allRoutes.map((e) => e).toList()[subItem.id - 1],
+                      'route': mafati7AljinanAllRoutes.almonajatRoutes
+                          .map((e) => e)
+                          .toList()[subItem.id - 1],
                     });
                   }
                 }
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

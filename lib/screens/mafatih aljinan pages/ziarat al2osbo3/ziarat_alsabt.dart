@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
-import '../../../widgets/scroll_title.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../ziarat_al2osbou3.dart';
-import 'ziarat_al2a7ad.dart';
-import 'ziarat_aljom3a.dart';
 
 class ZiaratAlsabt extends StatefulWidget {
   static String screenRoute = 'ziarat_alsabt_screen';
@@ -67,7 +58,7 @@ class _ZiaratAlsabtState extends State<ZiaratAlsabt> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
@@ -90,7 +81,7 @@ class _ZiaratAlsabtState extends State<ZiaratAlsabt> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
