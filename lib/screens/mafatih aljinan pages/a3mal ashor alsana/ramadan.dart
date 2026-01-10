@@ -1,46 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import '../a3mal_ashhor_alsana.dart';
-import 'ramadan/a3mal_allaila_altasi3a_3ashara_ramadan.dart';
-import 'ramadan/allayla_al2oula_ramadan.dart';
-import 'ramadan/allayla_al5amisa_3ashar_ramadan.dart';
-import 'ramadan/allayla_alrabi3a_3ashar_ramadan.dart';
-import 'ramadan/allayla_alsabi3a_3ashara_ramadan.dart';
-import 'ramadan/allayla_alsabi3a_wal3ishroun_ramadan.dart';
-import 'ramadan/allayla_alsalisa_3ashar_ramadan.dart';
-import 'ramadan/allayla_alsalisa_wal3ishroun_ramadan.dart';
-import 'ramadan/allayla_alwa7ida_wal3ishroun_ramadan.dart';
-import 'ramadan/alyawm_al2awal_ramadan.dart';
-import 'ramadan/alyawm_alsadis_ramadan.dart';
-import 'ramadan/alyawm_alsalasin_ramadan.dart';
-import 'ramadan/alyawm_alwa7id_wal3ishroun_ramadan.dart';
-import 'ramadan/da3awat_ayam_shaher_ramadan.dart';
-import 'ramadan/dou3aa_allayla_al5amisa_wal3ishroun_ramadan.dart';
-import 'ramadan/dou3aa_allayla_alrabi3a_wal3ishroun_ramadan.dart';
-import 'ramadan/dou3aa_allayla_alsabi3a_wal3ishroun_ramadan.dart';
-import 'ramadan/dou3aa_allayla_alsadisa_wal3ishroun_ramadan.dart';
-import 'ramadan/dou3aa_allayla_alsalasin_ramadan.dart';
-import 'ramadan/dou3aa_allayla_alsamina_wal3ishroun_ramadan.dart';
-import 'ramadan/dou3aa_allayla_altasi3a_wal3ishroun_ramadan.dart';
-import 'ramadan/douaa_abi_7amza_alsamali.dart';
-import 'ramadan/douaa_al2iftita7.dart';
-import 'ramadan/douaa_allayla_alsania_wal3ishroun_ramadan.dart';
-import 'ramadan/douaa_alsa7ar.dart';
-import 'ramadan/fi_2a3mal_2ashar_shaher_ramadan.dart';
-import 'ramadan/fi_2a3mal_2ayam_shaher_ramadan.dart';
-import 'ramadan/fi_2a3mal_shaher_ramadan_al5asa.dart';
-import 'ramadan/fi_fadel_shaher_ramadan_wa2a3maloh.dart';
-import 'ramadan/ma_ya3om_allayali_wal2ayam.dart';
-import 'ramadan/ma_yosta7ab_2itanoh_fi_layali_shaher_ramadan.dart';
-import 'ramadan/salawat_allayali_wada3awat_al2ayama_almashhoura.dart';
-import 'ramadan/yawm_alnisf_men_ramadan.dart';
 
 class Ramadan extends StatefulWidget {
   static String screenRoute = 'ramadan_screen';
@@ -64,8 +23,7 @@ class _RamadanState extends State<Ramadan> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('اعمال اشهر السنة'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على اعمال اشهر السنة'),
+          orElse: () => throw Exception('لم يتم العثور على اعمال اشهر السنة'),
         );
 
         // قائمة المستوى الثالث
@@ -80,6 +38,8 @@ class _RamadanState extends State<Ramadan> {
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route':
+                        mafati7AljinanAllRoutes.ramadanRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -104,14 +64,21 @@ class _RamadanState extends State<Ramadan> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'شهر رمضان واعماله',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -143,41 +110,6 @@ class _RamadanState extends State<Ramadan> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Da3awatAyamShaherRamadan.screenRoute,
-                FiFadelShaherRamadanWa2a3maloh.screenRoute,
-                MaYa3omAllayaliWal2ayam.screenRoute,
-                MaYosta7ab2itanohFiLayaliShaherRamadan.screenRoute,
-                DouaaAl2iftita7.screenRoute,
-                Fi2a3mal2asharShaherRamadan.screenRoute,
-                DouaaAbi7amzaAlsamali.screenRoute,
-                DouaaAlsa7ar.screenRoute,
-                Fi2a3mal2ayamShaherRamadan.screenRoute,
-                Fi2a3malShaherRamadanAl5asa.screenRoute,
-                SalawatAllayaliWada3awatAl2ayamaAlmashhoura.screenRoute,
-                AllaylaAl2oulaRamadan.screenRoute,
-                AlyawmAl2awalRamadan.screenRoute,
-                AlyawmAlsadisRamadan.screenRoute,
-                AllaylaAlsalisa3asharRamadan.screenRoute,
-                AllaylaAlrabi3a3asharRamadan.screenRoute,
-                AllaylaAl5amisa3asharRamadan.screenRoute,
-                YawmAlnisfMenRamadan.screenRoute,
-                AllaylaAlsabi3a3asharaRamadan.screenRoute,
-                A3malAllailaAltasi3a3asharaRamadan.screenRoute,
-                AllaylaAlwa7idaWal3ishrounRamadan.screenRoute,
-                AlyawmAlwa7idWal3ishrounRamadan.screenRoute,
-                DouaaAllaylaAlsaniaWal3ishrounRamadan.screenRoute,
-                AllaylaAlsalisaWal3ishrounRamadan.screenRoute,
-                Dou3aaAllaylaAlrabi3aWal3ishrounRamadan.screenRoute,
-                Dou3aaAllaylaAl5amisaWal3ishrounRamadan.screenRoute,
-                Dou3aaAllaylaAlsadisaWal3ishrounRamadan.screenRoute,
-                Dou3aaAllaylaAlsabi3aWal3ishrounRamadan.screenRoute,
-                AllaylaAlsabi3aWal3ishrounRamadan.screenRoute,
-                Dou3aaAllaylaAlsaminaWal3ishrounRamadan.screenRoute,
-                Dou3aaAllaylaAltasi3aWal3ishrounRamadan.screenRoute,
-                Dou3aaAllaylaAlsalasinRamadan.screenRoute,
-                AlyawmAlsalasinRamadan.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال اشهر السنة') {
                   for (var subItem in item.index) {
@@ -185,7 +117,7 @@ class _RamadanState extends State<Ramadan> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes.ramadanRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -196,20 +128,25 @@ class _RamadanState extends State<Ramadan> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

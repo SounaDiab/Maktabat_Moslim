@@ -1,23 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../mafatih%20aljinan%20pages/a3mal_ashhor_alsana.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import 'rajab/al2a3mal_al5asa_brajab.dart';
-import 'rajab/allayla_alsabi3a_wal3eshroun.dart';
-import 'rajab/allayla_alsalisa_3ashara.dart';
-import 'rajab/alyawm_al2a5ir_men_alshaher.dart';
-import 'rajab/alyawm_al2awal_men_rajab.dart';
-import 'rajab/alyawm_al5ames_wal3ishroun.dart';
-import 'rajab/alyawm_alsabe3_wal3eshroun.dart';
-import 'rajab/alyawm_alsalis_3ashar.dart';
-import 'rajab/lailat_alnisf_men_rajab.dart';
-import 'rajab/yawm_alnisf_men_rajab.dart';
 
 class Rajab extends StatefulWidget {
   static String screenRoute = 'rajab_screen';
@@ -41,8 +23,7 @@ class _RajabState extends State<Rajab> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('اعمال اشهر السنة'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على اعمال اشهر السنة'),
+          orElse: () => throw Exception('لم يتم العثور على اعمال اشهر السنة'),
         );
 
         // قائمة المستوى الثالث
@@ -57,6 +38,7 @@ class _RajabState extends State<Rajab> {
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route': mafati7AljinanAllRoutes.rajabRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -81,14 +63,21 @@ class _RajabState extends State<Rajab> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'شهر رجب واعماله',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: () {
               debugPrint('Clearing search and navigating...');
@@ -129,18 +118,6 @@ class _RajabState extends State<Rajab> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                Al2a3malAl5asaBrajab.screenRoute,
-                AlyawmAl2awalMenRajab.screenRoute,
-                AllaylaAlsalisa3ashara.screenRoute,
-                AlyawmAlsalis3ashar.screenRoute,
-                LailatAlnisfMenRajab.screenRoute,
-                YawmAlnisfMenRajab.screenRoute,
-                AlyawmAl5amesWal3ishroun.screenRoute,
-                AllaylaAlsabi3aWal3eshroun.screenRoute,
-                AlyawmAlsabe3Wal3eshroun.screenRoute,
-                AlyawmAl2a5irMenAlshaher.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال اشهر السنة') {
                   for (var subItem in item.index) {
@@ -148,7 +125,7 @@ class _RajabState extends State<Rajab> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes.rajabRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -159,20 +136,25 @@ class _RajabState extends State<Rajab> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

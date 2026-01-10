@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import '../a3mal_ashhor_alsana.dart';
-import 'shawal/a3mal_yawm_3id_alfitr.dart';
-import 'shawal/allayla_al2oula_shawal.dart';
 
 class Shawal extends StatefulWidget {
   static String screenRoute = 'shawal_screen';
@@ -33,8 +23,7 @@ class _ShawalState extends State<Shawal> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('اعمال اشهر السنة'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على اعمال اشهر السنة'),
+          orElse: () => throw Exception('لم يتم العثور على اعمال اشهر السنة'),
         );
 
         // قائمة المستوى الثالث
@@ -49,6 +38,8 @@ class _ShawalState extends State<Shawal> {
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route':
+                        mafati7AljinanAllRoutes.shawalRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -73,14 +64,21 @@ class _ShawalState extends State<Shawal> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'شهر شوال واعماله',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -112,10 +110,6 @@ class _ShawalState extends State<Shawal> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                AllaylaAl2oulaShawal.screenRoute,
-                A3malYawm3idAlfitr.screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال اشهر السنة') {
                   for (var subItem in item.index) {
@@ -123,7 +117,7 @@ class _ShawalState extends State<Shawal> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes.shawalRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -134,20 +128,25 @@ class _ShawalState extends State<Shawal> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {

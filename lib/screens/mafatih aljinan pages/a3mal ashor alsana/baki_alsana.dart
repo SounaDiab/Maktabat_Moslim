@@ -1,18 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../api/web service/json_service.dart';
-import '../../../business logic/cubit/mafatih_aljinan_cubit.dart';
-import '../../mafatih%20aljinan%20pages/a3mal_ashhor_alsana.dart';
-import '../../../widgets/search_widget.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../../../widgets/line_from_index.dart';
-import '../../search_provider.dart';
-import 'baki al sana/fi_2a3mal_3ama_wa2a3mal_alnayrouz_wa2a3mal_al2ashhor_alromiya.dart';
-import 'baki al sana/fi_shaher_rabi3_al2awal.dart';
-import 'baki al sana/fi_shaher_rabi3_alsani_waljamada_al2oula_wal2a5ira.dart';
-import 'baki al sana/fi_shaher_safar.dart';
-import 'baki al sana/fi_shaher_zilko3da.dart';
 
 class BakiAlsana extends StatefulWidget {
   static String screenRoute = 'bakiAlsana_screen';
@@ -36,8 +23,7 @@ class _BakiAlsanaState extends State<BakiAlsana> {
 
         final mafatihSection = mafatihList.firstWhere(
           (item) => item.title.contains('اعمال اشهر السنة'),
-          orElse: () =>
-              throw Exception('لم يتم العثور على اعمال اشهر السنة'),
+          orElse: () => throw Exception('لم يتم العثور على اعمال اشهر السنة'),
         );
 
         // قائمة المستوى الثالث
@@ -52,6 +38,8 @@ class _BakiAlsanaState extends State<BakiAlsana> {
                   mappedList.add({
                     'id': subSub.id,
                     'title': subSub.title,
+                    'route': mafati7AljinanAllRoutes
+                        .bakiA3malAlsanaRoutes[subSub.id - 1],
                   });
                 }
               }
@@ -76,14 +64,21 @@ class _BakiAlsanaState extends State<BakiAlsana> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final searchProvider =
-            Provider.of<SearchProvider>(context, listen: false);
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
+          title: Text(
+            'باقي اعمال اشهر السنة',
+            style: TextStyle(
+              fontSize: isTablet ? 40 : 16,
+              fontFamily: 'Tajawal',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
             onPressed: _onWillPop,
             icon: Icon(
@@ -115,14 +110,6 @@ class _BakiAlsanaState extends State<BakiAlsana> {
             } else if (state is MafatihAljinanLoaded) {
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
-              final allRoutes = [
-                FiShaherZilko3da.screenRoute,
-                FiShaherSafar.screenRoute,
-                FiShaherRabi3Al2awal.screenRoute,
-                FiShaherRabi3AlsaniWaljamadaAl2oulaWal2a5ira.screenRoute,
-                Fi2a3mal3amaWa2a3malAlnayrouzWa2a3malAl2ashhorAlromiya
-                    .screenRoute,
-              ];
               for (var item in mafatihAljinan) {
                 if (item.title == 'اعمال اشهر السنة') {
                   for (var subItem in item.index) {
@@ -130,7 +117,7 @@ class _BakiAlsanaState extends State<BakiAlsana> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route': allRoutes
+                          'route': mafati7AljinanAllRoutes.bakiA3malAlsanaRoutes
                               .map((e) => e)
                               .toList()[inSubItem.id - 1],
                         });
@@ -141,20 +128,25 @@ class _BakiAlsanaState extends State<BakiAlsana> {
               }
               return SafeArea(
                 child: Container(
+                  padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: allTitles.length,
-                      itemBuilder: (context, i) {
-                        final title = allTitles[i]['title'];
-                        final route = allTitles[i]['route'];
-
-                        return ListTile(
-                          title: LineFromIndex(
-                            text: title,
-                            route: route,
-                          ),
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: allTitles.length,
+                    itemBuilder: (context, i) {
+                      final title = allTitles[i]['title'];
+                      final route = allTitles[i]['route'];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isTablet ? 20 : 10,
+                          vertical: isTablet ? 6 : 3,
+                        ),
+                        child: LineFromIndex(
+                          text: title,
+                          route: route,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state is MafatihAljinanError) {
