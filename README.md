@@ -96,7 +96,8 @@
 
 <h2>👨‍💻 المطور</h2>
 <p style="text-align:center;">
-  <strong>Hassan Diab</strong><br>
+  <center><strong>Hassan Diab</strong></center><br>
   <small>تطبيق يهدف لخدمة المسلمين حول العالم 🤍</small>
 </p>
+
 
