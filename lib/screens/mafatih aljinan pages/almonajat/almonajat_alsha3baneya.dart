@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../almonajat.dart';
-import 'almonajat_bikashf_alzolm.dart';
-import 'monajat_alta2ibin.dart';
 
 class AlmonajatAlsha3baneya extends StatefulWidget {
   static String screenRoute = 'almonajat_alsha3baneya_screen';
@@ -68,7 +59,7 @@ class _AlmonajatAlsha3baneyaState extends State<AlmonajatAlsha3baneya> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
@@ -91,7 +82,7 @@ class _AlmonajatAlsha3baneyaState extends State<AlmonajatAlsha3baneya> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
@@ -126,8 +117,7 @@ class _AlmonajatAlsha3baneyaState extends State<AlmonajatAlsha3baneya> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: MonajatAlta2ibin.screenRoute,
           pushBack: AlmonajatBikashfAlzolm.screenRoute,
-          soud:
-              '',
+          soud: '',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

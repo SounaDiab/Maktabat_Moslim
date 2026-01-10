@@ -1,15 +1,6 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../widgets/add_custom_bottom_navigation_bar.dart';
-import '../../../widgets/scroll_title.dart';
-import '../../favorites_provider.dart';
-import '../../favorites_screen.dart';
-import '../ad3iyat_al2osbo3.dart';
-import 'dou3a2_al2arbi3a2.dart';
-import 'dou3a2_al2isnain.dart';
 
 class Dou3a2Alsoulasa2 extends StatefulWidget {
   static String screenRoute = 'dou3a2_alsoulasa2_screen';
@@ -67,7 +58,7 @@ class _Dou3a2Alsoulasa2State extends State<Dou3a2Alsoulasa2> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: isTablet ? 100 : 50,
+          toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
@@ -90,7 +81,7 @@ class _Dou3a2Alsoulasa2State extends State<Dou3a2Alsoulasa2> {
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
                 size: isTablet ? 40 : 25,
-                color: isIcon ? Theme.of(context).iconTheme.color : Colors.red,
+                color: isIcon ? Colors.white : Colors.red,
               ),
               onPressed: () async {
                 setState(() {
