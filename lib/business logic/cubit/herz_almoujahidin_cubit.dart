@@ -1,8 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
-import '../../api/models/herz_almoujahidin.dart';
-import '../../api/repository/repository.dart';
+import '../../Util/app_imports.dart';
 
 part 'herz_almoujahidin_state.dart';
 

@@ -1,15 +1,12 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
-import '../../api/models/alhakiba_alramadaneya.dart';
-import '../../api/repository/repository.dart';
+import '../../Util/app_imports.dart';
 
 part 'alhakiba_alramadaneya_state.dart';
 
 class AlhakibaAlramadaneyaCubit extends Cubit<AlhakibaAlramadaneyaState> {
   final Repository repository;
 
-  AlhakibaAlramadaneyaCubit(this.repository) : super(AlhakibaAlramadaneyaInitial());
+  AlhakibaAlramadaneyaCubit(this.repository)
+      : super(AlhakibaAlramadaneyaInitial());
 
   // جلب بيانات الحقيبة الرمضانية من الـ repository
   Future<void> getAlhakibaAlramadaneya() async {

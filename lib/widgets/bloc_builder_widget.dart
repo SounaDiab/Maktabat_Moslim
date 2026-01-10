@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'container_scrollview.dart';
-
-import '../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
-import 'list_of_nine_verses.dart';
+import '../../Util/app_imports.dart';
 
 class BlocBuilderWidget extends StatelessWidget {
   final String? text;

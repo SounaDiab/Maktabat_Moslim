@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
+import '../../Util/app_imports.dart';
 
 class ScrollTitle extends StatelessWidget {
   ScrollTitle({
@@ -22,6 +21,7 @@ class ScrollTitle extends StatelessWidget {
                 ? 20
                 : 23,
         fontWeight: FontWeight.bold,
+        fontFamily: 'Tajawal',
       ),
       scrollAxis: Axis.horizontal,
       crossAxisAlignment: CrossAxisAlignment.start,

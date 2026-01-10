@@ -1,8 +1,5 @@
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/material.dart';
-
-import 'cache_manager_widget.dart';
-import 'custom_bottom_navigation_bar.dart';
+import '../../Util/app_imports.dart';
+import 'package:http/http.dart' as http;
 
 class AddCustomBottomNavigationBar extends StatefulWidget {
   String pushNext;
@@ -51,26 +48,52 @@ class _AddCustomBottomNavigationBarState
     player.stop();
   }
 
-  void _handleSoundToggle(bool isSoundOn) async {
-    setState(() {
-      isSoundOn = isPlaying;
-    });
-    if (isPlaying) {
-      await player.pause();
-    } else {
-      try {
-        final file =
-            await CacheManagerWidget.instance.getSingleFile(widget.soud);
-        await player.setSource(DeviceFileSource(file.path));
-        await player.resume();
-        print('Audio Downloaded');
-      } catch (e) {
-        print(e);
+  // دالة لتحميل الصوت وحفظه في المجلد الدائم
+  Future<String> _getAudioPath(String soundUrl) async {
+    final dir = await getApplicationDocumentsDirectory();
+    final fileName = soundUrl.split('/').last;
+    final filePath = '${dir.path}/$fileName';
+    final file = File(filePath);
+
+    if (!file.existsSync()) {
+      final response = await http.get(Uri.parse(soundUrl));
+      if (response.statusCode == 200) {
+        await file.writeAsBytes(response.bodyBytes);
+        print('Audio saved to local storage');
+      } else {
+        throw Exception('Failed to download audio');
       }
     }
-    setState(() {
-      isPlaying = !isPlaying;
-    });
+    return filePath;
+  }
+
+  // دالة لتشغيل أو إيقاف الصوت
+  void _handleSoundToggle(bool isSoundOn) async {
+    isSoundOn = isPlaying;
+    // إيقاف الصوت إذا كان مشغلاً
+    if (isPlaying) {
+      await player.pause();
+      print('Audio Paused');
+    } else {
+      try {
+        // تحميل الصوت من الإنترنت وحفظه في المجلد المحلي
+        final audioPath = await _getAudioPath(widget.soud);
+
+        // إعداد المصدر الصوتي من المجلد المحلي
+        await player.setSource(DeviceFileSource(audioPath));
+        await player.resume();
+        print('Audio Playing');
+      } catch (e) {
+        print('Error: $e');
+      }
+    }
+
+    // تحديث حالة الصوت بعد تشغيله أو إيقافه
+    if (mounted) {
+      setState(() {
+        isPlaying = !isPlaying; // تبديل حالة التشغيل
+      });
+    }
   }
 
   @override

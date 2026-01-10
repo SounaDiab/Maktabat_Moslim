@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../business logic/cubit/alhakiba_alramadaneya_cubit.dart';
-import 'container_scrollview.dart';
-import 'list_of_nine_verses.dart';
+import '../../Util/app_imports.dart';
 
 class BlocBuilderAlhakibaAlramadaneya extends StatelessWidget {
   final String? text;

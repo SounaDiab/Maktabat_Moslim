@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../Util/app_imports.dart';
 
 class ListOfNineVerses extends StatefulWidget {
   ListOfNineVerses({
@@ -6,12 +6,14 @@ class ListOfNineVerses extends StatefulWidget {
     required this.subtitle,
     required this.weight,
     required this.size,
+    this.color = Colors.green,
   });
 
   String title;
   String subtitle;
   FontWeight weight;
   double size;
+  Color color;
 
   @override
   State<ListOfNineVerses> createState() => _ListOfNineVersesState();
@@ -30,7 +32,7 @@ class _ListOfNineVersesState extends State<ListOfNineVerses> {
               style: TextStyle(
                 fontSize: isTablet ? 40 : 18,
                 fontWeight: FontWeight.w900,
-                color: Colors.green,
+                color: widget.color != Colors.green ? widget.color : Colors.green,
                 fontFamily: 'Tajawal',
               ),
             ),

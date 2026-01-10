@@ -1,10 +1,4 @@
-import '../screens/a3mal_layali_kadr_home_screen.dart';
-import '../screens/al7akiba_alramadaneya_home_screen.dart';
-import '../screens/albakiyat_alsali7at_home_screen.dart';
-import '../screens/alsa7ifa_alsajadiya_home_screen.dart';
-import '../screens/herz_almoujahidin_home_screen.dart';
-import '../screens/mafatih_aljinan_home_screen.dart';
-import '../screens/quran_home_screen.dart';
+import '../Util/app_imports.dart';
 
 class BooksItem {
   static final List<String> bookstitle = [

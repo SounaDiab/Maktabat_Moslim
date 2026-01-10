@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../Util/app_imports.dart';
 
 class AboutLink extends StatelessWidget {
   const AboutLink({
@@ -39,7 +38,6 @@ class AboutLink extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                color: Colors.grey[700],
                 fontSize: fontSize,
                 fontFamily: 'UthmanicHafs',
                 fontWeight: FontWeight.bold,

@@ -1,7 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import '../../api/repository/repository.dart';
-import '../../api/models/mafati7_aljinan.dart';
+import '../../Util/app_imports.dart';
 
 part 'mafatih_aljinan_state.dart';
 

@@ -1,9 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-
-import '../../api/models/a3mal_laylat_kader.dart';
-import '../../api/repository/repository.dart';
-import 'package:equatable/equatable.dart';
+import '../../Util/app_imports.dart';
 
 part 'a3mal_laylat_alkader_state.dart';
 

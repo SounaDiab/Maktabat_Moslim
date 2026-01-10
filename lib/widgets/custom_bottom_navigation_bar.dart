@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../Util/app_imports.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final VoidCallback onBack;
@@ -49,6 +49,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
     return BottomAppBar(
       height: isTablet ? 100 : 70,
+      color: Theme.of(context).primaryColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -109,14 +110,18 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           children: [
             Icon(
               icon,
-              color: isActive ? Colors.blue : Colors.grey,
+              color: isActive
+                  ? Theme.of(context).primaryIconTheme.color
+                  : Colors.white,
               size: isTablet ? 40 : 20,
             ),
             const SizedBox(height: 4),
             Text(
               label,
               style: TextStyle(
-                color: isActive ? Colors.blue : Colors.grey,
+                color: isActive
+                    ? Theme.of(context).primaryIconTheme.color
+                    : Colors.white,
                 fontSize: isTablet ? 20 : 12,
               ),
             ),

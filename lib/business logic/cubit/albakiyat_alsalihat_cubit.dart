@@ -1,8 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
-import '../../api/models/albakiyat_alsalihat.dart';
-import '../../api/repository/repository.dart';
+import '../../Util/app_imports.dart';
 
 part 'albakiyat_alsalihat_state.dart';
 

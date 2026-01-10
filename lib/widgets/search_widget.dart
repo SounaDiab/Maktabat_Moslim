@@ -1,60 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../screens/search_provider.dart';
-
-class SearchWidget extends StatefulWidget {
-  @override
-  State<SearchWidget> createState() => _SearchWidgetState();
-}
-
-class _SearchWidgetState extends State<SearchWidget> {
-  final TextEditingController _controller = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth >= 600;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        controller: _controller,
-        onChanged: (value) {
-          setState(() {});
-          Provider.of<SearchProvider>(context, listen: false).search(value);
-        },
-        onTapOutside: (value) {
-          FocusScope.of(context).unfocus();
-        },
-        decoration: InputDecoration(
-          labelText: "ابحث...",
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-          border: InputBorder.none,
-          icon: Icon(
-            Icons.search,
-            size: isTablet ? 40 : 20,
-          ),
-          suffixIcon: _controller.text.isNotEmpty
-              ? GestureDetector(
-                  onTap: () {
-                    _controller.clear();
-                    Provider.of<SearchProvider>(context, listen: false)
-                        .search('');
-                    FocusScope.of(context).unfocus();
-                    setState(() {});
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Icon(
-                      Icons.clear,
-                      size: isTablet ? 40 : 20,
-                    ),
-                  ),
-                )
-              : null,
-        ),
-      ),
-    );
-  }
-}
+import '../../Util/app_imports.dart';
 
 class DataSearch extends SearchDelegate<String> {
   final List<Map<String, dynamic>> items;
@@ -112,7 +56,9 @@ class DataSearch extends SearchDelegate<String> {
         return ListTile(
           title: Text(results[index]['title']!),
           onTap: () {
-            Navigator.pushNamed(context, results[index]['route']!);
+            final route = results[index]['route'];
+            Navigator.pushNamed(context, route);
+            print('result tapped: $route');
           },
         );
       },
@@ -134,6 +80,7 @@ class DataSearch extends SearchDelegate<String> {
           onTap: () {
             query = suggestions[index]['title']!;
             showResults(context);
+            print('query: $query');
           },
           subtitle: SizedBox(
             height: 20,

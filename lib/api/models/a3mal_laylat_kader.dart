@@ -1,7 +1,7 @@
 class A3malLaylatKader {
   final int id;
   final String title;
-  final List<A3malSection> index;
+  final List<A3malSectionn> index;
 
   A3malLaylatKader({
     required this.id,
@@ -14,7 +14,7 @@ class A3malLaylatKader {
       id: json['id'],
       title: json['title'],
       index: (json['index'] as List<dynamic>)
-          .map((e) => A3malSection.fromJson(e))
+          .map((e) => A3malSectionn.fromJson(e))
           .toList(),
     );
   }
@@ -28,7 +28,7 @@ class A3malLaylatKader {
   }
 }
 
-class A3malSection {
+class A3malSectionn {
   final int id;
   final String title;
   final String? subtitle;
@@ -43,7 +43,7 @@ class A3malSection {
   final String? fourthContent;
   final String? souContent;
 
-  A3malSection({
+  A3malSectionn({
     required this.id,
     required this.title,
     this.subtitle,
@@ -59,8 +59,8 @@ class A3malSection {
     this.souContent,
   });
 
-  factory A3malSection.fromJson(Map<String, dynamic> json) {
-    return A3malSection(
+  factory A3malSectionn.fromJson(Map<String, dynamic> json) {
+    return A3malSectionn(
       id: json['id'],
       title: json['title'],
       subtitle: json['subtitle'],

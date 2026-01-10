@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../Util/app_imports.dart';
 
 class She3er extends StatelessWidget {
   She3er({

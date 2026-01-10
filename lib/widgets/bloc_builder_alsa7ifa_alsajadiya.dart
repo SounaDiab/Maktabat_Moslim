@@ -1,11 +1,11 @@
 import '../../Util/app_imports.dart';
 
-class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
+class BlocBuilderAlsa7ifaAlsajadiya extends StatelessWidget {
   final String? text;
   final double fontSize;
   final double fontSizeTablet;
 
-  BlocBuilderAlbakiyatAlsalihat({
+  BlocBuilderAlsa7ifaAlsajadiya({
     Key? key,
     required this.text,
     required this.fontSize,
@@ -16,14 +16,15 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    return BlocBuilder<AlbakiyatAlsalihatCubit, AlbakiyatAlsalihatState>(
+    return BlocBuilder<Alsa7ifaAlsajadiyaCubit, Alsa7ifaAlsajadiyaState>(
         builder: (context, state) {
-      if (state is AlbakiyatAlsalihatLoading) {
+      if (state is Alsa7ifaAlsajadiyaLoading) {
         return Center(
           child: CircularProgressIndicator(),
         );
-      } else if (state is AlbakiyatAlsalihatLoaded) {
-        final albakiyatAlsalihat = state.items;
+      } else if (state is Alsa7ifaAlsajadiyaLoaded) {
+        final alsa7ifaAlsajadiya = state.items;
+        String souTitle = '';
         String content = '';
         String twoContent = '';
         String threeContent = '';
@@ -49,21 +50,6 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
         String twentyThreeContent = '';
         String twentyFourContent = '';
         String twentyFiveContent = '';
-        String twentySixContent = '';
-        String twentySevenContent = '';
-        String twentyEightContent = '';
-        String twentyNineContent = '';
-        String thirtyContent = '';
-        String thirtyOneContent = '';
-        String thirtyTwoContent = '';
-        String thirtyThreeContent = '';
-        String thirtyFourContent = '';
-        String thirtyFiveContent = '';
-        String thirtySixContent = '';
-        String thirtySevenContent = '';
-        String thirtyEightContent = '';
-        String thirtyNineContent = '';
-        String fortyContent = '';
         String firstTitle = '';
         String twoTitle = '';
         String threeTitle = '';
@@ -89,25 +75,63 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
         String twentyThreeTitle = '';
         String twentyFourTitle = '';
         String twentyFiveTitle = '';
-        String twentySixTitle = '';
-        String twentySevenTitle = '';
-        String twentyEightTitle = '';
-        String twentyNineTitle = '';
-        String thirtyTitle = '';
-        String thirtyOneTitle = '';
-        String thirtyTwoTitle = '';
-        String thirtyThreeTitle = '';
-        String thirtyFourTitle = '';
-        String thirtyFiveTitle = '';
-        String thirtySixTitle = '';
-        String thirtySevenTitle = '';
-        String thirtyEightTitle = '';
-        String thirtyNineTitle = '';
-        String fortyTitle = '';
-        for (var item in albakiyatAlsalihat) {
+        String firstTafsir = '';
+        String twoTafsir = '';
+        String threeTafsir = '';
+        String fourTafsir = '';
+        String fiveTafsir = '';
+        String sixTafsir = '';
+        String sevenTafsir = '';
+        String eightTafsir = '';
+        String nineTafsir = '';
+        String tenTafsir = '';
+        String elevenTafsir = '';
+        String twelveTafsir = '';
+        String thirteenTafsir = '';
+        String fourteenTafsir = '';
+        String fifteenTafsir = '';
+        String sixteenTafsir = '';
+        String seventeenTafsir = '';
+        String eighteenTafsir = '';
+        String nineteenTafsir = '';
+        String twentyTafsir = '';
+        String twentyOneTafsir = '';
+        String twentyTwoTafsir = '';
+        String twentyThreeTafsir = '';
+        String twentyFourTafsir = '';
+        String twentyFiveTafsir = '';
+        String twentySixTafsir = '';
+        String firstTafsirTitle = '';
+        String twoTafsirTitle = '';
+        String threeTafsirTitle = '';
+        String fourTafsirTitle = '';
+        String fiveTafsirTitle = '';
+        String sixTafsirTitle = '';
+        String sevenTafsirTitle = '';
+        String eightTafsirTitle = '';
+        String nineTafsirTitle = '';
+        String tenTafsirTitle = '';
+        String elevenTafsirTitle = '';
+        String twelveTafsirTitle = '';
+        String thirteenTafsirTitle = '';
+        String fourteenTafsirTitle = '';
+        String fifteenTafsirTitle = '';
+        String sixteenTafsirTitle = '';
+        String seventeenTafsirTitle = '';
+        String eighteenTafsirTitle = '';
+        String nineteenTafsirTitle = '';
+        String twentyTafsirTitle = '';
+        String twentyOneTafsirTitle = '';
+        String twentyTwoTafsirTitle = '';
+        String twentyThreeTafsirTitle = '';
+        String twentyFourTafsirTitle = '';
+        String twentyFiveTafsirTitle = '';
+        String twentySixTafsirTitle = '';
+        for (var item in alsa7ifaAlsajadiya) {
           for (var subItem in item.index) {
             if (subItem.title == text) {
-              //! Content 41
+              souTitle = subItem.souTitle ?? '';
+              //! Content 25
               content = subItem.content ?? '';
               twoContent = subItem.twoContent ?? '';
               threeContent = subItem.threeContent ?? '';
@@ -133,23 +157,8 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
               twentyThreeContent = subItem.twentyThreeContent ?? '';
               twentyFourContent = subItem.twentyFourContent ?? '';
               twentyFiveContent = subItem.twentyFiveContent ?? '';
-              twentySixContent = subItem.twentySixContent ?? '';
-              twentySevenContent = subItem.twentySevenContent ?? '';
-              twentyEightContent = subItem.twentyEightContent ?? '';
-              twentyNineContent = subItem.twentyNineContent ?? '';
-              thirtyContent = subItem.thirtyContent ?? '';
-              thirtyOneContent = subItem.thirtyOneContent ?? '';
-              thirtyTwoContent = subItem.thirtyTwoContent ?? '';
-              thirtyThreeContent = subItem.thirtyThreeContent ?? '';
-              thirtyFourContent = subItem.thirtyFourContent ?? '';
-              thirtyFiveContent = subItem.thirtyFiveContent ?? '';
-              thirtySixContent = subItem.thirtySixContent ?? '';
-              thirtySevenContent = subItem.thirtySevenContent ?? '';
-              thirtyEightContent = subItem.thirtyEightContent ?? '';
-              thirtyNineContent = subItem.thirtyNineContent ?? '';
-              fortyContent = subItem.fortyContent ?? '';
 
-              //! Titles 41
+              //! Titles 25
               firstTitle = subItem.subtitle ?? '';
               twoTitle = subItem.twoSubtitle ?? '';
               threeTitle = subItem.threeSubtitle ?? '';
@@ -175,21 +184,62 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
               twentyThreeTitle = subItem.twentyThreeSubtitle ?? '';
               twentyFourTitle = subItem.twentyFourSubtitle ?? '';
               twentyFiveTitle = subItem.twentyFiveSubtitle ?? '';
-              twentySixTitle = subItem.twentySixSubtitle ?? '';
-              twentySevenTitle = subItem.twentySevenSubtitle ?? '';
-              twentyEightTitle = subItem.twentyEightSubtitle ?? '';
-              twentyNineTitle = subItem.twentyNineSubtitle ?? '';
-              thirtyTitle = subItem.thirtySubtitle ?? '';
-              thirtyOneTitle = subItem.thirtyOneSubtitle ?? '';
-              thirtyTwoTitle = subItem.thirtyTwoSubtitle ?? '';
-              thirtyThreeTitle = subItem.thirtyThreeSubtitle ?? '';
-              thirtyFourTitle = subItem.thirtyFourSubtitle ?? '';
-              thirtyFiveTitle = subItem.thirtyFiveSubtitle ?? '';
-              thirtySixTitle = subItem.thirtySixSubtitle ?? '';
-              thirtySevenTitle = subItem.thirtySevenSubtitle ?? '';
-              thirtyEightTitle = subItem.thirtyEightSubtitle ?? '';
-              thirtyNineTitle = subItem.thirtyNineSubtitle ?? '';
-              fortyTitle = subItem.fortySubtitle ?? '';
+
+              //! tafsir 26
+              firstTafsir = subItem.tafsir ?? '';
+              twoTafsir = subItem.twoTafsir ?? '';
+              threeTafsir = subItem.threeTafsir ?? '';
+              fourTafsir = subItem.fourTafsir ?? '';
+              fiveTafsir = subItem.fiveTafsir ?? '';
+              sixTafsir = subItem.sixTafsir ?? '';
+              sevenTafsir = subItem.sevenTafsir ?? '';
+              eightTafsir = subItem.eightTafsir ?? '';
+              nineTafsir = subItem.nineTafsir ?? '';
+              tenTafsir = subItem.tenTafsir ?? '';
+              elevenTafsir = subItem.elevenTafsir ?? '';
+              twelveTafsir = subItem.twelveTafsir ?? '';
+              thirteenTafsir = subItem.thirteenTafsir ?? '';
+              fourteenTafsir = subItem.fourteenTafsir ?? '';
+              fifteenTafsir = subItem.fifteenTafsir ?? '';
+              sixteenTafsir = subItem.sixteenTafsir ?? '';
+              seventeenTafsir = subItem.seventeenTafsir ?? '';
+              eighteenTafsir = subItem.eighteenTafsir ?? '';
+              nineteenTafsir = subItem.nineteenTafsir ?? '';
+              twentyTafsir = subItem.twentyTafsir ?? '';
+              twentyOneTafsir = subItem.twentyOneTafsir ?? '';
+              twentyTwoTafsir = subItem.twentyTwoTafsir ?? '';
+              twentyThreeTafsir = subItem.twentyThreeTafsir ?? '';
+              twentyFourTafsir = subItem.twentyFourTafsir ?? '';
+              twentyFiveTafsir = subItem.twentyFiveTafsir ?? '';
+              twentySixTafsir = subItem.twentySixTafsir ?? '';
+
+              //! tafsirTitle 26
+              firstTafsirTitle = subItem.tafsirTitle ?? '';
+              twoTafsirTitle = subItem.twoTafsirTitle ?? '';
+              threeTafsirTitle = subItem.threeTafsirTitle ?? '';
+              fourTafsirTitle = subItem.fourTafsirTitle ?? '';
+              fiveTafsirTitle = subItem.fiveTafsirTitle ?? '';
+              sixTafsirTitle = subItem.sixTafsirTitle ?? '';
+              sevenTafsirTitle = subItem.sevenTafsirTitle ?? '';
+              eightTafsirTitle = subItem.eightTafsirTitle ?? '';
+              nineTafsirTitle = subItem.nineTafsirTitle ?? '';
+              tenTafsirTitle = subItem.tenTafsirTitle ?? '';
+              elevenTafsirTitle = subItem.elevenTafsirTitle ?? '';
+              twelveTafsirTitle = subItem.twelveTafsirTitle ?? '';
+              thirteenTafsirTitle = subItem.thirteenTafsirTitle ?? '';
+              fourteenTafsirTitle = subItem.fourteenTafsirTitle ?? '';
+              fifteenTafsirTitle = subItem.fifteenTafsirTitle ?? '';
+              sixteenTafsirTitle = subItem.sixteenTafsirTitle ?? '';
+              seventeenTafsirTitle = subItem.seventeenTafsirTitle ?? '';
+              eighteenTafsirTitle = subItem.eighteenTafsirTitle ?? '';
+              nineteenTafsirTitle = subItem.nineteenTafsirTitle ?? '';
+              twentyTafsirTitle = subItem.twentyTafsirTitle ?? '';
+              twentyOneTafsirTitle = subItem.twentyOneTafsirTitle ?? '';
+              twentyTwoTafsirTitle = subItem.twentyTwoTafsirTitle ?? '';
+              twentyThreeTafsirTitle = subItem.twentyThreeTafsirTitle ?? '';
+              twentyFourTafsirTitle = subItem.twentyFourTafsirTitle ?? '';
+              twentyFiveTafsirTitle = subItem.twentyFiveTafsirTitle ?? '';
+              twentySixTafsirTitle = subItem.twentySixTafsirTitle ?? '';
               break;
             }
           }
@@ -227,6 +277,22 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
                   size: isTablet ? fontSizeTablet : fontSize,
                 ),
               ),
+              souTitle != ''
+                  ? Container(
+                      margin: EdgeInsets.only(top: 10, bottom: 10),
+                      child: Center(
+                        child: SelectableText(
+                          souTitle,
+                          style: TextStyle(
+                            fontSize: isTablet ? fontSizeTablet : fontSize,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.red,
+                            fontFamily: 'Tajawal',
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox.shrink(),
               twoContent != ''
                   ? Container(
                       child: ListOfNineVerses(
@@ -467,152 +533,320 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
                       ),
                     )
                   : SizedBox.shrink(),
-              twentySixContent != ''
+              firstTafsir != ''
+                  ? SizedBox(
+                      child: Divider(
+                        thickness: 2,
+                        color: Colors.grey,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              firstTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: twentySixTitle != '' ? twentySixTitle : '',
-                        subtitle: twentySixContent,
+                        title: firstTafsirTitle != '' ? firstTafsirTitle : '',
+                        subtitle: firstTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              twentySevenContent != ''
+              twoTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: twentySevenTitle != '' ? twentySevenTitle : '',
-                        subtitle: twentySevenContent,
+                        title: twoTafsirTitle != '' ? twoTafsirTitle : '',
+                        subtitle: twoTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              twentyEightContent != ''
+              threeTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: twentyEightTitle != '' ? twentyEightTitle : '',
-                        subtitle: twentyEightContent,
+                        title: threeTafsirTitle != '' ? threeTafsirTitle : '',
+                        subtitle: threeTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              twentyNineContent != ''
+              fourTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: twentyNineTitle != '' ? twentyNineTitle : '',
-                        subtitle: twentyNineContent,
+                        title: fourTafsirTitle != '' ? fourTafsirTitle : '',
+                        subtitle: fourTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyContent != ''
+              fiveTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyTitle != '' ? thirtyTitle : '',
-                        subtitle: thirtyContent,
+                        title: fiveTafsirTitle != '' ? fiveTafsirTitle : '',
+                        subtitle: fiveTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyOneContent != ''
+              sixTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyOneTitle != '' ? thirtyOneTitle : '',
-                        subtitle: thirtyOneContent,
+                        title: sixTafsirTitle != '' ? sixTafsirTitle : '',
+                        subtitle: sixTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyTwoContent != ''
+              sevenTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyTwoTitle != '' ? thirtyTwoTitle : '',
-                        subtitle: thirtyTwoContent,
+                        title: sevenTafsirTitle != '' ? sevenTafsirTitle : '',
+                        subtitle: sevenTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyThreeContent != ''
+              eightTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyThreeTitle != '' ? thirtyThreeTitle : '',
-                        subtitle: thirtyThreeContent,
+                        title: eightTafsirTitle != '' ? eightTafsirTitle : '',
+                        subtitle: eightTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyFourContent != ''
+              nineTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyFourTitle != '' ? thirtyFourTitle : '',
-                        subtitle: thirtyFourContent,
+                        title: nineTafsirTitle != '' ? nineTafsirTitle : '',
+                        subtitle: nineTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyFiveContent != ''
+              tenTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyFiveTitle != '' ? thirtyFiveTitle : '',
-                        subtitle: thirtyFiveContent,
+                        title: tenTafsirTitle != '' ? tenTafsirTitle : '',
+                        subtitle: tenTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtySixContent != ''
+              elevenTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtySixTitle != '' ? thirtySixTitle : '',
-                        subtitle: thirtySixContent,
+                        title: elevenTafsirTitle != '' ? elevenTafsirTitle : '',
+                        subtitle: elevenTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtySevenContent != ''
+              twelveTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtySevenTitle != '' ? thirtySevenTitle : '',
-                        subtitle: thirtySevenContent,
+                        title: twelveTafsirTitle != '' ? twelveTafsirTitle : '',
+                        subtitle: twelveTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyEightContent != ''
+              thirteenTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyEightTitle != '' ? thirtyEightTitle : '',
-                        subtitle: thirtyEightContent,
+                        title: thirteenTafsirTitle != ''
+                            ? thirteenTafsirTitle
+                            : '',
+                        subtitle: thirteenTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              thirtyNineContent != ''
+              fourteenTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: thirtyNineTitle != '' ? thirtyNineTitle : '',
-                        subtitle: thirtyNineContent,
+                        title: fourteenTafsirTitle != ''
+                            ? fourteenTafsirTitle
+                            : '',
+                        subtitle: fourteenTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
                   : SizedBox.shrink(),
-              fortyContent != ''
+              fifteenTafsir != ''
                   ? Container(
                       child: ListOfNineVerses(
-                        title: fortyTitle != '' ? fortyTitle : '',
-                        subtitle: fortyContent,
+                        title:
+                            fifteenTafsirTitle != '' ? fifteenTafsirTitle : '',
+                        subtitle: fifteenTafsir,
                         weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              sixteenTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title:
+                            sixteenTafsirTitle != '' ? sixteenTafsirTitle : '',
+                        subtitle: sixteenTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              seventeenTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: seventeenTafsirTitle != ''
+                            ? seventeenTafsirTitle
+                            : '',
+                        subtitle: seventeenTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              eighteenTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: eighteenTafsirTitle != ''
+                            ? eighteenTafsirTitle
+                            : '',
+                        subtitle: eighteenTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              nineteenTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: nineteenTafsirTitle != ''
+                            ? nineteenTafsirTitle
+                            : '',
+                        subtitle: nineteenTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              twentyTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: twentyTafsirTitle != '' ? twentyTafsirTitle : '',
+                        subtitle: twentyTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              twentyOneTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: twentyOneTafsirTitle != ''
+                            ? twentyOneTafsirTitle
+                            : '',
+                        subtitle: twentyOneTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              twentyTwoTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: twentyTwoTafsirTitle != ''
+                            ? twentyTwoTafsirTitle
+                            : '',
+                        subtitle: twentyTwoTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              twentyThreeTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: twentyThreeTafsirTitle != ''
+                            ? twentyThreeTafsirTitle
+                            : '',
+                        subtitle: twentyThreeTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              twentyFourTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: twentyFourTafsirTitle != ''
+                            ? twentyFourTafsirTitle
+                            : '',
+                        subtitle: twentyFourTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              twentyFiveTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: twentyFiveTafsirTitle != ''
+                            ? twentyFiveTafsirTitle
+                            : '',
+                        subtitle: twentyFiveTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
+                        size: isTablet ? fontSizeTablet : fontSize,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              twentySixTafsir != ''
+                  ? Container(
+                      child: ListOfNineVerses(
+                        title: twentySixTafsirTitle != ''
+                            ? twentySixTafsirTitle
+                            : '',
+                        subtitle: twentySixTafsir,
+                        weight: FontWeight.w600,
+                        color: Colors.blue,
                         size: isTablet ? fontSizeTablet : fontSize,
                       ),
                     )
@@ -620,7 +854,7 @@ class BlocBuilderAlbakiyatAlsalihat extends StatelessWidget {
             ],
           ),
         );
-      } else if (state is AlbakiyatAlsalihatError) {
+      } else if (state is Alsa7ifaAlsajadiyaError) {
         return Center(
           child: SelectableText(state.message),
         );

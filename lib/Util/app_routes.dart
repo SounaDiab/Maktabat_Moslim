@@ -1,540 +1,4 @@
-import 'package:flutter/material.dart';
-import '../api/web%20service/json_service.dart';
-
-import '../api/repository/repository.dart';
-import '../business logic/cubit/a3mal_laylat_alkader_cubit.dart';
-import '../screens/a3mal layali kadr/a3mal layaly alkadr/al2iste3dad.dart';
-import '../screens/a3mal layali kadr/a3mal layaly alkadr/mawane3_alkoboul.dart';
-import '../screens/a3mal layali kadr/a3mal layaly alkadr/sawab_al2i7ya2.dart';
-import '../screens/a3mal layali kadr/a3mal_layaly_alkadr.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/a3mal_ashar_ramdan.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/altasbihat.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_abi_hamza_alsamali.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_al2imam_alsadek.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_aljawshan_alkabir.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_allahoma_2ini_amsayt.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_alsalihin.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_altawasol_belmis7af.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_altawba.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_idris.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_l2iftitah.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_makarim_al2a5lak.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_ya_3odati.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a2_ya_mafza3i.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/dou3a_albaha2.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/salat_mi2at_rok3a.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/salat_rok3atain.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/ziyarat_3ali_bin_alhussein.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/ziyarat_abi_alfadl.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/ziyarat_al2imam_alhussein.dart';
-import '../screens/a3mal layali kadr/al2a3mal al3ama/ziyarat_alshohada.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/a3mal_allayla_alsalisa_wal3ishrin.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/a3mal_allayla_alwahida_wal3eshrin.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/a3mal_allayla_latasi3a_3ashar.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/dou3a2_2alhazin.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/dou3a2_alimam_alsadek.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/dou3a2_allayla_alwahida_wal3ishrin.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/dou3a2_ba3d_salat_alwater.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/dou3a2_ya_batinan.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/hadis_2alkisa2.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/salat_layl.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/zyarat_amir_mo2minin.dart';
-import '../screens/a3mal layali kadr/al2a3mal al5asa/zyarat_sa7ib_alzaman.dart';
-import '../screens/a3mal layali kadr/al2a3mal_al3ama.dart';
-import '../screens/a3mal layali kadr/al2a3mal_al5asa.dart';
-import '../screens/a3mal layali kadr/alsowar_alkor2aneya.dart';
-import '../screens/a3mal layali kadr/sowar kor2aneya/sourat_al3ankabout.dart';
-import '../screens/a3mal layali kadr/sowar kor2aneya/sourat_aldo5an.dart';
-import '../screens/a3mal layali kadr/sowar kor2aneya/sourat_alroum.dart';
-import '../screens/a3mal_layali_kadr_home_screen.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al2awal.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al3asher.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al3ishroun.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al5amis.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al5amis_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al5amis_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al7adi_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2al7adi_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alrabi3.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alrabi3_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alrabi3_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsabi3.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsabi3_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsabi3_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsadis.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsadis_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsadis_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsalasin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsalis.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsalis_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsalis_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsamen.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsamin_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsamin_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsani.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsani_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2alsani_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2altase3.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2altasi3_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat ayam ramadan/alyawm_2altasi3_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2al2oula.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2al5amisa_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2al5amisa_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2al7adiya_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alrabi3a_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alrabi3a_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsabi3a_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsabi3a_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsadisa_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsalasin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsalisa_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsalisa_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsamina_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2alsaniya_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2altasi3a_3ashar.dart';
-import '../screens/al7akiba alramadaneya/a3mal w2ad3iyat layali ramadan/allayla_2altasi3a_wal3ishrin.dart';
-import '../screens/al7akiba alramadaneya/a3mal_w2ad3iyat_layali_ramadan.dart';
-import '../screens/al7akiba alramadaneya/a3mal_wa2ad3iyat_ayam_ramadan.dart';
-import '../screens/al7akiba alramadaneya/fi a3mal ashar ramadan/dou3a2_abi_7amza_alsamali.dart';
-import '../screens/al7akiba alramadaneya/fi a3mal ashar ramadan/dou3a2_alsa7ar.dart';
-import '../screens/al7akiba alramadaneya/fi a3mal ashar ramadan/fi_2a3mal_2as7ar_ramadan.dart';
-import '../screens/al7akiba alramadaneya/fi ma yosta7ab 2itanoh fi ramadan/dou3a2_al2iftita7.dart';
-import '../screens/al7akiba alramadaneya/fi ma yosta7ab 2itanoh fi ramadan/ma_yosta7ab_2itanoh_fi_layali_ramadan.dart';
-import '../screens/al7akiba alramadaneya/fi_a3mal_ashar_ramadan.dart';
-import '../screens/al7akiba alramadaneya/fima ya3om allayali wal2ayam/fi_fadl_shaher_ramadan.dart';
-import '../screens/al7akiba alramadaneya/fima ya3om allayali wal2ayam/ma_ya3om_allayali_walayam.dart';
-import '../screens/al7akiba alramadaneya/fima_ya3om_allayali_wal2ayam.dart';
-import '../screens/al7akiba alramadaneya/fima_yosta7ab_2itanoh_fi_ramadan.dart';
-import '../screens/al7akiba_alramadaneya_home_screen.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/al3awza_libtal_alsi7r.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/al7erz_men_al3ain.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/aldou3a2_likarakir_albatn.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/aldou3a2_lilbaras.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awza_lidaf3_wasawis_alshaitan.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awza_lil2amn_men_alsarik.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awza_lil3akrab.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awza_liwaja3_al3ain.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awza_liwaja3_al3awra.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awza_liwaja3_alasnan.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awza_liwaja3_alrokba.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awzat_al7oma.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/awzat_wadou3a2_lilamrad.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_al3afiya.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_li7al_almarbout.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_lilso2lol_wlilawram.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_lilza7ir.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_lita3asor_alwilada.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_liwaja3_albaten_walcolon.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_liwaja3_alfam.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya wal3awzat lil2alam wal2askam/dou3a2_liwaja3_alra2s_walisoda3_walisomm.dart';
-import '../screens/albakiyat alsali7at/al2ad3iya_wal3awzat_lil2alam_wal2askam.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belisti5araa.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belistikala.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_belsafaar.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bilisti3aza.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bishokr_allah.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_al7aj.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_al7awa2ij.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_alrizk.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_bitalab_altawba.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/almonajat_likashf_alzolm.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/dou3a2_alsajad_fi_zikr_altawba.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_asar_ba3d_sowar_walayat.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_ba3d_ala7raz_walad3iya_almoujaza.dart';
-import '../screens/albakiyat alsali7at/ala7raz walad3iya almoujaza/fi_ba3d_ma_yata3alak_belmawt.dart';
-import '../screens/albakiyat alsali7at/ala7raz_walad3iya_almoujaza.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al2a3rabi.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al2isti5ara_zat_alrka3.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al3afo.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al3asra.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al5awf_men_alzalim.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al7aja.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al7aja_al2oula.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al7aja_al5amisa.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al7aja_alrabi3a.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al7aja_alsalisa.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al7aja_alsaniya.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_al7oja_fi_jamkaran.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_alhadiya.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_alisti8asa.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_alja2i3.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_alwalad_liwalidayh.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_alwasiya.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_lailat_aldafn.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_li7adis_alnafs.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_li8ofran_alzounoub.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_liddain_wlkifayat_zolm_alsoltan.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_lilmohemat.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_lilzaka2_wjoudat_alhofez.dart';
-import '../screens/albakiyat alsali7at/ba3d alsalawat almandouba/salat_lziyadat_alrizk.dart';
-import '../screens/albakiyat alsali7at/ba3d_alsalawat_almandouba.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/dou3a2_al2i7tijab_amir_almo2minin.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_3ida_men_al2ad3iya_allati_yod3a_biha_saba7an_wmasa2an.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ad3iya_ma2soura_lilrizk.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ad3iya_yod3a_bha_3ind_alnom_w3ind_l2intibah_menh.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ad3iyat_al3ilal_walmarad.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_ba3d_ala7raz_wal3owaz.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_da3awat_ma2soura_kabl_salat_wfi_adbariha.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_da3awat_mojzat_ljami3_7wa2ej_aldonia_wal2a5ira.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_zikr_3idat_da3awat_yod3a_bha_2iza_5araj_l2insan_men_manzlhi.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_zikr_ba3d_ma_warad_lilham_wal8am_wal5awf_wa8airaha.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba men kitab alkafi alsharif/fi_zikr_dou3a2ain_lildin.dart';
-import '../screens/albakiyat alsali7at/da3awat_monta5aba_men_kitab_alkafi_alsharif.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/alta3kibat_al3amaa.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/alta3kibat_al5asa_bfaridat_alsob7.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/fi_azkar_wda3awat_tokra2_saba7an_wamasa2an.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/fi_l2intibah_men_alnawm_wsalat_allayl.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/fi_nozor_mema_yo3mal_fi_alnahar_mabaina_tolou3_alshames_w8roubaha.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/fima_yata3alak_bel8odat.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/fima_yo3mal_men_7in_al8ouroub_2ela_7in_alnawm.dart';
-import '../screens/albakiyat alsali7at/nozor men a3mal allail walnahar/fima_yod3a_bihi_fikol_sa3a_men_sa3at_alyawm.dart';
-import '../screens/albakiyat alsali7at/nozor_men_a3mal_allail_walnahar.dart';
-import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_al2a7add.dart';
-import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_al2arbi3aa2.dart';
-import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_al2isnainn.dart';
-import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_al5amiss.dart';
-import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_aljom3aa.dart';
-import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_alsabtt.dart';
-import '../screens/albakiyat alsali7at/zikr salawat ayam al2ousbou3/salat_yawm_alsoulasaa2.dart';
-import '../screens/albakiyat alsali7at/zikr_salawat_ayam_al2osbou3.dart';
-import '../screens/albakiyat_alsali7at_home_screen.dart';
-import '../screens/alsa7ifa_alsajadiya_home_screen.dart';
-import '../screens/kor2an/screens/index_screen.dart';
-import '../screens/kor2an/screens/juz_index_screen.dart';
-import '../screens/other pages/counter_screen.dart';
-import '../screens/other pages/imsakiya_screen.dart';
-import '../screens/other pages/salat layl/dou3aa_7azin.dart';
-import '../screens/other pages/salat layl/dou3aa_ba3d_salat_alwater.dart';
-import '../screens/other pages/salat layl/name_list_page.dart';
-import '../screens/other pages/salat layl/sawabaha_wa_fawa2idaha.dart';
-import '../screens/other pages/salat layl/waktaha_wakaifyatiha.dart';
-import '../screens/other pages/salat_allayl.dart';
-import '../screens/other pages/takwim_screen.dart';
-import '../screens/quran_home_screen.dart';
-import '../screens/about/about_us.dart';
-import '../screens/books.dart';
-import '../screens/other pages/counter page/tesbiha_page.dart';
-import '../screens/other pages/counter page/tesbihat_alzahra2_page.dart';
-import '../screens/other_screen.dart';
-import '../screens/favorites_screen.dart';
-import '../screens/herz_almoujahidin_home_screen.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/a3mal_masjid_alsahla.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/adab alziyarat/fi_adab_alziyarat.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/adab alziyarat/fi_zikr_al2isted3a2.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/adab_alziyarat.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/aakib_ziyarat_al2a2ima.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_ali_bin_lhussein.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_ali_bin_mohamad.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_ali_bin_moussa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_alnabi.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_alsayida_fatima.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_amir_almo2minin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_ja3far_bin_mohamad.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_lhassan_al3askari.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_lhassan_walhussein.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_mohamad_bin_ali.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_mohamad_bin_ali_bin_moussa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_moussa_bin_ja3far.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/alsalat_3ala_waley_l2amer.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/fi_ziyarat_alabna2_al3ozama2.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/fi_ziyarat_kobour_lmo2minin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/fi_ziyarat_l2abiya2_l3izam.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/hadis_alkisa2.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/ma_yozar_kol_2imam.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/salat_ja3far_altayar.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/ziyarat_2al_yasin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/ziyarat_alna7iya_almokadasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat aljami3a wal salawat/ziyarat_alsayida_zainab.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/alziyarat_aljami3a_walsalawat.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/fadl_lakoufa_wmasjidoha.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/kaifyat_wziyarat_amir_almo2minin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/a3mal_al2ostwana_al5amisa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/a3mal_al2ostwana_alsabi3a.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/a3mal_bab_alfaraj.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/a3mal_bait_altast.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/a3mal_dikat_alkada2_wbait_altast.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/a3mal_jami3_alkoufa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/a3mal_mi7rab_amir_almo2minin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/aamal_al2ostwana_alsalisa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/fi_fadl_alkoufa_wamasjidouha.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/mounajat_amir_almo2minin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/sifat_salat.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/sifat_salat_lil7aja.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/zikr_alsalat_waldou3aa_fi_wasat_almasjid.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/ziyarat_hani_ben_3orwa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alkoufa/ziyarat_mouslim_ben_3akil.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alsahla/a3mal_masjed_alsahla.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alsahla/alsalat_waldouaa_fi_masjed_zaid.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/masjid alsahla/fi_fadl_masjed_alsahla.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat 2a2imat sir/almakam_al2awal.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat 2a2imat sir/almakam_alsani.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat 2a2imat sir/ziyarat_al2imam_almahdi_al2o5ra_alsalisa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat 2a2imat sir/ziyarat_al2imam_almahdi_al2o5ra_alsaniya.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat 2a2imat sir/ziyarat_al2imam_almahdi_almankoula.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat 2a2imat sir/ziyarat_al2imam_almahdi_alsalat_3alaih.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat 2a2imat sir/ziyarat_alimam_al3askari.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/al2oula_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/al5amisa_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alrbi3a_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alsadbi3a_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alsadbi3a_almo5asasa_alsania.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alsadisa_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alsalisa_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alsamina_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alsania_almo5asasa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_al2o5ra.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_almotlaka_al2oula.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_almotlaka_al5amisa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_almotlaka_alrabi3a.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_almotlaka_alsabi3a.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_almotlaka_alsadisa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_almotlaka_alsalisa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/alziyarat_almotlaka_alsaniya.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/fadl_torbat_alhussein.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/fi_fadl_ziyarat_alhussein.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/fima_3ala_alza2ir_mora3atoh.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/ziyarat_3ashoraa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alhussein/ziyarat_al3abas_ben_3ali.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alkazimin/almasjed_alsharif.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alkazimin/fi_fadl_ziyarat_lkazimin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alkazimin/ziyarat_2o5ra_lmohamad_altaki.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alkazimin/ziyarat_2o5ra_lmohamad_altaki_alsaniya.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alkazimin/ziyarat_2o5ra_lmousa.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alkazimin/ziyarat_alnowab_al2arba3a.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alkazimin/ziyarat_salman.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/alwada3.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/zikr_almasajed_almo3azama.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/zikr_sa2ir_alziyarat.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_2a2imat_belbaki3.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_alnabi.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_alnabi_walzahraa_wal2a2ima_belbaki3.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_fatima_bent_2asad.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_hamza.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alnabi wal zahraa wal 2a2ima/ziyarat_kobour_alshohada2.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alrida/ziyarat_alimam_alrida_al2oula.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat alrida/ziyarat_alimam_alrida_alsaniya.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat amir almo2minin/alsalisa_men_alziyarat.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat amir almo2minin/alsaniya_men_alziyarat.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat amir almo2minin/fi_fadl_ziyaratihi.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat amir almo2minin/fi_kaifiyat_ziyaratihi.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat amir almo2minin/wada3_al2amir.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat_2a2imat_sir.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat_alhoussein_wa2adabiha.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat_alkazimin.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat_alnabi_walzahraa_wal2a2ima.dart';
-import '../screens/mafatih aljinan pages/a3mal almasajed wal ziyarat/ziyarat_alrida.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/baki al sana/fi_2a3mal_3ama_wa2a3mal_alnayrouz_wa2a3mal_al2ashhor_alromiya.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/baki al sana/fi_shaher_rabi3_al2awal.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/baki al sana/fi_shaher_rabi3_alsani_waljamada_al2oula_wal2a5ira.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/baki al sana/fi_shaher_safar.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/baki al sana/fi_shaher_zilko3da.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/baki_alsana.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/allayla_al2oula.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/allayla_al3ashira.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/alyawm_al2awal.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/alyawm_al3asher.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/alyawm_al5ames_wal_3eshroun.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/alyawm_alsalis.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/alyawm_altase3.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/moharam/fi_a3mal_shaher_moharam.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/al2a3mal_al5asa_brajab.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/allayla_alsabi3a_wal3eshroun.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/allayla_alsalisa_3ashara.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/alyawm_al2a5ir_men_alshaher.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/alyawm_al2awal_men_rajab.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/alyawm_al5ames_wal3ishroun.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/alyawm_alsabe3_wal3eshroun.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/alyawm_alsalis_3ashar.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/lailat_alnisf_men_rajab.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/rajab/yawm_alnisf_men_rajab.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/a3mal_allaila_altasi3a_3ashara_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_al2oula_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_al5amisa_3ashar_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_alrabi3a_3ashar_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_alsabi3a_3ashara_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_alsabi3a_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_alsalisa_3ashar_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_alsalisa_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/allayla_alwa7ida_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/alyawm_al2awal_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/alyawm_alsadis_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/alyawm_alsalasin_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/alyawm_alwa7id_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/da3awat_ayam_shaher_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/dou3aa_allayla_al5amisa_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/dou3aa_allayla_alrabi3a_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/dou3aa_allayla_alsabi3a_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/dou3aa_allayla_alsadisa_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/dou3aa_allayla_alsalasin_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/dou3aa_allayla_alsamina_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/dou3aa_allayla_altasi3a_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/douaa_abi_7amza_alsamali.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/douaa_al2iftita7.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/douaa_allayla_alsania_wal3ishroun_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/douaa_alsa7ar.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/fi_2a3mal_2ashar_shaher_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/fi_2a3mal_2ayam_shaher_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/fi_2a3mal_shaher_ramadan_al5asa.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/fi_fadel_shaher_ramadan_wa2a3maloh.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/ma_ya3om_allayali_wal2ayam.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/ma_yosta7ab_2itanoh_fi_layali_shaher_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/salawat_allayali_wada3awat_al2ayama_almashhoura.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/ramadan/yawm_alnisf_men_ramadan.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/a3mal_ma_bakya_men_alshaher.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/allayla_al2oula_sha3ban.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/allayla_alsalisa_3ashara_sha3ban.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/alyawm_al2awal_sha3ban.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/alyawm_alsalis_sha3ben.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/fi_fadl_shaher_sha3ban.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/laylat_alnisf_men_sha3ben.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/sha3ban/yawm_alnisf_men_sha3ben.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/shawal.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/shawal/a3mal_yawm_3id_alfitr.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/shawal/allayla_al2oula_shawal.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/allayla_al3ashira_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/allayla_alsamina_3ashara_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/allayla_altasi3a_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_al2a5ir_men_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_al2awal_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_al3ashir_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_al5amis_3ashar_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_al5amis_wal3ishroun_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_alrabi3_wal3ishroun_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_alsabi3_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_alsamin_3ashar_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_alsamin_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/alyawm_altasi3_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/fi_a3mal_shaher_zilhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/khotbat_amir_almo2minin_tawm_al8adir.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi lhoja/ziyarat_amir_almo2minin_yawm_al8adir.dart';
-import '../screens/mafatih aljinan pages/a3mal ashor alsana/zi_lhoja.dart';
-import '../screens/mafatih aljinan pages/a3mal_almasajed_walziyarat.dart';
-import '../screens/mafatih aljinan pages/a3mal_ashhor_alsana.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/Douaa_alsabah.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_3alkama.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_al3adila.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_al3asharat.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_alaahd.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_alfaraj.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_alhazin.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_alihtijab.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_aljawshan_alkabir.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_aljawshan_alsa8ir.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_alkamous.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_almashlol.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_almojir.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_alsimat.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_altawasol.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_komail.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_makarim_alakhlak.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_nodba.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_yastashir.dart';
-import '../screens/mafatih aljinan pages/ad3iya mashhoura/douaa_zaman_alghaiba.dart';
-import '../screens/mafatih aljinan pages/ad3iya_mashhoura.dart';
-import '../screens/mafatih aljinan pages/ad3iyat al2osbo3/dou3a2_al2a7ad.dart';
-import '../screens/mafatih aljinan pages/ad3iyat al2osbo3/dou3a2_al2arbi3a2.dart';
-import '../screens/mafatih aljinan pages/ad3iyat al2osbo3/dou3a2_al2isnain.dart';
-import '../screens/mafatih aljinan pages/ad3iyat al2osbo3/dou3a2_al5amis.dart';
-import '../screens/mafatih aljinan pages/ad3iyat al2osbo3/dou3a2_aljom3a.dart';
-import '../screens/mafatih aljinan pages/ad3iyat al2osbo3/dou3a2_alsabt.dart';
-import '../screens/mafatih aljinan pages/ad3iyat al2osbo3/dou3a2_alsoulasa2.dart';
-import '../screens/mafatih aljinan pages/ad3iyat_al2osbo3.dart';
-import '../screens/mafatih aljinan pages/almonajat.dart';
-import '../screens/mafatih aljinan pages/almonajat/almonajat_alsha3baneya.dart';
-import '../screens/mafatih aljinan pages/almonajat/almonajat_belsafar.dart';
-import '../screens/mafatih aljinan pages/almonajat/almonajat_bikashf_alzolm.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_al3arifin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_al5a2ifin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_almo3tasimin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_almo7ebin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_almoftakirin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_almoridin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_almotawasilin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_almoti3in_lillah.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_alra8ibin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_alrajin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_alshakin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_alshakirin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_alta2ibin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_alzahidin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_alzakirin.dart';
-import '../screens/mafatih aljinan pages/almonajat/monajat_l2amir_almo2minin.dart';
-import '../screens/mafatih aljinan pages/almonajat/salas_kalimat_3an_amir_almo2minin.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/a3mal_lailat_aljom3a.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/a3mal_nahar_aljom3a.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_2imam_almahdi.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_al3askari.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_albaker.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_alhadi.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_alhassan.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_alhussein.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_aljawad.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_alkazem.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_alrida.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_alsadek.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_al2imam_zain_al3abidin.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_alnabi.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_alsaida_alzahraa.dart';
-import '../screens/mafatih aljinan pages/lailat aljom3a wnaharaha w2a3malaha/salat_amir_amo2minin.dart';
-import '../screens/mafatih aljinan pages/lailat_aljom3a_wnaharaha_w2a3malaha.dart';
-import '../screens/mafatih aljinan pages/ta3kibat.dart';
-import '../screens/mafatih aljinan pages/ta3kibat/ta3kib_al3asr.dart';
-import '../screens/mafatih aljinan pages/ta3kibat/ta3kib_al3isha2.dart';
-import '../screens/mafatih aljinan pages/ta3kibat/ta3kib_aldohr.dart';
-import '../screens/mafatih aljinan pages/ta3kibat/ta3kib_alma8rib.dart';
-import '../screens/mafatih aljinan pages/ta3kibat/ta3kib_alsabah.dart';
-import '../screens/mafatih aljinan pages/ta3kibat/ta3kibat_3ama.dart';
-import '../screens/mafatih aljinan pages/ziarat al2osbo3/ziarat_al2a7ad.dart';
-import '../screens/mafatih aljinan pages/ziarat al2osbo3/ziarat_al2arbi3a2.dart';
-import '../screens/mafatih aljinan pages/ziarat al2osbo3/ziarat_al2isnain.dart';
-import '../screens/mafatih aljinan pages/ziarat al2osbo3/ziarat_al5amis.dart';
-import '../screens/mafatih aljinan pages/ziarat al2osbo3/ziarat_aljom3a.dart';
-import '../screens/mafatih aljinan pages/ziarat al2osbo3/ziarat_alsabt.dart';
-import '../screens/mafatih aljinan pages/ziarat al2osbo3/ziarat_alsoulasa2.dart';
-import '../screens/mafatih aljinan pages/ziarat_al2osbou3.dart';
-import '../screens/mafatih_aljinan_home_screen.dart';
-import '../screens/welcome_screen.dart';
-import '../screens/herz lmoujahidin/aawza_yataawaz_biha_aala_alaadaa_page.dart';
-import '../screens/herz lmoujahidin/aawzat_alnabi_yawm_wadi_alkora_page.dart';
-import '../screens/herz lmoujahidin/alfalak_page.dart';
-import '../screens/herz lmoujahidin/alhayakel_sabea_page.dart';
-import '../screens/herz lmoujahidin/alikhlas_page.dart';
-import '../screens/herz lmoujahidin/alkafiroun_page.dart';
-import '../screens/herz lmoujahidin/alnas_page.dart';
-import '../screens/herz lmoujahidin/ayat_alhefz_men_saif_alaadow_page.dart';
-import '../screens/herz lmoujahidin/ayat_alikhtifaa_men_alaadow_page.dart';
-import '../screens/herz lmoujahidin/ayat_listekfaa_page.dart';
-import '../screens/herz lmoujahidin/ayat_lkorsi_page.dart';
-import '../screens/herz lmoujahidin/douaa_ikhdaa_rikab_aljababira_page.dart';
-import '../screens/herz lmoujahidin/douaa_lidafea_kaid_aladow_wsharoh_page.dart';
-import '../screens/herz lmoujahidin/douaa_lilihtijab_aan_basar_alaadaa_page.dart';
-import '../screens/herz lmoujahidin/douaa_lilihtijab_page.dart';
-import '../screens/herz lmoujahidin/douaa_lilkhalas_men_alkatl_page.dart';
-import '../screens/herz lmoujahidin/douaa_nadi_aalyan_mozhira_alaajaib_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_alaaskari_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_albaker_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_alhadi_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_alhassan_almojtaba_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_alhussein_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_ali_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_aljawad_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_alkazem_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_almahdi_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_alrida_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_alsadek_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_mohamad_aljawad_page.dart';
-import '../screens/herz lmoujahidin/herz_alimam_zain_alaabidin_page.dart';
-import '../screens/herz lmoujahidin/herz_alrasoul_wal_aimma_page.dart';
-import '../screens/herz lmoujahidin/herz_altaj_page.dart';
-import '../screens/herz lmoujahidin/herz_fatimat_alzahraa_page.dart';
-import '../screens/herz lmoujahidin/herz_lietikaa_silah_alaadow_page.dart';
-import '../screens/herz lmoujahidin/herz_mostakhraj_men_kitab_allah_page.dart';
-import '../screens/herz lmoujahidin/herz_rasoul_allah_page.dart';
-import '../screens/herz lmoujahidin/rokaat_aljayb_lilimam_alrida_aalaih_alsalam_page.dart';
+import '../Util/app_imports.dart';
 
 class AppRoutes {
   late Repository repository;
@@ -553,17 +17,18 @@ class AppRoutes {
         HerzAlmoujahidinHomeScreen(),
     MafatihAljinanHomeScreen.screenRoute: (context) =>
         MafatihAljinanHomeScreen(),
-    OtherScreen.screenRoute: (context) => OtherScreen(),
+    MawakitAlsalat.screenRoute: (context) => MawakitAlsalat(),
     // ! Salat Layl
     SalatAllayl.screenRoute: (context) => SalatAllayl(),
     SawabahaWaFawa2idaha.screenRoute: (context) => SawabahaWaFawa2idaha(),
     WaktahaWakaifyatiha.screenRoute: (context) => WaktahaWakaifyatiha(),
     Dou3aaBa3dSalatAlwater.screenRoute: (context) => Dou3aaBa3dSalatAlwater(),
     Dou3aa7azin.screenRoute: (context) => Dou3aa7azin(),
+    Dou3a2SahmAllail.screenRoute: (context) => Dou3a2SahmAllail(),
     NameListPage.screenRoute: (context) => NameListPage(),
     // !
-    CounterScreen.screenRoute: (context) => CounterScreen(),
     ImsakiyaScreen.screenRoute: (context) => ImsakiyaScreen(),
+    QiblaSalat.screenRoute: (context) => QiblaSalat(),
     TakwimScreen.screenRoute: (context) => TakwimScreen(),
     AboutUs.screenRoute: (context) => AboutUs(),
     //! HERZ AL MOUJAHIDIN
@@ -1297,5 +762,108 @@ class AppRoutes {
     Alsa7ifaAlsajadiyaHomeScreen.screenRoute: (context) =>
         Alsa7ifaAlsajadiyaHomeScreen(),
     // !
+    Takdim.screenRoute: (context) => Takdim(),
+    Takdimm.screenRoute: (context) => Takdimm(),
+    Almokadima.screenRoute: (context) => Almokadima(),
+    // !
+    Alad3iya.screenRoute: (context) => Alad3iya(),
+    Dou3a2Wa7ad.screenRoute: (context) => Dou3a2Wa7ad(),
+    Dou3a2Isnain.screenRoute: (context) => Dou3a2Isnain(),
+    Dou3a2Salasa.screenRoute: (context) => Dou3a2Salasa(),
+    Dou3a2Arba3a.screenRoute: (context) => Dou3a2Arba3a(),
+    Dou3a25amsa.screenRoute: (context) => Dou3a25amsa(),
+    Dou3a2Sita.screenRoute: (context) => Dou3a2Sita(),
+    Dou3a2Sab3a.screenRoute: (context) => Dou3a2Sab3a(),
+    Dou3a2Samaniya.screenRoute: (context) => Dou3a2Samaniya(),
+    Dou3a2Tes3a.screenRoute: (context) => Dou3a2Tes3a(),
+    Dou3a23ashra.screenRoute: (context) => Dou3a23ashra(),
+    Dou3a27da3esh.screenRoute: (context) => Dou3a27da3esh(),
+    Dou3a2Tna3esh.screenRoute: (context) => Dou3a2Tna3esh(),
+    Dou3a2Tlata3esh.screenRoute: (context) => Dou3a2Tlata3esh(),
+    Dou3a2Arba3ta3esh.screenRoute: (context) => Dou3a2Arba3ta3esh(),
+    Dou3a25amesta3esh.screenRoute: (context) => Dou3a25amesta3esh(),
+    Dou3a2Seta3esh.screenRoute: (context) => Dou3a2Seta3esh(),
+    Dou3a2Sabe3ta3esh.screenRoute: (context) => Dou3a2Sabe3ta3esh(),
+    Dou3a2Tmanta3esh.screenRoute: (context) => Dou3a2Tmanta3esh(),
+    Dou3a2Tese3ta3esh.screenRoute: (context) => Dou3a2Tese3ta3esh(),
+    Dou3a23ishrin.screenRoute: (context) => Dou3a23ishrin(),
+    Dou3a2Wa7edW3ishrin.screenRoute: (context) => Dou3a2Wa7edW3ishrin(),
+    Dou3a2TnainaW3ishrin.screenRoute: (context) => Dou3a2TnainaW3ishrin(),
+    Dou3a2TletaW3ishrin.screenRoute: (context) => Dou3a2TletaW3ishrin(),
+    Dou3a2Arb3aW3ishrin.screenRoute: (context) => Dou3a2Arb3aW3ishrin(),
+    Dou3a25amsaW3ishrin.screenRoute: (context) => Dou3a25amsaW3ishrin(),
+    Dou3a2SitaW3ishrin.screenRoute: (context) => Dou3a2SitaW3ishrin(),
+    Dou3a2Sab3aW3ishrin.screenRoute: (context) => Dou3a2Sab3aW3ishrin(),
+    Dou3a2TmenaW3ishrin.screenRoute: (context) => Dou3a2TmenaW3ishrin(),
+    Dou3a2Tes3aW3ishrin.screenRoute: (context) => Dou3a2Tes3aW3ishrin(),
+    Dou3a2Tlatin.screenRoute: (context) => Dou3a2Tlatin(),
+    Dou3a2We7daWtlatin.screenRoute: (context) => Dou3a2We7daWtlatin(),
+    Dou3a2TnainaWtlatin.screenRoute: (context) => Dou3a2TnainaWtlatin(),
+    Dou3a2TletaWtlatin.screenRoute: (context) => Dou3a2TletaWtlatin(),
+    Dou3a2Arb3aWtlatin.screenRoute: (context) => Dou3a2Arb3aWtlatin(),
+    Dou3a25amsaWtlatin.screenRoute: (context) => Dou3a25amsaWtlatin(),
+    Dou3a2SitaWtlatin.screenRoute: (context) => Dou3a2SitaWtlatin(),
+    Dou3a2Sab3aWtlatin.screenRoute: (context) => Dou3a2Sab3aWtlatin(),
+    Dou3a2TmenaWtlatin.screenRoute: (context) => Dou3a2TmenaWtlatin(),
+    Dou3a2Tes3aWtlatin.screenRoute: (context) => Dou3a2Tes3aWtlatin(),
+    Dou3a2Arb3in.screenRoute: (context) => Dou3a2Arb3in(),
+    Dou3a2We7daWarba3in.screenRoute: (context) => Dou3a2We7daWarba3in(),
+    Dou3a2TnainaWarb3in.screenRoute: (context) => Dou3a2TnainaWarb3in(),
+    Dou3a2TletaWarb3in.screenRoute: (context) => Dou3a2TletaWarb3in(),
+    Dou3a2Arb3aWarb3in.screenRoute: (context) => Dou3a2Arb3aWarb3in(),
+    Dou3a25amsaWarb3in.screenRoute: (context) => Dou3a25amsaWarb3in(),
+    Dou3a2SitaWarb3in.screenRoute: (context) => Dou3a2SitaWarb3in(),
+    Dou3a2Sab3aWarb3in.screenRoute: (context) => Dou3a2Sab3aWarb3in(),
+    Dou3a2TmenaWarb3in.screenRoute: (context) => Dou3a2TmenaWarb3in(),
+    Dou3a2Tes3aWarb3in.screenRoute: (context) => Dou3a2Tes3aWarb3in(),
+    Dou3a25amsin.screenRoute: (context) => Dou3a25amsin(),
+    Dou3a2We7daW5amsin.screenRoute: (context) => Dou3a2We7daW5amsin(),
+    Dou3a2TnainaW5amsin.screenRoute: (context) => Dou3a2TnainaW5amsin(),
+    Dou3a2TletaW5amsin.screenRoute: (context) => Dou3a2TletaW5amsin(),
+    Dou3a2Arba3Wa5amin.screenRoute: (context) => Dou3a2Arba3Wa5amin(),
+    // !
+    Molhakat.screenRoute: (context) => Molhakat(),
+    FiAltasbi7.screenRoute: (context) => FiAltasbi7(),
+    Dou3a2WtamjidLah.screenRoute: (context) => Dou3a2WtamjidLah(),
+    FiZikrAlMohamad.screenRoute: (context) => FiZikrAlMohamad(),
+    FiAlsalat3alaAdam.screenRoute: (context) => FiAlsalat3alaAdam(),
+    FiAlkarbWal2ikala.screenRoute: (context) => FiAlkarbWal2ikala(),
+    MimaYa7zarohoWya5afoh.screenRoute: (context) => MimaYa7zarohoWya5afoh(),
+    FiAltazalol.screenRoute: (context) => FiAltazalol(),
+    // !
+    A3iyatAlayam.screenRoute: (context) => A3iyatAlayam(),
+    Sabt.screenRoute: (context) => Sabt(),
+    A7ad.screenRoute: (context) => A7ad(),
+    Tanain.screenRoute: (context) => Tanain(),
+    Taleta.screenRoute: (context) => Taleta(),
+    Orb3a.screenRoute: (context) => Orb3a(),
+    Khamis.screenRoute: (context) => Khamis(),
+    Jom3a.screenRoute: (context) => Jom3a(),
+    // !
+    AlmonajatAlkhamsat3ashar.screenRoute: (context) =>
+        AlmonajatAlkhamsat3ashar(),
+    Alta2ibin.screenRoute: (context) => Alta2ibin(),
+    Alshakin.screenRoute: (context) => Alshakin(),
+    Al5a2ifin.screenRoute: (context) => Al5a2ifin(),
+    Alrajin.screenRoute: (context) => Alrajin(),
+    Alra8ibin.screenRoute: (context) => Alra8ibin(),
+    Alshakirin.screenRoute: (context) => Alshakirin(),
+    Almoti3inLilah.screenRoute: (context) => Almoti3inLilah(),
+    Almoridin.screenRoute: (context) => Almoridin(),
+    Almo7ibin.screenRoute: (context) => Almo7ibin(),
+    Almotawasilin.screenRoute: (context) => Almotawasilin(),
+    Almoftakirin.screenRoute: (context) => Almoftakirin(),
+    Al3arifin.screenRoute: (context) => Al3arifin(),
+    Alzakirin.screenRoute: (context) => Alzakirin(),
+    Almo3tasimin.screenRoute: (context) => Almo3tasimin(),
+    Alzahidin.screenRoute: (context) => Alzahidin(),
+    // !
+    RisalatAlhokok.screenRoute: (context) => RisalatAlhokok(),
+    HokokAllah.screenRoute: (context) => HokokAllah(),
+    HokokAlaf3al.screenRoute: (context) => HokokAlaf3al(),
+    HokokAl2a2ima.screenRoute: (context) => HokokAl2a2ima(),
+    HokokAlra3iya.screenRoute: (context) => HokokAlra3iya(),
+    HokokAlra7em.screenRoute: (context) => HokokAlra7em(),
+    HokokAl2a5arin.screenRoute: (context) => HokokAl2a5arin(),
   };
 }

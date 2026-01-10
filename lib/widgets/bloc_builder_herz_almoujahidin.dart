@@ -1,10 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../Util/app_imports.dart';
 
-import '../business logic/cubit/herz_almoujahidin_cubit.dart';
-import 'container_scrollview.dart';
-import 'list_of_nine_verses.dart';
 
 class BlocBuilderHerzAlmoujahidin extends StatelessWidget {
   final String? text;

@@ -1,13 +1,6 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:archive/archive.dart';
 
-import '../../constants/String.dart';
-import '../models/a3mal_laylat_kader.dart';
-import '../models/albakiyat_alsalihat.dart';
-import '../models/alhakiba_alramadaneya.dart';
-import '../models/herz_almoujahidin.dart';
-import '../models/mafati7_aljinan.dart';
+import '../../Util/app_imports.dart';
 
 class JsonService {
   // قراءة JSON عادي
@@ -73,13 +66,16 @@ class JsonService {
   Future<List<AlhakibaAlramadaneyaModel>> getAlhakibaAlramadaneya() async {
     // نقوم بتحميل JSON مضغوط من ملف zip ثم نقرأ JSON داخله
     final jsonData = await loadCompressedJson(
-        '$baseUrl/alhakiba_alramadaneya.json.zip', 'alhakiba_alramadaneya.json');
+        '$baseUrl/alhakiba_alramadaneya.json.zip',
+        'alhakiba_alramadaneya.json');
 
     // jsonData هنا متوقع يكون List<dynamic> أو Map حسب هيكل JSON
     // لنفترض أن جذر JSON هو List
     if (jsonData is List) {
       // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
-      return jsonData.map((e) => AlhakibaAlramadaneyaModel.fromJson(e)).toList();
+      return jsonData
+          .map((e) => AlhakibaAlramadaneyaModel.fromJson(e))
+          .toList();
     } else {
       throw Exception('تنسيق JSON غير صحيح، متوقع List');
     }
@@ -112,6 +108,38 @@ class JsonService {
     if (jsonData is List) {
       // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
       return jsonData.map((e) => AlbakiyatAlsalihatModel.fromJson(e)).toList();
+    } else {
+      throw Exception('تنسيق JSON غير صحيح، متوقع List');
+    }
+  }
+
+  //! الصحيفة السجادية
+  Future<List<Alsa7ifaAlsajadiyaModel>> getAlsa7ifaAlsajadiya() async {
+    // نقوم بتحميل JSON مضغوط من ملف zip ثم نقرأ JSON داخله
+    final jsonData = await loadCompressedJson(
+        '$baseUrl/alsa7ifa_alsajadiya.json.zip', 'alsa7ifa_alsajadiya.json');
+
+    // jsonData هنا متوقع يكون List<dynamic> أو Map حسب هيكل JSON
+    // لنفترض أن جذر JSON هو List
+    if (jsonData is List) {
+      // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
+      return jsonData.map((e) => Alsa7ifaAlsajadiyaModel.fromJson(e)).toList();
+    } else {
+      throw Exception('تنسيق JSON غير صحيح، متوقع List');
+    }
+  }
+
+  //! صلاة الليل
+  Future<List<SalatLailModel>> getSalatLail() async {
+    // نقوم بتحميل JSON مضغوط من ملف zip ثم نقرأ JSON داخله
+    final jsonData = await loadCompressedJson(
+        '$baseUrl/salat_lail.json.zip', 'salat_lail.json');
+
+    // jsonData هنا متوقع يكون List<dynamic> أو Map حسب هيكل JSON
+    // لنفترض أن جذر JSON هو List
+    if (jsonData is List) {
+      // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
+      return jsonData.map((e) => SalatLailModel.fromJson(e)).toList();
     } else {
       throw Exception('تنسيق JSON غير صحيح، متوقع List');
     }
