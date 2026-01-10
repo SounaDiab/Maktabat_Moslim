@@ -1,16 +1,45 @@
-# herz_lmoujahidin
+<h1>📚 مكتبة المسلم</h1>
+مكتبة المسلم هو تطبيق إسلامي متكامل يهدف إلى مساعدة المسلمين في حياتهم اليومية من خلال توفير أهم الأدوات والعبادات في تطبيق واحد، بواجهة بسيطة وسهلة الاستخدام.
+✨ مميزات التطبيق
+📖 القرآن الكريم
+عرض السور والآيات بشكل منظم
+سهولة التنقل بين السور
+حفظ آخر موضع قراءة
+🤲 الأدعية والأحراز
+مجموعة مختارة من الأدعية اليومية
+أحراز وأذكار مأثورة
+🕌 مواقيت الصلاة
+حساب دقيق لمواقيت الصلاة حسب الموقع
+دعم التنبيهات لكل صلاة
+إمكانية تشغيل الأذان
+📿 المسبحة الإلكترونية
+تحديد نوع التسبيح
+تحديد عدد التسبيحات
+عدّاد ذكي مع تنبيه عند الانتهاء
+🗓️ التقويم الهجري
+عرض التاريخ الهجري
+إمكانية تعديل فرق الأيام (Hijri Offset)
+🌙 الإمساكية
+مواقيت الصيام لشهر رمضان
+أوقات الإمساك والإفطار
+🌗 الوضع الليلي والنهاري
+تصميم مريح للعين
+التبديل بين الوضعين بسهولة
+🛠️ التقنيات المستخدمة
+Flutter
+Dart
+إدارة الحالة باستخدام Cubit / Bloc
+التخزين المحلي باستخدام SharedPreferences
+واجهات متوافقة مع أجهزة Android
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🤝 المساهمة
+نرحب بجميع المساهمات لتحسين التطبيق
+اقتراح ميزات جديدة
+الإبلاغ عن الأخطاء
+تحسين الواجهة أو الأداء
+📄 الرخصة
+هذا المشروع مفتوح المصدر ويخضع لرخصة MIT
+يمكنك استخدامه وتعديله بحرية.
+👨‍💻 المطور
+حسن دياب
+تطبيق يهدف لخدمة المسلمين حول العالم 🤍
