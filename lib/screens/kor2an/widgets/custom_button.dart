@@ -1,21 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import '../../../Util/app_imports.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
-    required this.onPrimary,
     required this.text,
     required this.onPressed,
     this.isFilled = false,
-    this.primary,
     this.svgIcon,
     this.borderRadius = 5,
   }) : super(key: key);
 
   final bool isFilled;
-  final Color? primary;
-  final Color onPrimary;
   final String? svgIcon;
   final String text;
   final VoidCallback onPressed;
@@ -25,10 +20,6 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final textStyle = TextStyle(
-      color: onPrimary,
-      fontSize: isTablet ? 30 : 15,
-    );
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -36,8 +27,10 @@ class CustomButton extends StatelessWidget {
         width: isTablet ? 120 : 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
-          color: primary,
-          border: isFilled ? null : Border.all(width: 2, color: onPrimary),
+          color: text == 'إنتقال' ? Theme.of(context).primaryColor : Colors.red,
+          border: isFilled
+              ? null
+              : Border.all(width: 2, color: Theme.of(context).cardColor),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +41,7 @@ class CustomButton extends StatelessWidget {
             ],
             Text(
               text,
-              style: textStyle,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ],
         ),

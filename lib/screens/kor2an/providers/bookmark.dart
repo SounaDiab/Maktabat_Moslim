@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import '../../../Util/app_imports.dart';
 import '../core/index.dart';
 
 class BookMarkProvider extends ChangeNotifier {

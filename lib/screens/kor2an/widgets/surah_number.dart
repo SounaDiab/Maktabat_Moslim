@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import '../../../Util/app_imports.dart';
 
 import '../core/index.dart';
 
@@ -10,18 +9,20 @@ class SurahNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Stack(
       alignment: Alignment.center,
       children: [
-        SvgPicture.asset(AppAsset.surahNumber),
+        SvgPicture.asset(
+          AppAsset.surahNumber,
+          color: Theme.of(context).iconTheme.color,
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 3),
           child: Text(
             number.toString(),
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: colorScheme.surahNumber,
+              color: Theme.of(context).iconTheme.color,
               fontSize: 17,
             ),
           ),

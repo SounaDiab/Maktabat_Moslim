@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../screens/index_screen.dart';
-import '../../screens/juz_index_screen.dart';
-import 'package:provider/provider.dart';
+import '../../../../Util/app_imports.dart';
 
 import '../../core/index.dart';
-import '../../providers/bookmark.dart';
-import '../../providers/quran.dart';
-import '../../providers/show_overlay_provider.dart';
 // import '../../providers/style_provider.dart';
 import '../custom_container.dart';
 import '../go_to_page_popup.dart';
@@ -72,37 +65,12 @@ class LandscapeOverlay extends StatelessWidget {
                         onPressed: bookMark.changeMark,
                       ),
                     ),
-                    // Expanded(
-                    //   child: GestureDetector(
-                    //     onTap: () {
-                    //       styleProvider.toggleStyle();
-                    //       print(styleProvider.style);
-                    //     },
-                    //     child: Consumer<StyleProvider>(
-                    //       builder: (context, styleProvider, child) => Container(
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: [
-                    //             SvgPicture.asset(
-                    //               AppAsset.book,
-                    //             ),
-                    //             const SizedBox(width: 5),
-                    //             Text(
-                    //               '${styleProvider.style}',
-                    //               style: textStyle,
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
             ],
           ),
-          const HorizentalDiv(),
+          HorizentalDiv(color: Theme.of(context).indicatorColor),
           SizedBox(
             height: 45,
             child: Row(
@@ -120,7 +88,7 @@ class LandscapeOverlay extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalDiv(),
+                VerticalDiv(color: Theme.of(context).indicatorColor),
                 Expanded(
                   flex: 3,
                   child: TextButton.icon(
@@ -139,7 +107,7 @@ class LandscapeOverlay extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalDiv(),
+                VerticalDiv(color: Theme.of(context).indicatorColor),
                 Expanded(
                   flex: 2,
                   child: TextButton.icon(
@@ -153,7 +121,7 @@ class LandscapeOverlay extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalDiv(),
+                VerticalDiv(color: Theme.of(context).indicatorColor),
                 Expanded(
                   flex: 2,
                   child: TextButton.icon(

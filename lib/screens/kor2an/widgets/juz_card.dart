@@ -1,14 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
 import '../core/index.dart';
-import '../providers/quran.dart';
 import '../quran/quran.dart';
 import 'horizental_divider.dart';
 import 'vertical_divider.dart';
-
-const vDiv = VerticalDiv(color: Color.fromARGB(104, 165, 165, 165));
-const hDiv = HorizentalDiv(color: Color.fromARGB(104, 165, 165, 165));
 
 class JuzCard extends StatelessWidget {
   const JuzCard({Key? key, required this.juz}) : super(key: key);
@@ -32,18 +27,18 @@ class JuzCard extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              vDiv,
+              VerticalDiv(),
               Expanded(
                 flex: 6,
                 child: Column(
                   children: [
                     hizbPart(1),
-                    hDiv,
+                    HorizentalDiv(),
                     hizbPart(2),
                   ],
                 ),
               ),
-              vDiv,
+              VerticalDiv(),
               Expanded(
                   child: CustomText(
                 '${getJuzPage(juz)}',
@@ -69,7 +64,7 @@ class JuzCard extends StatelessWidget {
               ),
             ),
           ),
-          vDiv,
+          VerticalDiv(),
           Expanded(
             flex: 2,
             child: CustomText(
@@ -79,7 +74,7 @@ class JuzCard extends StatelessWidget {
               ),
             ),
           ),
-          vDiv,
+          VerticalDiv(),
           Expanded(
             flex: 2,
             child: CustomText(
@@ -89,7 +84,7 @@ class JuzCard extends StatelessWidget {
               ),
             ),
           ),
-          vDiv,
+          VerticalDiv(),
           Expanded(
             flex: 2,
             child: CustomText(
@@ -118,7 +113,6 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final quran = Provider.of<Quran>(context, listen: false);
-    final colorScheme = Theme.of(context).colorScheme;
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -133,12 +127,10 @@ class CustomText extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: AppTheme.secondaryFontFamily,
-            fontSize: fontSize,
-            color: colorScheme.juzCardText,
-            fontWeight: fontWeight,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+              ),
         ),
       ),
     );

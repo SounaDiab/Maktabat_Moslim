@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 import '../core/index.dart';
-import '../providers/bookmark.dart';
 
 class Marker extends StatelessWidget {
   const Marker({Key? key, this.left = 20}) : super(key: key);

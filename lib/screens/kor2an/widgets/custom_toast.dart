@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
-import '../providers/quran.dart';
-import '../providers/toast.dart';
 
 class CustomToast extends StatelessWidget {
   const CustomToast({Key? key}) : super(key: key);
@@ -20,14 +17,11 @@ class CustomToast extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: Colors.black87,
+            color: Theme.of(context).primaryColor.withOpacity(0.9),
           ),
           child: Text(
             quran.hizbText,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-            ),
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
       ),

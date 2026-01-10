@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
 import '../core/index.dart';
-import '../providers/quran.dart';
 import 'info_overlay/info_text.dart';
 
 class PageInfo extends StatelessWidget {

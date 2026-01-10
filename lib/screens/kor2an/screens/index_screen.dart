@@ -1,15 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
-import '../providers/bookmark.dart';
-import '../providers/show_overlay_provider.dart';
-import '../quran/quran.dart';
-
+import '../../../Util/app_imports.dart';
 import '../core/index.dart';
-import '../providers/quran.dart';
-
+import '../quran/quran.dart';
 import '../widgets/horizental_divider.dart';
-import '../widgets/marker.dart';
 import '../widgets/surah_number.dart';
 
 class IndexScreen extends StatelessWidget {
@@ -23,11 +15,6 @@ class IndexScreen extends StatelessWidget {
     final quran = Provider.of<Quran>(context, listen: false);
     final bookMark = Provider.of<BookMarkProvider>(context);
     final overlay = Provider.of<ShowOverlayProvider>(context, listen: false);
-    final colorScheme = Theme.of(context).colorScheme;
-    final textStyle = TextStyle(
-      color: colorScheme.juzCardText,
-      fontSize: isTablet ? 30 : 15,
-    );
 
     void _goToBookMark() {
       quran.goToPage(bookMark.markPage);
@@ -37,19 +24,19 @@ class IndexScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppConstant.surahIndex),
+        title: Text(AppConstant.surahIndex),
         actions: [
           TextButton.icon(
             onPressed: _goToBookMark,
             icon: SvgPicture.asset(
               AppAsset.saveFilled,
-              color: colorScheme.juzCardText,
+              color: Theme.of(context).appBarTheme.foregroundColor,
               width: isTablet ? 25 : 20,
             ),
             label: FittedBox(
               child: Text(
                 isTablet ? AppConstant.goToBookMark : '',
-                style: textStyle,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
           ),
@@ -58,7 +45,7 @@ class IndexScreen extends StatelessWidget {
       body: ListView.separated(
         itemCount: 114,
         separatorBuilder: (context, index) {
-          return HorizentalDiv(color: colorScheme.div);
+          return HorizentalDiv();
         },
         itemBuilder: (BuildContext context, int index) {
           final surahNumber = index + 1;
@@ -71,32 +58,34 @@ class IndexScreen extends StatelessWidget {
                   quran.goToPageIndex(page - 1);
                 },
                 visualDensity: const VisualDensity(horizontal: -3),
-                leading: SurahNumber(number: surahNumber),
+                leading: SurahNumber(
+                  number: surahNumber,
+                ),
                 title: Text(
                   getSurahNameArabic(surahNumber),
-                  style: const TextStyle(
-                    fontFamily: AppTheme.secondaryFontFamily,
-                    fontSize: 25,
+                  style: TextStyle(
+                    fontFamily:
+                        Theme.of(context).textTheme.displayMedium?.fontFamily,
+                    fontSize: isTablet ? 45 : 25,
                     fontWeight: FontWeight.bold,
                     height: 1.2,
                   ),
                 ),
                 subtitle: Text(
                   getSurahData(surahNumber),
-                  style: const TextStyle(
-                    fontSize: 15,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: isTablet ? 20 : 15,
+                      ),
                 ),
                 trailing: Text(
                   '${page}',
-                  style: TextStyle(
-                    fontSize: 21,
-                    color: colorScheme.pageNumber,
-                  ),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                        fontSize: isTablet ? 42 : 21,
+                      ),
                 ),
               ),
               if (isMarkedSurah(bookMark.markPage, surahNumber))
-                const Marker(left: 60),
+                const Marker(left: 80),
             ],
           );
         },

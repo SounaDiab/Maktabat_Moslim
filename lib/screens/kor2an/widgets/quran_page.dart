@@ -1,36 +1,50 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-
-import '../../../widgets/cache_manager_widget.dart';
-import '../quran/quran.dart';
+import '../../../Util/app_imports.dart';
+import '../../../widgets/page_directory_download_image_widget.dart';
 
 class QuranPage extends StatelessWidget {
   const QuranPage({Key? key, required this.pageIndex}) : super(key: key);
 
   final int pageIndex;
 
+  // دالة للحصول على المسار المحلي للصورة
+  Future<String> getImagePath(int pageIndex) async {
+    return await getImagePath(pageIndex + 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth >= 600;
     final orientation = MediaQuery.of(context).orientation;
     final isLandscape = orientation == Orientation.landscape;
 
-    return Container(
-      width: screenSize.width,
-      // child: Image.network(
-      //   pageDir(pageIndex + 1),
-      //   fit: isLandscape ? BoxFit.fitWidth : BoxFit.fill,
-      //   width: screenSize.width,
-      // ),
-      child: CachedNetworkImage(
-        imageUrl: pageDir(pageIndex + 1),
-        placeholder: (context, url) =>
-            Center(child: CircularProgressIndicator()),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-        fit: isLandscape ? BoxFit.fitWidth : BoxFit.fill,
-        width: screenSize.width,
-        cacheManager: CacheManagerWidget.instance,
-      ),
+    return FutureBuilder<String>(
+      future: pageDirectory(pageIndex + 1),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+              child: CircularProgressIndicator(
+            color: Theme.of(context).dividerColor,
+          ));
+        } else if (snapshot.hasError) {
+          return Center(child: Icon(Icons.error));
+        } else if (snapshot.hasData) {
+          final imagePath = snapshot.data!;
+          return Container(
+            color: Theme.of(context).cardColor,
+            padding: EdgeInsets.all(isTablet ? 10 : 0),
+            width: screenSize.width,
+            child: Image.file(
+              File(imagePath), // عرض الصورة من المسار المحلي
+              fit: isLandscape ? BoxFit.fitWidth : BoxFit.fill,
+              width: screenSize.width,
+            ),
+          );
+        } else {
+          return Center(child: Text('No image found'));
+        }
+      },
     );
   }
 }

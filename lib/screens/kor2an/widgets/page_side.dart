@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
 import '../core/index.dart';
-import '../providers/quran.dart';
 
 class PageSide extends StatelessWidget {
   const PageSide({Key? key}) : super(key: key);
@@ -15,10 +12,14 @@ class PageSide extends StatelessWidget {
     return Column(
       children: [
         SvgPicture.asset(
-            quran.isRightPage ? AppAsset.pageRight : AppAsset.pageLeft),
+          quran.isRightPage ? AppAsset.pageRight : AppAsset.pageLeft,
+          color: Theme.of(context).iconTheme.color,
+        ),
         Text(
           quran.hizbText,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Theme.of(context).textTheme.labelMedium?.color,
+          ),
         ),
       ],
     );

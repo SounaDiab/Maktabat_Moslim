@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 
 class ThemeProvider with ChangeNotifier {
   ThemeMode themeMode =
@@ -13,4 +13,3 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 }
-

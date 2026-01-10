@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 
 class PageFeild extends StatefulWidget {
   const PageFeild(
@@ -48,9 +48,9 @@ class _PageFeildState extends State<PageFeild> {
         filled: true,
         fillColor: Colors.black12,
         hintText: '43',
-        border: _inputBorder(Colors.black38),
-        enabledBorder: _inputBorder(Colors.black38),
-        focusedBorder: _inputBorder(Colors.black54),
+        border: _inputBorder(Theme.of(context).dividerColor),
+        enabledBorder: _inputBorder(Theme.of(context).dividerColor),
+        focusedBorder: _inputBorder(Theme.of(context).dividerColor),
       ),
     );
   }

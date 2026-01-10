@@ -1,14 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
+import '../../../../Util/app_imports.dart';
 
 import '../../core/index.dart';
-import '../../providers/bookmark.dart';
-import '../../providers/quran.dart';
-import '../../providers/show_overlay_provider.dart';
 // import '../../providers/style_provider.dart';
-import '../../screens/index_screen.dart';
-import '../../screens/juz_index_screen.dart';
 import '../custom_container.dart';
 import '../go_to_page_popup.dart';
 import '../horizental_divider.dart';
@@ -27,7 +20,6 @@ class _BottomOverlayState extends State<BottomOverlay> {
     final quran = Provider.of<Quran>(context, listen: false);
     final bookMark = Provider.of<BookMarkProvider>(context);
     final overlay = Provider.of<ShowOverlayProvider>(context, listen: false);
-    // final styleProvider = Provider.of<StyleProvider>(context, listen: false);
 
     void _goToBookMark() {
       quran.goToPage(bookMark.markPage);
@@ -53,47 +45,22 @@ class _BottomOverlayState extends State<BottomOverlay> {
                             bookMark.markButtonText == AppConstant.saveBookmark
                                 ? AppAsset.save
                                 : AppAsset.saveFilled,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                           const SizedBox(width: 10),
                           Text(
                             bookMark.markButtonText,
-                            style: textStyle,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
-                // const VerticalDiv(),
-                // Expanded(
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       styleProvider.toggleStyle();
-                //       print(styleProvider.style);
-                //     },
-                //     child: Consumer<StyleProvider>(
-                //       builder: (context, styleProvider, child) => Container(
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.center,
-                //           children: [
-                //             SvgPicture.asset(
-                //               AppAsset.book,
-                //             ),
-                //             const SizedBox(width: 10),
-                //             Text(
-                //               '${AppConstant.goStyle} ${styleProvider.style}',
-                //               style: textStyle,
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
-          const HorizentalDiv(),
+          HorizentalDiv(color: Theme.of(context).indicatorColor),
           SizedBox(
             height: 45,
             child: Row(
@@ -102,16 +69,19 @@ class _BottomOverlayState extends State<BottomOverlay> {
                   flex: 5,
                   child: TextButton.icon(
                     onPressed: _goToBookMark,
-                    icon: SvgPicture.asset(AppAsset.saveFilled),
-                    label: const FittedBox(
+                    icon: SvgPicture.asset(
+                      AppAsset.saveFilled,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    label: FittedBox(
                       child: Text(
                         AppConstant.goToBookMark,
-                        style: textStyle,
+                        style: Theme.of(context).textTheme.labelMedium,
                       ),
                     ),
                   ),
                 ),
-                const VerticalDiv(),
+                VerticalDiv(color: Theme.of(context).indicatorColor),
                 Expanded(
                   flex: 4,
                   child: TextButton.icon(
@@ -119,15 +89,18 @@ class _BottomOverlayState extends State<BottomOverlay> {
                       showDialog(
                         barrierDismissible: true,
                         context: context,
-                        builder: (context) => const GoToPagePopup(),
+                        builder: (context) => GoToPagePopup(),
                       );
                       overlay.toggleisShowOverlay();
                     },
-                    icon: SvgPicture.asset(AppAsset.page),
-                    label: const FittedBox(
+                    icon: SvgPicture.asset(
+                      AppAsset.page,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    label: FittedBox(
                       child: Text(
                         AppConstant.changePage,
-                        style: textStyle,
+                        style: Theme.of(context).textTheme.labelMedium,
                       ),
                     ),
                   ),
@@ -135,7 +108,7 @@ class _BottomOverlayState extends State<BottomOverlay> {
               ],
             ),
           ),
-          const HorizentalDiv(),
+          HorizentalDiv(color: Theme.of(context).indicatorColor),
           SizedBox(
             height: 45,
             child: Row(
@@ -145,24 +118,30 @@ class _BottomOverlayState extends State<BottomOverlay> {
                     onPressed: () {
                       Navigator.of(context).pushNamed(IndexScreen.screenRoute);
                     },
-                    icon: SvgPicture.asset(AppAsset.index),
-                    label: const Text(
+                    icon: SvgPicture.asset(
+                      AppAsset.index,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    label: Text(
                       AppConstant.index,
-                      style: textStyle,
+                      style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
                 ),
-                const VerticalDiv(),
+                VerticalDiv(color: Theme.of(context).indicatorColor),
                 Expanded(
                   child: TextButton.icon(
                     onPressed: () {
                       Navigator.of(context)
                           .pushNamed(JuzIndexScreen.screenRoute);
                     },
-                    icon: SvgPicture.asset(AppAsset.part),
-                    label: const Text(
+                    icon: SvgPicture.asset(
+                      AppAsset.part,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    label: Text(
                       AppConstant.ajzaa,
-                      style: textStyle,
+                      style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
                 ),
@@ -174,8 +153,3 @@ class _BottomOverlayState extends State<BottomOverlay> {
     );
   }
 }
-
-const textStyle = TextStyle(
-  color: Colors.white,
-  fontSize: 15,
-);

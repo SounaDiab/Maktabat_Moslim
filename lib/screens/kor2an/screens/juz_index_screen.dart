@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
 import '../core/index.dart';
-import '../providers/bookmark.dart';
-import '../providers/quran.dart';
-import '../providers/show_overlay_provider.dart';
 import '../widgets/horizental_divider.dart';
 import '../widgets/juz_card.dart';
 
@@ -18,11 +13,6 @@ class JuzIndexScreen extends StatelessWidget {
     final bookMark = Provider.of<BookMarkProvider>(context);
     final overlay = Provider.of<ShowOverlayProvider>(context, listen: false);
     final quran = Provider.of<Quran>(context, listen: false);
-    final colorScheme = Theme.of(context).colorScheme;
-    final textStyle = TextStyle(
-      color: colorScheme.juzCardText,
-      fontSize: 15,
-    );
 
     void _goToBookMark() {
       quran.goToPage(bookMark.markPage);
@@ -38,12 +28,12 @@ class JuzIndexScreen extends StatelessWidget {
             onPressed: _goToBookMark,
             icon: SvgPicture.asset(
               AppAsset.saveFilled,
-              color: colorScheme.juzCardText,
+              // color: colorScheme.juzCardText,
             ),
             label: FittedBox(
               child: Text(
                 AppConstant.goToBookMark,
-                style: textStyle,
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
           ),
@@ -52,7 +42,9 @@ class JuzIndexScreen extends StatelessWidget {
       body: ListView.separated(
         itemCount: 30,
         separatorBuilder: (context, index) {
-          return HorizentalDiv(color: colorScheme.div, thickness: 2);
+          return HorizentalDiv(
+            thickness: 3,
+          );
         },
         itemBuilder: (BuildContext context, int index) {
           return JuzCard(juz: index + 1);

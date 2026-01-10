@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../../../Util/app_imports.dart';
 
 import '../core/index.dart';
 import '../quran/page_data.dart';
-import '../providers/quran.dart';
 import '../quran/quran.dart';
 import 'custom_button.dart';
 import 'info_overlay/info_text.dart';
@@ -47,6 +45,7 @@ class _GoToPagePopupState extends State<GoToPagePopup> {
     }
 
     return Dialog(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: Padding(
         padding: EdgeInsets.symmetric(
           vertical: isTablet ? 60 : 30,
@@ -121,16 +120,12 @@ class ActionButtons extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          onPrimary: Colors.white,
-          primary: Colors.red,
           isFilled: true,
           text: AppConstant.cancel,
         ),
         const SizedBox(width: 10),
         CustomButton(
           onPressed: () => goToPage(textC),
-          onPrimary: Colors.white,
-          primary: Colors.green,
           text: AppConstant.move,
         ),
       ],

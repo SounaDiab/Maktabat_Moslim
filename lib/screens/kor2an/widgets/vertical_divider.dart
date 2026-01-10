@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 
 class VerticalDiv extends StatelessWidget {
   const VerticalDiv({Key? key, this.color = const Color(0xff575757)})

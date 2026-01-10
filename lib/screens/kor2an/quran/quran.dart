@@ -37,10 +37,6 @@ String getSurahDataWithNameByPage(int page) {
   return 'سورة ${getSurahNamePopUp(page)} (${getSurahDataByPage(page)})';
 }
 
-// simple methods
-// int getSurahNumberByPage(int page) {
-//   return getSurahId(page - 1);
-// }
 int getSurahNumberByPage(int page) {
   return quranPages[page - 1].surah;
 }
@@ -103,16 +99,4 @@ int getJuzPage(int juz) {
 
 int getHizbPage(int hizb) {
   return quranPages.indexWhere((page) => page.hizb == hizb) + 1;
-}
-
-String pageDir(int number) {
-  // return 'assets/quran-images-$index/page${formattedPageNumber(number)}.${index == 2 ? 'jpg' : 'png'}';
-  // return 'assets/quran-images-1/page${formattedPageNumber(number)}.png';
-  return 'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/quran_images/page${formattedPageNumber(number)}.png';
-}
-
-String formattedPageNumber(int number) {
-  if (number < 10) return '00$number';
-  if (number < 100) return '0$number';
-  return '$number';
 }

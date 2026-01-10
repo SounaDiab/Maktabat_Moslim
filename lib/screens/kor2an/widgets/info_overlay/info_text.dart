@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import '../../../../Util/app_imports.dart';
 
 class InfoText extends StatelessWidget {
   const InfoText(
@@ -24,15 +23,19 @@ class InfoText extends StatelessWidget {
       child: Row(
         children: [
           if (svgIcon != null) ...[
-            SvgPicture.asset(svgIcon!, color: color),
+            SvgPicture.asset(
+              svgIcon!,
+              color: Theme.of(context).iconTheme.color,
+            ),
             const SizedBox(width: 5),
           ],
           Text(
             text,
             style: TextStyle(
-                fontSize: isTablet ? 20 : 12,
-                fontWeight: FontWeight.bold,
-                color: color),
+              fontSize: isTablet ? 20 : 12,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.labelMedium?.color,
+            ),
           ),
         ],
       ),

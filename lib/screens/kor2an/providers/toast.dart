@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 
 class ToastProvider extends ChangeNotifier {
   int hizbQuarter = 0;

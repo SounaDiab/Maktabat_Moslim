@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/show_overlay_provider.dart';
-import '../providers/theme_provider.dart';
+import '../../../Util/app_imports.dart';
 
 class CustomContainer extends StatelessWidget {
   const CustomContainer({
@@ -34,10 +30,11 @@ class CustomContainer extends StatelessWidget {
                   margin: EdgeInsets.all(theme.isDarkMode ? 6 : 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: theme.isDarkMode ? Colors.black : Colors.black87,
-                    border: theme.isDarkMode
-                        ? Border.all(width: 2, color: Colors.white54)
-                        : null,
+                    color: Theme.of(context).primaryColor.withOpacity(0.9),
+                    border: Border.all(
+                      width: 2,
+                      color: Theme.of(context).dividerColor,
+                    ),
                   ),
                   child: ch),
             ),

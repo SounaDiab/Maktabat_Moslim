@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import '../../../Util/app_imports.dart';
 
 class HorizentalDiv extends StatelessWidget {
-  const HorizentalDiv({Key? key, this.color = const Color(0xff575757), this.thickness = 1})
+  const HorizentalDiv(
+      {Key? key, this.color = const Color(0xff575757), this.thickness = 1})
       : super(key: key);
 
   final Color color;
