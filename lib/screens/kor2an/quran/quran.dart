@@ -94,6 +94,9 @@ int getHizbQuarterPage(int quarter) {
 }
 
 int getJuzPage(int juz) {
+  if (juz == 7) return quranPages.indexWhere((page) => page.juz == juz) + 2;
+  if (juz == 11) return quranPages.indexWhere((page) => page.juz == juz) + 2;
+
   return quranPages.indexWhere((page) => page.juz == juz) + 1;
 }
 

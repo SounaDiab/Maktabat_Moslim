@@ -37,11 +37,14 @@ class _AlnasPageState extends State<AlnasPage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(HerzAlmoujahidinHomeScreen.screenRoute);
+          .pushReplacement(CustomPageRoute(page: HerzAlmoujahidinHomeScreen()));
       return false;
     }
   }
@@ -65,6 +68,8 @@ class _AlnasPageState extends State<AlnasPage> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -103,7 +108,7 @@ class _AlnasPageState extends State<AlnasPage> {
           pushNext: AyatListekfaaPage.screenRoute,
           pushBack: AlfalakPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/سورة الناس.mp3',
+              'https://www.dropbox.com/scl/fi/3mgzh9ny4lcnaxyhkdvfb/.mp3?rlkey=0v5bcrt0yr3xan4jgxa9fn2o2&st=ods9uame&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

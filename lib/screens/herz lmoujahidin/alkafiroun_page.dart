@@ -1,6 +1,5 @@
 import '../../Util/app_imports.dart';
 
-
 class AlkafirounPage extends StatefulWidget {
   static String screenRoute = 'alkafiroun_screen';
   AlkafirounPage({super.key});
@@ -38,11 +37,14 @@ class _AlkafirounPageState extends State<AlkafirounPage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(HerzAlmoujahidinHomeScreen.screenRoute);
+          .pushReplacement(CustomPageRoute(page: HerzAlmoujahidinHomeScreen()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _AlkafirounPageState extends State<AlkafirounPage> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -106,7 +110,7 @@ class _AlkafirounPageState extends State<AlkafirounPage> {
           pushNext: AlikhlasPage.screenRoute,
           pushBack: AyatLkorsiPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/سورة الكافرون.mp3',
+              'https://www.dropbox.com/scl/fi/7r9c09e1kd04yjnqbxo8x/.mp3?rlkey=6ikm83x1newjqiymlp5991igr&st=wkxxvwoe&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

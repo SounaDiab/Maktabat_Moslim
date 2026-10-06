@@ -1,7 +1,6 @@
 import '../../Util/app_imports.dart';
 import '../../widgets/bloc_builder_herz_almoujahidin_herz_alrasoul_wal2a2ima.dart';
 
-
 class HerzAlimamAlsadekPage extends StatefulWidget {
   static String screenRoute = 'herzalimamalsadek_screen';
   HerzAlimamAlsadekPage({super.key});
@@ -36,11 +35,14 @@ class _HerzAlimamAlsadekPageState extends State<HerzAlimamAlsadekPage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(HerzAlrasoulWalAimmaPage.screenRoute);
+          .pushReplacement(CustomPageRoute(page: HerzAlrasoulWalAimmaPage()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _HerzAlimamAlsadekPageState extends State<HerzAlimamAlsadekPage> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

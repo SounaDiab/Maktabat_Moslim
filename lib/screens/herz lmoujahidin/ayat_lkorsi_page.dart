@@ -1,6 +1,5 @@
 import '../../Util/app_imports.dart';
 
-
 class AyatLkorsiPage extends StatefulWidget {
   static String screenRoute = 'ayatkorsi_screen';
   const AyatLkorsiPage({super.key});
@@ -35,11 +34,14 @@ class _AyatLkorsiPageState extends State<AyatLkorsiPage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(HerzAlmoujahidinHomeScreen.screenRoute);
+          .pushReplacement(CustomPageRoute(page: HerzAlmoujahidinHomeScreen()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _AyatLkorsiPageState extends State<AyatLkorsiPage> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -104,7 +108,9 @@ class _AyatLkorsiPageState extends State<AyatLkorsiPage> {
           pushNext: AlkafirounPage.screenRoute,
           pushBack: DouaaNadiAalyanMozhiraAlaajaibPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آية الكرسي.mp3',
+              'https://www.dropbox.com/scl/fi/pfxfuywiprvrl2c23gtph/.mp3?rlkey=k6ptvgxyxal0lqnda3cpxodru&st=fu9logc5&dl=1',
+          // soud:
+          //     'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/آية الكرسي.mp3',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -23,7 +23,8 @@ class PageInfo extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             InfoText(
-              text: '${AppConstant.juz} ${quran.juz}',
+              text:
+                  '${AppConstant.juz} ${quran.currentPage == 121 || quran.currentPage == 201 ? quran.juz - 1 : quran.juz}',
               svgIcon: AppAsset.part,
             ),
           ],

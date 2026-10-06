@@ -164,7 +164,7 @@ class PageInfo extends StatelessWidget {
                 children: [
                   InfoText(
                     text:
-                        '${AppConstant.juz} ${quranPages[currentPage - 1].juz}',
+                        '${AppConstant.juz} ${currentPage == 121 || currentPage == 201 ? quranPages[currentPage - 1].juz - 1 : quranPages[currentPage - 1].juz}',
                     svgIcon: AppAsset.part,
                     color: color,
                     padding: 0,

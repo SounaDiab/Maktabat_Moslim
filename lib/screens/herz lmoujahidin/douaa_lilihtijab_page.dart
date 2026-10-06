@@ -1,6 +1,5 @@
 import '../../Util/app_imports.dart';
 
-
 class DouaaLilihtijabPage extends StatefulWidget {
   static String screenRoute = 'douaalilihtijab_screen';
   DouaaLilihtijabPage({super.key});
@@ -35,11 +34,14 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(HerzAlmoujahidinHomeScreen.screenRoute);
+          .pushReplacement(CustomPageRoute(page: HerzAlmoujahidinHomeScreen()));
       return false;
     }
   }
@@ -65,6 +67,8 @@ class _DouaaLilihtijabPageState extends State<DouaaLilihtijabPage> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

@@ -1,6 +1,5 @@
 import '../../Util/app_imports.dart';
 
-
 class AlfalakPage extends StatefulWidget {
   static String screenRoute = 'alfalak_screen';
   AlfalakPage({super.key});
@@ -38,11 +37,14 @@ class _AlfalakPageState extends State<AlfalakPage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(HerzAlmoujahidinHomeScreen.screenRoute);
+          .pushReplacement(CustomPageRoute(page: HerzAlmoujahidinHomeScreen()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _AlfalakPageState extends State<AlfalakPage> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -104,7 +108,7 @@ class _AlfalakPageState extends State<AlfalakPage> {
           pushNext: AlnasPage.screenRoute,
           pushBack: AlikhlasPage.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/سورة الفلق.mp3',
+              'https://www.dropbox.com/scl/fi/as0v65mlb2ug9wdz0ebdo/.mp3?rlkey=euhqzigkzbagg8izbzokqm7tv&st=nwky7rpw&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
