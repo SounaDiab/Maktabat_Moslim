@@ -26,8 +26,8 @@ class AppRoutes {
     Dou3aa7azin.screenRoute: (context) => Dou3aa7azin(),
     Dou3a2SahmAllail.screenRoute: (context) => Dou3a2SahmAllail(),
     NameListPage.screenRoute: (context) => NameListPage(),
+    RamadanSchedulePage.screenRoute: (context) => RamadanSchedulePage(),
     // !
-    ImsakiyaScreen.screenRoute: (context) => ImsakiyaScreen(),
     QiblaSalat.screenRoute: (context) => QiblaSalat(),
     TakwimScreen.screenRoute: (context) => TakwimScreen(),
     AboutUs.screenRoute: (context) => AboutUs(),

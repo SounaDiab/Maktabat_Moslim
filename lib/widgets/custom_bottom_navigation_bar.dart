@@ -103,6 +103,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     final isTablet = screenWidth >= 600;
     return Expanded(
       child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         onTap: onTap,
         onLongPress: onLongPress,
         child: Column(

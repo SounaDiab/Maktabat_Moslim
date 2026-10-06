@@ -32,6 +32,7 @@ class DataSearch extends SearchDelegate<String> {
         size: isTablet ? 40 : 20,
       ),
       onPressed: () {
+        FocusScope.of(context).unfocus();
         close(context, '');
       },
     );
@@ -40,8 +41,8 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     List<Map<String, dynamic>> results = items
-        .where((item) =>
-            item['title']!.toLowerCase().contains(query.toLowerCase()))
+        .where((item) => normalize(item['title']!.toLowerCase())
+            .contains(normalize(query.toLowerCase())))
         .toList();
 
     if (results.isEmpty) {
@@ -57,8 +58,11 @@ class DataSearch extends SearchDelegate<String> {
           title: Text(results[index]['title']!),
           onTap: () {
             final route = results[index]['route'];
-            Navigator.pushNamed(context, route);
             print('result tapped: $route');
+            close(context, '');
+            Future.delayed(Duration(milliseconds: 200), () {
+              Navigator.pushNamed(context, route);
+            });
           },
         );
       },
@@ -68,8 +72,8 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<Map<String, dynamic>> suggestions = items
-        .where((item) =>
-            item['title']!.toLowerCase().contains(query.toLowerCase()))
+        .where((item) => normalize(item['title']!.toLowerCase())
+            .contains(normalize(query.toLowerCase())))
         .toList();
 
     return ListView.builder(

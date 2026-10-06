@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../Util/app_imports.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -11,6 +13,7 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
   String error = '';
   bool loading = false;
   String selectedCity = 'Beirut';
+  final String _cityKey = 'selected_city';
 
   Map<String, bool> enabledNotificationsPerPrayer = {};
 
@@ -28,23 +31,25 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
   void initState() {
     super.initState();
     _initializeApp();
+    // _loadCity();
   }
 
   // ✅ دمج كل عمليات التهيئة في دالة واحدة مع معالجة أخطاء
   Future<void> _initializeApp() async {
-    try {
-      await checkAndRequestPermissions();
-      await loadNotificationPreferences();
-      await loadFromCache();
-      await rescheduleIfTimeZoneChanged();
-      await fetchPrayerTimes();
-    } catch (e) {
-      print('❌ خطأ في التهيئة: $e');
-      setState(() {
-        error = 'خطأ في تهيئة التطبيق: ${e.toString()}';
-      });
-    }
+  try {
+    await checkAndRequestPermissions();
+    await loadNotificationPreferences();
+    await loadFromCache();
+    await _loadCity(); // ✅ نحمّل المدينة أولاً
+    await rescheduleIfTimeZoneChanged();
+    // ❌ أزلنا fetchPrayerTimes() من هنا، لأن _loadCity تستدعيها
+  } catch (e) {
+    print('❌ خطأ في التهيئة: $e');
+    setState(() {
+      error = 'خطأ في تهيئة التطبيق: ${e.toString()}';
+    });
   }
+}
 
   // ✅ دمج طلب الأذونات
   Future<void> checkAndRequestPermissions() async {
@@ -236,6 +241,7 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
   Future<void> schedulePrayerNotifications(List<PrayerTime> list) async {
     try {
       await AwesomeNotifications().cancelAllSchedules();
+       await Future.delayed(const Duration(milliseconds: 300)); // ✅ انتظر قليلاً للتأكد من الإلغاء
 
       for (var prayer in list) {
         if (enabledNotificationsPerPrayer[prayer.name] != true) continue;
@@ -305,6 +311,22 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
     }
   }
 
+  Future<void> _saveCity(String city) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_cityKey, city);
+  }
+
+  Future<void> _loadCity() async {
+  final prefs = await SharedPreferences.getInstance();
+  final city = prefs.getString(_cityKey);
+  if (city != null && cities.contains(city)) {
+    setState(() {
+      selectedCity = city;
+    });
+  }
+  await fetchPrayerTimes(); // ✅ تُستدعى مرة واحدة فقط بعد تحميل المدينة
+}
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -359,12 +381,12 @@ class _PrayerTimeWidgetState extends State<PrayerTimeWidget> {
                   );
                 }).toList(),
                 onChanged: (value) async {
-                  if (value != null) {
-                    setState(() {
-                      selectedCity = value;
-                    });
-                    await fetchPrayerTimes();
-                  }
+                  if (value == null) return;
+                  setState(() {
+                    selectedCity = value;
+                  });
+                  await _saveCity(value);
+                  await fetchPrayerTimes();
                 },
               ),
               IconButton(

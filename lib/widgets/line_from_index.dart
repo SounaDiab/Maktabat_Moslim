@@ -18,6 +18,8 @@ class LineFromIndex extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
     return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () => Navigator.pushNamed(context, route),
       child: Card(
         elevation: 3,

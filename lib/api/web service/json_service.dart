@@ -1,6 +1,5 @@
-import 'package:archive/archive.dart';
-
 import '../../Util/app_imports.dart';
+export 'package:archive/archive.dart';
 
 class JsonService {
   // قراءة JSON عادي
@@ -10,24 +9,27 @@ class JsonService {
   }
 
   // قراءة JSON مضغوط ZIP
+  final Map<String, dynamic> _cache = {};
+
   Future<dynamic> loadCompressedJson(
       String zipPath, String jsonFileName) async {
-    // قراءة ملف zip من الـ assets
+    // إرجاع من الـ cache إذا موجود
+    if (_cache.containsKey(zipPath)) return _cache[zipPath];
+
     final byteData = await rootBundle.load(zipPath);
     final bytes = byteData.buffer.asUint8List();
 
-    // فك الضغط باستخدام مكتبة archive
-    final archive = ZipDecoder().decodeBytes(bytes);
+    final result = await compute(
+      _decompressAndDecodeJson,
+      {
+        'bytes': bytes,
+        'jsonFileName': jsonFileName,
+      },
+    );
 
-    // البحث عن ملف json داخل الـ zip
-    for (final file in archive) {
-      if (file.isFile && file.name == jsonFileName) {
-        final jsonString = utf8.decode(file.content as List<int>);
-        return jsonDecode(jsonString);
-      }
-    }
-
-    throw Exception("لم يتم العثور على ملف $jsonFileName داخل $zipPath");
+    // حفظ في الـ cache
+    _cache[zipPath] = result;
+    return result;
   }
 
   //! أعمال ليلة القدر
@@ -83,18 +85,15 @@ class JsonService {
 
   //! مفاتيح الجنان
   Future<List<MafatihAljinanModel>> getMafatihAljinan() async {
-    // نقوم بتحميل JSON مضغوط من ملف zip ثم نقرأ JSON داخله
     final jsonData = await loadCompressedJson(
-        '$baseUrl/mafatih_aljinan.json.zip', 'mafatih_aljinan.json');
+      '$baseUrl/mafatih_aljinan.json.zip',
+      'mafatih_aljinan.json',
+    );
 
-    // jsonData هنا متوقع يكون List<dynamic> أو Map حسب هيكل JSON
-    // لنفترض أن جذر JSON هو List
     if (jsonData is List) {
-      // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
       return jsonData.map((e) => MafatihAljinanModel.fromJson(e)).toList();
-    } else {
-      throw Exception('تنسيق JSON غير صحيح، متوقع List');
     }
+    throw Exception('تنسيق JSON غير صحيح، متوقع List');
   }
 
   //! الباقيات الصالحات
@@ -144,4 +143,69 @@ class JsonService {
       throw Exception('تنسيق JSON غير صحيح، متوقع List');
     }
   }
+
+  //! wisdom of day
+  Future<List<DailyItem>> getWelcomScreen() async {
+    // نقوم بتحميل JSON مضغوط من ملف zip ثم نقرأ JSON داخله
+    final jsonData = await loadCompressedJson(
+        '$baseUrl/wisdom_of_day.json.zip', 'wisdom_of_day.json');
+
+    // jsonData هنا متوقع يكون List<dynamic> أو Map حسب هيكل JSON
+    // لنفترض أن جذر JSON هو List
+    if (jsonData is List) {
+      // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
+      return jsonData.map((e) => DailyItem.fromJson(e)).toList();
+    } else {
+      throw Exception('تنسيق JSON غير صحيح، متوقع List');
+    }
+  }
+
+  //! quran Touch
+  Future<List<DailyItem>> getQuranTouch() async {
+    // نقوم بتحميل JSON مضغوط من ملف zip ثم نقرأ JSON داخله
+    final jsonData = await loadCompressedJson(
+        '$baseUrl/quran_touch.json.zip', 'quran_touch.json');
+
+    // jsonData هنا متوقع يكون List<dynamic> أو Map حسب هيكل JSON
+    // لنفترض أن جذر JSON هو List
+    if (jsonData is List) {
+      // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
+      return jsonData.map((e) => DailyItem.fromJson(e)).toList();
+    } else {
+      throw Exception('تنسيق JSON غير صحيح، متوقع List');
+    }
+  }
+
+  //! image of day
+  Future<List<DailyItem>> getImageOfDay() async {
+    // نقوم بتحميل JSON مضغوط من ملف zip ثم نقرأ JSON داخله
+    final jsonData = await loadCompressedJson(
+        '$baseUrl/image_of_day.json.zip', 'image_of_day.json');
+    // jsonData هنا متوقع يكون List<dynamic> أو Map حسب هيكل JSON
+    // لنفترض أن جذر JSON هو List
+    if (jsonData is List) {
+      // تحويل كل عنصر من json إلى موديل HerzAlmoujahidin
+      return jsonData.map((e) => DailyItem.fromJson(e)).toList();
+    } else {
+      throw Exception('تنسيق JSON غير صحيح، متوقع List');
+    }
+  }
+}
+
+dynamic _decompressAndDecodeJson(Map<String, dynamic> params) {
+  final Uint8List bytes = params['bytes'];
+  final String jsonFileName = params['jsonFileName'];
+
+  // فك الضغط
+  final archive = ZipDecoder().decodeBytes(bytes);
+
+  // البحث عن الملف
+  for (final file in archive) {
+    if (file.isFile && file.name == jsonFileName) {
+      final jsonString = utf8.decode(file.content as List<int>);
+      return jsonDecode(jsonString);
+    }
+  }
+
+  throw Exception('لم يتم العثور على $jsonFileName');
 }

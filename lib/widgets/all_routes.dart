@@ -1,5 +1,17 @@
 import '../Util/app_imports.dart';
 
+//! All Routes
+class AllRoutes {
+  static final routes = [
+    herzAlmoujahidinAllRoutes,
+    mafati7AljinanAllRoutes,
+    a3malLayaliKaderAllRoutes,
+    alhakibaAlramadaneyaAllRoutes,
+    albakyatAlsali7atAllRoutes,
+    asa7ifaAlsajadeyaAllRoutes
+  ];
+}
+
 //! مجموعة كل مسارات حرز المجاهدين
 class herzAlmoujahidinAllRoutes {
   static final herzAlmoujahidinRoutes = [
@@ -47,6 +59,7 @@ class herzAlmoujahidinAllRoutes {
 }
 
 //! Mafati7 Aljinan
+
 class mafati7AljinanAllRoutes {
   static final mafati7AljinanRoutes = [
     Ta3kibat.screenRoute,
@@ -240,7 +253,7 @@ class mafati7AljinanAllRoutes {
     A3malYawm3idAlfitr.screenRoute,
   ];
   //? -- Zi Lhoja -- //
-  static final ZiAlhoja = [
+  static final ziAlhojaRoutes = [
     ZiyaratAmirAlmo2mininYawmAl8adir.screenRoute,
     FiA3malShaherZilhoja.screenRoute,
     AlyawmAl2awalZilhoja.screenRoute,
@@ -440,8 +453,8 @@ class a3malLayaliKaderAllRoutes {
     ZiyaratAbiAlfadl.screenRoute,
     SalatMi2atRok3a.screenRoute,
     Dou3a2Allahoma2iniAmsayt.screenRoute,
-    Dou3a2Altawba.screenRoute,
     Dou3a2AljawshanAlkabir.screenRoute,
+    Dou3a2Altawba.screenRoute,
     A3malAsharRamdan.screenRoute,
     Dou3aAlbaha2.screenRoute,
     Dou3a2AbiHamzaAlsamali.screenRoute,
@@ -547,7 +560,7 @@ class alhakibaAlramadaneyaAllRoutes {
   ];
 }
 
-//! Alhakiba Alramadaneya
+//! Albakyat Alsali7at
 class albakyatAlsali7atAllRoutes {
   static final albakyatAlsali7atRoutes = [
     NozorMenA3malAllailWalnahar.screenRoute,
@@ -780,5 +793,16 @@ class asa7ifaAlsajadeyaAllRoutes {
     HokokAlra3iya.screenRoute,
     HokokAlra7em.screenRoute,
     HokokAl2a5arin.screenRoute,
+  ];
+}
+
+//! Salat Al Layl
+class salatAllayl {
+  static final salatAllaylRoutes = [
+    SawabahaWaFawa2idaha.screenRoute,
+    WaktahaWakaifyatiha.screenRoute,
+    Dou3aaBa3dSalatAlwater.screenRoute,
+    Dou3aa7azin.screenRoute,
+    Dou3a2SahmAllail.screenRoute,
   ];
 }

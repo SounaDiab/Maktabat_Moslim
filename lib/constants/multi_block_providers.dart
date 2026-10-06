@@ -52,6 +52,15 @@ class MultiBlocProviders {
           lazy: false,
           create: (_) => HijriOffsetCubit(),
         ),
+        BlocProvider(
+          lazy: false,
+          create: (_) => RamadanCubit()..loadRamadan(),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (_) =>
+              DailyContentCubit(Repository(JsonService()))..loadDailyContent(),
+        ),
       ],
       child: child,
     );

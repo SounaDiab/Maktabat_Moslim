@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import '../../Util/app_imports.dart';
 
@@ -20,9 +22,11 @@ Future<String> pageDirectory(int pageNumber) async {
         print('Image downloaded and saved to local storage.');
       } else {
         throw Exception('Failed to download image');
+        print('url: $url');
       }
     } catch (e) {
       print('Error downloading image: $e');
+      print('url: $url');
       rethrow; // إعادة رمي الاستثناء لالتقاطه في الأماكن المناسبة
     }
   } else {

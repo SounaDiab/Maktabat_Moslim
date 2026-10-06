@@ -5,6 +5,10 @@ class LightTheme {
   LightTheme({required this.isTablet});
   ThemeData get themeData {
     return ThemeData(
+      pageTransitionsTheme: PageTransitionsTheme(builders: {
+        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      }),
       brightness: Brightness.light,
       scaffoldBackgroundColor: LightColors.background,
       primaryColor: LightColors.primary,
@@ -31,7 +35,7 @@ class LightTheme {
           fontFamily: 'UthmanicHafs',
         ),
         displaySmall: TextStyle(
-          color: DarkColors.accent,
+          color: LightColors.accent,
           fontSize: isTablet ? 28 : 14,
           fontFamily: 'UthmanicHafs',
           fontWeight: FontWeight.bold,
@@ -107,6 +111,10 @@ class DarkTheme {
   DarkTheme({required this.isTablet});
   ThemeData get themeData {
     return ThemeData(
+      pageTransitionsTheme: PageTransitionsTheme(builders: {
+        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      }),
       brightness: Brightness.dark,
       scaffoldBackgroundColor: DarkColors.background,
       primaryColor: DarkColors.primary,

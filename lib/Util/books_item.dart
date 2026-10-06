@@ -19,13 +19,13 @@ class BooksItem {
     'images/albakiyat_alsali7at.png',
     'images/alsahifa_alsajadiya.png',
   ];
-  static final List<String> booksRoute = [
-    QuranHomeScreen.screenRoute,
-    MafatihAljinanHomeScreen.screenRoute,
-    HerzAlmoujahidinHomeScreen.screenRoute,
-    A3malLayaliKadrHomeScreen.screenRoute,
-    Al7akibaAlramadaneyaHomeScreen.screenRoute,
-    AlbakiyatAlsali7atHomeScreen.screenRoute,
-    Alsa7ifaAlsajadiyaHomeScreen.screenRoute,
+  static final List<Widget> booksRoute = [
+    QuranHomeScreen(),
+    MafatihAljinanHomeScreen(),
+    HerzAlmoujahidinHomeScreen(),
+    A3malLayaliKadrHomeScreen(),
+    Al7akibaAlramadaneyaHomeScreen(),
+    AlbakiyatAlsali7atHomeScreen(),
+    Alsa7ifaAlsajadiyaHomeScreen(),
   ];
 }

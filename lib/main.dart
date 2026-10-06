@@ -39,13 +39,6 @@ void main() async {
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   final prefs = await SharedPreferences.getInstance();
 
-  await MobileAds.instance.initialize();
-  MobileAds.instance.updateRequestConfiguration(
-    RequestConfiguration(
-      testDeviceIds: ['362C471954687B4A91A2144B0AF49E9A'],
-    ),
-  );
-
   runApp(
     MultiProvider(
       providers: [
