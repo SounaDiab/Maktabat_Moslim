@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class A3malMaBakyaMenAlshaher extends StatefulWidget {
   static String screenRoute = 'a3mal_ma_bakeya_men_alshaher_screen';
   const A3malMaBakyaMenAlshaher({super.key});
@@ -42,10 +41,13 @@ class _A3malMaBakyaMenAlshaherState extends State<A3malMaBakyaMenAlshaher> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Sha3ban.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Sha3ban()));
       return false;
     }
   }
@@ -69,6 +71,8 @@ class _A3malMaBakyaMenAlshaherState extends State<A3malMaBakyaMenAlshaher> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

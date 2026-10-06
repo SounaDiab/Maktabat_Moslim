@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class ZiLhoja extends StatefulWidget {
   static String screenRoute = 'ziLhoja_screen';
   ZiLhoja({super.key});
@@ -10,38 +9,151 @@ class ZiLhoja extends StatefulWidget {
 }
 
 class _ZiLhojaState extends State<ZiLhoja> {
+  // ✅ أضف هذا
+  final ScrollController _scrollController = ScrollController();
+  static const String _scrollKey = 'ziLhoja_scroll_offset';
   @override
   void initState() {
     super.initState();
+    // ✅ تتبع موضع الـ scroll باستمرار
+    _scrollController.addListener(() async {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setDouble(_scrollKey, _scrollController.offset);
+    });
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
-        final jsonService = JsonService();
+        final Map<String, List<String>> mafatihSectionRoutes = {
+          'التعقيبات': mafati7AljinanAllRoutes.ta3kibatRoutes,
+          'زيارات ايام الاسبوع':
+              mafati7AljinanAllRoutes.ziyaratAyamAl2ousnbou3Routes,
+          'ادعية ايام الاسبوع':
+              mafati7AljinanAllRoutes.ad3iyatAyamAl2ousnbou3Routes,
+          'ليلة الجمعة ونهارها واعمالها':
+              mafati7AljinanAllRoutes.lailatAljom3aRoutes,
+          'الادعية المشهورة': mafati7AljinanAllRoutes.ad3iyaMashhouraRoutes,
+          'المناجاة': mafati7AljinanAllRoutes.almonajatRoutes,
+          'اعمال اشهر السنة': mafati7AljinanAllRoutes.a3malAshhorAlsanaRoutes,
+          'شهر محرم واعماله': mafati7AljinanAllRoutes.moharamRoutes,
+          'شهر رجب واعماله': mafati7AljinanAllRoutes.rajabRoutes,
+          'شهر شعبان واعماله': mafati7AljinanAllRoutes.sha3benRoutes,
+          'شهر رمضان واعماله': mafati7AljinanAllRoutes.ramadanRoutes,
+          'شهر شوال واعماله': mafati7AljinanAllRoutes.shawalRoutes,
+          'شهر ذي الحجة واعماله': mafati7AljinanAllRoutes.ziAlhojaRoutes,
+          'باقي اعمال اشهر السنة':
+              mafati7AljinanAllRoutes.bakiA3malAlsanaRoutes,
+          'اعمال المساجد والزيارات':
+              mafati7AljinanAllRoutes.A3malAlmasajedRoutes,
+          'آداب الزيارة': mafati7AljinanAllRoutes.adabAlziyaratRoutes,
+          'زيارة النبي والزهراءوالأئمة (ع)':
+              mafati7AljinanAllRoutes.ziyaratAlnabiWakzahraaRoutes,
+          'كيفية وفضل زيارة امير المؤمنين':
+              mafati7AljinanAllRoutes.ziyaratAmirAlmo2mininRoutes,
+          'فضل الكوفة ومسجدها واعماله':
+              mafati7AljinanAllRoutes.masjedAlkoufaRoutes,
+          'اعمال مسجد السهلة وزيد وصعصعة':
+              mafati7AljinanAllRoutes.masjedAlsahlaRoutes,
+          'زيارات الحسين (ع) آدابها وفضلها':
+              mafati7AljinanAllRoutes.ziyaratAlhusseinRoutes,
+          'زيارة الكاظمين والنواب الاربعة (ع)':
+              mafati7AljinanAllRoutes.ziyaratAlkaziminRoutes,
+          'زيارة الامام الرضا': mafati7AljinanAllRoutes.ziyaratAlridaRoutes,
+          'زيارة أئمة سر من رأى (ع) واعمال السرداب':
+              mafati7AljinanAllRoutes.ziyarat2a2imatSirRoutes,
+          'الزيارات الجامعة والصلوات على الحجج الطاهرين':
+              mafati7AljinanAllRoutes.alziyaratAljami3aRoutes,
+        };
+        Map<String, dynamic> buildItem({
+          required String title,
+          required String route,
+        }) {
+          return {
+            'title': title,
+            'route': route,
+          };
+        }
 
+        final jsonService = JsonService();
         final mafatihList = await jsonService.getMafatihAljinan();
 
-        final mafatihSection = mafatihList.firstWhere(
-          (item) => item.title.contains('اعمال اشهر السنة'),
-          orElse: () => throw Exception('لم يتم العثور على اعمال اشهر السنة'),
-        );
-
-        // قائمة المستوى الثالث
         final List<Map<String, dynamic>> mappedList = [];
 
-        if (mafatihSection.index.isNotEmpty) {
-          for (var sub in mafatihSection.index) {
-            // الآن نتحقق من وجود index داخلي (المستوى الثالث)
-            if (sub.index.isNotEmpty) {
-              if (sub.title == "شهر ذي الحجة واعماله") {
-                for (var subSub in sub.index) {
-                  mappedList.add({
-                    'id': subSub.id,
-                    'title': subSub.title,
-                    'route': mafati7AljinanAllRoutes.ZiAlhoja[subSub.id - 1],
-                  });
-                }
-              }
+        for (final section in mafatihList) {
+          // معالجة خاصة للأقسام الرئيسية الثمانية
+          // التعقيبات، زيارات الأسبوع، أدعية الأسبوع، إلخ
+          final mainRoutes = mafati7AljinanAllRoutes.mafati7AljinanRoutes;
+          final mainSections = [
+            'التعقيبات',
+            'زيارات ايام الاسبوع',
+            'ادعية ايام الاسبوع',
+            'ليلة الجمعة ونهارها واعمالها',
+            'الادعية المشهورة',
+            'المناجاة',
+            'اعمال اشهر السنة',
+            'اعمال المساجد والزيارات',
+          ];
+          final routes = mafatihSectionRoutes.entries
+              .firstWhere(
+                (e) => section.title.contains(e.key),
+                orElse: () => const MapEntry('', []),
+              )
+              .value;
+
+          // التحقق إذا كان القسم الحالي من الأقسام الرئيسية
+          int mainIndex =
+              mainSections.indexWhere((key) => section.title.contains(key));
+
+          if (mainIndex != -1 && mainIndex < mainRoutes.length) {
+            // إضافة القسم الرئيسي مع مساره الصحيح
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: mainRoutes[mainIndex],
+              ),
+            );
+          } else {
+            // للأقسام الأخرى، استخدم المسار الافتراضي
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: routes.first,
+              ),
+            );
+          }
+
+          // البحث عن routes الفرعية الخاصة بهذا القسم
+
+          // إضافة العناصر الفرعية
+          for (int i = 0; i < section.index.length; i++) {
+            if (i >= routes.length) break;
+
+            mappedList.add(
+              buildItem(
+                title: section.index[i].title,
+                route: routes[i],
+              ),
+            );
+          }
+
+          // معالجة الأقسام الفرعية العميقة
+          for (final sup in section.index) {
+            final subRoutes = mafatihSectionRoutes.entries
+                .firstWhere(
+                  (e) => sup.title.contains(e.key),
+                  orElse: () => const MapEntry('', []),
+                )
+                .value;
+
+            for (int i = 0; i < sup.index.length; i++) {
+              if (i >= subRoutes.length) break;
+
+              mappedList.add(
+                buildItem(
+                  title: sup.index[i].title,
+                  route: subRoutes[i],
+                ),
+              );
             }
           }
         }
@@ -50,6 +162,22 @@ class _ZiLhojaState extends State<ZiLhoja> {
         searchProvider.setItems(mappedList);
       },
     );
+  }
+
+  // ✅ أضف هذا
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  // ✅ دالة لاستعادة الموضع — استدعها بعد تحميل البيانات
+  Future<void> _restoreScrollPosition() async {
+    final prefs = await SharedPreferences.getInstance();
+    final offset = prefs.getDouble(_scrollKey) ?? 0;
+    if (offset > 0 && _scrollController.hasClients) {
+      _scrollController.jumpTo(offset);
+    }
   }
 
   Future<bool> _onWillPop() async {
@@ -107,6 +235,10 @@ class _ZiLhojaState extends State<ZiLhoja> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is MafatihAljinanLoaded) {
+              // ✅ استعادة الموضع بعد البناء
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _restoreScrollPosition();
+              });
               final mafatihAljinan = state.items;
               final allTitles = <Map<String, dynamic>>[];
               for (var item in mafatihAljinan) {
@@ -116,9 +248,9 @@ class _ZiLhojaState extends State<ZiLhoja> {
                       for (var inSubItem in subItem.index) {
                         allTitles.add({
                           'title': inSubItem.title,
-                          'route':
-                              mafati7AljinanAllRoutes.ZiAlhoja.map((e) => e)
-                                  .toList()[inSubItem.id - 1],
+                          'route': mafati7AljinanAllRoutes.ziAlhojaRoutes
+                              .map((e) => e)
+                              .toList()[inSubItem.id - 1],
                         });
                       }
                     }
@@ -129,6 +261,9 @@ class _ZiLhojaState extends State<ZiLhoja> {
                 child: Container(
                   padding: EdgeInsets.only(top: isTablet ? 20 : 10),
                   child: ListView.builder(
+                    key: PageStorageKey(
+                        'mafatih_list'), // ✅ يحفظ موضع الـ scroll تلقائياً
+                    controller: _scrollController, // ✅ أضف هذا
                     shrinkWrap: true,
                     itemCount: allTitles.length,
                     itemBuilder: (context, i) {

@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class FiA3malShaherMoharam extends StatefulWidget {
   static String screenRoute = 'fi_a3mal_shaher_moharam_screen';
   const FiA3malShaherMoharam({super.key});
@@ -40,10 +39,13 @@ class _FiA3malShaherMoharamState extends State<FiA3malShaherMoharam> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Moharam.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Moharam()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _FiA3malShaherMoharamState extends State<FiA3malShaherMoharam> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

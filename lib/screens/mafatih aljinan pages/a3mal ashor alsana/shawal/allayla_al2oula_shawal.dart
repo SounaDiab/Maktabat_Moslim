@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class AllaylaAl2oulaShawal extends StatefulWidget {
   static String screenRoute = 'allayla_al2oula_shawal_screen';
   const AllaylaAl2oulaShawal({super.key});
@@ -40,10 +39,13 @@ class _AllaylaAl2oulaShawalState extends State<AllaylaAl2oulaShawal> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Shawal.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Shawal()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _AllaylaAl2oulaShawalState extends State<AllaylaAl2oulaShawal> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
