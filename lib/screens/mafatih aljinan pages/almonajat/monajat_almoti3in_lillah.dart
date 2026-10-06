@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class MonajatAlmoti3inLillah extends StatefulWidget {
   static String screenRoute = 'monajat_almoti3in_lillah_screen';
   const MonajatAlmoti3inLillah({super.key});
@@ -40,10 +39,13 @@ class _MonajatAlmoti3inLillahState extends State<MonajatAlmoti3inLillah> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Almonajat.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Almonajat()));
       return false;
     }
   }
@@ -52,9 +54,6 @@ class _MonajatAlmoti3inLillahState extends State<MonajatAlmoti3inLillah> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -62,15 +61,9 @@ class _MonajatAlmoti3inLillahState extends State<MonajatAlmoti3inLillah> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(Almonajat.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -78,6 +71,8 @@ class _MonajatAlmoti3inLillahState extends State<MonajatAlmoti3inLillah> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

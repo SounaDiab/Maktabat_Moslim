@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class AlmonajatAlsha3baneya extends StatefulWidget {
   static String screenRoute = 'almonajat_alsha3baneya_screen';
   const AlmonajatAlsha3baneya({super.key});
@@ -40,10 +39,13 @@ class _AlmonajatAlsha3baneyaState extends State<AlmonajatAlsha3baneya> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Almonajat.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Almonajat()));
       return false;
     }
   }
@@ -52,9 +54,6 @@ class _AlmonajatAlsha3baneyaState extends State<AlmonajatAlsha3baneya> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -62,15 +61,9 @@ class _AlmonajatAlsha3baneyaState extends State<AlmonajatAlsha3baneya> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(Almonajat.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -78,6 +71,8 @@ class _AlmonajatAlsha3baneyaState extends State<AlmonajatAlsha3baneya> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class MonajatAl3arifin extends StatefulWidget {
   static String screenRoute = 'monajat_al3arifin_screen';
   const MonajatAl3arifin({super.key});
@@ -39,10 +38,13 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Almonajat.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Almonajat()));
       return false;
     }
   }
@@ -51,9 +53,6 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -61,15 +60,9 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(Almonajat.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -77,6 +70,8 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -92,13 +87,13 @@ class _MonajatAl3arifinState extends State<MonajatAl3arifin> {
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .addFavorite(
-                          'مناجاة العارفين', AlmakamAl2awal.screenRoute);
+                          'مناجاة العارفين', MonajatAl3arifin.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
                       .removeFavorite(
                           'مناجاة العارفين',
-                          AlmakamAl2awal.screenRoute,
-                          AlmakamAl2awal.screenRoute);
+                          MonajatAl3arifin.screenRoute,
+                          MonajatAl3arifin.screenRoute);
                 }
               },
             ),

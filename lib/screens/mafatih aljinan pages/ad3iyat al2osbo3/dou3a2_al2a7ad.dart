@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class Dou3a2Al2a7ad extends StatefulWidget {
   static String screenRoute = 'dou3a2_al2a7ad_screen';
   const Dou3a2Al2a7ad({super.key});
@@ -39,10 +38,14 @@ class _Dou3a2Al2a7adState extends State<Dou3a2Al2a7ad> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Ad3iyatAl2osbo3.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: Ad3iyatAl2osbo3()));
       return false;
     }
   }
@@ -51,9 +54,6 @@ class _Dou3a2Al2a7adState extends State<Dou3a2Al2a7ad> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -61,15 +61,9 @@ class _Dou3a2Al2a7adState extends State<Dou3a2Al2a7ad> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(Ad3iyatAl2osbo3.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -77,6 +71,8 @@ class _Dou3a2Al2a7adState extends State<Dou3a2Al2a7ad> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -114,7 +110,7 @@ class _Dou3a2Al2a7adState extends State<Dou3a2Al2a7ad> {
           pushNext: Dou3a2Al2isnain.screenRoute,
           pushBack: Dou3a2Alsabt.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3aa_ahad.mp3',
+              'https://www.dropbox.com/scl/fi/c4ny28b70m21fh41i820z/dou3aa_ahad.mp3?rlkey=tn3gip3w11sgzewg1ofeydlhz&st=39wi1mhj&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

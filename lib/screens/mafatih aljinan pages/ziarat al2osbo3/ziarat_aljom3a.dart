@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class ZiaratAljom3a extends StatefulWidget {
   static String screenRoute = 'ziarat_aljom3a_screen';
   const ZiaratAljom3a({super.key});
@@ -39,10 +38,14 @@ class _ZiaratAljom3aState extends State<ZiaratAljom3a> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(ZiaratAl2osbou3.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: ZiaratAl2osbou3()));
       return false;
     }
   }
@@ -51,9 +54,6 @@ class _ZiaratAljom3aState extends State<ZiaratAljom3a> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -61,15 +61,9 @@ class _ZiaratAljom3aState extends State<ZiaratAljom3a> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(ZiaratAl2osbou3.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -77,6 +71,8 @@ class _ZiaratAljom3aState extends State<ZiaratAljom3a> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -115,7 +111,7 @@ class _ZiaratAljom3aState extends State<ZiaratAljom3a> {
           pushNext: ZiaratAlsabt.screenRoute,
           pushBack: ZiaratAl5amis.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/zyarat_jom3a.mp3',
+              'https://www.dropbox.com/scl/fi/eirzbdi49xult8q7k1jbn/zyarat_jom3a.mp3?rlkey=7x9rl7uwbra15hwq4qmvkbuww&st=r8u128ek&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

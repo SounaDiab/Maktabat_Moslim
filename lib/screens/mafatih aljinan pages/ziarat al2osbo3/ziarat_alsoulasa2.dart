@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class ZiaratAlsoulasa2 extends StatefulWidget {
   static String screenRoute = 'ziarat_alsoulasa2_screen';
   const ZiaratAlsoulasa2({super.key});
@@ -39,10 +38,14 @@ class _ZiaratAlsoulasa2State extends State<ZiaratAlsoulasa2> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(ZiaratAl2osbou3.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: ZiaratAl2osbou3()));
       return false;
     }
   }
@@ -51,9 +54,6 @@ class _ZiaratAlsoulasa2State extends State<ZiaratAlsoulasa2> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -61,15 +61,9 @@ class _ZiaratAlsoulasa2State extends State<ZiaratAlsoulasa2> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(ZiaratAl2osbou3.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -77,6 +71,8 @@ class _ZiaratAlsoulasa2State extends State<ZiaratAlsoulasa2> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -117,7 +113,7 @@ class _ZiaratAlsoulasa2State extends State<ZiaratAlsoulasa2> {
           pushNext: ZiaratAl2arbi3a2.screenRoute,
           pushBack: ZiaratAl2isnain.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/zyarat_soulasa2.mp3',
+              'https://www.dropbox.com/scl/fi/e0utwv5haykrauj5k4ej6/zyarat_soulasa2.mp3?rlkey=9ltzj8s6345ew2w04kqwn1a1p&st=x96n115a&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

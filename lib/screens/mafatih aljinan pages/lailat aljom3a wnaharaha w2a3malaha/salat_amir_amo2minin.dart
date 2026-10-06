@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class SalatAmirAmo2minin extends StatefulWidget {
   static String screenRoute = 'salat_amir_almo2minin_screen';
   const SalatAmirAmo2minin({super.key});
@@ -39,11 +38,14 @@ class _SalatAmirAmo2mininState extends State<SalatAmirAmo2minin> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(LailatAljom3aWnaharahaW2a3malaha.screenRoute);
+      Navigator.of(context).pushReplacement(
+          CustomPageRoute(page: LailatAljom3aWnaharahaW2a3malaha()));
       return false;
     }
   }
@@ -52,9 +54,6 @@ class _SalatAmirAmo2mininState extends State<SalatAmirAmo2minin> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -62,15 +61,9 @@ class _SalatAmirAmo2mininState extends State<SalatAmirAmo2minin> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context).pushReplacementNamed(
-                    LailatAljom3aWnaharahaW2a3malaha.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -78,6 +71,8 @@ class _SalatAmirAmo2mininState extends State<SalatAmirAmo2minin> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

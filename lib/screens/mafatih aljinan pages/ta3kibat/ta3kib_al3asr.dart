@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class Ta3kibAl3asr extends StatefulWidget {
   static String screenRoute = 'ta3kib_al3asr_screen';
   const Ta3kibAl3asr({super.key});
@@ -39,10 +38,13 @@ class _Ta3kibAl3asrState extends State<Ta3kibAl3asr> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Ta3kibat.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Ta3kibat()));
       return false;
     }
   }
@@ -51,9 +53,6 @@ class _Ta3kibAl3asrState extends State<Ta3kibAl3asr> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -61,15 +60,9 @@ class _Ta3kibAl3asrState extends State<Ta3kibAl3asr> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(Ta3kibat.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -77,6 +70,8 @@ class _Ta3kibAl3asrState extends State<Ta3kibAl3asr> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -115,7 +110,7 @@ class _Ta3kibAl3asrState extends State<Ta3kibAl3asr> {
           pushNext: Ta3kibAlma8rib.screenRoute,
           pushBack: Ta3kibAldohr.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ta3kib_3asr.mp3',
+              'https://www.dropbox.com/scl/fi/n5zxhwyew3xp9o6r6aco3/ta3kib_3asr.mp3?rlkey=6lncg9dt1eb2vwy3p9nph170m&st=fnbvi904&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

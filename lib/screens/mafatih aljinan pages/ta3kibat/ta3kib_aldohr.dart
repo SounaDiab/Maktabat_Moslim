@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class Ta3kibAldohr extends StatefulWidget {
   static String screenRoute = 'ta3kib_aldohr_screen';
   const Ta3kibAldohr({super.key});
@@ -42,10 +41,13 @@ class _Ta3kibAldohrState extends State<Ta3kibAldohr> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Ta3kibat.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: Ta3kibat()));
       return false;
     }
   }
@@ -54,9 +56,6 @@ class _Ta3kibAldohrState extends State<Ta3kibAldohr> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final previousPage = args?['previousPage'];
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -64,15 +63,9 @@ class _Ta3kibAldohrState extends State<Ta3kibAldohr> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              if (previousPage == 'favorite_screen') {
-                Navigator.of(context)
-                    .pushReplacementNamed(FavoritesScreen.screenRoute);
-              } else {
-                Navigator.of(context)
-                    .pushReplacementNamed(Ta3kibat.screenRoute);
-              }
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -80,6 +73,8 @@ class _Ta3kibAldohrState extends State<Ta3kibAldohr> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -118,7 +113,7 @@ class _Ta3kibAldohrState extends State<Ta3kibAldohr> {
           pushNext: Ta3kibAl3asr.screenRoute,
           pushBack: Ta3kibAlsabah.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/ta3kib_dohr.mp3',
+              'https://www.dropbox.com/scl/fi/m1kectm5sbt5022rxhp5l/ta3kib_dohr.mp3?rlkey=45j95q8bb2mxl9cb1euuap3hl&st=l91qr715&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
