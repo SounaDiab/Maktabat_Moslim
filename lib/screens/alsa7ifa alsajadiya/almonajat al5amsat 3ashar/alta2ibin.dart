@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Alta2ibin extends StatefulWidget {
   static String screenRoute = 'alta2ibin_screen';
   const Alta2ibin({super.key});
@@ -38,11 +37,14 @@ class _Alta2ibinState extends State<Alta2ibin> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(AlmonajatAlkhamsat3ashar.screenRoute);
+          .pushReplacement(CustomPageRoute(page: AlmonajatAlkhamsat3ashar()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _Alta2ibinState extends State<Alta2ibin> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -80,10 +84,10 @@ class _Alta2ibinState extends State<Alta2ibin> {
 
                 if (!isIcon) {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .addFavorite('مناجاة التائبين', Alta2ibin.screenRoute);
+                      .addFavorite('مناجاة التّائبين', Alta2ibin.screenRoute);
                 } else {
                   Provider.of<FavoritesProvider>(context, listen: false)
-                      .removeFavorite('مناجاة التائبين', Alta2ibin.screenRoute,
+                      .removeFavorite('مناجاة التّائبين', Alta2ibin.screenRoute,
                           Alta2ibin.screenRoute);
                 }
               },
@@ -91,11 +95,11 @@ class _Alta2ibinState extends State<Alta2ibin> {
           ],
           title: SizedBox(
             height: isTablet ? 60 : 30,
-            child: ScrollTitle(title: 'مناجاة التائبين'),
+            child: ScrollTitle(title: 'مناجاة التّائبين'),
           ),
         ),
         body: BlocBuilderAlsa7ifaAlsajadiya(
-          text: 'مناجاة التائبين',
+          text: 'مناجاة التّائبين',
           fontSize: _fontSize,
           fontSizeTablet: _fontSizeTablet,
         ),

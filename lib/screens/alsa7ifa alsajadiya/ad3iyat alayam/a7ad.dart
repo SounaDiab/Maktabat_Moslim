@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class A7ad extends StatefulWidget {
   static String screenRoute = 'a7ad_screen';
   const A7ad({super.key});
@@ -38,10 +37,14 @@ class _A7adState extends State<A7ad> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(A3iyatAlayam.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: A3iyatAlayam()));
       return false;
     }
   }
@@ -65,6 +68,8 @@ class _A7adState extends State<A7ad> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

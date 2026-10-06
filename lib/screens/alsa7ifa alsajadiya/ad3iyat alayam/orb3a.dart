@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Orb3a extends StatefulWidget {
   static String screenRoute = 'orb3a_screen';
   const Orb3a({super.key});
@@ -38,10 +37,14 @@ class _Orb3aState extends State<Orb3a> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(A3iyatAlayam.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: A3iyatAlayam()));
       return false;
     }
   }
@@ -65,6 +68,8 @@ class _Orb3aState extends State<Orb3a> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class HokokAlra3iya extends StatefulWidget {
   static String screenRoute = 'hokok_alra3iya_screen';
   const HokokAlra3iya({super.key});
@@ -38,10 +37,14 @@ class _HokokAlra3iyaState extends State<HokokAlra3iya> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(RisalatAlhokok.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: RisalatAlhokok()));
       return false;
     }
   }
@@ -65,6 +68,8 @@ class _HokokAlra3iyaState extends State<HokokAlra3iya> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

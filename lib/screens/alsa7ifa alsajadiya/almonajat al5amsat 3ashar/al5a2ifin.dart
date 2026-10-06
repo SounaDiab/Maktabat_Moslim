@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Al5a2ifin extends StatefulWidget {
   static String screenRoute = 'al5a2ifin_screen';
   const Al5a2ifin({super.key});
@@ -38,11 +37,14 @@ class _Al5a2ifinState extends State<Al5a2ifin> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(AlmonajatAlkhamsat3ashar.screenRoute);
+          .pushReplacement(CustomPageRoute(page: AlmonajatAlkhamsat3ashar()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _Al5a2ifinState extends State<Al5a2ifin> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

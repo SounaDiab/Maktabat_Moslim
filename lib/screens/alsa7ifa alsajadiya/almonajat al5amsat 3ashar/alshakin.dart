@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Alshakin extends StatefulWidget {
   static String screenRoute = 'alshakin_screen';
   const Alshakin({super.key});
@@ -38,11 +37,14 @@ class _AlshakinState extends State<Alshakin> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(AlmonajatAlkhamsat3ashar.screenRoute);
+          .pushReplacement(CustomPageRoute(page: AlmonajatAlkhamsat3ashar()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _AlshakinState extends State<Alshakin> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
