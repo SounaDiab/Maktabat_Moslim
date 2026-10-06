@@ -4,7 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.5.0+17
+version: 1.5.47+29
 
 environment:
   sdk: ^3.5.3
@@ -33,7 +33,6 @@ dependencies:
   awesome_notifications: ^0.9.3+1
   flutter_qiblah: ^3.1.0+1
   geolocator: ^13.0.4
-  google_mobile_ads: ^5.3.1
 
 dependency_overrides:
   flutter_compass_v2: null
@@ -58,6 +57,7 @@ flutter:
     - images/
     - assets/icons/
     - assets/json/
+    - assets/images/
     - assets/islamic_icons/
   fonts:
     - family: UthmanicHafs

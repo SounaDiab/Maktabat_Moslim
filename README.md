@@ -1,109 +1,16 @@
-<h1>📚 مكتبة المسلم</h1>
+# herz_lmoujahidin
 
-<p>
-  <strong>مكتبة المسلم</strong> هو تطبيق إسلامي متكامل يهدف إلى مساعدة المسلمين
-  في حياتهم اليومية من خلال توفير أهم الأدوات والعبادات في تطبيق واحد،
-  بواجهة بسيطة وسهلة الاستخدام.
-</p>
+A new Flutter project.
 
-<hr>
+## Getting Started
 
-<h2>✨ مميزات التطبيق</h2>
+This project is a starting point for a Flutter application.
 
-<h3>📖 القرآن الكريم</h3>
-<ul>
-  <li>عرض السور والآيات بشكل منظم</li>
-  <li>سهولة التنقل بين السور</li>
-  <li>حفظ آخر موضع قراءة</li>
-</ul>
+A few resources to get you started if this is your first Flutter project:
 
-<h3>🤲 الأدعية والأحراز</h3>
-<ul>
-  <li>مجموعة مختارة من الأدعية اليومية</li>
-  <li>أحراز وأذكار مأثورة</li>
-</ul>
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-<h3>🕌 مواقيت الصلاة</h3>
-<ul>
-  <li>حساب دقيق لمواقيت الصلاة حسب الموقع</li>
-  <li>دعم التنبيهات لكل صلاة</li>
-  <li>إمكانية تشغيل الأذان</li>
-</ul>
-
-<h3>📿 المسبحة الإلكترونية</h3>
-<ul>
-  <li>تحديد نوع التسبيح</li>
-  <li>تحديد عدد التسبيحات</li>
-  <li>عدّاد ذكي مع تنبيه عند الانتهاء</li>
-</ul>
-
-<h3>🗓️ التقويم الهجري</h3>
-<ul>
-  <li>عرض التاريخ الهجري</li>
-  <li>إمكانية تعديل فرق الأيام <small>(Hijri Offset)</small></li>
-</ul>
-
-<h3>🌙 الإمساكية</h3>
-<ul>
-  <li>مواقيت الصيام لشهر رمضان</li>
-  <li>أوقات الإمساك والإفطار</li>
-</ul>
-
-<h3>🌗 الوضع الليلي والنهاري</h3>
-<ul>
-  <li>تصميم مريح للعين</li>
-  <li>التبديل بين الوضعين بسهولة</li>
-</ul>
-
-<hr>
-
-<h2>🛠️ التقنيات المستخدمة</h2>
-<ul>
-  <li>Flutter</li>
-  <li>Dart</li>
-  <li>إدارة الحالة باستخدام Cubit / Bloc</li>
-  <li>التخزين المحلي باستخدام SharedPreferences</li>
-  <li>واجهات متوافقة مع أجهزة Android</li>
-</ul>
-
-<hr>
-
-<h2>🚀 طريقة التشغيل</h2>
-
-<ol>
-  <li>تأكد من تثبيت Flutter على جهازك</li>
-  <li>استنسخ المشروع:</li>
-</ol>
-
-<pre><code>git clone https://github.com/SounaDiab/Maktabat_Moslim.git</code></pre>
-
-<p>انتقل إلى مجلد المشروع:</p>
-<pre><code>cd muslim-library</code></pre>
-
-<p>شغّل التطبيق:</p>
-<pre><code>flutter run</code></pre>
-
-<hr>
-
-<h2>📦 متطلبات التشغيل</h2>
-<ul>
-  <li>Flutter SDK (الإصدار الموصى به)</li>
-  <li>Android SDK</li>
-  <li>minSdkVersion: 21</li>
-</ul>
-
-<hr>
-
-<h2>👨‍💻 Developper</h2>
-<p>
-  <h3><strong>Hassan Diab</strong></h3><br>
-  <small>تطبيق يهدف لخدمة المسلمين حول العالم 🤍</small>
-</p>
-
-
-
-
-
-
-
-
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
