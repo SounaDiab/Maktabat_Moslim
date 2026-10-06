@@ -72,9 +72,6 @@ class _QiblaSalatState extends State<QiblaSalat> {
               return const SizedBox.shrink();
             },
           ),
-          bottomNavigationBar: AdBanner(
-            adUnitId: 'ca-app-pub-9302649846832207/7637663819',
-          ),
         ),
       ),
     );

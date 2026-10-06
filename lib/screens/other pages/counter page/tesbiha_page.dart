@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class TesbihPage extends StatefulWidget {
   static String screenRoute = 'tesbiha_screen';
   const TesbihPage({super.key});
@@ -14,8 +13,50 @@ class _TesbihPageState extends State<TesbihPage> {
   int total = 100;
   bool showDoneCard = false;
 
-  final tasbeehController = TextEditingController(text: "سبحان الله");
-  final totalController = TextEditingController(text: "100");
+  final tasbeehController = TextEditingController();
+  final totalController = TextEditingController();
+
+  // ✅ مفاتيح الحفظ
+  static const String _keyTasbeeh = 'tasbeeh_text';
+  static const String _keyTotal = 'tasbeeh_total';
+  static const String _keyCurrent = 'tasbeeh_current';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData(); // ✅ تحميل البيانات عند الفتح
+  }
+
+  // ✅ تحميل البيانات المحفوظة
+  Future<void> _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      tasbeehController.text = prefs.getString(_keyTasbeeh) ?? 'سبحان الله';
+
+      // ✅ إذا كان المحفوظ -1 معناه الحقل كان فارغاً
+      final savedTotal = prefs.getInt(_keyTotal);
+      if (savedTotal == null || savedTotal == -1) {
+        total = 0;
+        totalController.text = '';
+      } else {
+        total = savedTotal;
+        totalController.text = total.toString();
+      }
+
+      current = prefs.getInt(_keyCurrent) ?? 0;
+    });
+  }
+
+  // ✅ حفظ البيانات
+  Future<void> _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_keyTasbeeh, tasbeehController.text);
+
+    // ✅ إذا كان الحقل فارغاً نحفظ -1 كعلامة
+    final isEmpty = totalController.text.isEmpty;
+    await prefs.setInt(_keyTotal, isEmpty ? -1 : total);
+    await prefs.setInt(_keyCurrent, current);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +112,7 @@ class _TesbihPageState extends State<TesbihPage> {
                     padding: EdgeInsets.only(bottom: 10),
                     onPressed: () {
                       Navigator.pushNamed(
-                                context, TesbihatAlzahra2Page.screenRoute);
+                          context, TesbihatAlzahra2Page.screenRoute);
                     },
                     icon: Icon(
                       Icons.change_circle,
@@ -82,7 +123,11 @@ class _TesbihPageState extends State<TesbihPage> {
                 ),
                 const SizedBox(height: 60),
 
-                _textField(tasbeehController, "اكتب التسبيحة"),
+                _textField(
+                  tasbeehController,
+                  "اكتب التسبيحة",
+                  onChanged: (v) => _saveData(), // ✅ حفظ عند تغيير النص
+                ),
                 const SizedBox(height: 20),
 
                 _textField(
@@ -91,49 +136,57 @@ class _TesbihPageState extends State<TesbihPage> {
                   isNumber: true,
                   onChanged: (v) {
                     total = int.tryParse(v) ?? 0;
-                    setState(() => current = 0); // ✅ شرطك الثالث
+                    setState(() => current = 0);
+                    _saveData(); // ✅ حفظ عند تغيير العدد
                   },
                 ),
 
                 const SizedBox(height: 100),
 
                 /// العداد
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    /// الحلقة نفسها
-                    CustomPaint(
-                      size: Size(260, 260),
-                      painter: TasbeehRingPainter(
-                        progress: current / (total == 0 ? 1 : total),
-                        color: Theme.of(context).cardColor,
-                        secColor: Theme.of(context).canvasColor,
-                        thirdColor: Theme.of(context).dividerColor,
+                GestureDetector(
+                  onTap: _onTasbeeh,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      /// الحلقة نفسها
+                      CustomPaint(
+                        size: Size(260, 260),
+                        painter: TasbeehRingPainter(
+                          progress: current / (total == 0 ? 1 : total),
+                          color: Theme.of(context).cardColor,
+                          secColor: Theme.of(context).canvasColor,
+                          thirdColor: Theme.of(context).dividerColor,
+                        ),
                       ),
-                    ),
 
-                    /// الأرقام فوق الحلقة
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "$total ",
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontSize: isTablet ? 40 : 24,
-                                  ),
-                        ),
-                        Text(
-                          "/ $current",
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontSize: isTablet ? 40 : 24,
-                                  ),
-                        ),
-                        SizedBox(width: 8),
-                      ],
-                    ),
-                  ],
+                      /// الأرقام فوق الحلقة
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "$total ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontSize: isTablet ? 40 : 24,
+                                ),
+                          ),
+                          Text(
+                            "/ $current",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontSize: isTablet ? 40 : 24,
+                                ),
+                          ),
+                          SizedBox(width: 8),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
 
                 const Spacer(),
@@ -171,7 +224,15 @@ class _TesbihPageState extends State<TesbihPage> {
                       padding: const EdgeInsets.only(left: 15),
                       child: FloatingActionButton(
                         backgroundColor: Theme.of(context).dividerColor,
-                        onPressed: () => setState(() => current = 0),
+                        onPressed: () {
+                          setState(() {
+                            current = 0;
+                            total = 0;
+                            tasbeehController.text = "";
+                            totalController.text = '';
+                          });
+                          _saveData(); // ✅ حفظ بعد الإعادة
+                        },
                         child: Icon(
                           Icons.refresh,
                           color: Theme.of(context).indicatorColor,
@@ -197,6 +258,7 @@ class _TesbihPageState extends State<TesbihPage> {
   void _onTasbeeh() {
     if (current < total) {
       setState(() => current++);
+      _saveData(); // ✅ حفظ عند كل ضغطة
     }
     if (current == total && total != 0) {
       setState(() => showDoneCard = true);

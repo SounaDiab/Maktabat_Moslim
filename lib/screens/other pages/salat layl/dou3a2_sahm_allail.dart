@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_salat_lail.dart';
 
-
 class Dou3a2SahmAllail extends StatefulWidget {
   static String screenRoute = 'dou3a2_sahm_lail_screen';
   const Dou3a2SahmAllail({super.key});
@@ -39,10 +38,10 @@ class _Dou3a2SahmAllailState extends State<Dou3a2SahmAllail> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: FavoritesScreen(favoritePages: [],)));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(SalatAllayl.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: SalatAllayl()));
       return false;
     }
   }
@@ -66,6 +65,8 @@ class _Dou3a2SahmAllailState extends State<Dou3a2SahmAllail> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

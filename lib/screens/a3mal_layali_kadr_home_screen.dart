@@ -20,16 +20,81 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
       (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
+        final Map<String, List<String>> a3malLayaliKaderSectionRoutes = {
+          'السور القرآنية المباركة التي تستحب قرائتها في ليلة القدر':
+              a3malLayaliKaderAllRoutes.alSowarAlKor2aneyaRoutes,
+          'اعمال ليلة القدر': a3malLayaliKaderAllRoutes.a3malLaylatKaderRoutes,
+          'الاعمال العامة في ليلة القدر':
+              a3malLayaliKaderAllRoutes.al2a3malAl3amaRoutes,
+          'الاعمال الخاصة بليالي القدر':
+              a3malLayaliKaderAllRoutes.al2a3malAl5asaRoutes,
+        };
+        Map<String, dynamic> buildItem({
+          required String title,
+          required String route,
+        }) {
+          return {
+            'title': title,
+            'route': route,
+          };
+        }
+
         final jsonService = JsonService();
-        final kaderList = await jsonService.getA3malLaylatAlkader();
-        final mappedList = kaderList
-            .map((e) => {
-                  'id': e.id,
-                  'title': e.title,
-                  'route': a3malLayaliKaderAllRoutes
-                      .a3malLayaliKaderRoutes[e.id - 1],
-                })
-            .toList();
+        final herzList = await jsonService.getA3malLaylatAlkader();
+
+        final List<Map<String, dynamic>> mappedList = [];
+
+        for (final section in herzList) {
+          // البحث عن routes الخاصة بهذا القسم
+          final mainRoutes = a3malLayaliKaderAllRoutes.a3malLayaliKaderRoutes;
+          final mainSections = [
+            'السور القرآنية المباركة التي تستحب قرائتها في ليلة القدر',
+            'اعمال ليلة القدر',
+            'الاعمال العامة في ليلة القدر',
+            'الاعمال الخاصة بليالي القدر',
+          ];
+          final routes = a3malLayaliKaderSectionRoutes.entries
+              .firstWhere(
+                (e) => section.title.contains(e.key),
+                orElse: () => const MapEntry('', []),
+              )
+              .value;
+
+          // التحقق إذا كان القسم الحالي من الأقسام الرئيسية
+          int mainIndex =
+              mainSections.indexWhere((key) => section.title.contains(key));
+
+          if (mainIndex != -1 && mainIndex < mainRoutes.length) {
+            // إضافة القسم الرئيسي مع مساره الصحيح
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: mainRoutes[mainIndex],
+              ),
+            );
+          } else {
+            // للأقسام الأخرى، استخدم المسار الافتراضي
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: routes.first,
+              ),
+            );
+          }
+
+          // إضافة العناصر الفرعية
+
+          for (int i = 0; i < section.index.length; i++) {
+            if (i >= routes.length) break;
+
+            mappedList.add(
+              buildItem(
+                title: section.index[i].title,
+                route: routes[i],
+              ),
+            );
+          }
+        }
 
         // تمرير البيانات إلى مزود البحث
         searchProvider.setItems(mappedList);
@@ -98,8 +163,9 @@ class _A3malLayaliKadrHomeScreenState extends State<A3malLayaliKadrHomeScreen> {
               for (var item in a3malLaylatAlkader) {
                 allTitles.add({
                   'title': item.title,
-                  'route': a3malLayaliKaderAllRoutes
-                      .a3malLayaliKaderRoutes.map((e) => e).toList()[item.id - 1],
+                  'route': a3malLayaliKaderAllRoutes.a3malLayaliKaderRoutes
+                      .map((e) => e)
+                      .toList()[item.id - 1],
                 });
               }
               return SafeArea(

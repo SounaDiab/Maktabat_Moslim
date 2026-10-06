@@ -9,21 +9,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  final InterstitialAdManager _adManager = InterstitialAdManager();
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      _adManager.loadAd('ca-app-pub-9302649846832207/8901261139');
-    });
-  }
-
-  @override
-  void dispose() {
-    _adManager.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -33,6 +18,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       },
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        drawer: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.85,
+          child: Drawer(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            child: DrawerScreen(),
+          ),
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -42,42 +34,36 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Switch(
-                            activeTrackColor: Theme.of(context).canvasColor,
-                            inactiveTrackColor: Theme.of(context).canvasColor,
-                            activeColor: Theme.of(context).iconTheme.color,
-                            inactiveThumbColor:
-                                Theme.of(context).iconTheme.color,
-                            value:
-                                Theme.of(context).brightness == Brightness.dark,
-                            onChanged: (value) {
-                              setState(() {
-                                // Toggle theme mode
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? AdaptiveTheme.of(context).setLight()
-                                    : AdaptiveTheme.of(context).setDark();
-                              });
-                            },
-                          ),
-                          Icon(
-                            Theme.of(context).brightness == Brightness.dark
-                                ? Icons.nightlight_round
-                                : Icons.wb_sunny,
-                            size: 30,
-                          ),
-                        ],
-                      ),
-                    ),
+                    Builder(builder: (context) {
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 14),
+                            height: 55,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: Icon(
+                              Icons.menu,
+                              size: 24,
+                              color: Theme.of(context).iconTheme.color,
+                            )),
+                      );
+                    }),
                     Row(
                       children: [
                         InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, ImsakiyaScreen.screenRoute);
+                            Navigator.push(context,
+                                CustomPageRoute(page: RamadanSchedulePage()));
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
@@ -100,9 +86,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           width: 5,
                         ),
                         InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, FavoritesScreen.screenRoute);
+                            Navigator.push(
+                                context,
+                                CustomPageRoute(
+                                    page: FavoritesScreen(
+                                  favoritePages: [],
+                                )));
                           },
                           child: _topButton(Icons.favorite, ''),
                         ),
@@ -110,103 +102,32 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ],
                 ),
-                Spacer(),
-
-                // Main Buttons
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _mainCard(
-                            title: 'القرآن والأدعية',
-                            image: 'assets/islamic_icons/koran.png',
-                            color: Theme.of(context).cardColor,
-                            onTap: () {
-                              Navigator.pushNamed(context, Books.screenRoute);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: _mainCard(
-                            title: 'مواقيت الصلاة',
-                            image: 'assets/islamic_icons/clock.png',
-                            color: Theme.of(context).cardColor,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, MawakitAlsalat.screenRoute);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _mainCard(
-                            title: 'التقويم',
-                            image: 'assets/islamic_icons/schedule.png',
-                            color: Theme.of(context).cardColor,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, TakwimScreen.screenRoute);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: _mainCard(
-                            title: 'مسبحة',
-                            image: 'assets/islamic_icons/beads.png',
-                            color: Theme.of(context).cardColor,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, TesbihPage.screenRoute);
-                              _adManager.showAd();
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _mainCard(
-                            title: 'القبلة',
-                            image: 'assets/islamic_icons/qibla-compass.png',
-                            color: Theme.of(context).cardColor,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, QiblaSalat.screenRoute);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: _mainCard(
-                            title: 'صلاة الليل',
-                            image: 'assets/islamic_icons/praying.png',
-                            color: Theme.of(context).cardColor,
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, SalatAllayl.screenRoute);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                SizedBox(
+                  height: 20,
                 ),
-
-                const Spacer(),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, AboutUs.screenRoute);
-                  },
-                  child: _topButton(Icons.info_outline, 'حول التطبيق'),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: WisdomOfDay(),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: ImageOfDay(),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: QuranTouch(),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -233,9 +154,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             size: 24,
             color: Theme.of(context).iconTheme.color,
           ),
-          SizedBox(
-            child: text == '' ? SizedBox.shrink() : SizedBox(width: 6),
-          ),
+          if (text.isNotEmpty) SizedBox(width: 6),
           text != ''
               ? Text(
                   text,
@@ -247,6 +166,118 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
+  Widget DrawerScreen() {
+    return SafeArea(
+      child: DrawerHeader(
+        curve: Curves.decelerate,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Switch(
+                  activeTrackColor: Theme.of(context).canvasColor,
+                  inactiveTrackColor: Theme.of(context).canvasColor,
+                  activeColor: Theme.of(context).iconTheme.color,
+                  inactiveThumbColor: Theme.of(context).iconTheme.color,
+                  value: Theme.of(context).brightness == Brightness.dark,
+                  onChanged: (value) {
+                    setState(() {
+                      // Toggle theme mode
+                      Theme.of(context).brightness == Brightness.dark
+                          ? AdaptiveTheme.of(context).setLight()
+                          : AdaptiveTheme.of(context).setDark();
+                    });
+                  },
+                ),
+                Icon(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Icons.nightlight_round
+                      : Icons.wb_sunny,
+                  size: 30,
+                ),
+              ],
+            ),
+            Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _mainCard(
+                  title: 'القرآن والأدعية',
+                  image: 'assets/islamic_icons/koran.png',
+                  color: Theme.of(context).cardColor,
+                  onTap: () {
+                    Navigator.push(context, CustomPageRoute(page: Books()));
+                  },
+                ),
+                const SizedBox(height: 16),
+                _mainCard(
+                  title: 'مواقيت الصلاة',
+                  image: 'assets/islamic_icons/clock.png',
+                  color: Theme.of(context).cardColor,
+                  onTap: () {
+                    Navigator.push(
+                        context, CustomPageRoute(page: MawakitAlsalat()));
+                    // _adMawakitSalat.showAd();
+                  },
+                ),
+                const SizedBox(height: 16),
+                _mainCard(
+                  title: 'التقويم',
+                  image: 'assets/islamic_icons/schedule.png',
+                  color: Theme.of(context).cardColor,
+                  onTap: () {
+                    Navigator.push(
+                        context, CustomPageRoute(page: TakwimScreen()));
+                    // _adTakwim.showAd();
+                  },
+                ),
+                const SizedBox(height: 16),
+                _mainCard(
+                  title: 'مسبحة',
+                  image: 'assets/islamic_icons/beads.png',
+                  color: Theme.of(context).cardColor,
+                  onTap: () {
+                    Navigator.push(
+                        context, CustomPageRoute(page: TesbihPage()));
+                    // _adMasbaha.showAd();
+                  },
+                ),
+                const SizedBox(height: 16),
+                _mainCard(
+                  title: 'القبلة',
+                  image: 'assets/islamic_icons/qibla-compass.png',
+                  color: Theme.of(context).cardColor,
+                  onTap: () {
+                    Navigator.push(
+                        context, CustomPageRoute(page: QiblaSalat()));
+                  },
+                ),
+                const SizedBox(height: 16),
+                _mainCard(
+                  title: 'صلاة الليل',
+                  image: 'assets/islamic_icons/praying.png',
+                  color: Theme.of(context).cardColor,
+                  onTap: () {
+                    Navigator.push(
+                        context, CustomPageRoute(page: SalatAllayl()));
+                  },
+                ),
+              ],
+            ),
+            const Spacer(),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, CustomPageRoute(page: AboutUs()));
+              },
+              child: _topButton(Icons.info_outline, 'حول التطبيق'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _mainCard({
     required String title,
     required String image,
@@ -254,29 +285,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     required VoidCallback onTap,
   }) {
     return InkWell(
-      onTap: onTap,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
+      onTap: onTap,
       child: Container(
-        height: 150,
+        height: 75,
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(24),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            const SizedBox(width: 16),
             Image(
               image: AssetImage(image),
-              width: 60,
-              height: 60,
+              width: 30,
+              height: 30,
               color: Theme.of(context).iconTheme.color,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(width: 16),
             Text(
+              textAlign: TextAlign.center,
               title,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).indicatorColor,
               ),

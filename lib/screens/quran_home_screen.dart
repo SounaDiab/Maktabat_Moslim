@@ -1,7 +1,6 @@
 import '../Util/app_imports.dart';
 import 'kor2an/quran/page_data.dart';
 
-
 class QuranHomeScreen extends StatefulWidget {
   static String screenRoute = 'quran_home_screen_screen';
 
@@ -15,7 +14,7 @@ class _QuranHomeScreenState extends State<QuranHomeScreen> {
   Future<bool> _onWillPop() async {
     final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     searchProvider.clearSearch();
-    Navigator.of(context).pushReplacementNamed(Books.screenRoute);
+    Navigator.of(context).pushReplacement(CustomPageRoute(page: Books()));
     return false;
   }
 

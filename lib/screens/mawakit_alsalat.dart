@@ -12,7 +12,7 @@ class MawakitAlsalat extends StatelessWidget {
     final isTablet = screenWidth >= 600;
     return WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).pushReplacementNamed(WelcomeScreen.screenRoute);
+        Navigator.of(context).pop();
         return true;
       },
       child: Scaffold(
@@ -28,6 +28,8 @@ class MawakitAlsalat extends StatelessWidget {
             ),
           ),
           leading: IconButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -45,9 +47,6 @@ class MawakitAlsalat extends StatelessWidget {
             vertical: isTablet ? 80 : 40,
           ),
           child: PrayerTimeWidget(),
-        ),
-        bottomNavigationBar: AdBanner(
-          adUnitId: 'ca-app-pub-9302649846832207/8459790891',
         ),
       ),
     );

@@ -34,7 +34,8 @@ class _SalatAllaylState extends State<SalatAllayl> {
   Future<bool> _onWillPop() async {
     final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     searchProvider.clearSearch();
-    Navigator.of(context).pop();
+    Navigator.of(context)
+        .pushReplacement(CustomPageRoute(page: WelcomeScreen()));
     return false;
   }
 
@@ -131,9 +132,6 @@ class _SalatAllaylState extends State<SalatAllayl> {
             }
             return const SizedBox();
           },
-        ),
-        bottomNavigationBar: AdBanner(
-          adUnitId: 'ca-app-pub-9302649846832207/6324582140',
         ),
       ),
     );

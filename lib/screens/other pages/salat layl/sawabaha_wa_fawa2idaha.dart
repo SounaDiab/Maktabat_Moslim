@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_salat_lail.dart';
 
-
 class SawabahaWaFawa2idaha extends StatefulWidget {
   static String screenRoute = 'sawabaha_wa_fawa2idaha_screen';
   const SawabahaWaFawa2idaha({super.key});
@@ -40,10 +39,14 @@ class _SawabahaWaFawa2idahaState extends State<SawabahaWaFawa2idaha> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(SalatAllayl.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: SalatAllayl()));
       return false;
     }
   }
@@ -67,6 +70,8 @@ class _SawabahaWaFawa2idahaState extends State<SawabahaWaFawa2idaha> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

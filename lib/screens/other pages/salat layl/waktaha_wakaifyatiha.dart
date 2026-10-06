@@ -40,10 +40,14 @@ class _WaktahaWakaifyatihaState extends State<WaktahaWakaifyatiha> {
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(SalatAllayl.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: SalatAllayl()));
       return false;
     }
   }

@@ -1,6 +1,5 @@
 import '../Util/app_imports.dart';
 
-
 class Books extends StatefulWidget {
   static String screenRoute = 'books_screen';
   Books({super.key});
@@ -11,15 +10,16 @@ class Books extends StatefulWidget {
 
 class _BooksState extends State<Books> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(WelcomeScreen.screenRoute);
+    Navigator.of(context)
+        .pushReplacement(CustomPageRoute(page: WelcomeScreen()));
     return false;
   }
-  
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 600;
+    final searchProvider = Provider.of<SearchProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -27,10 +27,9 @@ class _BooksState extends State<Books> {
           toolbarHeight: isTablet ? 100 : 70,
           centerTitle: true,
           leading: IconButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(WelcomeScreen.screenRoute);
-            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: _onWillPop,
             icon: Icon(
               Icons.arrow_back,
               size: isTablet ? 50 : 25,
@@ -44,6 +43,22 @@ class _BooksState extends State<Books> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          actions: [
+            IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: DataSearch(searchProvider.filteredItems),
+                );
+              },
+              icon: Icon(
+                Icons.search,
+                size: isTablet ? 40 : 20,
+              ),
+            ),
+          ],
         ),
         body: Container(
           alignment: Alignment.topRight,
@@ -57,10 +72,12 @@ class _BooksState extends State<Books> {
               ),
               itemCount: BooksItem.bookstitle.length,
               itemBuilder: (context, index) {
-                return TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(BooksItem.booksRoute[index]);
+                return InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                        CustomPageRoute(page: BooksItem.booksRoute[index]));
                   },
                   child: Column(
                     children: [
@@ -101,9 +118,6 @@ class _BooksState extends State<Books> {
                   ),
                 );
               }),
-        ),
-        bottomNavigationBar: AdBanner(
-          adUnitId: 'ca-app-pub-9302649846832207/7118789062',
         ),
       ),
     );

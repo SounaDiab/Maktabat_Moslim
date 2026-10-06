@@ -18,16 +18,86 @@ class _Al7akibaAlramadaneyaHomeScreenState
       (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
+        final Map<String, List<String>> al7akibaAlramadaneyaSectionRoutes = {
+          'فيما يعم الليالي والايام':
+              alhakibaAlramadaneyaAllRoutes.fimaYa3omAllayaliWal2ayamRoutes,
+          'فيما يستحب ايتانه في رمضان':
+              alhakibaAlramadaneyaAllRoutes.fimaYostahab2itanohoRoutes,
+          'في اعمال اسحار رمضان':
+              alhakibaAlramadaneyaAllRoutes.fiA3malAs7arRoutes,
+          'اعمال وادعية ايام رمضان':
+              alhakibaAlramadaneyaAllRoutes.a3malW2ad3yat2ayamRamadanRoutes,
+          'اعمال وادعية ليالي رمضان':
+              alhakibaAlramadaneyaAllRoutes.a3malW2ad3yatLayaliRamadanRoutes,
+        };
+        Map<String, dynamic> buildItem({
+          required String title,
+          required String route,
+        }) {
+          return {
+            'title': title,
+            'route': route,
+          };
+        }
+
         final jsonService = JsonService();
-        final hakibaList = await jsonService.getAlhakibaAlramadaneya();
-        final mappedList = hakibaList
-            .map((e) => {
-                  'id': e.id,
-                  'title': e.title,
-                  'route': alhakibaAlramadaneyaAllRoutes
-                      .alhakibaAlramadaneyaRoutes[e.id - 1],
-                })
-            .toList();
+        final herzList = await jsonService.getAlhakibaAlramadaneya();
+
+        final List<Map<String, dynamic>> mappedList = [];
+
+        for (final section in herzList) {
+          // البحث عن routes الخاصة بهذا القسم
+          final mainRoutes =
+              alhakibaAlramadaneyaAllRoutes.alhakibaAlramadaneyaRoutes;
+          final mainSections = [
+            'فيما يعم الليالي والايام',
+            'فيما يستحب ايتانه في رمضان',
+            'في اعمال اسحار رمضان',
+            'اعمال وادعية ايام رمضان',
+            'اعمال وادعية ليالي رمضان',
+          ];
+          final routes = al7akibaAlramadaneyaSectionRoutes.entries
+              .firstWhere(
+                (e) => section.title.contains(e.key),
+                orElse: () => const MapEntry('', []),
+              )
+              .value;
+
+          // التحقق إذا كان القسم الحالي من الأقسام الرئيسية
+          int mainIndex =
+              mainSections.indexWhere((key) => section.title.contains(key));
+
+          if (mainIndex != -1 && mainIndex < mainRoutes.length) {
+            // إضافة القسم الرئيسي مع مساره الصحيح
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: mainRoutes[mainIndex],
+              ),
+            );
+          } else {
+            // للأقسام الأخرى، استخدم المسار الافتراضي
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: routes.first,
+              ),
+            );
+          }
+
+          // إضافة العناصر الفرعية
+
+          for (int i = 0; i < section.index.length; i++) {
+            if (i >= routes.length) break;
+
+            mappedList.add(
+              buildItem(
+                title: section.index[i].title,
+                route: routes[i],
+              ),
+            );
+          }
+        }
 
         // تمرير البيانات إلى مزود البحث
         searchProvider.setItems(mappedList);
@@ -97,7 +167,9 @@ class _Al7akibaAlramadaneyaHomeScreenState
                 allTitles.add({
                   'title': item.title,
                   'route': alhakibaAlramadaneyaAllRoutes
-                      .alhakibaAlramadaneyaRoutes.map((e) => e).toList()[item.id - 1],
+                      .alhakibaAlramadaneyaRoutes
+                      .map((e) => e)
+                      .toList()[item.id - 1],
                 });
               }
               return SafeArea(

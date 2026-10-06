@@ -1,7 +1,6 @@
 import '../../../Util/app_imports.dart';
 import '../../../widgets/bloc_builder_salat_lail.dart';
 
-
 class Dou3aa7azin extends StatefulWidget {
   static String screenRoute = 'dou3aa_7azin_screen';
   const Dou3aa7azin({super.key});
@@ -39,10 +38,10 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: FavoritesScreen(favoritePages: [],)));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(SalatAllayl.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(page: SalatAllayl()));
       return false;
     }
   }
@@ -66,6 +65,8 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -103,7 +104,7 @@ class _Dou3aa7azinState extends State<Dou3aa7azin> {
           pushNext: SawabahaWaFawa2idaha.screenRoute,
           pushBack: Dou3aaBa3dSalatAlwater.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/دعاء الحزين.mp3',
+              'https://www.dropbox.com/scl/fi/o4eqi3rhekwtjykmkptyo/.mp3?rlkey=9q30fhofj98961pqfcdyny0oc&st=eskgjtn5&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
