@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class SalatLziyadatAlrizk extends StatefulWidget {
   static String screenRoute = 'salat_lziyadat_alrizk_screen';
   const SalatLziyadatAlrizk({super.key});
@@ -38,11 +37,14 @@ class _SalatLziyadatAlrizkState extends State<SalatLziyadatAlrizk> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(Ba3dAlsalawatAlmandouba.screenRoute);
+          .pushReplacement(CustomPageRoute(page: Ba3dAlsalawatAlmandouba()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _SalatLziyadatAlrizkState extends State<SalatLziyadatAlrizk> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

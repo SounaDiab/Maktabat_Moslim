@@ -17,29 +17,88 @@ class _NozorMenA3malAllailWalnaharState
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final searchProvider =
           Provider.of<SearchProvider>(context, listen: false);
-      final jsonService = JsonService();
-
-      final albakiyatList = await jsonService.getAlbakiyatAlsalihat();
-
-      final albakiyatSection = albakiyatList.firstWhere(
-        (item) => item.title.contains('نزر من اعمال الليل والنهار'),
-        orElse: () =>
-            throw Exception('لم يتم العثور على نزر من اعمال الليل والنهار'),
-      );
-
-      // نتأكد أن فيه فهرس داخلي (index أو subSections)
-      final List<Map<String, dynamic>> mappedList = [];
-
-      if (albakiyatSection.index.isNotEmpty) {
-        for (var sub in albakiyatSection.index) {
-          mappedList.add({
-            'id': sub.id,
-            'title': sub.title,
-            'route': albakyatAlsali7atAllRoutes
-                .nozorMenA3malAllaylWalnaharRoutes[sub.id - 1],
-          });
+      final Map<String, List<String>> albakiyatAlsalihatSectionRoutes = {
+          'نزر من اعمال الليل والنهار':
+              albakyatAlsali7atAllRoutes.nozorMenA3malAllaylWalnaharRoutes,
+          'ذكر صلوات ايام الاسبوع':
+              albakyatAlsali7atAllRoutes.zikrSalawatAyamAl2ousbou3Routes,
+          'بعض الصلوات المندوبة':
+              albakyatAlsali7atAllRoutes.ba3dAlsalawatAlmandoubaRoutes,
+          'الادعية والعوذات للالام والاسقام ولعلل الاعضاء والحمى وغيرها':
+              albakyatAlsali7atAllRoutes.alad3yaWal3awzatRoutes,
+          'دعوات منتخبة من كتاب الكافي الشريف':
+              albakyatAlsali7atAllRoutes.da3awatMonta5abaRoutes,
+          'الاحراز والادعية الموجزة':
+              albakyatAlsali7atAllRoutes.ala7razWalad3iyaRoutes,
+        };
+        Map<String, dynamic> buildItem({
+          required String title,
+          required String route,
+        }) {
+          return {
+            'title': title,
+            'route': route,
+          };
         }
-      }
+
+        final jsonService = JsonService();
+        final herzList = await jsonService.getAlbakiyatAlsalihat();
+
+        final List<Map<String, dynamic>> mappedList = [];
+
+        for (final section in herzList) {
+          // البحث عن routes الخاصة بهذا القسم
+          final mainRoutes = albakyatAlsali7atAllRoutes.albakyatAlsali7atRoutes;
+          final mainSections = [
+            'نزر من اعمال الليل والنهار',
+            'ذكر صلوات ايام الاسبوع',
+            'بعض الصلوات المندوبة',
+            'الادعية والعوذات للالام والاسقام ولعلل الاعضاء والحمى وغيرها',
+            'دعوات منتخبة من كتاب الكافي الشريف',
+            'الاحراز والادعية الموجزة',
+          ];
+          final routes = albakiyatAlsalihatSectionRoutes.entries
+              .firstWhere(
+                (e) => section.title.contains(e.key),
+                orElse: () => const MapEntry('', []),
+              )
+              .value;
+
+          // التحقق إذا كان القسم الحالي من الأقسام الرئيسية
+          int mainIndex =
+              mainSections.indexWhere((key) => section.title.contains(key));
+
+          if (mainIndex != -1 && mainIndex < mainRoutes.length) {
+            // إضافة القسم الرئيسي مع مساره الصحيح
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: mainRoutes[mainIndex],
+              ),
+            );
+          } else {
+            // للأقسام الأخرى، استخدم المسار الافتراضي
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: routes.first,
+              ),
+            );
+          }
+
+          // إضافة العناصر الفرعية
+
+          for (int i = 0; i < section.index.length; i++) {
+            if (i >= routes.length) break;
+
+            mappedList.add(
+              buildItem(
+                title: section.index[i].title,
+                route: routes[i],
+              ),
+            );
+          }
+        }
       // تمرير الفهرس إلى SearchProvider
       searchProvider.setItems(mappedList);
     });
