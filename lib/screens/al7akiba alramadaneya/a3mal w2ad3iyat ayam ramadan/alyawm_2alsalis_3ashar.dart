@@ -38,11 +38,14 @@ class _Alyawm2alsalis3asharState extends State<Alyawm2alsalis3ashar> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(A3malWa2ad3iyatAyamRamadan.screenRoute);
+          .pushReplacement(CustomPageRoute(page: A3malWa2ad3iyatAyamRamadan()));
       return false;
     }
   }
@@ -66,6 +69,8 @@ class _Alyawm2alsalis3asharState extends State<Alyawm2alsalis3ashar> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

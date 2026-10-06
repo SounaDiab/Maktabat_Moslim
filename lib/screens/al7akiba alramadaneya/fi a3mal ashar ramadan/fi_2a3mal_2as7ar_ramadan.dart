@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Fi2a3mal2as7arRamadan extends StatefulWidget {
   static String screenRoute = 'fi_2a3mal_2as7ar_ramadan_screen';
   const Fi2a3mal2as7arRamadan({super.key});
@@ -39,11 +38,14 @@ class _Fi2a3mal2as7arRamadanState extends State<Fi2a3mal2as7arRamadan> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(FiA3malAsharRamadan.screenRoute);
+          .pushReplacement(CustomPageRoute(page: FiA3malAsharRamadan()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _Fi2a3mal2as7arRamadanState extends State<Fi2a3mal2as7arRamadan> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

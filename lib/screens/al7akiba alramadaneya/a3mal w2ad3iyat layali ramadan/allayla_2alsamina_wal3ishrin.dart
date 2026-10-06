@@ -41,11 +41,14 @@ class _Allayla2alsaminaWal3ishrinState
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(A3malW2ad3iyatLayaliRamadan.screenRoute);
+      Navigator.of(context).pushReplacement(
+          CustomPageRoute(page: A3malW2ad3iyatLayaliRamadan()));
       return false;
     }
   }
@@ -69,6 +72,8 @@ class _Allayla2alsaminaWal3ishrinState
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
