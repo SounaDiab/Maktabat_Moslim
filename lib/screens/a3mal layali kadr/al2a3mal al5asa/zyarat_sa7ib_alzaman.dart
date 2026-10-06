@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class ZyaratSa7ibAlzaman extends StatefulWidget {
   static String screenRoute = 'zyarat_sa7ib_alzaman_screen';
   const ZyaratSa7ibAlzaman({super.key});
@@ -38,10 +37,14 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Al2a3malAl5asa.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: Al2a3malAl5asa()));
       return false;
     }
   }
@@ -65,6 +68,8 @@ class _ZyaratSa7ibAlzamanState extends State<ZyaratSa7ibAlzaman> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

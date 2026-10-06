@@ -15,28 +15,79 @@ class _AlsowarAlkor2aneyaState extends State<AlsowarAlkor2aneya> {
       (_) async {
         final searchProvider =
             Provider.of<SearchProvider>(context, listen: false);
+        final Map<String, List<String>> a3malLayaliKaderSectionRoutes = {
+          'السور القرآنية المباركة التي تستحب قرائتها في ليلة القدر':
+              a3malLayaliKaderAllRoutes.alSowarAlKor2aneyaRoutes,
+          'اعمال ليلة القدر': a3malLayaliKaderAllRoutes.a3malLaylatKaderRoutes,
+          'الاعمال العامة في ليلة القدر':
+              a3malLayaliKaderAllRoutes.al2a3malAl3amaRoutes,
+          'الاعمال الخاصة بليالي القدر':
+              a3malLayaliKaderAllRoutes.al2a3malAl5asaRoutes,
+        };
+        Map<String, dynamic> buildItem({
+          required String title,
+          required String route,
+        }) {
+          return {
+            'title': title,
+            'route': route,
+          };
+        }
+
         final jsonService = JsonService();
+        final herzList = await jsonService.getA3malLaylatAlkader();
 
-        final kaderList = await jsonService.getA3malLaylatAlkader();
-
-        final kaderSection = kaderList.firstWhere(
-          (item) => item.title.contains(
-              'السور القرآنية المباركة التي تستحب قرائتها في ليلة القدر'),
-          orElse: () => throw Exception(
-              'لم يتم العثور على السور القرآنية المباركة التي تستحب قرائتها في ليلة القدر'),
-        );
-
-        // نتأكد أن فيه فهرس داخلي (index أو subSections)
         final List<Map<String, dynamic>> mappedList = [];
 
-        if (kaderSection.index.isNotEmpty) {
-          for (var sub in kaderSection.index) {
-            mappedList.add({
-              'id': sub.id,
-              'title': sub.title,
-              'route': a3malLayaliKaderAllRoutes
-                      .alSowarAlKor2aneyaRoutes[sub.id - 1],
-            });
+        for (final section in herzList) {
+          // البحث عن routes الخاصة بهذا القسم
+          final mainRoutes = a3malLayaliKaderAllRoutes.a3malLayaliKaderRoutes;
+          final mainSections = [
+            'السور القرآنية المباركة التي تستحب قرائتها في ليلة القدر',
+            'اعمال ليلة القدر',
+            'الاعمال العامة في ليلة القدر',
+            'الاعمال الخاصة بليالي القدر',
+          ];
+          final routes = a3malLayaliKaderSectionRoutes.entries
+              .firstWhere(
+                (e) => section.title.contains(e.key),
+                orElse: () => const MapEntry('', []),
+              )
+              .value;
+
+          // التحقق إذا كان القسم الحالي من الأقسام الرئيسية
+          int mainIndex =
+              mainSections.indexWhere((key) => section.title.contains(key));
+
+          if (mainIndex != -1 && mainIndex < mainRoutes.length) {
+            // إضافة القسم الرئيسي مع مساره الصحيح
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: mainRoutes[mainIndex],
+              ),
+            );
+          } else {
+            // للأقسام الأخرى، استخدم المسار الافتراضي
+            mappedList.add(
+              buildItem(
+                title: section.title,
+                route: routes.first,
+              ),
+            );
+          }
+
+          // إضافة العناصر الفرعية
+
+          for (int i = 0; i < section.index.length; i++) {
+            if (i >= routes.length) break;
+
+            mappedList.add(
+              buildItem(
+                title: section.index[i].title,
+                route: routes[i],
+              ),
+            );
           }
         }
         // تمرير الفهرس إلى SearchProvider

@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Dou3a2AljawshanAlkabir extends StatefulWidget {
   static String screenRoute = 'doua2_aljawshan_alkabir_screen';
   const Dou3a2AljawshanAlkabir({super.key});
@@ -39,10 +38,14 @@ class _Dou3a2AljawshanAlkabirState extends State<Dou3a2AljawshanAlkabir> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Al2a3malAl3ama.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: Al2a3malAl3ama()));
       return false;
     }
   }
@@ -66,6 +69,8 @@ class _Dou3a2AljawshanAlkabirState extends State<Dou3a2AljawshanAlkabir> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -107,7 +112,7 @@ class _Dou3a2AljawshanAlkabirState extends State<Dou3a2AljawshanAlkabir> {
           pushNext: Dou3a2Altawba.screenRoute,
           pushBack: Dou3a2Allahoma2iniAmsayt.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/dou3a2_aljawshan_alkabir.mp3',
+              'https://www.dropbox.com/scl/fi/ym4de6egsb26vkqq4bb32/dou3a2_aljawshan_alkabir.mp3?rlkey=vmfm6m71tpac5s49ng7cndqzg&st=qgezm2q7&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

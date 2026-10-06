@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Dou3a2AbiHamzaAlsamali extends StatefulWidget {
   static String screenRoute = 'dou32_abi_hamza_alsamali_screen';
   const Dou3a2AbiHamzaAlsamali({super.key});
@@ -39,10 +38,14 @@ class _Dou3a2AbiHamzaAlsamaliState extends State<Dou3a2AbiHamzaAlsamali> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Al2a3malAl3ama.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: Al2a3malAl3ama()));
       return false;
     }
   }
@@ -66,6 +69,8 @@ class _Dou3a2AbiHamzaAlsamaliState extends State<Dou3a2AbiHamzaAlsamali> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -107,7 +112,7 @@ class _Dou3a2AbiHamzaAlsamaliState extends State<Dou3a2AbiHamzaAlsamali> {
           pushNext: Dou3a2Ya3odati.screenRoute,
           pushBack: Dou3aAlbaha2.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/abi_hamza_alsamali.mp3',
+              'https://www.dropbox.com/scl/fi/qba1m0h6ew8gzt1dv74fc/abi_hamza_alsamali.mp3?rlkey=13mlffe8xzfpi4ayc0dmsmsbh&st=pxr6fobz&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

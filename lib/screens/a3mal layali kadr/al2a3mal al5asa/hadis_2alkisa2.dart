@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class Hadis2alkisa2 extends StatefulWidget {
   static String screenRoute = 'hadis_2alkisa2_screen';
   const Hadis2alkisa2({super.key});
@@ -38,10 +37,14 @@ class _Hadis2alkisa2State extends State<Hadis2alkisa2> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context).pushReplacementNamed(Al2a3malAl5asa.screenRoute);
+      Navigator.of(context)
+          .pushReplacement(CustomPageRoute(page: Al2a3malAl5asa()));
       return false;
     }
   }
@@ -65,6 +68,8 @@ class _Hadis2alkisa2State extends State<Hadis2alkisa2> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

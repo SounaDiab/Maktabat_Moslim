@@ -1,6 +1,5 @@
 import '../../../Util/app_imports.dart';
 
-
 class SouratAlroum extends StatefulWidget {
   static String screenRoute = 'suorat_alroum_screen';
   const SouratAlroum({super.key});
@@ -38,11 +37,14 @@ class _SouratAlroumState extends State<SouratAlroum> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(AlsowarAlkor2aneya.screenRoute);
+          .pushReplacement(CustomPageRoute(page: AlsowarAlkor2aneya()));
       return false;
     }
   }
@@ -66,6 +68,8 @@ class _SouratAlroumState extends State<SouratAlroum> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -104,7 +108,7 @@ class _SouratAlroumState extends State<SouratAlroum> {
           pushNext: SouratAldo5an.screenRoute,
           pushBack: SouratAl3ankabout.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/sourat_roum.mp3',
+              'https://www.dropbox.com/scl/fi/t1onfe5nnvmjj2f04u29a/sourat_roum.mp3?rlkey=lczr4f3j73xha2cnv8bzvatv1&st=rgkv5f9f&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {
