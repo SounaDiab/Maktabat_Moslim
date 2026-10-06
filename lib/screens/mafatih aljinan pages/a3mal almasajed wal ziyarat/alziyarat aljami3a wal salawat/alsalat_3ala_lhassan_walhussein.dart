@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class Alsalat3alaLhassanWalhussein extends StatefulWidget {
   static String screenRoute = 'alsalat_3ala_lhassan_walhussein_screen';
   const Alsalat3alaLhassanWalhussein({super.key});
@@ -43,11 +42,14 @@ class _Alsalat3alaLhassanWalhusseinState
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(AlziyaratAljami3aWalsalawat.screenRoute);
+      Navigator.of(context).pushReplacement(
+          CustomPageRoute(page: AlziyaratAljami3aWalsalawat()));
       return false;
     }
   }

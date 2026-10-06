@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class ZikrAlmasajedAlmo3azama extends StatefulWidget {
   static String screenRoute = 'zikr_almasajed_almo3azama_screen';
   const ZikrAlmasajedAlmo3azama({super.key});
@@ -41,11 +40,14 @@ class _ZikrAlmasajedAlmo3azamaState extends State<ZikrAlmasajedAlmo3azama> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(ZiyaratAlnabiWalzahraaWal2a2ima.screenRoute);
+      Navigator.of(context).pushReplacement(
+          CustomPageRoute(page: ZiyaratAlnabiWalzahraaWal2a2ima()));
       return false;
     }
   }
@@ -69,6 +71,8 @@ class _ZikrAlmasajedAlmo3azamaState extends State<ZikrAlmasajedAlmo3azama> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

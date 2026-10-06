@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class Ziyarat3ashoraa extends StatefulWidget {
   static String screenRoute = 'ziyarat_3ashoraa_screen';
   const Ziyarat3ashoraa({super.key});
@@ -39,11 +38,14 @@ class _Ziyarat3ashoraaState extends State<Ziyarat3ashoraa> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(ZiyaratAlhousseinWa2adabiha.screenRoute);
+      Navigator.of(context).pushReplacement(
+          CustomPageRoute(page: ZiyaratAlhousseinWa2adabiha()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _Ziyarat3ashoraaState extends State<Ziyarat3ashoraa> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -106,7 +110,8 @@ class _Ziyarat3ashoraaState extends State<Ziyarat3ashoraa> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: FiFadlZiyaratAlhussein.screenRoute,
           pushBack: FadlTorbatAlhussein.screenRoute,
-          soud: '',
+          soud:
+              'https://www.dropbox.com/scl/fi/sgzti4q4b97r0wwt9grni/.mp3?rlkey=9msged1mza2ggv8t9juizehjg&st=morg4x2l&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class SifatSalatLil7aja extends StatefulWidget {
   static String screenRoute = 'sifat_salat_lil7aja_screen';
   const SifatSalatLil7aja({super.key});
@@ -39,11 +38,14 @@ class _SifatSalatLil7ajaState extends State<SifatSalatLil7aja> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(FadlLakoufaWmasjidoha.screenRoute);
+          .pushReplacement(CustomPageRoute(page: FadlLakoufaWmasjidoha()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _SifatSalatLil7ajaState extends State<SifatSalatLil7aja> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

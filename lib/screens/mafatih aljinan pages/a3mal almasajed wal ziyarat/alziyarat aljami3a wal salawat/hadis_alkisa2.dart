@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class HadisAlkisa2 extends StatefulWidget {
   static String screenRoute = 'hadis_alkisa2_screen';
   const HadisAlkisa2({super.key});
@@ -39,11 +38,14 @@ class _HadisAlkisa2State extends State<HadisAlkisa2> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(AlziyaratAljami3aWalsalawat.screenRoute);
+      Navigator.of(context).pushReplacement(
+          CustomPageRoute(page: AlziyaratAljami3aWalsalawat()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _HadisAlkisa2State extends State<HadisAlkisa2> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -104,7 +108,7 @@ class _HadisAlkisa2State extends State<HadisAlkisa2> {
           pushNext: FiZiyaratAlabna2Al3ozama2.screenRoute,
           pushBack: ZiyaratAlsayidaZainab.screenRoute,
           soud:
-              'https://cdn.jsdelivr.net/gh/SounaDiab/image_audio@master/audio/حديث الكساء.mp3',
+              'https://www.dropbox.com/scl/fi/n5iew2d6x6vfgicml2p7c/.mp3?rlkey=qzj3ren01yphf8iq1uu5jg7ik&st=mj7tb8j7&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

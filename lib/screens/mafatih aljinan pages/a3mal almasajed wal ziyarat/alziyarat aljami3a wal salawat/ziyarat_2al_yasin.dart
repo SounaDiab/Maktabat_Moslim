@@ -38,11 +38,14 @@ class _Ziyarat2alYasinState extends State<Ziyarat2alYasin> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(AlziyaratAljami3aWalsalawat.screenRoute);
+      Navigator.of(context).pushReplacement(
+          CustomPageRoute(page: AlziyaratAljami3aWalsalawat()));
       return false;
     }
   }
@@ -66,6 +69,8 @@ class _Ziyarat2alYasinState extends State<Ziyarat2alYasin> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
@@ -105,7 +110,8 @@ class _Ziyarat2alYasinState extends State<Ziyarat2alYasin> {
         bottomNavigationBar: AddCustomBottomNavigationBar(
           pushNext: ZiyaratAlna7iyaAlmokadasa.screenRoute,
           pushBack: Alsalat3alaWaleyL2amer.screenRoute,
-          soud: '',
+          soud:
+              'https://www.dropbox.com/scl/fi/ocrx53qlihud9nprjvfn3/.m4a?rlkey=834lr8o666k2m1tj2ltfp0029&st=pytldvab&dl=1',
           onTap: (double fontSize) {
             // تحديث حجم الخط
             setState(() {

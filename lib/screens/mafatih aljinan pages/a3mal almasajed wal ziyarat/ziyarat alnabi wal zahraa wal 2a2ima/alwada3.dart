@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class Alwada3 extends StatefulWidget {
   static String screenRoute = 'alwada3_screen';
   const Alwada3({super.key});
@@ -39,11 +38,14 @@ class _Alwada3State extends State<Alwada3> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(ZiyaratAlnabiWalzahraaWal2a2ima.screenRoute);
+          .pushReplacement(CustomPageRoute(page: ZiyaratAlnabiWalzahraaWal2a2ima()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _Alwada3State extends State<Alwada3> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

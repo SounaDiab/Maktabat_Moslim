@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class ZikrAlsalatWaldou3aaFiWasatAlmasjid extends StatefulWidget {
   static String screenRoute = 'zikr_alsalat_waldou3aa_fi_wasat_almasjid_screen';
   const ZikrAlsalatWaldou3aaFiWasatAlmasjid({super.key});
@@ -43,11 +42,14 @@ class _ZikrAlsalatWaldou3aaFiWasatAlmasjidState
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(FadlLakoufaWmasjidoha.screenRoute);
+          .pushReplacement(CustomPageRoute(page: FadlLakoufaWmasjidoha()));
       return false;
     }
   }
@@ -71,6 +73,8 @@ class _ZikrAlsalatWaldou3aaFiWasatAlmasjidState
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,

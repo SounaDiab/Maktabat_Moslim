@@ -1,7 +1,6 @@
 import '../../../../Util/app_imports.dart';
 import '../../../../widgets/bloc_builder_mafatih_aljinan.dart';
 
-
 class A3malBaitAltast extends StatefulWidget {
   static String screenRoute = 'a3mal_bait_altast_screen';
   const A3malBaitAltast({super.key});
@@ -39,11 +38,14 @@ class _A3malBaitAltastState extends State<A3malBaitAltast> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final previousPage = args?['previousPage'];
     if (previousPage == 'favorite_screen') {
-      Navigator.of(context).pushReplacementNamed(FavoritesScreen.screenRoute);
+      Navigator.of(context).pushReplacement(CustomPageRoute(
+          page: FavoritesScreen(
+        favoritePages: [],
+      )));
       return false;
     } else {
       Navigator.of(context)
-          .pushReplacementNamed(FadlLakoufaWmasjidoha.screenRoute);
+          .pushReplacement(CustomPageRoute(page: FadlLakoufaWmasjidoha()));
       return false;
     }
   }
@@ -67,6 +69,8 @@ class _A3malBaitAltastState extends State<A3malBaitAltast> {
           ),
           actions: [
             IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               padding: EdgeInsets.only(left: isTablet ? 50 : 30),
               icon: Icon(
                 isIcon ? Icons.favorite_border : Icons.favorite_rounded,
